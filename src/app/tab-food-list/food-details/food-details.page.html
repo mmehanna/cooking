@@ -4,5 +4,7 @@
   </ion-buttons>
 </ion-toolbar>
 <ion-content>
-  <pre>{{foodDetails | json}}</pre>
+  <pre> <img src="{{foodDetails.details.imgUrl}}" alt="Italian Trulli"></pre>
+  <h2>{{foodDetails.label}}</h2>
+  <pre>{{foodDetails.details.description}}</pre>
 </ion-content>
