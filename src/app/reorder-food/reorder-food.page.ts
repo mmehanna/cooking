@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FoodService } from "../_services/food.service";
 import { ItemReorderEventDetail } from "@ionic/angular";
+import { ChooseFoodPage } from "../tab-food-list/choose-food.page";
 
 @Component({
   selector: 'app-tab2',
-  templateUrl: 'tab-reorder-food.page.html',
-  styleUrls: ['tab-reorder-food.page.scss']
+  templateUrl: 'reorder-food.page.html',
+  styleUrls: ['reorder-food.page.scss']
 })
-export class TabReorderFoodPage {
+export class ReorderFoodPage {
 
   constructor(
     private foodService: FoodService
@@ -18,6 +19,7 @@ export class TabReorderFoodPage {
   days: string[] = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   public isDisabled = true;
   public alertButtons = ['Save'];
+  component = ChooseFoodPage;
 
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
     // The `from` and `to` properties contain the index of the item

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabChooseFoodPage } from './tab-choose-food.page';
+import { ChooseFoodPage } from './choose-food.page';
 
 const routes: Routes = [
-  { path: '', component: TabChooseFoodPage },
+  { path: '', component: ChooseFoodPage },
   {
     path: 'food-details/:id',
     loadChildren: () => import('./food-details/food-details-page.module').then(m => m.FoodDetailsPageModule)
