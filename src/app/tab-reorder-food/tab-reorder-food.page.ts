@@ -15,8 +15,9 @@ export class TabReorderFoodPage {
   }
 
   foods = this.foodService.getFoods();
-
+  days: string[] = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   public isDisabled = true;
+  public alertButtons = ['Save'];
 
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
     // The `from` and `to` properties contain the index of the item
@@ -29,7 +30,5 @@ export class TabReorderFoodPage {
     ev.detail.complete();
   }
 
-  toggleReorder() {
-    this.isDisabled = !this.isDisabled;
-  }
+
 }

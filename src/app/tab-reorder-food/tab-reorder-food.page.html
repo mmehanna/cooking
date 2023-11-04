@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
+      Reorder your foods
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,18 +12,69 @@
       <ion-title size="large">Reorder your food</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <!-- Casting $event to $any is a temporary fix for this bug https://github.com/ionic-team/ionic-framework/issues/24245 -->
-  <ion-reorder-group [disabled]="isDisabled" (ionItemReorder)="handleReorder($any($event))">
-    <ion-list *ngFor="let food of foods">
-      <ion-item>
-        <ion-label> {{food.label}}</ion-label>
-        <ion-reorder slot="end"></ion-reorder>
-      </ion-item>
-    </ion-list>
-  </ion-reorder-group>
-
-
-  <!-- The reorder gesture is disabled by default, enable it to drag and drop items -->
-  <ion-button (click)="toggleReorder()"> Toggle Reorder</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-list>
+          <ion-reorder-group disabled="false" *ngFor="let day of days">
+            <ion-item>
+              <ion-label>
+                {{day}}
+              </ion-label>
+            </ion-item>
+          </ion-reorder-group>
+        </ion-list>
+      </ion-col>
+      <ion-col size="6">
+        <ion-list>
+          <ion-reorder-group disabled="false" *ngFor="let food of foods">
+            <ion-item *ngIf="food.isSelected">
+              <ion-label>
+                {{food.label}}
+              </ion-label>
+              <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+          </ion-reorder-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-button id="present-alert">Save</ion-button>
+      <ion-alert
+        trigger="present-alert"
+        header="Confirmation"
+        subHeader="Save the modification"
+        message="Click on save"
+        [buttons]="alertButtons"
+      ></ion-alert>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+
+<!--<ion-grid>-->
+<!--  <ion-col size="3">-->
+<!--    <ion-reorder-group [disabled]="isDisabled" (ionItemReorder)="handleReorder($any($event))">-->
+<!--      <ion-list *ngFor="let food of foods">-->
+<!--        <ion-item *ngIf="food.isSelected">-->
+<!--          <ion-label> {{food.label}}</ion-label>-->
+<!--          <ion-reorder slot="end"></ion-reorder>-->
+<!--        </ion-item>-->
+<!--      </ion-list>-->
+<!--    </ion-reorder-group>-->
+<!--  </ion-col>-->
+<!--  <ion-col size="1">-->
+<!--    <ion-list *ngFor="let day of days">-->
+<!--      <ion-item>-->
+<!--        <ion-label>{{day}}</ion-label>-->
+<!--      </ion-item>-->
+<!--    </ion-list>-->
+<!--  </ion-col>-->
+<!--</ion-grid>-->
+
+<!--<ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))" *ngFor="let food of foods">-->
+<!--  <ion-item *ngIf="food.isSelected">-->
+<!--    <ion-label> {{food.label}} </ion-label>-->
+<!--    <ion-reorder slot="end"></ion-reorder>-->
+<!--  </ion-item>-->
+<!--</ion-reorder-group>-->
