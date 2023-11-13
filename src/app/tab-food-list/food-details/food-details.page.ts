@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodInterface } from "../interfaces/food.interface";
+import { FoodInterface } from "../../interfaces/food.interface";
 import { ActivatedRoute } from "@angular/router";
 import { FoodService } from "../../_services/food.service";
 import { UUID } from "angular2-uuid";

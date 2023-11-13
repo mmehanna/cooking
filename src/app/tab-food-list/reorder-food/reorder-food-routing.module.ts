@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabConfirmFoodPage } from './tab-confirm-food.page';
+import { ReorderFoodPage } from './reorder-food.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TabConfirmFoodPage,
+    component: ReorderFoodPage,
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class Tab3PageRoutingModule {}
+export class Tab2PageRoutingModule {}

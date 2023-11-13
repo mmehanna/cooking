@@ -2,17 +2,18 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TabConfirmFoodPage } from './tab-confirm-food.page';
+import { ChooseFoodPage } from './choose-food.page';
 
-import { Tab3PageRoutingModule } from './tab-confirm-food-routing.module';
+import { Tab1PageRoutingModule } from './choose-food-routing.module';
+import { FoodService } from "../../_services/food.service";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab3PageRoutingModule
+    Tab1PageRoutingModule
   ],
-  declarations: [TabConfirmFoodPage]
+  declarations: [ChooseFoodPage]
 })
-export class Tab3PageModule {}
+export class ChooseFood {}

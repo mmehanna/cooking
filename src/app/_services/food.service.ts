@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { FoodInterface } from "../tab-food-list/interfaces/food.interface";
+import { FoodInterface } from "../interfaces/food.interface";
 import { UUID } from "angular2-uuid";
 
 @Injectable({providedIn: 'root'})
