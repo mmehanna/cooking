@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', component: ChooseFoodPage },
   {
     path: 'food-details/:id',
-    loadChildren: () => import('./food-details/food-details-page.module').then(m => m.FoodDetailsPageModule)
+    loadChildren: () => import('../food-details/food-details-page.module').then(m => m.FoodDetailsPageModule)
   },
 
 ];

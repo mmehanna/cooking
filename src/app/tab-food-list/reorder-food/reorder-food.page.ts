@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FoodService } from "../_services/food.service";
+import { FoodService } from "../../_services/food.service";
 import { ItemReorderEventDetail } from "@ionic/angular";
-import { ChooseFoodPage } from "../tab-food-list/choose-food.page";
+import { ChooseFoodPage } from "../choose-food/choose-food.page";
 
 @Component({
   selector: 'app-tab2',

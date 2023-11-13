@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FoodService } from "../_services/food.service";
+import { FoodService } from "../../_services/food.service";
 import { UUID } from "angular2-uuid";
 import { ReorderFoodPage } from "../reorder-food/reorder-food.page";
 
