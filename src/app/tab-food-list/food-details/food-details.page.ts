@@ -18,6 +18,6 @@ export class FoodDetailsPage implements OnInit {
 
   ngOnInit(): void {
     this.foodDetailsId = this.activatedRoute.snapshot.params['id'] as UUID;
-    this.foodDetails = this.foodService.getFoodDetails(this.foodDetailsId);
+    //this.foodDetails = this.foodService.getFoodDetails(this.foodDetailsId);
   }
 }
