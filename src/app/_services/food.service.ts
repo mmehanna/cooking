@@ -17,9 +17,13 @@ export class FoodService {
         return this.http.get<FoodInterface[]>(`${this.apiUrl}/foods`);
     }
 
-    public getFoodDetails(id: UUID): Observable<FoodInterface> {
-        const url = `${this.apiUrl}/foods/${id}`;
-        return this.http.get<FoodInterface>(url);
+    // public getFoodDetails(id: UUID): Observable<FoodInterface> {
+    //     const url = `${this.apiUrl}/foods/${id}`;
+    //     return this.http.get<FoodInterface>(url);
+    // }
+
+    public getFoodDetails(foodId: UUID): Observable<FoodInterface> {
+        return this.http.get<FoodInterface>(`${this.apiUrl}/foods/${foodId}`);
     }
 
     public toggleFoodSelection(foodId: UUID) {

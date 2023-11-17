@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FoodService } from "../../_services/food.service";
+import { Subscription } from "rxjs";
+
 import { UUID } from "angular2-uuid";
-import { ReorderFoodPage } from "../reorder-food/reorder-food.page";
-import { Observable } from "rxjs";
 import { FoodInterface } from "../../interfaces/food.interface";
+import { FoodService } from "../../_services/food.service";
 
 @Component({
   selector: 'app-tab1',
@@ -12,7 +12,7 @@ import { FoodInterface } from "../../interfaces/food.interface";
 })
 
 export class ChooseFoodPage implements OnInit, OnDestroy{
-  private subscription: any;
+  private subscription = new Subscription();
   public foodList: FoodInterface[];
 
   constructor(private foodService : FoodService) {}
