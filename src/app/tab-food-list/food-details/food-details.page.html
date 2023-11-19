@@ -1,10 +1,12 @@
 <ion-toolbar color="primary">
-  <ion-buttons slot="start">
-    <ion-back-button default-href="/recipes"></ion-back-button>
-  </ion-buttons>
+    <ion-buttons slot="start">
+        <ion-back-button default-href="/recipes"></ion-back-button>
+    </ion-buttons>
 </ion-toolbar>
 <ion-content>
-  <img [src]="foodDetails.details?.imgUrl">
-  <h2>{{foodDetails.label}}</h2>
-  <p>{{foodDetails.details?.description}}</p>
+    <ng-container *ngIf=foodDetails>
+        <img [src]="foodDetails.details?.imgUrl">
+        <h2>{{foodDetails?.label}}</h2>
+        <p>{{foodDetails?.details?.description}}</p>
+    </ng-container>
 </ion-content>
