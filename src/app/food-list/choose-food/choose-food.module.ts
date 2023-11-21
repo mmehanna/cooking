@@ -2,10 +2,10 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChooseFoodPage } from './choose-food.page';
 
+import { ChooseFoodPage } from './choose-food.page';
 import { Tab1PageRoutingModule } from './choose-food-routing.module';
-import { FoodService } from "../../_services/food.service";
+import { ReorderFoodPage } from "../reorder-food/reorder-food.page";
 
 @NgModule({
   imports: [
@@ -14,6 +14,6 @@ import { FoodService } from "../../_services/food.service";
     FormsModule,
     Tab1PageRoutingModule
   ],
-  declarations: [ChooseFoodPage]
+  declarations: [ChooseFoodPage,ReorderFoodPage]
 })
 export class ChooseFood {}

@@ -3,7 +3,6 @@
     <ion-button slot="end" [routerLink]="['reorder-food']">next</ion-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -15,7 +14,7 @@
     <ion-item>
       <ion-checkbox labelPlacement="end"
                     justify="start"
-                    (ionChange)="toggleFoodSelection(food.id)">
+                    (ionChange)="toggleFoodSelection(food)">
         {{food.label}}
       </ion-checkbox>
       <ion-chip [outline]="true"
@@ -24,4 +23,5 @@
       </ion-chip>
     </ion-item>
   </ion-list>
+
 </ion-content>

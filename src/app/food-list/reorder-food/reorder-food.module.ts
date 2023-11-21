@@ -7,7 +7,7 @@ import { ReorderFoodPage } from './reorder-food.page';
 import { Tab2PageRoutingModule } from './reorder-food-routing.module';
 
 @NgModule({
-  imports: [IonicModule, CommonModule, FormsModule, Tab2PageRoutingModule], declarations: [ReorderFoodPage]
+  imports: [IonicModule, CommonModule, FormsModule, Tab2PageRoutingModule], declarations: []
 })
 export class ReorderFood {
 }
