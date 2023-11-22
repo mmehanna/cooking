@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Reorder your food</ion-title>
+      <ion-title size="large">Reorder your foods</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -49,31 +49,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-
-
-<!--<ion-grid>-->
-<!--  <ion-col size="3">-->
-<!--    <ion-reorder-group [disabled]="isDisabled" (ionItemReorder)="handleReorder($any($event))">-->
-<!--      <ion-list *ngFor="let food of foods">-->
-<!--        <ion-item *ngIf="food.isSelected">-->
-<!--          <ion-label> {{food.label}}</ion-label>-->
-<!--          <ion-reorder slot="end"></ion-reorder>-->
-<!--        </ion-item>-->
-<!--      </ion-list>-->
-<!--    </ion-reorder-group>-->
-<!--  </ion-col>-->
-<!--  <ion-col size="1">-->
-<!--    <ion-list *ngFor="let day of days">-->
-<!--      <ion-item>-->
-<!--        <ion-label>{{day}}</ion-label>-->
-<!--      </ion-item>-->
-<!--    </ion-list>-->
-<!--  </ion-col>-->
-<!--</ion-grid>-->
-
-<!--<ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))" *ngFor="let food of foods">-->
-<!--  <ion-item *ngIf="food.isSelected">-->
-<!--    <ion-label> {{food.label}} </ion-label>-->
-<!--    <ion-reorder slot="end"></ion-reorder>-->
-<!--  </ion-item>-->
-<!--</ion-reorder-group>-->

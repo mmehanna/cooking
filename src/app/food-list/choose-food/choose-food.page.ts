@@ -27,6 +27,6 @@ export class ChooseFoodPage implements OnInit{
 
   public toggleFoodSelection(food: FoodItemBo) {
     food.isSelected = !food.isSelected;
-    console.log(this.foodList);
+    this.foodService.setFoodFromChooseFoods(this.foodList);
   }
 }

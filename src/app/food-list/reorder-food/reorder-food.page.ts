@@ -1,10 +1,9 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ItemReorderEventDetail } from "@ionic/angular";
 import { Subscription } from "rxjs";
 
 import { FoodService } from "../services/food.service";
 import { FoodItemBo } from "../bos/food-item.bo";
-import { ChooseFoodPage } from "../choose-food/choose-food.page";
 
 @Component({
   selector: 'app-reorder',
@@ -22,19 +21,10 @@ export class ReorderFoodPage implements OnDestroy {
     private foodService: FoodService
   ) {}
 
-  // ngOnInit() {
-  //   // this.foodList = this.chooseFoodPage.foodList;
-  //   // console.log(this.foodList);
-  // }
-
   ngOnInit() {
-    const foodListSubscription$ = this.foodService
-        .getFoods().subscribe((foodList: FoodItemBo[]) => {
-          this.foodList = foodList;
-          console.log(this.foodList)
-        });
-    this.subscription.add(foodListSubscription$);
+    this.foodList = this.foodService.getFoodFromChooseFoods();
   }
+
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
     // The `from` and `to` properties contain the index of the item
     // when the drag started and ended, respectively

@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { ChooseFoodPage } from './choose-food.page';
 import { Tab1PageRoutingModule } from './choose-food-routing.module';
-import { ReorderFoodPage } from "../reorder-food/reorder-food.page";
 
 @NgModule({
   imports: [
@@ -14,6 +13,6 @@ import { ReorderFoodPage } from "../reorder-food/reorder-food.page";
     FormsModule,
     Tab1PageRoutingModule
   ],
-  declarations: [ChooseFoodPage,ReorderFoodPage]
+  declarations: [ChooseFoodPage]
 })
 export class ChooseFood {}
