@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FoodDetailsPage } from "./food-details.page";
-import { RecipeDetailPageRoutingModule } from "./food-detail-routing.module";
 import { IonicModule } from "@ionic/angular";
+
+import { FoodDetailsPage } from "./food-details.page";
+import { RecipeDetailRoutingModule } from "./food-detail-routing.module";
 
 @NgModule({
   declarations: [FoodDetailsPage],
   imports: [
     CommonModule,
-    RecipeDetailPageRoutingModule,
-    IonicModule
+    IonicModule,
+    RecipeDetailRoutingModule,
   ]
 })
 export class FoodDetailsPageModule { }
