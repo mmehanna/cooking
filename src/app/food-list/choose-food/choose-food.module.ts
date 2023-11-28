@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ChooseFoodPage } from './choose-food.page';
 import { ChooseFoodRoutingModule } from './choose-food-routing.module';
@@ -12,6 +12,7 @@ import { ChooseFoodRoutingModule } from './choose-food-routing.module';
     ChooseFoodRoutingModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule
   ],
   declarations: [ChooseFoodPage]
 })

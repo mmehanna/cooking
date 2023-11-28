@@ -21,11 +21,11 @@ export class ReorderFoodPage implements OnDestroy {
     private foodService: FoodService
   ) {}
 
-  ngOnInit() {
+   ngOnInit() {
     this.foodList = this.foodService.getFoodFromChooseFoods();
   }
 
-  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
     // The `from` and `to` properties contain the index of the item
     // when the drag started and ended, respectively
     console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);

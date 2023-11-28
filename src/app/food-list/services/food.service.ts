@@ -5,6 +5,7 @@ import { UUID } from "angular2-uuid";
 import { FoodItemBo } from "../bos/food-item.bo";
 import { FoodClient } from "../../_clients/food.client";
 import { FoodModel } from "../../_clients/models/food.model";
+import { createFoodDto } from "../../_clients/models/createFood.dto";
 
 @Injectable({providedIn: 'root'})
 export class FoodService {
@@ -30,6 +31,10 @@ export class FoodService {
           })
         })
       )
+  }
+
+  public createFood(food: createFoodDto):Observable<createFoodDto>{
+        return this.foodClient.createFood(food);
   }
 
   public getFoodDetails(foodId: UUID): Observable<FoodModel> {
