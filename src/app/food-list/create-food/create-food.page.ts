@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder} from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 
-import { FoodService } from "../services/food.service";
-import { createFoodDto } from "../../_clients/models/createFood.dto";
+import { FoodModel } from "../../_clients/models/food.model";
+
 @Component({
   selector: 'app-create-food',
   templateUrl: './create-food.page.html',
@@ -10,26 +10,15 @@ import { createFoodDto } from "../../_clients/models/createFood.dto";
 })
 
 export class CreateFoodPage {
-  private food: createFoodDto={id: "", label: "", description: "", imgUrl:"",isSelected:false};
+  private food: FoodModel={id: "", label: "", description: "", imgUrl:""};
+  public alertButtons = ['Save'];
 
   public foodForm = this.formBuilder.group({
-    foodName: [],
-    foodDescription: []
+    foodName: ['',Validators.required],
+    foodDescription: ['',Validators.required]
   });
 
-  constructor(private foodService: FoodService,
-              private formBuilder: FormBuilder
+  constructor(private formBuilder: FormBuilder,
   ) { }
 
-public async saveFood() {
-    this.food.label = this.foodForm.get('foodName').value;
-    this.food.description = this.foodForm.get('foodDescription').value;
-
-    try {
-      await this.foodService.createFood(this.food).toPromise();
-
-    } catch (error) {
-      console.error('Erreur lors de la création de l\'aliment', error);
-    }
-  }
 }

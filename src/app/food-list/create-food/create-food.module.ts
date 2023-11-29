@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { CreateFoodPageRoutingModule } from './create-food-routing.module';
 import { CreateFoodPage } from './create-food.page';
+import { Camera } from "@ionic-native/camera/ngx";
 
 @NgModule({
   imports: [
@@ -12,7 +13,10 @@ import { CreateFoodPage } from './create-food.page';
     FormsModule,
     IonicModule,
     CreateFoodPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+  ],
+  providers: [
+    Camera
   ],
   declarations: [CreateFoodPage]
 })

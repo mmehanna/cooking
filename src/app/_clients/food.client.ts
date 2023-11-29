@@ -5,7 +5,6 @@ import { Observable } from "rxjs";
 import { FoodModel } from "./models/food.model";
 import { UUID } from "angular2-uuid";
 import { FoodItemBo } from "../food-list/bos/food-item.bo";
-import { createFoodDto } from "./models/createFood.dto";
 
 @Injectable({providedIn: 'root'})
 export class FoodClient {
@@ -21,8 +20,8 @@ export class FoodClient {
         return this.httpClient.get<FoodModel>(`${this.apiUrl}/foods/${foodId}`);
     }
 
-  public createFood(food: createFoodDto): Observable<createFoodDto> {
-    return this.httpClient.post<createFoodDto>(`${this.apiUrl}/foods`, food);
+  public createFood(food: FoodModel): Observable<FoodModel> {
+    return this.httpClient.post<FoodModel>(`${this.apiUrl}/foods`, food);
   }
 
 

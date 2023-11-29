@@ -25,4 +25,50 @@
       </ion-chip>
     </ion-item>
   </ion-list>
+  <ion-fab id="open-modal" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal trigger="open-modal">
+    <ng-template>
+
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Welcome</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" (click)="saveFood()">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <form [formGroup]="foodForm">
+          <ion-item>
+            <ion-input
+              formControlName="foodName"
+              id="foodName"
+              label="Enter your food name"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Your food name"
+              maxlength="30"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              formControlName="foodDescription"
+              id="foodDescription"
+              label="Enter your description"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Your description"
+              maxlength="30"
+            ></ion-input>
+          </ion-item>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
