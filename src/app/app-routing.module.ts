@@ -11,12 +11,8 @@ const routes: Routes = [
     loadChildren: () => import('./food-list/choose-food/choose-food.module').then(m => m.ChooseFood)
   },
   {
-    path: 'create-food',
-    loadChildren: () => import('./food-list/choose-food/choose-food.module').then(m => m.ChooseFood)
-  },
-  {
-    path: 'create-food',
-    loadChildren: () => import('./food-list/create-food/create-food.module').then(m => m.CreateFoodPageModule)
+    path: 'reorder-foods',
+    loadChildren: () => import('./food-list/reorder-food/reorder-food.module').then(m => m.ReorderFood)
   },
 ];
 @NgModule({

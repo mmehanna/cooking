@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button slot="start" default-href="menu"></ion-back-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,22 +17,35 @@
   <form [formGroup]="foodForm">
     <ion-item>
       <label for="foodName">Food name: </label>
-      <input id="foodName" maxlength="20" type="text" formControlName="foodName">
+      <input id="foodName"
+             maxlength="20"
+             type="text"
+             formControlName="foodName">
     </ion-item>
     <ion-item>
       <label for="foodDescription">Food description: </label>
-      <input id="foodDescription" maxlength="20" type="text" formControlName="foodDescription">
+      <input id="foodDescription"
+             maxlength="20"
+             type="text"
+             formControlName="foodDescription">
     </ion-item>
   </form>
   <ion-button>take a picture</ion-button>
   <br/>
-  <ion-button id="present-alert">Save</ion-button>
-
-
-  <ion-alert
-    trigger="present-alert"
-    header="Saved"
-    message="Your food is saved!"
-    [buttons]="alertButtons"
-  ></ion-alert>
+  <ion-button id="open-toast"
+              (click)="createFood()">Save</ion-button>
+  <ion-toast trigger="open-toast"
+             message="Food is added!"
+             [duration]="2000">
+  </ion-toast>
 </ion-content>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

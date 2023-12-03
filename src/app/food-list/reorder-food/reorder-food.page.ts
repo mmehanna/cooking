@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ItemReorderEventDetail } from "@ionic/angular";
 import { Subscription } from "rxjs";
 
@@ -10,12 +10,11 @@ import { FoodItemBo } from "../bos/food-item.bo";
   templateUrl: 'reorder-food.page.html',
   styleUrls: ['reorder-food.page.scss']
 })
-export class ReorderFoodPage implements OnDestroy {
+export class ReorderFoodPage implements OnDestroy,OnInit {
   private subscription = new Subscription();
   public foodList: FoodItemBo[];
   public days: string[] = ['Monday','Tuesday','Wednesday',
     'Thursday','Friday','Saturday','Sunday'];
-  public alertButtons = ['Save'];
 
   constructor(
     private foodService: FoodService
@@ -25,7 +24,7 @@ export class ReorderFoodPage implements OnDestroy {
     this.foodList = this.foodService.getFoodFromChooseFoods();
   }
 
-   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+   public handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
     // The `from` and `to` properties contain the index of the item
     // when the drag started and ended, respectively
     console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);

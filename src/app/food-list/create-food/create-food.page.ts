@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
+import { IonModal, ModalController } from "@ionic/angular";
 
 import { FoodModel } from "../../_clients/models/food.model";
+import { FoodService } from "../services/food.service";
 
 @Component({
   selector: 'app-create-food',
@@ -11,7 +13,7 @@ import { FoodModel } from "../../_clients/models/food.model";
 
 export class CreateFoodPage {
   private food: FoodModel={id: "", label: "", description: "", imgUrl:""};
-  public alertButtons = ['Save'];
+  @ViewChild(IonModal) modal: IonModal;
 
   public foodForm = this.formBuilder.group({
     foodName: ['',Validators.required],
@@ -19,6 +21,17 @@ export class CreateFoodPage {
   });
 
   constructor(private formBuilder: FormBuilder,
+              private foodService: FoodService,
+              private modalController: ModalController
   ) { }
+    public createFood() {
+    this.food.label = this.foodForm.get('foodName').value;
+    this.food.description = this.foodForm.get('foodDescription').value;
 
+       this.foodService.createFood(this.food).toPromise();
+  }
+
+  public closeModal(){
+    this.modalController.dismiss();
+  }
 }

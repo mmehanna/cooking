@@ -26,7 +26,9 @@
       </ion-col>
       <ion-col size="6">
         <ion-list>
-          <ion-reorder-group disabled="false" *ngFor="let food of foodList">
+          <ion-reorder-group disabled="false" *ngFor="let food of foodList"
+                             [disabled]="false"
+                             (ionItemReorder)="handleReorder($any($event))">
             <ion-item *ngIf="food.isSelected">
               <ion-label>
                 {{food.label}}
@@ -38,14 +40,13 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-button id="present-alert">Save</ion-button>
-      <ion-alert
-        trigger="present-alert"
-        header="Confirmation"
-        subHeader="Save the modification"
-        message="Click on save"
-        [buttons]="alertButtons"
-      ></ion-alert>
+      <ion-button id="open-toast">Save
+      </ion-button>
+      <ion-toast trigger="open-toast"
+                 message="Your week list is added!"
+                 [duration]="2000">
+      </ion-toast>
     </ion-row>
   </ion-grid>
 </ion-content>
+
