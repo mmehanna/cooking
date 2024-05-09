@@ -1,9 +1,7 @@
-import { UUID } from "angular2-uuid";
-
-export interface FoodModel {
-  id: UUID;
+export class FoodModel {
+  id: number;
   label: string;
-  imgUrl: string;
   description: string;
+  imgUrl: string;
+  isSelected = false;
 }
-
