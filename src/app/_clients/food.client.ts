@@ -4,10 +4,8 @@ import {Observable} from "rxjs";
 import {UUID} from "angular2-uuid";
 import {FoodModel} from "./models/food.model";
 import {listFoodsForTargetedDateModel} from "./models/list-foods-for-targeted-date.model";
-import {FoodForCreationDto} from "../food-list/choose-food-page/dtos/food-for-creation.dto";
-import {
-  LinkFoodListIdToSelectedDateDto
-} from "../food-list/choose-food-page/dtos/link-food-list-id-to-selected-date.dto";
+import {FoodForCreationDto} from "../foods/choose-food-page/dtos/food-for-creation.dto";
+import {LinkFoodListIdToSelectedDateDto} from "../foods/choose-food-page/dtos/link-food-list-id-to-selected-date.dto";
 
 @Injectable({providedIn: 'root'})
 export class FoodClient {

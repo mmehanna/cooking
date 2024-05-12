@@ -4,10 +4,10 @@ import {UUID} from "angular2-uuid";
 
 import {FoodItemBo} from "../bos/food-item.bo";
 import {FoodClient} from "../../_clients/food.client";
-import {LinkFoodListIdToSelectedDateDto} from "../choose-food/dtos/link-food-list-id-to-selected-date.dto";
 import {FoodModel} from "../../_clients/models/food.model";
-import {FoodForCreationDto} from "../choose-food/dtos/food-for-creation.dto";
 import {listFoodsForTargetedDateModel} from "../../_clients/models/list-foods-for-targeted-date.model";
+import {LinkFoodListIdToSelectedDateDto} from "../choose-food-page/dtos/link-food-list-id-to-selected-date.dto";
+import {FoodForCreationDto} from "../choose-food-page/dtos/food-for-creation.dto";
 
 @Injectable({providedIn: 'root'})
 export class FoodService {
