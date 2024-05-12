@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title size="large">Add your foods</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngFor="let food of foodList">
+    <ion-item>
+        {{ food.label }}
+        <ion-button>
+          details
+        </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-fab horizontal="end" id="open-modal" slot="fixed" vertical="bottom">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
