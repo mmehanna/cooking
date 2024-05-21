@@ -49,14 +49,13 @@ export class FoodsListPage implements OnInit {
     })
   }
 
-  public presentDetailAddFoodModal() {
+  public async presentDetailAddFoodModal() {
     this.foodService.editable = false;
 
-    this.modalController.create({
+    await this.modalController.create({
       component: FoodDetailsModal
     }).then(modal => {
-      modal.present().then(r => {
-      });
+      modal.present();
     })
   }
 

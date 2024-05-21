@@ -45,8 +45,6 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
     } else {
       this.foodListId.foodListId.pop();
     }
-
-    console.log(this.foodListId);
   }
 
   public async linkFoodListToDate() {

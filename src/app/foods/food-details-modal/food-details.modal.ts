@@ -44,27 +44,26 @@ export class FoodDetailsModal implements OnInit {
       await firstValueFrom(this.foodService.createFood(this.foodForm.value));
     }
     await this.presentToast();
-    this.closeModal();
+    await this.closeModal();
   }
 
   public async presentToast() {
-    if (this.foodService.editable == true) {
+    if (this.foodService.editable) {
       const toast = await this.toastController.create({
         message: 'Your food is up to date!',
         duration: 2000
       });
-      toast.present();
+      await toast.present();
     } else {
       const toast = await this.toastController.create({
         message: 'Your food is added!',
         duration: 2000
       });
-      toast.present();
+      await toast.present();
     }
   }
 
-  public closeModal() {
-    this.modalController.dismiss().then(r => {
-    });
+  public async closeModal() {
+    await this.modalController.dismiss();
   }
 }
