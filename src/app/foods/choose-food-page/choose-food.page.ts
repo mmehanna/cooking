@@ -6,7 +6,7 @@ import {formatDate} from "@angular/common";
 import {FoodService} from "../services/food.service";
 import {FoodItemBo} from "../bos/food-item.bo";
 import {LinkFoodListIdToSelectedDateDto} from "./dtos/link-food-list-id-to-selected-date.dto";
-import {CreateFoodModal} from "../create-food-modal/create-food.modal";
+import {FoodDetailsModal} from "../food-details-modal/food-details.modal";
 
 @Component({
   templateUrl: 'choose-food.page.html',
@@ -37,7 +37,15 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
   }
 
   public toggleFoodSelection(food: FoodItemBo) {
-    this.foodListId.foodListId.push(food.id);
+    food.isSelected = !food.isSelected;
+
+    console.log(food);
+    if (food.isSelected) {
+      this.foodListId.foodListId.push(food.id);
+    } else {
+      this.foodListId.foodListId.pop();
+    }
+
     console.log(this.foodListId);
   }
 
@@ -55,7 +63,7 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
       if (err instanceof HttpErrorResponse) {
         console.error('Response body:', err.error);
 
-        // Handle specific validation errors
+        // Handle specific validation errorsds
         if (err.status === 400 && err.error && err.error.message) {
           const validationMessages = err.error.message;
 
@@ -69,14 +77,17 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
-  }
-
   presentCreateFoodModal() {
     this.modalController.create({
-      component: CreateFoodModal
+      component: FoodDetailsModal
+    }).then(modal => {
+      modal.present();
     })
+  }
+
+
+  ngOnDestroy() {
+    this.subscription$.unsubscribe();
   }
 }
 

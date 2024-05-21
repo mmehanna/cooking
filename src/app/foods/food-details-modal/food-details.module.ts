@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 
-import {CreateFoodPageRoutingModule} from './create-food-routing.module';
-import {CreateFoodModal} from './create-food.modal';
+import {CreateFoodPageRoutingModule} from './food-details-routing.module';
+import {FoodDetailsModal} from './food-details.modal';
 import {Camera} from "@ionic-native/camera/ngx";
 
 @NgModule({
@@ -19,9 +19,9 @@ import {Camera} from "@ionic-native/camera/ngx";
     Camera
   ],
   exports: [
-    CreateFoodModal
+    FoodDetailsModal
   ],
-  declarations: [CreateFoodModal]
+  declarations: [FoodDetailsModal]
 })
 export class CreateFoodPageModule {
 }

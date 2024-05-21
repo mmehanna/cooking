@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {IonicModule} from "@ionic/angular";
-import {CreateFoodPageModule} from "./create-food-modal/create-food.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FoodsListPage} from "./foods-list.page";
+import {FoodListRoutingModule} from "./food-list-routing.module";
 
 @NgModule({
   imports: [
@@ -11,7 +11,7 @@ import {FoodsListPage} from "./foods-list.page";
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    CreateFoodPageModule
+    FoodListRoutingModule
   ],
   declarations: [FoodsListPage]
 })

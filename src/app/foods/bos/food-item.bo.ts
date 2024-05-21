@@ -1,7 +1,7 @@
 import {FoodModel} from "../../_clients/models/food.model";
 
 export class FoodItemBo implements FoodModel {
-  id: number;
+  id: string;
   label: string;
   description: string;
   imgUrl: string;
