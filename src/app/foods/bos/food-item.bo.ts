@@ -5,7 +5,7 @@ export class FoodItemBo implements FoodModel {
   label: string;
   description: string;
   imgUrl: string;
-  isSelected = false;
+  isSelected: boolean = false;
 
   constructor(foodModel: FoodModel) {
     this.id = foodModel.id;
