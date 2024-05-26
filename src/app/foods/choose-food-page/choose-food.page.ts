@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {ModalController, ToastController} from "@ionic/angular";
 import {lastValueFrom, Subscription} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {formatDate} from "@angular/common";
 import {FoodService} from "../services/food.service";
 import {FoodItemBo} from "../bos/food-item.bo";
 import {LinkFoodListIdToSelectedDateDto} from "./dtos/link-food-list-id-to-selected-date.dto";
-import {CreateFoodModal} from "../create-food-modal/create-food.modal";
+import {FoodDetailsModal} from "../food-details-modal/food-details.modal";
 
 @Component({
   templateUrl: 'choose-food.page.html',
@@ -19,7 +19,9 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
   private foodListId: LinkFoodListIdToSelectedDateDto = new LinkFoodListIdToSelectedDateDto([]);
 
   constructor(private foodService: FoodService,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private toastController: ToastController,
+  ) {
   }
 
   ngOnInit() {
@@ -36,18 +38,27 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
     this.subscription$.add(foodListSubscription$);
   }
 
-  public toggleFoodSelection(food: FoodItemBo) {
-    this.foodListId.foodListId.push(food.id);
-    console.log(this.foodListId);
+  public async toggleFoodSelection(food: FoodItemBo) {
+    food.isSelected = !food.isSelected;
+
+    if (food.isSelected) {
+      console.log("food is selected");
+      this.foodListId.foodListId.push(food.id);
+      console.log(this.foodListId.foodListId);
+    } else {
+      console.log("food is not selected");
+      this.foodListId.foodListId.pop();
+      console.log(this.foodListId.foodListId);
+    }
+    if (this.foodListId.foodListId.length > 3) {
+      await this.quantityErrorMessage();
+    }
   }
 
   public async linkFoodListToDate() {
     try {
       this.foodService.date = formatDate(this.foodService.date, 'yyyy-MM-dd', 'en-US');
       const response = await lastValueFrom(this.foodService.linkFoodListToDate(this.foodService.date, this.foodListId));
-
-      // Log the successful response
-      console.log('Successful response:', response);
 
     } catch (err) {
       // Log the error details, including the response body
@@ -61,28 +72,29 @@ export class ChooseFoodPage implements OnInit, OnDestroy {
 
           // Display validation messages to the user or handle them appropriately
           console.error('Validation Errors:', validationMessages);
-
-          // Example: Show validation messages to the user (adjust based on your UI framework)
-          // this.showErrorMessagesToUser(validationMessages);
         }
       }
     }
   }
 
+  public presentCreateFoodModal() {
+    this.modalController.create({
+      component: FoodDetailsModal
+    }).then(modal => {
+      modal.present();
+    })
+  }
+
+  private async quantityErrorMessage() {
+    const toast = await this.toastController.create({
+      message: "You have exceeded the number of food per day! The number allowed is three.",
+      duration: 3000,
+      position: 'top'
+    });
+    await toast.present();
+  }
+
   ngOnDestroy() {
     this.subscription$.unsubscribe();
   }
-
-  presentCreateFoodModal() {
-    this.modalController.create({
-      component: CreateFoodModal
-    })
-  }
 }
-
-// public toggleFoodSelection(food: FoodItemBo) {
-//   food.isSelected = !food.isSelected;
-//   this.foodService.setFoodFromChooseFoods(this.foodList);
-//   console.log(food);
-//   this.foodListId.foodListId.push(food);
-// }

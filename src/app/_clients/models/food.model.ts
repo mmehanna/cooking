@@ -1,5 +1,5 @@
 export class FoodModel {
-  id: number;
+  id: string;
   label: string;
   description: string;
   imgUrl: string;

@@ -7,10 +7,6 @@ const routes: Routes = [
     loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
   },
   {
-    path:'foods',
-    loadChildren:  () => import('./foods/foods-list.module').then(m => m.FoodsListModule)
-  },
-  {
     path: 'foods-for-the-day',
     loadChildren: () => import('./foods/foods-for-the-day-page/foods-for-the-day.module').then(m => m.FoodForTheDay)
   },
@@ -21,7 +17,11 @@ const routes: Routes = [
   {
     path: 'choose-food',
     loadChildren: () => import('./foods/choose-food-page/choose-food.module').then(m => m.ChooseFood)
-  }
+  },
+  {
+    path: 'manage-foods',
+    loadChildren: () => import('./foods/foods-list.module').then(m => m.FoodsListModule)
+  },
 ];
 
 @NgModule({

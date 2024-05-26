@@ -1,4 +1,4 @@
-export class FoodForCreationDto {
+export class FoodForUpdateDto {
   label: string;
   description: string;
 

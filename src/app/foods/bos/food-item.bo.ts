@@ -1,11 +1,11 @@
 import {FoodModel} from "../../_clients/models/food.model";
 
 export class FoodItemBo implements FoodModel {
-  id: number;
+  id: string;
   label: string;
   description: string;
   imgUrl: string;
-  isSelected = false;
+  isSelected: boolean = false;
 
   constructor(foodModel: FoodModel) {
     this.id = foodModel.id;
