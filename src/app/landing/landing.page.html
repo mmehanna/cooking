@@ -1,0 +1,25 @@
+<ion-menu contentId="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Choose there</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <p routerLink="choose-date">Create your week list</p>
+    <p routerLink="foods-for-the-day">Food for the day</p>
+    <p routerLink="add-food-with-a-list">Add your foods</p>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu.</ion-content>
+</div>
+
