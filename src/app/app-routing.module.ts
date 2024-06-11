@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'foods-for-the-day',
-    loadChildren: () => import('./foods/foods-for-the-day-page/foods-for-the-day.module').then(m => m.FoodForTheDay)
+    loadChildren: () => import('./foods/foods-for-the-day-page/plates-for-the-day.module').then(m => m.FoodForTheDay)
   },
   {
     path: 'choose-date',
@@ -16,11 +16,11 @@ const routes: Routes = [
   },
   {
     path: 'choose-food',
-    loadChildren: () => import('./foods/choose-food-page/choose-food.module').then(m => m.ChooseFood)
+    loadChildren: () => import('./foods/choose-food-page/choose-plate.module').then(m => m.ChooseFood)
   },
   {
     path: 'manage-foods',
-    loadChildren: () => import('./foods/foods-list.module').then(m => m.FoodsListModule)
+    loadChildren: () => import('./foods/plates-list.module').then(m => m.PlatesListModule)
   },
 ];
 
