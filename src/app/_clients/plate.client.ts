@@ -10,7 +10,7 @@ import {
 import {PlateForUpdateDto} from "../plates/choose-plate-page/dtos/plate-for-update.dto";
 
 @Injectable({providedIn: 'root'})
-export class PlateClient {
+export class AuthClient {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) {

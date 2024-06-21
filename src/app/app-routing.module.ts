@@ -8,19 +8,19 @@ const routes: Routes = [
   },
   {
     path: 'foods-for-the-day',
-    loadChildren: () => import('./foods/foods-for-the-day-page/plates-for-the-day.module').then(m => m.FoodForTheDay)
+    loadChildren: () => import('./plates/plates-for-the-day-page/plates-for-the-day.module').then(m => m.FoodForTheDay)
   },
   {
     path: 'choose-date',
-    loadChildren: () => import('./foods/choose-date-page/choose-date.module').then(m => m.ChooseDatePageModule)
+    loadChildren: () => import('./plates/choose-date-page/choose-date.module').then(m => m.ChooseDatePageModule)
   },
   {
     path: 'choose-food',
-    loadChildren: () => import('./foods/choose-food-page/choose-plate.module').then(m => m.ChooseFood)
+    loadChildren: () => import('./plates/choose-plate-page/choose-plate.module').then(m => m.ChoosePlate)
   },
   {
     path: 'manage-foods',
-    loadChildren: () => import('./foods/plates-list.module').then(m => m.PlatesListModule)
+    loadChildren: () => import('./plates/plates-list.module').then(m => m.PlatesListModule)
   },
 ];
 
