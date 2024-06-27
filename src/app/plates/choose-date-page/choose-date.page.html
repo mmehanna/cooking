@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+
+    <ion-button (click)="nextPageValidation()" slot="end">next</ion-button>
+    <ion-title>choose the date</ion-title>
+    <ion-back-button default-href="" slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Choose your date</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-datetime (ionChange)="oneSelectedDate()"
+                  [(ngModel)]="foodService.date"
+                  displayFormat="DD/MM/YYYY"
+    ></ion-datetime>
+  </ion-item>
+</ion-content>
