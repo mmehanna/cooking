@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+
+    <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+      <p>Email is required and must be a valid email.</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+
+    <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+      <p>Password must be between 6 and 8 characters, contain at least one uppercase letter and one special
+        character.</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Password confirmation</ion-label>
+      <ion-input formControlName="confirmPassword" type="password"></ion-input>
+    </ion-item>
+
+    <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched">
+      <p>Passwords must match.</p>
+    </div>
+
+    <ion-button [disabled]="registerForm.invalid" expand="full" type="submit">Register</ion-button>
+  </form>
+</ion-content>

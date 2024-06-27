@@ -4,6 +4,14 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
+    path: 'landing',
     loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
   },
   {
@@ -22,6 +30,16 @@ const routes: Routes = [
     path: 'manage-foods',
     loadChildren: () => import('./plates/plates-list.module').then(m => m.PlatesListModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
+  },
+
+
 ];
 
 @NgModule({
