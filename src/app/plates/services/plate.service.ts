@@ -79,6 +79,10 @@ export class PlateService {
     )
   }
 
+  public getPlates(): Observable<any> {
+    return this.foodClient.getPlates();
+  }
+
 }
 
 

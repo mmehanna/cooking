@@ -55,4 +55,8 @@ export class AuthClient {
       })
     );
   }
+
+  public getPlates(): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/foods`);
+  }
 }

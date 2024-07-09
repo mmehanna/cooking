@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
   },
   {
-    path: 'foods-for-the-day',
+    path: 'plates-for-the-day',
     loadChildren: () => import('./plates/plates-for-the-day-page/plates-for-the-day.module').then(m => m.FoodForTheDay)
   },
   {
