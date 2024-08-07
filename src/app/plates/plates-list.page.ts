@@ -3,35 +3,35 @@ import {PlateItemBo} from "./bos/plate-item.bo";
 import {PlateService} from "./services/plate.service";
 import {firstValueFrom, Subscription} from "rxjs";
 import {ModalController, ToastController} from "@ionic/angular";
-import {FoodModel} from "../_clients/models/food.model";
+import {PLateModel} from "../_clients/models/PLateModel";
 import {PlateDetailsModal} from "./plate-details-modal/plate-details.modal";
 
 @Component({
-  selector: 'app-add-foods-with-a-list-page',
+  selector: 'app-add-plates-with-a-list-page',
   templateUrl: './plates-list.page.html',
   styleUrls: ['./plates-list.page.scss'],
 })
 export class PlatesListPage implements OnInit {
-  public foodList: PlateItemBo[];
+  public plateList: PlateItemBo[];
   private subscription$ = new Subscription();
 
-  constructor(private foodService: PlateService,
+  constructor(private plateService: PlateService,
               private modalController: ModalController,
               private toastController: ToastController
   ) {
   }
 
   ngOnInit() {
-    this.getFoodSubscription();
+    this.getPlateSubscription();
   }
 
-  public presentDetailEditFoodModal(food: PlateItemBo) {
-    this.foodService.editable = true;
+  public presentDetailEditPlateModal(plate: PlateItemBo) {
+    this.plateService.editable = true;
 
     this.modalController.create({
       component: PlateDetailsModal,
       componentProps: {
-        foodForEdit: food
+        plateForEdit: plate
       }
     }).then(modal => {
       modal.present().then(r => {
@@ -39,8 +39,8 @@ export class PlatesListPage implements OnInit {
     })
   }
 
-  public async presentDetailAddFoodModal() {
-    this.foodService.editable = false;
+  public async presentDetailAddPlateModal() {
+    this.plateService.editable = false;
 
     await this.modalController.create({
       component: PlateDetailsModal
@@ -49,9 +49,9 @@ export class PlatesListPage implements OnInit {
     })
   }
 
-  public async deleteFood(food: FoodModel) {
+  public async deletePlate(plate: PLateModel) {
     try {
-      await firstValueFrom(this.foodService.deleteFood(food.id));
+      await firstValueFrom(this.plateService.deletePlate(plate.id));
       await this.toastController.create({
         message: "Delete successful"
       });
@@ -62,11 +62,11 @@ export class PlatesListPage implements OnInit {
     }
   }
 
-  private getFoodSubscription() {
-    const foodListSubscription$ = this.foodService
-      .getFoods()
+  private getPlateSubscription() {
+    const foodListSubscription$ = this.plateService
+      .getPlates()
       .subscribe((foodList: PlateItemBo[]) => {
-        this.foodList = foodList;
+        this.plateList = foodList;
         console.log(foodList);
       });
     this.subscription$.add(foodListSubscription$);

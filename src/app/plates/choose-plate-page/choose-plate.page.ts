@@ -14,41 +14,38 @@ import {PlateDetailsModal} from "../plate-details-modal/plate-details.modal";
 })
 
 export class ChoosePlatePage implements OnInit, OnDestroy {
-  public foodList: PlateItemBo[];
+  public plateList: PlateItemBo[];
   private subscription$ = new Subscription();
-  private foodListId: LinkPlateListIdToSelectedDateDto = new LinkPlateListIdToSelectedDateDto([]);
+  private plateListId: LinkPlateListIdToSelectedDateDto = new LinkPlateListIdToSelectedDateDto([]);
 
-  constructor(private foodService: PlateService,
+  constructor(private plateService: PlateService,
               private modalController: ModalController,
               private toastController: ToastController,
   ) {
   }
 
   ngOnInit() {
-    this.getFoodSubscription();
+    this.getPlateSubscription();
   }
 
-  public async toggleFoodSelection(food: PlateItemBo) {
-    food.isSelected = !food.isSelected;
+  public async togglePlateSelection(plate: PlateItemBo) {
+    plate.isSelected = !plate.isSelected;
 
-    if (food.isSelected) {
-      console.log("food is selected");
-      this.foodListId.foodListId.push(food.id);
-      console.log(this.foodListId.foodListId);
+    if (plate.isSelected) {
+      this.plateListId.plateListId.push(plate.id);
     } else {
-      console.log("food is not selected");
-      this.foodListId.foodListId.pop();
-      console.log(this.foodListId.foodListId);
+      console.log("plate is not selected");
+      this.plateListId.plateListId.pop();
     }
-    if (this.foodListId.foodListId.length > 3) {
+    if (this.plateListId.plateListId.length > 3) {
       await this.quantityErrorMessage();
     }
   }
 
-  public async linkFoodListToDate() {
+  public async linkPlateListToDate() {
     try {
-      this.foodService.date = formatDate(this.foodService.date, 'yyyy-MM-dd', 'en-US');
-      const response = await lastValueFrom(this.foodService.linkFoodListToDate(this.foodService.date, this.foodListId));
+      this.plateService.date = formatDate(this.plateService.date, 'yyyy-MM-dd', 'en-US');
+      const response = await lastValueFrom(this.plateService.linkPlateListToDate(this.plateService.date, this.plateListId));
 
     } catch (err) {
       // Log the error details, including the response body
@@ -67,7 +64,7 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     }
   }
 
-  public presentCreateFoodModal() {
+  public presentCreatePlateModal() {
     this.modalController.create({
       component: PlateDetailsModal
     }).then(modal => {
@@ -79,12 +76,11 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  private getFoodSubscription() {
-    const foodListSubscription$ = this.foodService
-      .getFoods()
+  private getPlateSubscription() {
+    const foodListSubscription$ = this.plateService
+      .getPlates()
       .subscribe((foodList: PlateItemBo[]) => {
-        this.foodList = foodList;
-        console.log(foodList);
+        this.plateList = foodList;
       });
     this.subscription$.add(foodListSubscription$);
   }

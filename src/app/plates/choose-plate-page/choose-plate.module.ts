@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {ChoosePlatePage} from './choose-plate.page';
 import {ChoosePlateRoutingModule} from './choose-plate-routing.module';
-import {CreateFoodPageModule} from "../plate-details-modal/plate-details.module";
+import {CreatePlatePageModule} from "../plate-details-modal/plate-details.module";
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import {CreateFoodPageModule} from "../plate-details-modal/plate-details.module"
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    CreateFoodPageModule
+    CreatePlatePageModule
   ],
   declarations: [ChoosePlatePage]
 })

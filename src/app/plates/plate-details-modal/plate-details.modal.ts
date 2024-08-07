@@ -7,48 +7,48 @@ import {PlateItemBo} from "../bos/plate-item.bo";
 import {firstValueFrom} from "rxjs";
 
 @Component({
-  selector: 'food-details-modal',
+  selector: 'plate-details-modal',
   templateUrl: './plate-details.modal.html',
   styleUrls: ['./plate-details.modal.scss'],
 })
 
 export class PlateDetailsModal implements OnInit {
-  @Input() foodForEdit: PlateItemBo;
+  @Input() plateForEdit: PlateItemBo;
 
-  public foodForm = this.formBuilder.group({
+  public plateForm = this.formBuilder.group({
     label: ['', Validators.required],
     description: ['', Validators.required]
   });
 
   constructor(private formBuilder: FormBuilder,
-              private foodService: PlateService,
+              private plateService: PlateService,
               private modalController: ModalController,
               private toastController: ToastController
   ) {
   }
 
   ngOnInit() {
-    if (!this.foodForEdit) {
+    if (!this.plateForEdit) {
       return;
     }
-    this.foodForm.patchValue({
-      label: this.foodForEdit.label,
-      description: this.foodForEdit.description
+    this.plateForm.patchValue({
+      label: this.plateForEdit.label,
+      description: this.plateForEdit.description
     })
   }
 
-  public async saveFood() {
-    if (this.foodService.editable) {
-      await firstValueFrom(this.foodService.updateFoodDetails(this.foodForEdit.id, this.foodForm.value));
+  public async savePlate() {
+    if (this.plateService.editable) {
+      await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, this.plateForm.value));
     } else {
-      await firstValueFrom(this.foodService.createFood(this.foodForm.value));
+      await firstValueFrom(this.plateService.Plate(this.plateForm.value));
     }
     await this.presentToast();
     await this.closeModal();
   }
 
   public async presentToast() {
-    if (this.foodService.editable) {
+    if (this.plateService.editable) {
       const toast = await this.toastController.create({
         message: 'Your food is up to date!',
         duration: 2000

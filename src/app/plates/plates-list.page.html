@@ -10,19 +10,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngFor="let food of foodList">
+  <ion-list *ngFor="let food of plateList">
     <ion-item>
       {{ food.label }}
-      <ion-button (click)="presentDetailEditFoodModal(food)">
+      <ion-button (click)="presentDetailEditPlateModal(food)">
         edit
       </ion-button>
-      <ion-button (click)="deleteFood(food)" color="danger">
+      <ion-button (click)="deletePlate(food)" color="danger">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
   <ion-fab horizontal="end" id="open-modal" slot="fixed" vertical="bottom">
-    <ion-fab-button (click)="presentDetailAddFoodModal()">
+    <ion-fab-button (click)="presentDetailAddPlateModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

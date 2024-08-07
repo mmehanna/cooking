@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable, of} from "rxjs";
-import {FoodModel} from "./models/food.model";
-import {listFoodsForTargetedDateModel} from "./models/list-foods-for-targeted-date.model";
+import {PLateModel} from "./models/PLateModel";
+import {listPlatesForTargetedDateModel} from "./models/list-plates-for-targeted-date.model";
 import {PlateForCreationDto} from "../plates/choose-plate-page/dtos/plate-for-creation.dto";
 import {
   LinkPlateListIdToSelectedDateDto
@@ -10,53 +10,45 @@ import {
 import {PlateForUpdateDto} from "../plates/choose-plate-page/dtos/plate-for-update.dto";
 
 @Injectable({providedIn: 'root'})
-export class AuthClient {
+export class PlateClient {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  public getFoods(): Observable<FoodModel[]> {
-    return this.httpClient.get<FoodModel[]>(`${this.apiUrl}/foods`);
+  public getPlates(): Observable<PLateModel[]> {
+    return this.httpClient.get<PLateModel[]>(`${this.apiUrl}/plates`);
   }
 
-  public getFoodDetails(foodId: string): Observable<FoodModel> {
-    return this.httpClient.get<FoodModel>(`${this.apiUrl}/foods/${foodId}`);
+  public getPlateDetails(plateId: string): Observable<PLateModel> {
+    return this.httpClient.get<PLateModel>(`${this.apiUrl}/plates/${plateId}`);
   }
 
-  public createFood(foodForCreationDto: PlateForCreationDto): Observable<FoodModel> {
-    return this.httpClient.post<FoodModel>(`${this.apiUrl}/foods`, foodForCreationDto);
+  public createPlate(plateForCreationDto: PlateForCreationDto): Observable<PLateModel> {
+    return this.httpClient.post<PLateModel>(`${this.apiUrl}/plates`, plateForCreationDto);
   }
 
-  // public createUser(userForCreationDto: UserForCreationDto): Observable<FoodModel> {
-  //   return this.httpClient.post<FoodModel>(`${this.apiUrl}/foods`, userForCreationDto);
-  // }
-
-  public linkFoodListToDate(date: string, foodListIdToSelectedDateDto: LinkPlateListIdToSelectedDateDto): Observable<string> {
-    return this.httpClient.put<string>(`${this.apiUrl}/foods-for-day/${date}`, foodListIdToSelectedDateDto);
+  public linkPlateListToDate(date: string, plateListIdToSelectedDateDto: LinkPlateListIdToSelectedDateDto): Observable<string> {
+    return this.httpClient.put<string>(`${this.apiUrl}/plates-for-day/${date}`, plateListIdToSelectedDateDto);
   }
 
-  public updateFoodDetails(foodId: string, foodForUpdateDto: PlateForUpdateDto): Observable<FoodModel> {
-    return this.httpClient.put<FoodModel>(`${this.apiUrl}/foods/${foodId}`, foodForUpdateDto);
+  public updatePlateDetails(plateId: string, plateForUpdateDto: PlateForUpdateDto): Observable<PLateModel> {
+    return this.httpClient.put<PLateModel>(`${this.apiUrl}/plates/${plateId}`, plateForUpdateDto);
   }
 
-  public listFoodsForTargetedDate(date: string): Observable<listFoodsForTargetedDateModel[]> {
-    return this.httpClient.get<listFoodsForTargetedDateModel[]>(`${this.apiUrl}/foods-for-day/${date}`);
+  public listPlatesForTargetedDate(date: string): Observable<listPlatesForTargetedDateModel[]> {
+    return this.httpClient.get<listPlatesForTargetedDateModel[]>(`${this.apiUrl}/plates-for-day/${date}`);
   }
 
-  public deleteFood(foodId: string): Observable<FoodModel> {
-    if (!foodId) {
+  public deletePlate(plateId: string): Observable<PLateModel> {
+    if (!plateId) {
       throw new Error('FoodId must not be null or undefined');
     }
-    return this.httpClient.delete<FoodModel>(`${this.apiUrl}/foods/${foodId}`).pipe(
+    return this.httpClient.delete<PLateModel>(`${this.apiUrl}/plates/${plateId}`).pipe(
       catchError((error: any) => {
         console.error('Error deleting food', error);
         return of(error);
       })
     );
-  }
-
-  public getPlates(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/foods`);
   }
 }
