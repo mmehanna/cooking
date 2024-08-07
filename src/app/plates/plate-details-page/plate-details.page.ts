@@ -3,29 +3,29 @@ import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 
 import {PlateService} from "../services/plate.service";
-import {FoodModel} from "../../_clients/models/food.model";
+import {PLateModel} from "../../_clients/models/PLateModel";
 
 @Component({
   templateUrl: './plate-details.page.html',
   styleUrls: ['./plate-details.page.scss'],
 })
 export class PlateDetailsPage implements OnInit, OnDestroy {
-  public foodDetails: FoodModel;
+  public plateDetails: PLateModel;
   private subscription = new Subscription();
-  private foodId: string;
+  private plateId: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private foodService: PlateService
+              private plateService: PlateService
   ) {
   }
 
   ngOnInit(): void {
-    this.foodId = this.activatedRoute.snapshot.params['id'] as string;
+    this.plateId = this.activatedRoute.snapshot.params['id'] as string;
 
-    const foodSubscription$ = this.foodService
-      .getFoodDetails(this.foodId)
-      .subscribe((food: FoodModel) => this.foodDetails = food);
-    this.subscription.add(foodSubscription$);
+    const plateSubscription$ = this.plateService
+      .getPlateDetails(this.plateId)
+      .subscribe((food: PLateModel) => this.plateDetails = food);
+    this.subscription.add(plateSubscription$);
   }
 
   ngOnDestroy() {

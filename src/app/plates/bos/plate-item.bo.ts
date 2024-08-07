@@ -1,13 +1,15 @@
-import {FoodModel} from "../../_clients/models/food.model";
+import {PLateModel} from "../../_clients/models/PLateModel";
 
-export class PlateItemBo implements FoodModel {
+export class PlateItemBo implements PLateModel {
   id: string;
   label: string;
   description: string;
   imgUrl: string;
   isSelected: boolean = false;
+  date: string;
+  name: string;
 
-  constructor(foodModel: FoodModel) {
+  constructor(foodModel: PLateModel) {
     this.id = foodModel.id;
     this.label = foodModel.label;
     this.description = foodModel.description;

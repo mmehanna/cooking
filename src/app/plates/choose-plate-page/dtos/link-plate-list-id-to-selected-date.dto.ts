@@ -1,12 +1,12 @@
 export class LinkPlateListIdToSelectedDateDto {
-  foodListId = [];
+  plateListId = [];
 
   constructor(foodListId: string[]) {
-    this.foodListId = foodListId;
+    this.plateListId = foodListId;
   }
 
   toJson() {
-    return this.foodListId;
+    return this.plateListId;
   }
 }
 

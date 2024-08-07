@@ -1,4 +1,4 @@
-export class FoodModel {
+export class PLateModel {
   id: string;
   label: string;
   description: string;

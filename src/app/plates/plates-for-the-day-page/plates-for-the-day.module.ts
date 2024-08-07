@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 
 import {PlatesForTheDayPage} from './plates-for-the-day.page';
 import {PlatesForTheDayRoutingModule} from './plates-for-the-day-routing.module';
+import {CalendarMonthModule} from "angular-calendar";
 
 @NgModule({
   imports: [
@@ -12,8 +13,9 @@ import {PlatesForTheDayRoutingModule} from './plates-for-the-day-routing.module'
     FormsModule,
     IonicModule,
     PlatesForTheDayRoutingModule,
+    CalendarMonthModule,
   ],
   declarations: [PlatesForTheDayPage]
 })
-export class FoodForTheDay {
+export class PlateForTheDay {
 }

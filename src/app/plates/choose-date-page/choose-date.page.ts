@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./choose-date.page.scss'],
 })
 export class ChooseDatePage {
-  constructor(public foodService: PlateService,
+  constructor(public plateService: PlateService,
               private toastController: ToastController,
               private router: Router
   ) {
@@ -17,7 +17,7 @@ export class ChooseDatePage {
 
   public nextPageValidation() {
     if (this.timeValidation() == true) {
-      this.router.navigate(['/choose-food']);
+      this.router.navigate(['/choose-plate']);
     } else {
       this.dateTimeErrorMessage().then(r => {
       });
@@ -25,7 +25,7 @@ export class ChooseDatePage {
   }
 
   public oneSelectedDate() {
-    if (this.foodService.date) {
+    if (this.plateService.date) {
       this.timeValidation();
     } else {
       this.dateTimeErrorMessage().then(r => {
@@ -34,7 +34,7 @@ export class ChooseDatePage {
   }
 
   private timeValidation(): boolean {
-    const dateTime = new Date(this.foodService.date);
+    const dateTime = new Date(this.plateService.date);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);

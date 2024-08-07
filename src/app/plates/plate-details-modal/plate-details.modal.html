@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="foodForm">
+  <form [formGroup]="plateForm">
     <ion-item>
       <ion-label>Food name:</ion-label>
       <input formControlName="label"
@@ -25,7 +25,7 @@
     </ion-item>
   </form>
   <ion-button>take a picture</ion-button>
-  <ion-button (click)="saveFood()"
+  <ion-button (click)="savePlate()"
               id="open-toast">Save
   </ion-button>
 </ion-content>

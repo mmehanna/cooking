@@ -1,4 +1,4 @@
-export interface linkFoodListToDate {
+export interface linkPlateListToDate {
   id: number;
   label: string;
   date: string;
