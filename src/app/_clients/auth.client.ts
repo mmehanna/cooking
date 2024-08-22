@@ -12,13 +12,13 @@ export class AuthClient {
   }
 
   public get isLoggedIn(): boolean {
-    return localStorage.getItem('access_token') !== null;
+    return localStorage.getItem('accessToken') !== null;
   }
 
   public login(email: string, password: string): Observable<any> {
-    return this.httpClient.post<{ access_token: string }>(`${this.apiUrl}/login`, {email, password}).pipe(
+    return this.httpClient.post<{ accessToken: string }>(`${this.apiUrl}/login`, {email, password}).pipe(
       map(response => {
-        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('accessToken', response.accessToken);
         return response;
       })
     );

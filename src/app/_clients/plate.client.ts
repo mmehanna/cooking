@@ -8,13 +8,16 @@ import {
   LinkPlateListIdToSelectedDateDto
 } from "../plates/choose-plate-page/dtos/link-plate-list-id-to-selected-date.dto";
 import {PlateForUpdateDto} from "../plates/choose-plate-page/dtos/plate-for-update.dto";
+import {AuthService} from "../plates/services/auth.service";
 
 @Injectable({providedIn: 'root'})
 export class PlateClient {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private authService: AuthService) {
   }
+
 
   public getPlates(): Observable<PLateModel[]> {
     return this.httpClient.get<PLateModel[]>(`${this.apiUrl}/plates`);

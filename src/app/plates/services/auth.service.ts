@@ -10,6 +10,11 @@ export class AuthService {
   constructor(private authClient: AuthClient) {
   }
 
+  public getToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
+
+
   public login(email: string, password: string): Observable<any> {
     return this.authClient.login(email, password);
   }

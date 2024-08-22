@@ -28,6 +28,15 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     this.getPlateSubscription();
   }
 
+  private getPlateSubscription() {
+    const plateListSubscription$ = this.plateService
+      .getPlates()
+      .subscribe((plateList: PlateItemBo[]) => {
+        this.plateList = plateList;
+      });
+    this.subscription$.add(plateListSubscription$);
+  }
+
   public async togglePlateSelection(plate: PlateItemBo) {
     plate.isSelected = !plate.isSelected;
 
@@ -76,14 +85,6 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  private getPlateSubscription() {
-    const foodListSubscription$ = this.plateService
-      .getPlates()
-      .subscribe((foodList: PlateItemBo[]) => {
-        this.plateList = foodList;
-      });
-    this.subscription$.add(foodListSubscription$);
-  }
 
   private async quantityErrorMessage() {
     const toast = await this.toastController.create({
