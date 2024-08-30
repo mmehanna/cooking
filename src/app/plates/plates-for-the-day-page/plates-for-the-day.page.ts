@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {formatDate} from "@angular/common";
-import {PlateService} from "../services/plate.service";
 import {Subscription} from "rxjs";
-import {listPlatesForTargetedDateModel} from "../../_clients/models/list-plates-for-targeted-date.model";
+
 import {CalendarEvent} from "angular-calendar";
+import {PlateService} from "../services/plate.service";
+import {listPlatesForTargetedDateModel} from "../../_clients/models/list-plates-for-targeted-date.model";
 
 @Component({
   selector: 'app-reorder',

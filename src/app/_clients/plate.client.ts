@@ -36,7 +36,7 @@ export class PlateClient {
   }
 
   public updatePlateDetails(plateId: string, plateForUpdateDto: PlateForUpdateDto): Observable<PLateModel> {
-    return this.httpClient.put<PLateModel>(`${this.apiUrl}/plates/${plateId}`, plateForUpdateDto);
+    return this.httpClient.patch<PLateModel>(`${this.apiUrl}/plates/${plateId}`, plateForUpdateDto);
   }
 
   public listPlatesForTargetedDate(date: string): Observable<listPlatesForTargetedDateModel[]> {

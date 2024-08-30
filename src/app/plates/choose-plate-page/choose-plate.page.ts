@@ -81,9 +81,6 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
-  }
 
 
   private async quantityErrorMessage() {
@@ -93,5 +90,9 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       position: 'top'
     });
     await toast.present();
+  }
+
+  ngOnDestroy() {
+    this.subscription$.unsubscribe();
   }
 }
