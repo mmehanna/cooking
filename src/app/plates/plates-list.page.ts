@@ -28,16 +28,36 @@ export class PlatesListPage implements OnInit {
   public presentDetailEditPlateModal(plate: PlateItemBo) {
     this.plateService.editable = true;
 
-    this.modalController.create({
+    const modal = this.modalController.create({
       component: PlateDetailsModal,
       componentProps: {
-        plateForEdit: plate
+        plateForEdit: plate,
+        'saveEvent': () => this.refreshPage()
       }
     }).then(modal => {
       modal.present().then(r => {
       });
     })
   }
+
+  refreshPage() {
+    // Logique pour actualiser les données de la page
+    console.log('Données actualisées');
+  }
+
+  // public presentDetailEditPlateModal(plate: PlateItemBo) {
+  //   this.plateService.editable = true;
+  //
+  //   this.modalController.create({
+  //     component: PlateDetailsModal,
+  //     componentProps: {
+  //       plateForEdit: plate
+  //     }
+  //   }).then(modal => {
+  //     modal.present().then(r => {
+  //     });
+  //   })
+  // }
 
   public async presentDetailAddPlateModal() {
     this.plateService.editable = false;
