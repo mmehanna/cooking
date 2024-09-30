@@ -8,19 +8,22 @@ import {
   LinkPlateListIdToSelectedDateDto
 } from "../plates/choose-plate-page/dtos/link-plate-list-id-to-selected-date.dto";
 import {PlateForUpdateDto} from "../plates/choose-plate-page/dtos/plate-for-update.dto";
-import {AuthService} from "../plates/services/auth.service";
+import {PLateForWeekModel} from "./models/PLateForWeekModel";
 
 @Injectable({providedIn: 'root'})
 export class PlateClient {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private httpClient: HttpClient,
-              private authService: AuthService) {
+  constructor(private httpClient: HttpClient) {
   }
 
 
   public getPlates(): Observable<PLateModel[]> {
     return this.httpClient.get<PLateModel[]>(`${this.apiUrl}/plates`);
+  }
+
+  public getPlatesForWeek(startDate: string): Observable<PLateForWeekModel[]> {
+    return this.httpClient.get<PLateForWeekModel[]>(`${this.apiUrl}/plates-for-day/plate-list/${startDate}`);
   }
 
   public getPlateDetails(plateId: string): Observable<PLateModel> {
@@ -42,6 +45,7 @@ export class PlateClient {
   public listPlatesForTargetedDate(date: string): Observable<listPlatesForTargetedDateModel[]> {
     return this.httpClient.get<listPlatesForTargetedDateModel[]>(`${this.apiUrl}/plates-for-day/${date}`);
   }
+
 
   public deletePlate(plateId: string): Observable<PLateModel> {
     if (!plateId) {

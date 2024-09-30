@@ -8,14 +8,15 @@ import {listPlatesForTargetedDateModel} from "../../_clients/models/list-plates-
 import {LinkPlateListIdToSelectedDateDto} from "../choose-plate-page/dtos/link-plate-list-id-to-selected-date.dto";
 import {PlateForCreationDto} from "../choose-plate-page/dtos/plate-for-creation.dto";
 import {PlateForUpdateDto} from "../choose-plate-page/dtos/plate-for-update.dto";
+import {PLateForWeekModel} from "../../_clients/models/PLateForWeekModel";
 
 
 @Injectable({providedIn: 'root'})
 export class PlateService {
-  public plate: any;
-  public date: string;
   public editable: boolean;
   private plateListTrigger$ = new Subject();
+  date: string;
+
 
   constructor(private plateClient: PlateClient) {
   }
@@ -77,6 +78,11 @@ export class PlateService {
       })
     )
   }
+
+  public getPlatesForWeek(startDate: string): Observable<PLateForWeekModel[]> {
+    return this.plateClient.getPlatesForWeek(startDate);
+  }
+
 }
 
 

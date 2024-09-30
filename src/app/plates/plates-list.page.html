@@ -1,22 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-back-button slot="start"></ion-back-button>
+    <ion-title size="large">Manage your plates</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title size="large">Manage your plates</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-list *ngFor="let food of plateList">
+  <ion-list *ngFor="let plate of plateList">
     <ion-item>
-      {{ food.label }}
-      <ion-button (click)="presentDetailEditPlateModal(food)">
+      {{ plate.label }}
+      <ion-button (click)="presentDetailEditPlateModal(plate)">
         edit
       </ion-button>
-      <ion-button (click)="deletePlate(food)" color="danger">
+      <ion-button (click)="deletePlate(plate)" color="danger">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
