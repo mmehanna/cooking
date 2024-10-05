@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title size="large">Manage your food</ion-title>
+    <ion-title size="large">Manage your plate</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">
         <ion-icon name="close"></ion-icon>
@@ -12,13 +12,13 @@
 <ion-content class="ion-padding">
   <form [formGroup]="plateForm">
     <ion-item>
-      <ion-label>Food name:</ion-label>
+      <ion-label>Plate name:</ion-label>
       <input formControlName="label"
              maxlength="20"
              type="text">
     </ion-item>
     <ion-item>
-      <ion-label>Food description:</ion-label>
+      <ion-label>Plate description:</ion-label>
       <input formControlName="description"
              maxlength="20"
              type="text">

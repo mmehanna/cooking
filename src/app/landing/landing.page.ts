@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PlateService} from "../plates/services/plate.service";
 import {lastValueFrom,} from "rxjs";
 import {PLateForWeekModel} from "../_clients/models/PLateForWeekModel";
+import {AuthService} from "../plates/services/auth.service";
 
 @Component({
   selector: 'app-landing',
@@ -11,7 +12,8 @@ import {PLateForWeekModel} from "../_clients/models/PLateForWeekModel";
 export class LandingPage implements OnInit {
   plateForWeek: PLateForWeekModel[] = [];
 
-  constructor(private plateService: PlateService) {
+  constructor(private plateService: PlateService,
+              private authService: AuthService) {
   }
 
 
@@ -24,6 +26,11 @@ export class LandingPage implements OnInit {
       console.error('Error fetching plates:', error);
     }
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
 }
 
 

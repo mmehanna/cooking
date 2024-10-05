@@ -4,4 +4,5 @@ export class PLateModel {
   description: string;
   imgUrl: string;
   isSelected = false;
+  category: string;
 }

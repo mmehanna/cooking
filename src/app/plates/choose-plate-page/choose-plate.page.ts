@@ -14,9 +14,10 @@ import {PlateDetailsModal} from "../plate-details-modal/plate-details.modal";
 })
 
 export class ChoosePlatePage implements OnInit, OnDestroy {
-  public plateList: PlateItemBo[];
+  public plateList: PlateItemBo[] = [];
   private subscription$ = new Subscription();
   private plateListId: LinkPlateListIdToSelectedDateDto = new LinkPlateListIdToSelectedDateDto([]);
+  public filteredPlateList: any[] = [];
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
@@ -26,6 +27,20 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPlateSubscription();
+    this.filteredPlateList = this.plateList;
+  }
+
+  public onSegmentChange(event: any) {
+    const selectedSegment = event.detail.value;
+
+    if (selectedSegment === 'all') {
+      this.filteredPlateList = this.plateList;
+      console.log('Tous les plats :', this.filteredPlateList);
+
+    } else {
+      this.filteredPlateList = this.plateList.filter(plate => plate.category === selectedSegment);
+      console.log('Plats filtrés :', this.filteredPlateList);
+    }
   }
 
   private getPlateSubscription() {
@@ -33,6 +48,7 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       .getPlates()
       .subscribe((plateList: PlateItemBo[]) => {
         this.plateList = plateList;
+        console.log(this.plateList);
       });
     this.subscription$.add(plateListSubscription$);
   }
