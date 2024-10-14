@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {ModalController, ToastController} from "@ionic/angular";
 
@@ -14,6 +14,7 @@ import {firstValueFrom} from "rxjs";
 
 export class PlateDetailsModal implements OnInit {
   @Input() plateForEdit: PlateItemBo;
+  @Output() saveEvent = new EventEmitter<void>();
 
   public plateForm = this.formBuilder.group({
     label: ['', Validators.required],
@@ -43,6 +44,7 @@ export class PlateDetailsModal implements OnInit {
     } else {
       await firstValueFrom(this.plateService.Plate(this.plateForm.value));
     }
+
     await this.presentToast();
     await this.closeModal();
   }

@@ -26,11 +26,14 @@
   </ion-item>
 
   <ion-list *ngIf="this.linkPlateListToDates?.length > 0">
-    <ion-item *ngFor="let food of this.linkPlateListToDates">
-      <pre>{{ food | json }}</pre>
+    <ion-button (click)="deletePlateForDay(plateService.date)" color="danger">Delete all plates
+      <ion-icon name="trash-bin-outline"></ion-icon>
+    </ion-button>
+    <ion-item *ngFor="let plate of this.linkPlateListToDates">
+      <pre>{{ plate.label }}</pre>
     </ion-item>
   </ion-list>
 
-  <p *ngIf="this.linkPlateListToDates?.length === 0">Aucun aliment enregistré pour cette date.</p>
+  <p *ngIf="this.linkPlateListToDates?.length === 0">There is no plate for this date.</p>
 </ion-content>
 

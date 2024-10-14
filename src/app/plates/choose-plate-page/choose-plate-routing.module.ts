@@ -6,7 +6,7 @@ import {ChoosePlatePage} from './choose-plate.page';
 const routes: Routes = [
   {path: '', component: ChoosePlatePage},
   {
-    path: 'food-details-page/:id',
+    path: 'plate-details-page/:id',
     loadChildren: () => import('../plate-details-page/plate-details-page.module').then(m => m.PlateDetailsPageModule)
   },
   {

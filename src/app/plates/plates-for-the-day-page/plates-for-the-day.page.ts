@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {formatDate} from "@angular/common";
-import {PlateService} from "../services/plate.service";
 import {Subscription} from "rxjs";
-import {listPlatesForTargetedDateModel} from "../../_clients/models/list-plates-for-targeted-date.model";
+
 import {CalendarEvent} from "angular-calendar";
+import {PlateService} from "../services/plate.service";
+import {listPlatesForTargetedDateModel} from "../../_clients/models/list-plates-for-targeted-date.model";
+import {AlertController} from "@ionic/angular";
 
 @Component({
   selector: 'app-reorder',
@@ -17,7 +19,9 @@ export class PlatesForTheDayPage implements OnInit {
   events: CalendarEvent[] = [];
 
   constructor(
-    public plateService: PlateService
+    public plateService: PlateService,
+    private platesService: PlateService,
+    private alertController: AlertController
   ) {
   }
 
@@ -28,6 +32,11 @@ export class PlatesForTheDayPage implements OnInit {
         title: plate.name,
         color: {primary: '#ad2121', secondary: '#FAE3E3'}
       }));
+    });
+
+    // S'abonner aux changements de la liste des plats
+    this.platesService.platesList$.subscribe((plates) => {
+      this.linkPlateListToDates = plates;
     });
   }
 
@@ -47,7 +56,41 @@ export class PlatesForTheDayPage implements OnInit {
     this.subscription.add(foodListSubscription$);
   }
 
-  onDateChange(event: any): void {
+  public onDateChange(event: any): void {
     const date = event.detail.value.split('T')[0];
+  }
+
+  public async deletePlateForDay(targetedDate: string) {
+    console.log(targetedDate);
+    console.log("dans le viewModel: " + targetedDate);
+    console.log(this.linkPlateListToDates);
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete',
+      message: 'Are you sure you want to delete all plates for this day?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.platesService.deletePlateForDay(targetedDate).subscribe(
+              () => {
+                // Remove the plate from the list after deletion
+                this.linkPlateListToDates = this.linkPlateListToDates.filter(
+                  (plate) => plate.date !== targetedDate
+                );
+              },
+              (error) => {
+                console.error('Error deleting plate:', error);
+              }
+            );
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

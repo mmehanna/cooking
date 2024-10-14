@@ -9,15 +9,28 @@
     <ion-toolbar>
       <ion-title size="large">Choose your plates</ion-title>
     </ion-toolbar>
+    <ion-segment (ionChange)="onSegmentChange($event)" value="all">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="lunch">
+        <ion-label>Lunch</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="dinner">
+        <ion-label>Dinner</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="supper">
+        <ion-label>Supper</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-header>
 
-  <ion-list *ngFor="let plate of plateList">
+  <ion-list *ngFor="let plate of filteredPlateList">
     <ion-item>
       <ion-checkbox (ionChange)="togglePlateSelection(plate)"
                     justify="start"
                     labelPlacement="end">
         {{ plate.label }}
-
         <ion-button [routerLink]="['plate-details-page',plate.id]">
           details
         </ion-button>

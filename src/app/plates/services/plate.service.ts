@@ -1,4 +1,4 @@
-import {map, Observable, startWith, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, map, Observable, startWith, Subject, switchMap, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 
 import {PlateItemBo} from "../bos/plate-item.bo";
@@ -8,20 +8,26 @@ import {listPlatesForTargetedDateModel} from "../../_clients/models/list-plates-
 import {LinkPlateListIdToSelectedDateDto} from "../choose-plate-page/dtos/link-plate-list-id-to-selected-date.dto";
 import {PlateForCreationDto} from "../choose-plate-page/dtos/plate-for-creation.dto";
 import {PlateForUpdateDto} from "../choose-plate-page/dtos/plate-for-update.dto";
+import {PLateForWeekModel} from "../../_clients/models/PLateForWeekModel";
 
 
 @Injectable({providedIn: 'root'})
 export class PlateService {
-  public plate: any;
-  public date: string;
   public editable: boolean;
   private plateListTrigger$ = new Subject();
+  date: string;
+  private platesListSubject = new BehaviorSubject<any[]>([]);
+  platesList$ = this.platesListSubject.asObservable();
 
   constructor(private plateClient: PlateClient) {
   }
 
   public refreshPlateList() {
     this.plateListTrigger$.next(null);
+  }
+
+  public getPlatesForWeek(startDate: string): Observable<PLateForWeekModel[]> {
+    return this.plateClient.getPlatesForWeek(startDate);
   }
 
   public getPlates(): Observable<PlateItemBo[]> {
@@ -32,9 +38,9 @@ export class PlateService {
           return this.plateClient
             .getPlates()
             .pipe(
-              map((foodModelList: PLateModel[]) => {
-                return foodModelList.map(foodModel => {
-                  return new PlateItemBo(foodModel);
+              map((plateModelList: PLateModel[]) => {
+                return plateModelList.map(plateModel => {
+                  return new PlateItemBo(plateModel);
                 })
               })
             )
@@ -42,22 +48,22 @@ export class PlateService {
       )
   }
 
-  public getPlateDetails(foodId: string): Observable<any> {
-    return this.plateClient.getPlateDetails(foodId);
+  public getPlateDetails(plateId: string): Observable<any> {
+    return this.plateClient.getPlateDetails(plateId);
   }
 
-  public linkPlateListToDate(date: string, foodListIdToSelectedDateDto: LinkPlateListIdToSelectedDateDto): Observable<string> {
-    return this.plateClient.linkPlateListToDate(date, foodListIdToSelectedDateDto);
+  public linkPlateListToDate(date: string, plateListIdToSelectedDateDto: LinkPlateListIdToSelectedDateDto): Observable<string> {
+    return this.plateClient.linkPlateListToDate(date, plateListIdToSelectedDateDto);
   }
 
   public listPlatesForTargetedDate(targetedDate: string): Observable<listPlatesForTargetedDateModel[]> {
     return this.plateClient.listPlatesForTargetedDate(targetedDate);
   }
 
-  public Plate(foodFormValue: any): Observable<any> {
-    const foodForCreationDto = new PlateForCreationDto(foodFormValue.label, foodFormValue.description);
+  public Plate(plateFormValue: any): Observable<any> {
+    const plateForCreationDto = new PlateForCreationDto(plateFormValue.label, plateFormValue.description);
     return this.plateClient
-      .createPlate(foodForCreationDto)
+      .createPlate(plateForCreationDto)
       .pipe(
         tap(() => {
           this.refreshPlateList();
@@ -65,17 +71,32 @@ export class PlateService {
       )
   }
 
-  public updatePlateDetails(foodId: string, foodFormValue: any): Observable<any> {
-    const foodForUpdateDto = new PlateForUpdateDto(foodFormValue.label, foodFormValue.description);
-    return this.plateClient.updatePlateDetails(foodId, foodForUpdateDto);
+  public updatePlateDetails(plateId: string, plateFormValue: any): Observable<any> {
+    const plateForUpdateDto = new PlateForUpdateDto(plateFormValue.label, plateFormValue.description);
+    return this.plateClient.updatePlateDetails(plateId, plateForUpdateDto);
   }
 
-  public deletePlate(foodId: string): Observable<any> {
-    return this.plateClient.deletePlate(foodId).pipe(
+  public deletePlateForDay(targetedDate: string) {
+    return this.plateClient.deletePlateForDay(targetedDate).pipe(
+      tap(() => {
+        const updatedPlates = this.platesListSubject
+          .getValue()
+          .filter((plate) => plate.date !== targetedDate);
+        this.updatePlatesList(updatedPlates);
+      })
+    )
+  }
+
+  public deletePlate(plateId: string): Observable<any> {
+    return this.plateClient.deletePlate(plateId).pipe(
       tap(() => {
         this.refreshPlateList();
       })
     )
+  }
+
+  private updatePlatesList(plates: any[]) {
+    this.platesListSubject.next(plates);
   }
 }
 

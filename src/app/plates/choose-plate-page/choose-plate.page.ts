@@ -14,9 +14,10 @@ import {PlateDetailsModal} from "../plate-details-modal/plate-details.modal";
 })
 
 export class ChoosePlatePage implements OnInit, OnDestroy {
-  public plateList: PlateItemBo[];
+  public plateList: PlateItemBo[] = [];
   private subscription$ = new Subscription();
   private plateListId: LinkPlateListIdToSelectedDateDto = new LinkPlateListIdToSelectedDateDto([]);
+  public filteredPlateList: any[] = [];
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
@@ -26,6 +27,30 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPlateSubscription();
+    this.filteredPlateList = this.plateList;
+  }
+
+  public onSegmentChange(event: any) {
+    const selectedSegment = event.detail.value;
+
+    if (selectedSegment === 'all') {
+      this.filteredPlateList = this.plateList;
+      console.log('Tous les plats :', this.filteredPlateList);
+
+    } else {
+      this.filteredPlateList = this.plateList.filter(plate => plate.category === selectedSegment);
+      console.log('Plats filtrés :', this.filteredPlateList);
+    }
+  }
+
+  private getPlateSubscription() {
+    const plateListSubscription$ = this.plateService
+      .getPlates()
+      .subscribe((plateList: PlateItemBo[]) => {
+        this.plateList = plateList;
+        console.log(this.plateList);
+      });
+    this.subscription$.add(plateListSubscription$);
   }
 
   public async togglePlateSelection(plate: PlateItemBo) {
@@ -72,18 +97,7 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
-  }
 
-  private getPlateSubscription() {
-    const foodListSubscription$ = this.plateService
-      .getPlates()
-      .subscribe((foodList: PlateItemBo[]) => {
-        this.plateList = foodList;
-      });
-    this.subscription$.add(foodListSubscription$);
-  }
 
   private async quantityErrorMessage() {
     const toast = await this.toastController.create({
@@ -92,5 +106,9 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       position: 'top'
     });
     await toast.present();
+  }
+
+  ngOnDestroy() {
+    this.subscription$.unsubscribe();
   }
 }

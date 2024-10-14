@@ -4,11 +4,15 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('././landing/landing.module').then(m => m.LandingModule)
   },
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'landing',
@@ -30,15 +34,6 @@ const routes: Routes = [
     path: 'manage-plates',
     loadChildren: () => import('./plates/plates-list.module').then(m => m.PlatesListModule)
   },
-  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  },
-  {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
-  },
-
 
 ];
 
