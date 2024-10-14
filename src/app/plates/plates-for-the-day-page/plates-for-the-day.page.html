@@ -26,8 +26,11 @@
   </ion-item>
 
   <ion-list *ngIf="this.linkPlateListToDates?.length > 0">
+    <ion-button (click)="deletePlateForDay(plateService.date)" color="danger">Delete all plates
+      <ion-icon name="trash-bin-outline"></ion-icon>
+    </ion-button>
     <ion-item *ngFor="let plate of this.linkPlateListToDates">
-      <pre>{{ plate.label | json }}</pre>
+      <pre>{{ plate.label }}</pre>
     </ion-item>
   </ion-list>
 

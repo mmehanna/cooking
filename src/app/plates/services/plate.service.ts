@@ -1,4 +1,4 @@
-import {map, Observable, startWith, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, map, Observable, startWith, Subject, switchMap, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 
 import {PlateItemBo} from "../bos/plate-item.bo";
@@ -16,13 +16,18 @@ export class PlateService {
   public editable: boolean;
   private plateListTrigger$ = new Subject();
   date: string;
-
+  private platesListSubject = new BehaviorSubject<any[]>([]);
+  platesList$ = this.platesListSubject.asObservable();
 
   constructor(private plateClient: PlateClient) {
   }
 
   public refreshPlateList() {
     this.plateListTrigger$.next(null);
+  }
+
+  public getPlatesForWeek(startDate: string): Observable<PLateForWeekModel[]> {
+    return this.plateClient.getPlatesForWeek(startDate);
   }
 
   public getPlates(): Observable<PlateItemBo[]> {
@@ -71,6 +76,17 @@ export class PlateService {
     return this.plateClient.updatePlateDetails(plateId, plateForUpdateDto);
   }
 
+  public deletePlateForDay(targetedDate: string) {
+    return this.plateClient.deletePlateForDay(targetedDate).pipe(
+      tap(() => {
+        const updatedPlates = this.platesListSubject
+          .getValue()
+          .filter((plate) => plate.date !== targetedDate);
+        this.updatePlatesList(updatedPlates);
+      })
+    )
+  }
+
   public deletePlate(plateId: string): Observable<any> {
     return this.plateClient.deletePlate(plateId).pipe(
       tap(() => {
@@ -79,10 +95,9 @@ export class PlateService {
     )
   }
 
-  public getPlatesForWeek(startDate: string): Observable<PLateForWeekModel[]> {
-    return this.plateClient.getPlatesForWeek(startDate);
+  private updatePlatesList(plates: any[]) {
+    this.platesListSubject.next(plates);
   }
-
 }
 
 

@@ -58,4 +58,14 @@ export class PlateClient {
       })
     );
   }
+
+  public deletePlateForDay(targetedDate: string) {
+    console.log("dans deleplateforday: " + targetedDate);
+    return this.httpClient.delete(`${this.apiUrl}/plates-for-day/${targetedDate}`).pipe(
+      catchError((error: any) => {
+        console.error('Error deleting food', error);
+        return of(error);
+      })
+    );
+  }
 }

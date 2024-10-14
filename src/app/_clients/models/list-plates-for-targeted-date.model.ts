@@ -1,5 +1,5 @@
 export class listPlatesForTargetedDateModel {
-  id: number;
+  id: string;
   label: string;
   date: string;
 }
