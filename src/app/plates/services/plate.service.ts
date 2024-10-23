@@ -60,8 +60,8 @@ export class PlateService {
     return this.plateClient.listPlatesForTargetedDate(targetedDate);
   }
 
-  public Plate(plateFormValue: any): Observable<any> {
-    const plateForCreationDto = new PlateForCreationDto(plateFormValue.label, plateFormValue.description);
+  public createPlate(plateFormValue: any): Observable<any> {
+    const plateForCreationDto = new PlateForCreationDto(plateFormValue.label, plateFormValue.description, plateFormValue.category);
     return this.plateClient
       .createPlate(plateForCreationDto)
       .pipe(

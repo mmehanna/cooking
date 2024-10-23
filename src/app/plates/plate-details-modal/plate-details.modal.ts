@@ -15,10 +15,13 @@ import {firstValueFrom} from "rxjs";
 export class PlateDetailsModal implements OnInit {
   @Input() plateForEdit: PlateItemBo;
   @Output() saveEvent = new EventEmitter<void>();
-
   public plateForm = this.formBuilder.group({
     label: ['', Validators.required],
-    description: ['', Validators.required]
+    description: ['', Validators.required],
+    dinner: [false],
+    breakfast: [false],
+    lunch: [false],
+    category: ['']
   });
 
   constructor(private formBuilder: FormBuilder,
@@ -39,10 +42,19 @@ export class PlateDetailsModal implements OnInit {
   }
 
   public async savePlate() {
+    if (this.plateForm.value.lunch) {
+      this.plateForm.value.category = "lunch";
+    } else if (this.plateForm.value.dinner) {
+      this.plateForm.value.category = "dinner";
+    } else if (this.plateForm.value.breakfast) {
+      this.plateForm.value.category = "breakfast";
+    }
+
     if (this.plateService.editable) {
       await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, this.plateForm.value));
     } else {
-      await firstValueFrom(this.plateService.Plate(this.plateForm.value));
+      await firstValueFrom(this.plateService.createPlate(this.plateForm.value));
+      console.log(this.plateForm.value);
     }
 
     await this.presentToast();
