@@ -15,11 +15,13 @@ import {firstValueFrom} from "rxjs";
 export class PlateDetailsModal implements OnInit {
   @Input() plateForEdit: PlateItemBo;
   @Output() saveEvent = new EventEmitter<void>();
-
+  selectedCategory: string = '';
   public plateForm = this.formBuilder.group({
     label: ['', Validators.required],
-    description: ['', Validators.required]
+    description: ['', Validators.required],
+    category: ['']
   });
+
 
   constructor(private formBuilder: FormBuilder,
               private plateService: PlateService,
@@ -34,19 +36,24 @@ export class PlateDetailsModal implements OnInit {
     }
     this.plateForm.patchValue({
       label: this.plateForEdit.label,
-      description: this.plateForEdit.description
-    })
+      description: this.plateForEdit.description,
+      category: this.plateForEdit.category
+    });
+    this.selectedCategory = this.plateForEdit.category;
   }
 
   public async savePlate() {
     if (this.plateService.editable) {
       await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, this.plateForm.value));
     } else {
-      await firstValueFrom(this.plateService.Plate(this.plateForm.value));
+      await firstValueFrom(this.plateService.createPlate(this.plateForm.value));
+      console.log(this.plateForm.value);
     }
 
     await this.presentToast();
     await this.closeModal();
+    window.location.reload();
+    console.log(this.selectedCategory);
   }
 
   public async presentToast() {
