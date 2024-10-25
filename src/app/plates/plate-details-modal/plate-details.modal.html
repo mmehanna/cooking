@@ -25,15 +25,37 @@
     </ion-item>
     <br/>
     <ion-label>Category:</ion-label>
-    <ion-item>
-      <ion-checkbox alignment="start" formControlName="breakfast" label-placement="stacked">Breakfast</ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox alignment="start" formControlName="lunch" label-placement="stacked">Lunch</ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox alignment="start" formControlName="dinner" label-placement="stacked">Dinner</ion-checkbox>
-    </ion-item>
+    <br/>
+    <ion-radio-group [(ngModel)]="selectedCategory" formControlName="category">
+      <ion-item>
+        <ion-label>Breakfast</ion-label>
+        <ion-radio slot="start" value="breakfast"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Lunch</ion-label>
+        <ion-radio slot="start" value="lunch"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Dinner</ion-label>
+        <ion-radio slot="start" value="dinner"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+
+    <!--        <ion-item>-->
+    <!--      <ion-checkbox alignment="start" formControlName="breakfast" label-placement="stacked">Breakfast</ion-checkbox>-->
+    <!--    </ion-item>-->
+
+    <!--    <ion-item>-->
+    <!--      <ion-checkbox alignment="start" formControlName="lunch" label-placement="stacked">Lunch</ion-checkbox>-->
+    <!--    </ion-item>-->
+
+    <!--    <ion-item>-->
+    <!--      <ion-checkbox alignment="start" formControlName="dinner" label-placement="stacked">Dinner</ion-checkbox>-->
+    <!--    </ion-item>-->
+
     <br/>
   </form>
   <br/>

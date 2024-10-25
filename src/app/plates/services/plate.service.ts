@@ -72,7 +72,7 @@ export class PlateService {
   }
 
   public updatePlateDetails(plateId: string, plateFormValue: any): Observable<any> {
-    const plateForUpdateDto = new PlateForUpdateDto(plateFormValue.label, plateFormValue.description);
+    const plateForUpdateDto = new PlateForUpdateDto(plateFormValue.label, plateFormValue.description, plateFormValue.category);
     return this.plateClient.updatePlateDetails(plateId, plateForUpdateDto);
   }
 
