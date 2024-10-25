@@ -15,6 +15,10 @@ export class ChooseDatePage {
   ) {
   }
 
+  // async ngOnInit(){
+  //   this.plateService.refreshPlateList();
+  // }
+
   public nextPageValidation() {
     if (this.timeValidation() == true) {
       this.router.navigate(['/choose-plate']);

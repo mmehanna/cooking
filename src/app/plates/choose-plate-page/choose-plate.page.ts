@@ -48,10 +48,21 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       .getPlates()
       .subscribe((plateList: PlateItemBo[]) => {
         this.plateList = plateList;
+        this.filteredPlateList = this.plateList; // Initialisation correcte
         console.log(this.plateList);
       });
     this.subscription$.add(plateListSubscription$);
   }
+
+  // private getPlateSubscription() {
+  //   const plateListSubscription$ = this.plateService
+  //     .getPlates()
+  //     .subscribe((plateList: PlateItemBo[]) => {
+  //       this.plateList = plateList;
+  //       console.log(this.plateList);
+  //     });
+  //   this.subscription$.add(plateListSubscription$);
+  // }
 
   public async togglePlateSelection(plate: PlateItemBo) {
     plate.isSelected = !plate.isSelected;
