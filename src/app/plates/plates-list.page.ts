@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PlateItemBo} from "./bos/plate-item.bo";
 import {PlateService} from "./services/plate.service";
 import {firstValueFrom, Subscription} from "rxjs";
-import {ModalController, ToastController} from "@ionic/angular";
+import {AlertController, ModalController, ToastController} from "@ionic/angular";
 import {PLateModel} from "../_clients/models/PLateModel";
 import {PlateDetailsModal} from "./plate-details-modal/plate-details.modal";
 
@@ -17,7 +17,8 @@ export class PlatesListPage implements OnInit {
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
-              private toastController: ToastController
+              private toastController: ToastController,
+              private alertController: AlertController
   ) {
   }
 
@@ -69,18 +70,42 @@ export class PlatesListPage implements OnInit {
     })
   }
 
-  public async deletePlate(plate: PLateModel) {
-    try {
-      await firstValueFrom(this.plateService.deletePlate(plate.id));
-      await this.toastController.create({
-        message: "Delete successful"
-      });
-    } catch (err: any) {
-      await this.toastController.create({
-        message: "Delete unsuccessful"
-      });
-    }
+  public async confirmDeletePlate(plate: PLateModel) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete',
+      message: 'Are you sure you want to delete this plate?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Delete cancelled');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            firstValueFrom(this.plateService.deletePlate(plate.id));
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
+
+  // public async deletePlate(plate: PLateModel) {
+  //   try {
+  //     await firstValueFrom(this.plateService.deletePlate(plate.id));
+  //     await this.toastController.create({
+  //       message: "Delete successful"
+  //     });
+  //   } catch (err: any) {
+  //     await this.toastController.create({
+  //       message: "Delete unsuccessful"
+  //     });
+  //   }
+  // }
 
   private getPlateSubscription() {
     const foodListSubscription$ = this.plateService
