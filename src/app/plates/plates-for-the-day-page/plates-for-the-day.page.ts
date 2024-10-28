@@ -15,7 +15,6 @@ import {AlertController} from "@ionic/angular";
 export class PlatesForTheDayPage implements OnInit {
   public linkPlateListToDates: listPlatesForTargetedDateModel[];
   private subscription = new Subscription();
-  viewDate: Date = new Date();
   events: CalendarEvent[] = [];
 
   constructor(

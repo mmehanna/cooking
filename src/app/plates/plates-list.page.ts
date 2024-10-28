@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PlateItemBo} from "./bos/plate-item.bo";
 import {PlateService} from "./services/plate.service";
 import {firstValueFrom, Subscription} from "rxjs";
-import {AlertController, ModalController, ToastController} from "@ionic/angular";
+import {AlertController, ModalController} from "@ionic/angular";
 import {PLateModel} from "../_clients/models/PLateModel";
 import {PlateDetailsModal} from "./plate-details-modal/plate-details.modal";
 
@@ -17,7 +17,6 @@ export class PlatesListPage implements OnInit {
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
-              private toastController: ToastController,
               private alertController: AlertController
   ) {
   }
@@ -45,20 +44,6 @@ export class PlatesListPage implements OnInit {
     // Logique pour actualiser les données de la page
     console.log('Données actualisées');
   }
-
-  // public presentDetailEditPlateModal(plate: PlateItemBo) {
-  //   this.plateService.editable = true;
-  //
-  //   this.modalController.create({
-  //     component: PlateDetailsModal,
-  //     componentProps: {
-  //       plateForEdit: plate
-  //     }
-  //   }).then(modal => {
-  //     modal.present().then(r => {
-  //     });
-  //   })
-  // }
 
   public async presentDetailAddPlateModal() {
     this.plateService.editable = false;
@@ -93,19 +78,6 @@ export class PlatesListPage implements OnInit {
 
     await alert.present();
   }
-
-  // public async deletePlate(plate: PLateModel) {
-  //   try {
-  //     await firstValueFrom(this.plateService.deletePlate(plate.id));
-  //     await this.toastController.create({
-  //       message: "Delete successful"
-  //     });
-  //   } catch (err: any) {
-  //     await this.toastController.create({
-  //       message: "Delete unsuccessful"
-  //     });
-  //   }
-  // }
 
   private getPlateSubscription() {
     const foodListSubscription$ = this.plateService

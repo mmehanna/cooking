@@ -11,9 +11,6 @@ export class AuthClient {
   constructor(private httpClient: HttpClient) {
   }
 
-  public get isLoggedIn(): boolean {
-    return localStorage.getItem('accessToken') !== null;
-  }
 
   public login(email: string, password: string): Observable<any> {
     return this.httpClient.post<{ accessToken: string }>(`${this.apiUrl}/login`, {email, password}).pipe(

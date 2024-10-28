@@ -54,16 +54,6 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     this.subscription$.add(plateListSubscription$);
   }
 
-  // private getPlateSubscription() {
-  //   const plateListSubscription$ = this.plateService
-  //     .getPlates()
-  //     .subscribe((plateList: PlateItemBo[]) => {
-  //       this.plateList = plateList;
-  //       console.log(this.plateList);
-  //     });
-  //   this.subscription$.add(plateListSubscription$);
-  // }
-
   public async togglePlateSelection(plate: PlateItemBo) {
     plate.isSelected = !plate.isSelected;
 
@@ -107,8 +97,6 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       modal.present();
     })
   }
-
-
 
   private async quantityErrorMessage() {
     const toast = await this.toastController.create({

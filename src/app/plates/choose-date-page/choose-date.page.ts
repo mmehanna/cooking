@@ -15,10 +15,6 @@ export class ChooseDatePage {
   ) {
   }
 
-  // async ngOnInit(){
-  //   this.plateService.refreshPlateList();
-  // }
-
   public nextPageValidation() {
     if (this.timeValidation() == true) {
       this.router.navigate(['/choose-plate']);
@@ -61,30 +57,3 @@ export class ChooseDatePage {
     await toast.present();
   }
 }
-
-// public oneSelectedDate() {
-//   if (this.foodService.date) {
-//     const dateTime = new Date(this.foodService.date);
-//     const today = new Date();
-//
-//     console.log("date de this.foodService.date" + this.foodService.date);
-//
-//     if(dateTime < today){
-//       console.log("this date is unavailable");
-//     }
-//   } else {
-//     console.error('this.date is undefined.'); // Log an error or handle the situation accordingly
-//   }
-// }
-
-// public oneSelectedDate() {
-//   if (this.foodService.date) {
-//
-//     //Écrir dans la base de donnée
-//     console.log(this.foodService.date);
-//     this.foodService.addDate(this.foodService.date)
-//       .subscribe(date => this.foodService.date = date);
-//   } else {
-//     console.error('this.date is undefined.'); // Log an error or handle the situation accordingly
-//   }
-// }
