@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@ionic-native/camera": "^5.36.0",
+    "@ionic-native/core": "^5.36.0",
     "@ionic/angular": "^7.6.3",
     "@nrwl/angular": "^17.0.2",
     "angular-calendar": "^0.31.1",

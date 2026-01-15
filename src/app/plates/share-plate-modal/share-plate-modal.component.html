@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Share "{{ plateLabel }}"</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="share-options">
+    <ion-item>
+      <ion-label position="stacked">Select Family (optional)</ion-label>
+      <ion-select [(ngModel)]="selectedFamilyId" (ionChange)="onFamilyChange()" placeholder="Choose a family">
+        <ion-select-option *ngFor="let family of families" [value]="family.id">
+          {{ family.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="showUsersList">
+      <ion-label position="stacked">Select User in Family</ion-label>
+      <ion-select [(ngModel)]="selectedUserId" placeholder="Choose a user">
+        <ion-select-option *ngFor="let user of usersInFamily" [value]="user.id">
+          {{ user.name || user.email }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" (click)="sharePlate()" [disabled]="!(selectedFamilyId || selectedUserId)">
+      Share Plate
+    </ion-button>
+  </div>
+</ion-content>

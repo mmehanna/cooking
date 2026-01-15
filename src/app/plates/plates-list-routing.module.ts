@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: PlatesListPage,
+  },
+  {
+    path: 'shared-plates',
+    loadChildren: () => import('./shared-plates/shared-plates.module').then( m => m.SharedPlatesPageModule)
+  },
+  {
+    path: 'family',
+    loadChildren: () => import('./family/family.module').then( m => m.FamilyPageModule)
   }
 ];
 

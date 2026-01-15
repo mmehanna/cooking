@@ -8,10 +8,13 @@
   <ion-list *ngFor="let plate of plateList">
     <ion-item>
       {{ plate.label }}
-      <ion-button (click)="presentDetailEditPlateModal(plate)">
+      <ion-button (click)="presentDetailEditPlateModal(plate)" fill="clear">
         edit
       </ion-button>
-      <ion-button (click)="deletePlate(plate)" color="danger">
+      <ion-button (click)="presentSharePlateModal(plate)" fill="clear" color="primary">
+        <ion-icon name="share"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deletePlate(plate)" fill="clear" color="danger">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

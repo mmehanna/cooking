@@ -9,7 +9,9 @@ import {LinkPlateListIdToSelectedDateDto} from "../choose-plate-page/dtos/link-p
 import {PlateForCreationDto} from "../choose-plate-page/dtos/plate-for-creation.dto";
 import {PlateForUpdateDto} from "../choose-plate-page/dtos/plate-for-update.dto";
 import {PLateForWeekModel} from "../../_clients/models/PLateForWeekModel";
-
+import {FamilyClient} from "../../_clients/family.client";
+import {SharedPlateModel} from "../../_clients/models/SharedPlateModel";
+import {SharePlateDto} from "../../_clients/models/SharePlateDto";
 
 @Injectable({providedIn: 'root'})
 export class PlateService {
@@ -19,7 +21,7 @@ export class PlateService {
   private platesListSubject = new BehaviorSubject<any[]>([]);
   platesList$ = this.platesListSubject.asObservable();
 
-  constructor(private plateClient: PlateClient) {
+  constructor(private plateClient: PlateClient, private familyClient: FamilyClient) {
   }
 
   public refreshPlateList() {
@@ -95,9 +97,24 @@ export class PlateService {
     )
   }
 
+  // Nouvelles méthodes pour la gestion du partage de plats
+  public sharePlate(sharePlateDto: SharePlateDto): Observable<any> {
+    return this.familyClient.sharePlate(sharePlateDto).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    );
+  }
+
+  public getSharedPlatesWithUser(): Observable<SharedPlateModel[]> {
+    return this.familyClient.getSharedPlatesWithUser();
+  }
+
+  public getSharedPlatesByUser(): Observable<SharedPlateModel[]> {
+    return this.familyClient.getSharedPlatesByUser();
+  }
+
   private updatePlatesList(plates: any[]) {
     this.platesListSubject.next(plates);
   }
 }
-
-

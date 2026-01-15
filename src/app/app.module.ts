@@ -9,6 +9,7 @@ import {AppComponent} from './app.component';
 import {CalendarModule, DateAdapter} from "angular-calendar";
 import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {AuthInterceptor} from "./_clients/interceptor.client";
+import {FamilyClient} from "./_clients/family.client";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {AuthInterceptor} from "./_clients/interceptor.client";
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    FamilyClient
   ],
   bootstrap: [
     AppComponent
