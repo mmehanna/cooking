@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Shared Plates</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <app-shared-plates-list></app-shared-plates-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

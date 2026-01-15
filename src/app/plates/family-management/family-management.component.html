@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Family Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="family-section">
+    <h2>Create New Family</h2>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="newFamilyName"
+        placeholder="Enter family name"
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="createFamily()">Create Family</ion-button>
+  </div>
+
+  <div class="family-section" *ngIf="families.length > 0">
+    <h2>Your Families</h2>
+    <ion-list>
+      <ion-item *ngFor="let family of families">
+        <ion-label>
+          <h2>{{ family.name }}</h2>
+          <p>Owner: {{ family.owner?.name || family.owner?.email }}</p>
+          <p>Members: {{ family.users?.length || 0 }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="family-section" *ngIf="families.length > 0">
+    <h2>Invite to Family</h2>
+    <ion-item>
+      <ion-label>Select Family</ion-label>
+      <ion-select [(ngModel)]="selectedFamilyId" placeholder="Choose a family">
+        <ion-select-option *ngFor="let family of families" [value]="family.id">
+          {{ family.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="inviteEmail"
+        placeholder="Enter email address to invite"
+        type="email">
+      </ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="inviteToFamily()">Send Invitation</ion-button>
+  </div>
+</ion-content>

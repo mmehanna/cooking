@@ -1,0 +1,27 @@
+.family-section {
+  margin: 20px;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.family-section h2 {
+  font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-button {
+  margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+  .family-section {
+    margin: 10px;
+    padding: 10px;
+  }
+}

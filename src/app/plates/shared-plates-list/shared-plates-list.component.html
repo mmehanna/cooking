@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Shared Plates</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="received">
+      <ion-label>Received</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="sent">
+      <ion-label>Sent</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="segment-content">
+    <div *ngIf="activeSegment === 'received'">
+      <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+        <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing..."></ion-refresher-content>
+      </ion-refresher>
+
+      <ion-card *ngFor="let sharedPlate of sharedPlatesWithMe">
+        <ion-card-content>
+          <ion-card-title>{{ sharedPlate.plate.label }}</ion-card-title>
+          <p>{{ sharedPlate.plate.description }}</p>
+          <p class="shared-info">
+            Shared by: {{ sharedPlate.sharedByUser?.name || sharedPlate.sharedByUser?.email }}
+            <span *ngIf="sharedPlate.family">in {{ sharedPlate.family?.name }}</span>
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="sharedPlatesWithMe.length === 0 && !isLoadingReceived">
+        <ion-card-content>
+          <ion-card-title>No shared plates received</ion-card-title>
+          <p>You haven't received any shared plates yet.</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="isLoadingReceived">
+        <ion-card-content>
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Loading received plates...</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="activeSegment === 'sent'">
+      <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+        <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing..."></ion-refresher-content>
+      </ion-refresher>
+
+      <ion-card *ngFor="let sharedPlate of sharedPlatesByMe">
+        <ion-card-content>
+          <ion-card-title>{{ sharedPlate.plate.label }}</ion-card-title>
+          <p>{{ sharedPlate.plate.description }}</p>
+          <p class="shared-info">
+            Shared with: {{ sharedPlate.sharedWithUser?.name || sharedPlate.sharedWithUser?.email }}
+            <span *ngIf="sharedPlate.family">in {{ sharedPlate.family?.name }}</span>
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="sharedPlatesByMe.length === 0 && !isLoadingSent">
+        <ion-card-content>
+          <ion-card-title>No shared plates sent</ion-card-title>
+          <p>You haven't shared any plates yet.</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="isLoadingSent">
+        <ion-card-content>
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Loading sent plates...</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

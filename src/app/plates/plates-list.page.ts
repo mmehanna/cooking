@@ -5,6 +5,7 @@ import {firstValueFrom, Subscription} from "rxjs";
 import {ModalController, ToastController} from "@ionic/angular";
 import {PLateModel} from "../_clients/models/PLateModel";
 import {PlateDetailsModal} from "./plate-details-modal/plate-details.modal";
+import {SharePlateModalComponent} from "./share-plate-modal/share-plate-modal.component";
 
 @Component({
   selector: 'app-add-plates-with-a-list-page',
@@ -43,6 +44,18 @@ export class PlatesListPage implements OnInit {
   refreshPage() {
     // Logique pour actualiser les données de la page
     console.log('Données actualisées');
+  }
+
+  public async presentSharePlateModal(plate: PlateItemBo) {
+    const modal = await this.modalController.create({
+      component: SharePlateModalComponent,
+      componentProps: {
+        plateId: plate.id,
+        plateLabel: plate.label
+      }
+    });
+
+    modal.present();
   }
 
   // public presentDetailEditPlateModal(plate: PlateItemBo) {
