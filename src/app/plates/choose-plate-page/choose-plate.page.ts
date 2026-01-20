@@ -17,7 +17,7 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
   public plateList: PlateItemBo[] = [];
   private subscription$ = new Subscription();
   private plateListId: LinkPlateListIdToSelectedDateDto = new LinkPlateListIdToSelectedDateDto([]);
-  public filteredPlateList: any[] = [];
+  public filteredPlateList: PlateItemBo[] = [];
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
@@ -27,7 +27,6 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPlateSubscription();
-    this.filteredPlateList = this.plateList;
   }
 
   public onSegmentChange(event: any) {
@@ -48,22 +47,44 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       .getPlates()
       .subscribe((plateList: PlateItemBo[]) => {
         this.plateList = plateList;
+        this.filteredPlateList = [...this.plateList]; // Mettre à jour filteredPlateList avec les données récupérées
         console.log(this.plateList);
       });
     this.subscription$.add(plateListSubscription$);
   }
 
   public async togglePlateSelection(plate: PlateItemBo) {
+    const wasSelected = plate.isSelected;
     plate.isSelected = !plate.isSelected;
 
     if (plate.isSelected) {
+      // Vérifier la limite avant d'ajouter
+      if (this.plateListId.plateListId.length >= 3) {
+        await this.quantityErrorMessage();
+        plate.isSelected = false; // Annuler la sélection
+        return;
+      }
       this.plateListId.plateListId.push(plate.id);
     } else {
       console.log("plate is not selected");
-      this.plateListId.plateListId.pop();
+      // Retirer l'ID spécifique de la liste
+      const index = this.plateListId.plateListId.indexOf(plate.id);
+      if (index > -1) {
+        this.plateListId.plateListId.splice(index, 1);
+      }
     }
+
+    // Vérifier la quantité après modification
     if (this.plateListId.plateListId.length > 3) {
       await this.quantityErrorMessage();
+      // Réinitialiser la sélection si la limite est dépassée
+      if (!wasSelected) { // Si on venait de sélectionner
+        plate.isSelected = false;
+        const index = this.plateListId.plateListId.indexOf(plate.id);
+        if (index > -1) {
+          this.plateListId.plateListId.splice(index, 1);
+        }
+      }
     }
   }
 
