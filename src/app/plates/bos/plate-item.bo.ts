@@ -9,6 +9,7 @@ export class PlateItemBo implements PLateModel {
   date: string;
   name: string;
   category: string;
+  selectedMealType: 'breakfast' | 'lunch' | 'dinner' = 'dinner';
 
   constructor(foodModel: PLateModel) {
     this.id = foodModel.id;

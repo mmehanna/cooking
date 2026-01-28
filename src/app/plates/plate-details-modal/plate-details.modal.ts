@@ -5,6 +5,7 @@ import {ModalController, ToastController} from "@ionic/angular";
 import {PlateService} from "../services/plate.service";
 import {PlateItemBo} from "../bos/plate-item.bo";
 import {firstValueFrom} from "rxjs";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'plate-details-modal',
@@ -26,7 +27,8 @@ export class PlateDetailsModal implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private plateService: PlateService,
               private modalController: ModalController,
-              private toastController: ToastController
+              private toastController: ToastController,
+              private authService: AuthService
   ) {
   }
 
@@ -43,6 +45,21 @@ export class PlateDetailsModal implements OnInit {
   }
 
   public async savePlate() {
+    // Check if user is authenticated before making API calls
+    const isAuthenticated = this.authService.isAuthenticated();
+    console.log('User is authenticated:', isAuthenticated);
+
+    if (!isAuthenticated) {
+      console.error('User is not authenticated. Cannot save plate.');
+      // Show an error message to the user
+      const toast = await this.toastController.create({
+        message: 'Authentication required. Please log in.',
+        duration: 3000
+      });
+      await toast.present();
+      return;
+    }
+
     if (this.plateService.editable) {
       await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, this.plateForm.value));
     } else {

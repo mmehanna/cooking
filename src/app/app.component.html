@@ -1,3 +1,21 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-title>Choose there</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <p routerLink="/landing" (click)="closeMenu()">Home</p>
+      <p routerLink="/choose-date" (click)="closeMenu()">Create your day list</p>
+      <p routerLink="/plates-for-the-day" (click)="closeMenu()">Plate for the day</p>
+      <p routerLink="/manage-plates" (click)="closeMenu()">Manage your plates</p>
+      <p routerLink="/family" (click)="closeMenu()">Manage your families</p>
+      <p routerLink="/shared-plates" (click)="closeMenu()">View shared plates</p>
+
+      <button (click)="logout()" style="color: red">Logout</button>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

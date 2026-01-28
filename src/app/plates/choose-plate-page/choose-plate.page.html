@@ -1,16 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-button (click)="linkPlateListToDate()" [routerLink]="['']" id="open-toast" slot="end">save</ion-button>
-    <ion-back-button default-href="menu" slot="start"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Choose your plates</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="linkPlateListToDate()" id="open-toast">Save</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Choose your plates</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-segment (ionChange)="onSegmentChange($event)" value="all">
     <ion-segment-button value="all">
       <ion-label>All</ion-label>
@@ -26,16 +25,28 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list *ngFor="let plate of filteredPlateList">
-    <ion-item>
-      <ion-checkbox (ionChange)="togglePlateSelection(plate)"
-                    justify="start"
-                    labelPlacement="end">
+  <ion-list>
+    <ion-item *ngFor="let plate of filteredPlateList">
+      <ion-checkbox
+        [checked]="plate.isSelected"
+        (ionChange)="togglePlateSelection(plate)"
+        justify="start"
+        labelPlacement="end">
         {{ plate.label }}
-        <ion-button [routerLink]="['plate-details-page',plate.id]">
-          details
-        </ion-button>
       </ion-checkbox>
+      <ion-button fill="clear" [routerLink]="['plate-details-page',plate.id]" slot="end">
+        details
+      </ion-button>
+      <!-- Meal type selection for selected plates -->
+      <ion-select
+        *ngIf="plate.isSelected"
+        [(ngModel)]="plate.selectedMealType"
+        placeholder="Select meal type"
+        (ionChange)="updatePlateMealType(plate)">
+        <ion-select-option value="breakfast">Breakfast</ion-select-option>
+        <ion-select-option value="lunch">Lunch</ion-select-option>
+        <ion-select-option value="dinner">Dinner</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 

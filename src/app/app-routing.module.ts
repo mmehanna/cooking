@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'plates-for-the-day',
-    loadChildren: () => import('./plates/plates-for-the-day-page/plates-for-the-day.module').then(m => m.PlateForTheDay)
+    loadChildren: () => import('./plates/plates-for-the-day-page/plates-for-the-day.module').then(m => m.PlateForTheDayModule)
   },
   {
     path: 'choose-date',

@@ -28,7 +28,7 @@ export class AuthService {
   // Méthode de logout
   public logout() {
     // Supprimer le token du localStorage ou sessionStorage
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
 
     // Rediriger vers la page de login ou d'accueil
     this.router.navigate(['/login']);
@@ -36,7 +36,7 @@ export class AuthService {
 
   // Pour vérifier si l'utilisateur est authentifié
   public isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('accessToken');
   }
 
 }
