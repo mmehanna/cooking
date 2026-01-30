@@ -18,6 +18,7 @@ export class PlatesForTheDayPage implements OnInit {
   public breakfastPlates: listPlatesForTargetedDateModel[] = [];
   public lunchPlates: listPlatesForTargetedDateModel[] = [];
   public dinnerPlates: listPlatesForTargetedDateModel[] = [];
+  private selectedDate: string;
   private subscription = new Subscription();
   viewDate: Date = new Date();
   events: CalendarEvent[] = [];
@@ -42,10 +43,16 @@ export class PlatesForTheDayPage implements OnInit {
   }
 
   public onSelectDate() {
-    console.log('Date selected in plate service:', this.plateService.date);
+    console.log('Date selected in plate service (before formatting):', this.plateService.date);
     if (this.plateService.date) {
       const formattedDate = formatDate(this.plateService.date, 'yyyy-MM-dd', 'en-US');
       console.log('Formatted date for API call:', formattedDate);
+      // Mettre à jour explicitement la date formatée
+      this.plateService.date = formattedDate;
+      // Stocker la date sélectionnée dans notre variable locale
+      this.selectedDate = formattedDate;
+      console.log('Updated plate service date:', this.plateService.date);
+      console.log('Stored selected date:', this.selectedDate);
       this.listPlatesForTargetedDate(formattedDate);
     }
   }
@@ -72,6 +79,63 @@ export class PlatesForTheDayPage implements OnInit {
 
   public onDateChange(event: any): void {
     const date = event.detail.value.split('T')[0];
+  }
+
+  public async deleteSpecificPlate(plateId: string) {
+    // Log the date when the method is called
+    console.log('deleteSpecificPlate called with plateId:', plateId, 'and current date:', this.plateService.date, 'and selectedDate:', this.selectedDate);
+
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete',
+      message: 'Are you sure you want to delete this plate?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          handler: async () => {
+            // Log the date when the delete handler is executed
+            console.log('Delete handler executed with plateId:', plateId, 'and date:', this.plateService.date, 'and selectedDate:', this.selectedDate);
+
+            try {
+              // Use the locally stored selected date instead of the service date
+              // which might have been changed by other operations
+              const formattedDate = this.selectedDate;
+              console.log('Using stored date for deletion:', formattedDate);
+
+              // Call the service to delete this specific plate
+              await firstValueFrom(this.platesService.deleteSpecificPlateForDay(plateId, formattedDate));
+
+              // Show success message
+              const successToast = await this.toastController.create({
+                message: 'Plate deleted successfully',
+                duration: 2000,
+                color: 'success'
+              });
+              await successToast.present();
+
+              // Refresh the data to reflect the deletion
+              this.listPlatesForTargetedDate(formattedDate);
+
+            } catch (error: any) {
+              console.error('Error deleting plate:', error);
+
+              // Show error message to user
+              const errorToast = await this.toastController.create({
+                message: 'Failed to delete plate. Please try again later.',
+                duration: 3000,
+                color: 'danger'
+              });
+              await errorToast.present();
+            }
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   public async deletePlateForDay(targetedDate: string) {

@@ -68,4 +68,13 @@ export class PlateClient {
       })
     );
   }
+
+  public deleteSpecificPlateForDay(plateId: string, date: string) {
+    return this.httpClient.delete(`${this.apiUrl}/plates-for-day/plate/${plateId}?date=${date}`).pipe(
+      catchError((error: any) => {
+        console.error('Error deleting specific plate', error);
+        return of(error);
+      })
+    );
+  }
 }

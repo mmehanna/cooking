@@ -94,6 +94,14 @@ export class PlateService {
     )
   }
 
+  public deleteSpecificPlateForDay(plateId: string, date: string) {
+    return this.plateClient.deleteSpecificPlateForDay(plateId, date).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    )
+  }
+
   public deletePlate(plateId: string): Observable<any> {
     return this.plateClient.deletePlate(plateId).pipe(
       tap(() => {

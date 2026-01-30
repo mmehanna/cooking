@@ -21,6 +21,9 @@
     <ion-list>
       <ion-item *ngFor="let plate of breakfastPlates">
         <ion-label>{{ plate.label }}</ion-label>
+        <ion-button fill="clear" color="danger" slot="end" (click)="deleteSpecificPlate(plate.id)">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
   </ion-card>
@@ -33,6 +36,9 @@
     <ion-list>
       <ion-item *ngFor="let plate of lunchPlates">
         <ion-label>{{ plate.label }}</ion-label>
+        <ion-button fill="clear" color="danger" slot="end" (click)="deleteSpecificPlate(plate.id)">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
   </ion-card>
@@ -45,15 +51,12 @@
     <ion-list>
       <ion-item *ngFor="let plate of dinnerPlates">
         <ion-label>{{ plate.label }}</ion-label>
+        <ion-button fill="clear" color="danger" slot="end" (click)="deleteSpecificPlate(plate.id)">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
   </ion-card>
-
-  <!-- Delete button if there are any plates -->
-  <ion-button *ngIf="hasAnyPlates()" (click)="deletePlateForDay(plateService.date)" color="danger" expand="block">
-    Delete all plates
-    <ion-icon name="trash-bin-outline" slot="end"></ion-icon>
-  </ion-button>
 
   <!-- Message if no plates exist -->
   <ion-card *ngIf="!hasAnyPlates()">
