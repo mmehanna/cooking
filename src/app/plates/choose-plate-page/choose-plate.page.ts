@@ -167,6 +167,10 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     await toast.present();
   }
 
+  public goToChooseDate() {
+    this.router.navigate(['/choose-date']);
+  }
+
   ngOnDestroy() {
     this.subscription$.unsubscribe();
   }

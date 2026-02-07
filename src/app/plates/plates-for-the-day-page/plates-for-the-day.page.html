@@ -3,6 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="'/landing'" slot="start"></ion-back-button>
     </ion-buttons>
+    <ion-title> Choose a date</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,6 +11,7 @@
   <ion-item>
     <ion-label>Date:</ion-label>
     <ion-datetime (ionChange)="onSelectDate()" [(ngModel)]="plateService.date"
+                  presentation="date"
                   display-format="DD/MM/YYYY"></ion-datetime>
   </ion-item>
 
