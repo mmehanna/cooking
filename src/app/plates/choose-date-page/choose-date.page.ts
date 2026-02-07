@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {PlateService} from "../services/plate.service";
 import {ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-choose-date-page',
@@ -11,8 +12,13 @@ import {Router} from "@angular/router";
 export class ChooseDatePage {
   constructor(public plateService: PlateService,
               private toastController: ToastController,
-              private router: Router
+              private router: Router,
+              private location: Location
   ) {
+  }
+
+  public goBack() {
+    this.router.navigate(['/landing']);
   }
 
   public nextPageValidation() {

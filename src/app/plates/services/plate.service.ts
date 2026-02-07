@@ -16,7 +16,7 @@ import {SharePlateDto} from "../../_clients/models/SharePlateDto";
 @Injectable({providedIn: 'root'})
 export class PlateService {
   public editable: boolean;
-  private plateListTrigger$ = new Subject();
+  public plateListTrigger$ = new Subject();
   date: string;
   private platesListSubject = new BehaviorSubject<any[]>([]);
   platesList$ = this.platesListSubject.asObservable();
@@ -55,7 +55,11 @@ export class PlateService {
   }
 
   public linkPlateListToDate(date: string, plateListIdToSelectedDateDto: LinkPlateListIdToSelectedDateDto): Observable<string> {
-    return this.plateClient.linkPlateListToDate(date, plateListIdToSelectedDateDto);
+    return this.plateClient.linkPlateListToDate(date, plateListIdToSelectedDateDto).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    );
   }
 
   public listPlatesForTargetedDate(targetedDate: string): Observable<listPlatesForTargetedDateModel[]> {
@@ -85,6 +89,15 @@ export class PlateService {
           .getValue()
           .filter((plate) => plate.date !== targetedDate);
         this.updatePlatesList(updatedPlates);
+        this.refreshPlateList();
+      })
+    )
+  }
+
+  public deleteSpecificPlateForDay(plateId: string, date: string) {
+    return this.plateClient.deleteSpecificPlateForDay(plateId, date).pipe(
+      tap(() => {
+        this.refreshPlateList();
       })
     )
   }

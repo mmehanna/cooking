@@ -17,5 +17,5 @@ import {CalendarMonthModule} from "angular-calendar";
   ],
   declarations: [PlatesForTheDayPage]
 })
-export class PlateForTheDay {
+export class PlateForTheDayModule {
 }

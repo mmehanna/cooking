@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
+import { AuthService } from './plates/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,17 @@ import {Component} from '@angular/core';
   templateUrl: 'app.component.html',
 })
 export class AppComponent {
-  constructor() {
+  constructor(
+    private menuController: MenuController,
+    private authService: AuthService
+  ) {}
+
+  closeMenu() {
+    this.menuController.close();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.menuController.close();
   }
 }

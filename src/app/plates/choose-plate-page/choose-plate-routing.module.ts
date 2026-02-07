@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'reorder-food',
-    loadChildren: () => import('../plates-for-the-day-page/plates-for-the-day.module').then(m => m.PlateForTheDay)
+    loadChildren: () => import('../plates-for-the-day-page/plates-for-the-day.module').then(m => m.PlateForTheDayModule)
   },
 ];
 

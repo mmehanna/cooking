@@ -1,7 +1,7 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy, MenuController} from '@ionic/angular';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import {AppRoutingModule} from './app-routing.module';
@@ -10,6 +10,7 @@ import {CalendarModule, DateAdapter} from "angular-calendar";
 import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {AuthInterceptor} from "./_clients/interceptor.client";
 import {FamilyClient} from "./_clients/family.client";
+import {AuthService} from "./plates/services/auth.service";
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import {FamilyClient} from "./_clients/family.client";
       useClass: AuthInterceptor,
       multi: true
     },
-    FamilyClient
+    FamilyClient,
+    MenuController,
+    AuthService
   ],
   bootstrap: [
     AppComponent
