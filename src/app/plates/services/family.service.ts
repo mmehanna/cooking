@@ -42,4 +42,8 @@ export class FamilyService {
   public removeMember(familyId: string, memberId: string): Observable<any> {
     return this.familyClient.removeMember(familyId, memberId);
   }
+
+  public deleteFamily(familyId: string): Observable<any> {
+    return this.familyClient.deleteFamily(familyId);
+  }
 }

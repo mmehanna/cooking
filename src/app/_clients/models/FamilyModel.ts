@@ -13,6 +13,7 @@ export interface FamilyModel {
       email: string;
       name: string;
     };
+    role?: string;
   }>;
   createdAt?: string;
   updatedAt?: string;
