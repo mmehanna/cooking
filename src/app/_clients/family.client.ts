@@ -44,4 +44,8 @@ export class FamilyClient {
   public removeMember(familyId: string, memberId: string): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/family/${familyId}/remove-member/${memberId}`);
   }
+
+  public deleteFamily(familyId: string): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/family/${familyId}`);
+  }
 }

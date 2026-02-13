@@ -25,7 +25,39 @@
           <h2>{{ family.name }}</h2>
           <p>Owner: {{ family.owner?.name || family.owner?.email }}</p>
           <p>Members: {{ family.users?.length || 0 }}</p>
+
+          <!-- Show family members if available -->
+          <div *ngIf="family.users && family.users.length > 0">
+            <p><strong>Family Members:</strong></p>
+            <ion-list>
+              <ion-item *ngFor="let userFamily of family.users">
+                <ion-label>
+                  <h3>{{ userFamily.user?.name || userFamily.user?.email }}</h3>
+                  <p>Role: {{ userFamily.role || 'member' }}</p>
+                </ion-label>
+                <!-- Button to remove member (only for owner or admin) -->
+                <ion-button
+                  *ngIf="canRemoveMember(family, userFamily.user?.id)"
+                  slot="end"
+                  fill="clear"
+                  color="danger"
+                  (click)="confirmRemoveMember(family.id, userFamily.user?.id, userFamily.user?.name || userFamily.user?.email)">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-list>
+          </div>
         </ion-label>
+
+        <!-- Button to delete family (only for owner) -->
+        <ion-button
+          *ngIf="isFamilyOwner(family)"
+          slot="end"
+          fill="clear"
+          color="danger"
+          (click)="confirmDeleteFamily(family.id, family.name)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
   </div>

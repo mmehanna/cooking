@@ -46,8 +46,28 @@ export class SharePlateModalComponent implements OnInit {
   onFamilyChange() {
     if (this.selectedFamilyId) {
       const family = this.families.find(f => f.id === this.selectedFamilyId);
-      if (family && family.users) {
-        this.usersInFamily = family.users.map(user => user.user);
+      if (family) {
+        // Include both the owner and all users in the family
+        this.usersInFamily = [];
+
+        // Add the family owner if they're not already in the users list
+        if (family.owner) {
+          const ownerExists = family.users?.some(u => u.user.id === family.owner.id);
+          if (!ownerExists || family.owner.id !== family.ownerUserId) {
+            this.usersInFamily.push(family.owner);
+           }
+        }
+
+        // Add all family members
+        if (family.users) {
+          this.usersInFamily = [...this.usersInFamily, ...family.users.map(user => user.user)];
+        }
+
+        // Remove duplicates
+        this.usersInFamily = this.usersInFamily.filter((user, index, self) =>
+          index === self.findIndex(u => u.id === user.id)
+        );
+
         this.showUsersList = true;
       }
     } else {

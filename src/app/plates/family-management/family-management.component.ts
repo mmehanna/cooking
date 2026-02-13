@@ -3,7 +3,8 @@ import { FamilyService } from '../services/family.service';
 import { FamilyModel } from '../../_clients/models/FamilyModel';
 import { CreateFamilyDto } from '../../_clients/models/CreateFamilyDto';
 import { InviteFamilyMemberDto } from '../../_clients/models/InviteFamilyMemberDto';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-family-management',
@@ -18,7 +19,9 @@ export class FamilyManagementComponent implements OnInit {
 
   constructor(
     private familyService: FamilyService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private alertController: AlertController,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -103,5 +106,100 @@ export class FamilyManagementComponent implements OnInit {
       color: 'danger'
     });
     toast.present();
+  }
+
+  isFamilyOwner(family: FamilyModel): boolean {
+    const currentUserId = this.authService.getUserId();
+    return family.ownerUserId === currentUserId || family.owner?.id === currentUserId;
+  }
+
+  canRemoveMember(family: FamilyModel, memberId: string): boolean {
+    // A user can remove a member if they are the owner or an admin
+    const currentUserId = this.authService.getUserId();
+
+    // Owner can remove anyone except themselves
+    if (family.ownerUserId === currentUserId || family.owner?.id === currentUserId) {
+      return memberId !== currentUserId; // Owner can't remove themselves
+    }
+
+    // Check if current user is an admin in this family
+    const currentUserFamily = family.users?.find(uf => uf.user?.id === currentUserId);
+    if (currentUserFamily?.role === 'admin') {
+      return true;
+    }
+
+    return false;
+  }
+
+  async confirmDeleteFamily(familyId: string, familyName: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Deletion',
+      subHeader: 'Delete Family',
+      message: `Are you sure you want to delete the family "${familyName}"? This action cannot be undone and will remove all members.`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          cssClass: 'alert-danger',
+          handler: () => {
+            this.deleteFamily(familyId);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async confirmRemoveMember(familyId: string, memberId: string, memberName: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Removal',
+      subHeader: 'Remove Member',
+      message: `Are you sure you want to remove "${memberName}" from the family?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Remove',
+          cssClass: 'alert-warning',
+          handler: () => {
+            this.removeMember(familyId, memberId);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  deleteFamily(familyId: string) {
+    this.familyService.deleteFamily(familyId).subscribe({
+      next: () => {
+        this.showSuccessToast('Family deleted successfully!');
+        this.loadFamilies(); // Refresh the list
+      },
+      error: (error) => {
+        console.error('Error deleting family:', error);
+        this.showErrorToast('Failed to delete family: ' + error.message);
+      }
+    });
+  }
+
+  removeMember(familyId: string, memberId: string) {
+    this.familyService.removeMember(familyId, memberId).subscribe({
+      next: () => {
+        this.showSuccessToast('Member removed successfully!');
+        this.loadFamilies(); // Refresh the list
+      },
+      error: (error) => {
+        console.error('Error removing member:', error);
+        this.showErrorToast('Failed to remove member: ' + error.message);
+      }
+    });
   }
 }
