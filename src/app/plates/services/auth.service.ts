@@ -76,6 +76,21 @@ export class AuthService {
     return null;
   }
 
+  // Get user email from token
+  public getUserEmail(): string | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decodedToken = this.decodeToken(token);
+        return decodedToken?.email || null;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
+      }
+    }
+    return null;
+  }
+
 }
 
 

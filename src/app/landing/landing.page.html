@@ -5,6 +5,9 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>Menu</ion-title>
+      <ion-text slot="end" class="ion-padding-end" *ngIf="userEmail">
+        <small>{{ userEmail }}</small>
+      </ion-text>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu.
