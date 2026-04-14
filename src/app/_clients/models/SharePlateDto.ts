@@ -3,3 +3,9 @@ export interface SharePlateDto {
   sharedWithUserId: string;
   familyId?: string;
 }
+
+export interface BatchSharePlateDto {
+  plateIds: string[];
+  sharedWithUserId: string;
+  familyId?: string;
+}

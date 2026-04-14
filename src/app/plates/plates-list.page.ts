@@ -15,6 +15,8 @@ import {SharePlateModalComponent} from "./share-plate-modal/share-plate-modal.co
 export class PlatesListPage implements OnInit {
   public plateList: PlateItemBo[];
   private subscription$ = new Subscription();
+  public isSelectionMode = false;
+  public selectedPlates: Array<{ id: string; label: string }> = [];
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
@@ -81,6 +83,55 @@ export class PlatesListPage implements OnInit {
     }).then(modal => {
       modal.present();
     })
+  }
+
+  public toggleSelectionMode() {
+    this.isSelectionMode = !this.isSelectionMode;
+    if (!this.isSelectionMode) {
+      this.selectedPlates = [];
+    }
+  }
+
+  public togglePlateSelection(plate: PlateItemBo) {
+    const index = this.selectedPlates.findIndex(p => p.id === plate.id);
+    if (index > -1) {
+      this.selectedPlates.splice(index, 1);
+    } else {
+      this.selectedPlates.push({ id: plate.id, label: plate.label });
+    }
+  }
+
+  public isPlateSelected(plateId: string): boolean {
+    return this.selectedPlates.some(p => p.id === plateId);
+  }
+
+  public async presentBatchShareModal() {
+    if (this.selectedPlates.length === 0) {
+      this.showToast('Please select at least one plate');
+      return;
+    }
+
+    const modal = await this.modalController.create({
+      component: SharePlateModalComponent,
+      componentProps: {
+        plates: this.selectedPlates
+      }
+    });
+
+    modal.present();
+    
+    modal.onDidDismiss().then(() => {
+      this.selectedPlates = [];
+      this.isSelectionMode = false;
+    });
+  }
+
+  public async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   public async deletePlate(plate: PLateModel) {
