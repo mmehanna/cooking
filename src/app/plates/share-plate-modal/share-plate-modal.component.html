@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Share "{{ plateLabel }}"</ion-title>
+    <ion-title>{{ isBatchMode ? 'Share ' + selectedPlates.length + ' Plates' : 'Share "' + plateLabel + '"' }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Close</ion-button>
     </ion-buttons>
@@ -9,6 +9,20 @@
 
 <ion-content class="ion-padding">
   <div class="share-options">
+    <!-- Show selected plates -->
+    <ion-card *ngIf="selectedPlates.length > 0">
+      <ion-card-header>
+        <ion-card-title>Selected Plates ({{ selectedPlates.length }})</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let plate of selectedPlates">
+            <ion-label>{{ plate.label }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
     <ion-item>
       <ion-label position="stacked">Select Family (optional)</ion-label>
       <ion-select [(ngModel)]="selectedFamilyId" (ionChange)="onFamilyChange()" placeholder="Choose a family">
@@ -27,8 +41,8 @@
       </ion-select>
     </ion-item>
 
-    <ion-button expand="block" (click)="sharePlate()" [disabled]="!(selectedFamilyId || selectedUserId)">
-      Share Plate
+    <ion-button expand="block" (click)="sharePlate()" [disabled]="!selectedUserId || selectedPlates.length === 0">
+      {{ isBatchMode ? 'Share ' + selectedPlates.length + ' Plates' : 'Share Plate' }}
     </ion-button>
   </div>
 </ion-content>

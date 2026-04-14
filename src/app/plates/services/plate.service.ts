@@ -11,7 +11,7 @@ import {PlateForUpdateDto} from "../choose-plate-page/dtos/plate-for-update.dto"
 import {PLateForWeekModel} from "../../_clients/models/PLateForWeekModel";
 import {FamilyClient} from "../../_clients/family.client";
 import {SharedPlateModel} from "../../_clients/models/SharedPlateModel";
-import {SharePlateDto} from "../../_clients/models/SharePlateDto";
+import {SharePlateDto, BatchSharePlateDto} from "../../_clients/models/SharePlateDto";
 
 @Injectable({providedIn: 'root'})
 export class PlateService {
@@ -113,6 +113,14 @@ export class PlateService {
   // Nouvelles méthodes pour la gestion du partage de plats
   public sharePlate(sharePlateDto: SharePlateDto): Observable<any> {
     return this.familyClient.sharePlate(sharePlateDto).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    );
+  }
+
+  public batchSharePlate(batchSharePlateDto: BatchSharePlateDto): Observable<any> {
+    return this.familyClient.batchSharePlate(batchSharePlateDto).pipe(
       tap(() => {
         this.refreshPlateList();
       })

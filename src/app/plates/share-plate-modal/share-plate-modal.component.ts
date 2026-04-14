@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { FamilyService } from '../services/family.service';
 import { PlateService } from '../services/plate.service';
 import { FamilyModel } from '../../_clients/models/FamilyModel';
-import { SharePlateDto } from '../../_clients/models/SharePlateDto';
+import { BatchSharePlateDto } from '../../_clients/models/SharePlateDto';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -12,14 +12,19 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./share-plate-modal.component.scss'],
 })
 export class SharePlateModalComponent implements OnInit {
-  @Input() plateId: string;
-  @Input() plateLabel: string;
+  @Input() plateId?: string;
+  @Input() plateLabel?: string;
+  @Input() plates?: Array<{ id: string; label: string }>;
 
   families: FamilyModel[] = [];
   selectedFamilyId: string | null = null;
   selectedUserId: string | null = null;
   showUsersList = false;
   usersInFamily: any[] = [];
+  
+  // Track selected plates for batch sharing
+  selectedPlates: Array<{ id: string; label: string }> = [];
+  isBatchMode = false;
 
   constructor(
     private modalController: ModalController,
@@ -29,6 +34,15 @@ export class SharePlateModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // If plates array is provided, we're in batch mode
+    if (this.plates && this.plates.length > 0) {
+      this.isBatchMode = true;
+      this.selectedPlates = [...this.plates];
+    } else if (this.plateId) {
+      // Single plate mode
+      this.selectedPlates = [{ id: this.plateId, label: this.plateLabel || '' }];
+    }
+    
     this.loadFamilies();
   }
 
@@ -77,46 +91,44 @@ export class SharePlateModalComponent implements OnInit {
   }
 
   sharePlate() {
-    if (!this.plateId) {
-      this.showErrorToast('Plate ID is required');
+    if (!this.selectedUserId) {
+      this.showErrorToast('Please select a user');
       return;
     }
 
-    let sharePlateDto: SharePlateDto;
-
-    if (this.selectedFamilyId && this.selectedUserId) {
-      // Partage avec un utilisateur spécifique dans une famille
-      sharePlateDto = {
-        plateId: this.plateId,
-        sharedWithUserId: this.selectedUserId,
-        familyId: this.selectedFamilyId
-      };
-    } else if (this.selectedFamilyId) {
-      // Partage avec une famille entière (à implémenter côté backend)
-      this.showErrorToast('Sharing with entire family is not implemented yet');
-      return;
-    } else if (this.selectedUserId) {
-      // Partage avec un utilisateur spécifique en dehors d'une famille
-      sharePlateDto = {
-        plateId: this.plateId,
-        sharedWithUserId: this.selectedUserId
-      };
-    } else {
-      this.showErrorToast('Please select a family or a user');
+    if (this.selectedPlates.length === 0) {
+      this.showErrorToast('No plates selected');
       return;
     }
 
-    this.plateService.sharePlate(sharePlateDto).subscribe({
+    const batchSharePlateDto: BatchSharePlateDto = {
+      plateIds: this.selectedPlates.map(p => p.id),
+      sharedWithUserId: this.selectedUserId,
+      familyId: this.selectedFamilyId || undefined
+    };
+
+    this.plateService.batchSharePlate(batchSharePlateDto).subscribe({
       next: (response) => {
-        this.showSuccessToast('Plate shared successfully!');
-        // Fermer la modale après un court délai pour permettre l'affichage du message
+        const successCount = response.success?.length || 0;
+        const errorCount = response.errors?.length || 0;
+        
+        if (successCount > 0) {
+          this.showSuccessToast(`${successCount} plate(s) shared successfully!`);
+        }
+        
+        if (errorCount > 0) {
+          const errorMsg = response.errors.map(e => e.error).join(', ');
+          this.showErrorToast(`${errorCount} plate(s) failed: ${errorMsg}`);
+        }
+        
+        // Close modal after a short delay
         setTimeout(() => {
           this.dismiss();
-        }, 1000);
+        }, 1500);
       },
       error: (error) => {
-        console.error('Erreur lors du partage du plat:', error);
-        this.showErrorToast('Failed to share plate: ' + error.message);
+        console.error('Error sharing plates:', error);
+        this.showErrorToast('Failed to share plates: ' + error.message);
       }
     });
   }

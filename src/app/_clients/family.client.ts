@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { FamilyModel } from "./models/FamilyModel";
 import { SharedPlateModel } from "./models/SharedPlateModel";
-import { SharePlateDto } from "./models/SharePlateDto";
+import { SharePlateDto, BatchSharePlateDto } from "./models/SharePlateDto";
 import { CreateFamilyDto } from "./models/CreateFamilyDto";
 import { InviteFamilyMemberDto } from "./models/InviteFamilyMemberDto";
 
@@ -31,6 +31,10 @@ export class FamilyClient {
 
   public sharePlate(sharePlateDto: SharePlateDto): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/family/share-plate`, sharePlateDto);
+  }
+
+  public batchSharePlate(batchSharePlateDto: BatchSharePlateDto): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/family/batch-share-plate`, batchSharePlateDto);
   }
 
   public getSharedPlatesWithUser(): Observable<SharedPlateModel[]> {
