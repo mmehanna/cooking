@@ -59,6 +59,18 @@ export class PlateClient {
     );
   }
 
+  public removeSharedAccess(plateId: string): Observable<any> {
+    if (!plateId) {
+      throw new Error('PlateId must not be null or undefined');
+    }
+    return this.httpClient.delete(`${this.apiUrl}/plates/${plateId}/shared-access`).pipe(
+      catchError((error: any) => {
+        console.error('Error removing shared access', error);
+        return of(error);
+      })
+    );
+  }
+
   public deletePlateForDay(targetedDate: string) {
     console.log("dans deleplateforday: " + targetedDate);
     return this.httpClient.delete(`${this.apiUrl}/plates-for-day/${targetedDate}`).pipe(

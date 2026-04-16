@@ -6,6 +6,7 @@ import {AlertController, ModalController, ToastController} from "@ionic/angular"
 import {PLateModel} from "../_clients/models/PLateModel";
 import {PlateDetailsModal} from "./plate-details-modal/plate-details.modal";
 import {SharePlateModalComponent} from "./share-plate-modal/share-plate-modal.component";
+import {PlateClient} from "../_clients/plate.client";
 
 @Component({
   selector: 'app-add-plates-with-a-list-page',
@@ -21,7 +22,8 @@ export class PlatesListPage implements OnInit {
   constructor(private plateService: PlateService,
               private modalController: ModalController,
               private toastController: ToastController,
-              private alertController: AlertController
+              private alertController: AlertController,
+              private plateClient: PlateClient
   ) {
   }
 
@@ -134,19 +136,24 @@ export class PlatesListPage implements OnInit {
     toast.present();
   }
 
-  public async deletePlate(plate: PLateModel) {
+  public async deletePlate(plate: PlateItemBo) {
+    const actionLabel = plate.isOwner ? 'Delete' : 'Remove';
+    const message = plate.isOwner 
+      ? `Are you sure you want to delete the plate "${plate.label}"?`
+      : `Are you sure you want to remove the plate "${plate.label}" from your shared plates?`;
+
     const alert = await this.alertController.create({
-      header: 'Confirm Delete',
-      message: `Are you sure you want to delete the plate "${plate.label}"?`,
+      header: `Confirm ${actionLabel}`,
+      message: message,
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
         },
         {
-          text: 'Delete',
+          text: actionLabel,
           handler: () => {
-            console.log('Attempting to delete plate with ID:', plate.id);
+            console.log(`Attempting to ${actionLabel.toLowerCase()} plate with ID:`, plate.id);
 
             // Supprimer immédiatement de l'interface utilisateur pour une meilleure UX
             const plateIndex = this.plateList.findIndex(p => p.id === plate.id);
@@ -155,22 +162,26 @@ export class PlatesListPage implements OnInit {
               this.plateList = [...this.plateList]; // Créer un nouvel objet tableau pour forcer la mise à jour
             }
 
-            this.plateService.deletePlate(plate.id).subscribe({
+            const deleteObservable = plate.isOwner 
+              ? this.plateClient.deletePlate(plate.id)
+              : this.plateClient.removeSharedAccess(plate.id);
+
+            deleteObservable.subscribe({
               next: async () => {
-                console.log('Plate deleted successfully from server');
+                console.log(`Plate ${actionLabel.toLowerCase()}d successfully from server`);
                 const toast = await this.toastController.create({
-                  message: "Delete successful",
+                  message: `${actionLabel} successful`,
                   duration: 2000
                 });
                 await toast.present();
               },
               error: async (err: any) => {
-                console.error('Error deleting plate:', err);
+                console.error(`Error ${actionLabel.toLowerCase()}ing plate:`, err);
                 console.error('Error details:', err.error);
                 console.error('Status:', err.status);
                 console.error('URL:', err.url);
 
-                let errorMessage = 'Delete unsuccessful';
+                let errorMessage = `${actionLabel} unsuccessful`;
                 if (err.error && typeof err.error === 'object' && err.error.message) {
                   errorMessage += `: ${err.error.message}`;
                 } else if (err.message) {

@@ -1,6 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Shared Plates</ion-title>
+    <ion-buttons slot="end" *ngIf="activeSegment === 'sent'">
+      <ion-button (click)="toggleSelectionMode()">
+        {{ isSelectionMode ? 'Cancel' : 'Select' }}
+      </ion-button>
+      <ion-button *ngIf="isSelectionMode" (click)="selectAll()">
+        {{ selectedPlateIds.length === sharedPlatesByMe.length ? 'Deselect All' : 'Select All' }}
+      </ion-button>
+      <ion-button *ngIf="isSelectionMode && selectedPlateIds.length > 0" color="danger" (click)="confirmBatchUnshare()">
+        <ion-icon name="trash" slot="start"></ion-icon>
+        ({{ selectedPlateIds.length }})
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -51,14 +63,19 @@
         <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing..."></ion-refresher-content>
       </ion-refresher>
 
-      <ion-card *ngFor="let sharedPlate of sharedPlatesByMe">
+      <ion-card *ngFor="let sharedPlate of sharedPlatesByMe" (click)="isSelectionMode && togglePlateSelection(sharedPlate.id)">
         <ion-card-content>
+          <ion-checkbox *ngIf="isSelectionMode" [checked]="isPlateSelected(sharedPlate.id)" slot="start" class="select-checkbox"></ion-checkbox>
           <ion-card-title>{{ sharedPlate.plate.label }}</ion-card-title>
           <p>{{ sharedPlate.plate.description }}</p>
           <p class="shared-info">
             Shared with: {{ sharedPlate.sharedWithUser?.name || sharedPlate.sharedWithUser?.email }}
             <span *ngIf="sharedPlate.family">in {{ sharedPlate.family?.name }}</span>
           </p>
+          <ion-button *ngIf="!isSelectionMode" fill="clear" color="danger" (click)="confirmUnshare(sharedPlate)">
+            <ion-icon name="trash" slot="start"></ion-icon>
+            Unshare
+          </ion-button>
         </ion-card-content>
       </ion-card>
 
