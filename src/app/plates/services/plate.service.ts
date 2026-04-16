@@ -12,6 +12,7 @@ import {PLateForWeekModel} from "../../_clients/models/PLateForWeekModel";
 import {FamilyClient} from "../../_clients/family.client";
 import {SharedPlateModel} from "../../_clients/models/SharedPlateModel";
 import {SharePlateDto, BatchSharePlateDto} from "../../_clients/models/SharePlateDto";
+import {AuthService} from "./auth.service";
 
 @Injectable({providedIn: 'root'})
 export class PlateService {
@@ -21,7 +22,7 @@ export class PlateService {
   private platesListSubject = new BehaviorSubject<any[]>([]);
   platesList$ = this.platesListSubject.asObservable();
 
-  constructor(private plateClient: PlateClient, private familyClient: FamilyClient) {
+  constructor(private plateClient: PlateClient, private familyClient: FamilyClient, private authService: AuthService) {
   }
 
   public refreshPlateList() {
@@ -41,8 +42,11 @@ export class PlateService {
             .getPlates()
             .pipe(
               map((plateModelList: PLateModel[]) => {
+                const currentUserId = this.authService.getUserId();
                 return plateModelList.map(plateModel => {
-                  return new PlateItemBo(plateModel);
+                  const plate = new PlateItemBo(plateModel);
+                  plate.setOwnership(plate.userId === currentUserId);
+                  return plate;
                 })
               })
             )
@@ -110,6 +114,14 @@ export class PlateService {
     )
   }
 
+  public removeSharedAccess(plateId: string): Observable<any> {
+    return this.plateClient.removeSharedAccess(plateId).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    )
+  }
+
   // Nouvelles méthodes pour la gestion du partage de plats
   public sharePlate(sharePlateDto: SharePlateDto): Observable<any> {
     return this.familyClient.sharePlate(sharePlateDto).pipe(
@@ -121,6 +133,22 @@ export class PlateService {
 
   public batchSharePlate(batchSharePlateDto: BatchSharePlateDto): Observable<any> {
     return this.familyClient.batchSharePlate(batchSharePlateDto).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    );
+  }
+
+  public unsharePlate(shareAccessId: string): Observable<any> {
+    return this.familyClient.unsharePlate(shareAccessId).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    );
+  }
+
+  public batchUnsharePlates(shareAccessIds: string[]): Observable<any> {
+    return this.familyClient.batchUnsharePlates(shareAccessIds).pipe(
       tap(() => {
         this.refreshPlateList();
       })

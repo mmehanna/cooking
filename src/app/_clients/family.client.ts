@@ -37,6 +37,14 @@ export class FamilyClient {
     return this.httpClient.post(`${this.apiUrl}/family/batch-share-plate`, batchSharePlateDto);
   }
 
+  public unsharePlate(shareAccessId: string): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/family/shared-plate/${shareAccessId}`);
+  }
+
+  public batchUnsharePlates(shareAccessIds: string[]): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/family/batch-unshare-plates`, { shareAccessIds });
+  }
+
   public getSharedPlatesWithUser(): Observable<SharedPlateModel[]> {
     return this.httpClient.get<SharedPlateModel[]>(`${this.apiUrl}/family/shared-with-me`);
   }
