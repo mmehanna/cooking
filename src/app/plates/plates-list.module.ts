@@ -6,6 +6,7 @@ import {PlatesListPage} from "./plates-list.page";
 import {PlateListRoutingModule} from "./plates-list-routing.module";
 import {SharePlateModalComponent} from "./share-plate-modal/share-plate-modal.component";
 import { SharedModule } from '../shared/shared.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     PlateListRoutingModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ],
   declarations: [PlatesListPage, SharePlateModalComponent],
   exports: [SharePlateModalComponent]

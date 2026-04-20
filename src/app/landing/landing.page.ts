@@ -1,7 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PlateService} from "../plates/services/plate.service";
 import {AuthService} from "../plates/services/auth.service";
-import {lastValueFrom, interval, Subscription} from "rxjs";
+import {UserService} from "../settings/services/user.service";
+import {UserProfileModel} from "../_clients/models/UserProfileModel";
+import {lastValueFrom, interval, Subscription, take} from "rxjs";
 import {PLateForWeekModel} from "../_clients/models/PLateForWeekModel";
 
 @Component({
@@ -13,14 +15,25 @@ export class LandingPage implements OnInit, OnDestroy {
   plateForWeek: PLateForWeekModel[] = [];
   private refreshSubscription?: Subscription;
   userEmail: string | null = null;
+  userProfile: UserProfileModel | null = null;
 
   constructor(private plateService: PlateService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
   }
 
 
   async ngOnInit() {
     this.userEmail = this.authService.getUserEmail();
+    this.userService.profile$.subscribe(profile => {
+      this.userProfile = profile;
+    });
+    try {
+      const profile = await lastValueFrom(this.userService.loadProfile().pipe(take(1)));
+      this.userProfile = profile;
+    } catch (error) {
+      // Profile not available (e.g. not authenticated)
+    }
     await this.loadPlatesForWeek();
 
     // Écouter les changements de liste de plats pour rafraîchir automatiquement

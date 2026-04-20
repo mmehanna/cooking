@@ -1,39 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Family Management</ion-title>
+    <ion-title>{{ 'FAMILY.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="family-section">
-    <h2>Create New Family</h2>
+    <h2>{{ 'FAMILY.CREATE_FAMILY' | translate }}</h2>
     <ion-item>
       <ion-input
         [(ngModel)]="newFamilyName"
-        placeholder="Enter family name"
+        [placeholder]="'FAMILY.ENTER_FAMILY_NAME' | translate"
         type="text">
       </ion-input>
     </ion-item>
-    <ion-button expand="block" (click)="createFamily()">Create Family</ion-button>
+    <ion-button expand="block" (click)="createFamily()">{{ 'FAMILY.CREATE' | translate }}</ion-button>
   </div>
 
   <div class="family-section" *ngIf="families.length > 0">
-    <h2>Your Families</h2>
+    <h2>{{ 'FAMILY.YOUR_FAMILIES' | translate }}</h2>
     <ion-list>
       <ion-item *ngFor="let family of families">
         <ion-label>
           <h2>{{ family.name }}</h2>
-          <p>Owner: {{ family.owner?.name || family.owner?.email }}</p>
-          <p>Members: {{ family.users?.length || 0 }}</p>
+          <p>{{ 'FAMILY.OWNER' | translate }}{{ family.owner?.name || family.owner?.email }}</p>
+          <p>{{ 'FAMILY.MEMBERS' | translate }}{{ family.users?.length || 0 }}</p>
 
           <!-- Show family members if available -->
           <div *ngIf="family.users && family.users.length > 0">
-            <p><strong>Family Members:</strong></p>
+            <p><strong>{{ 'FAMILY.FAMILY_MEMBERS' | translate }}</strong></p>
             <ion-list>
               <ion-item *ngFor="let userFamily of family.users">
                 <ion-label>
                   <h3>{{ userFamily.user?.name || userFamily.user?.email }}</h3>
-                  <p>Role: {{ userFamily.role || 'member' }}</p>
+                  <p>{{ 'FAMILY.ROLE' | translate }}{{ userFamily.role || 'member' }}</p>
                 </ion-label>
                 <!-- Button to remove member (only for owner or admin) -->
                 <ion-button
@@ -63,10 +63,10 @@
   </div>
 
   <div class="family-section" *ngIf="families.length > 0">
-    <h2>Invite to Family</h2>
+    <h2>{{ 'FAMILY.INVITE_TO_FAMILY' | translate }}</h2>
     <ion-item>
-      <ion-label>Select Family</ion-label>
-      <ion-select [(ngModel)]="selectedFamilyId" placeholder="Choose a family">
+      <ion-label>{{ 'FAMILY.SELECT_FAMILY' | translate }}</ion-label>
+      <ion-select [(ngModel)]="selectedFamilyId" [placeholder]="'FAMILY.CHOOSE_FAMILY' | translate">
         <ion-select-option *ngFor="let family of families" [value]="family.id">
           {{ family.name }}
         </ion-select-option>
@@ -75,10 +75,10 @@
     <ion-item>
       <ion-input
         [(ngModel)]="inviteEmail"
-        placeholder="Enter email address to invite"
+        [placeholder]="'FAMILY.ENTER_EMAIL' | translate"
         type="email">
       </ion-input>
     </ion-item>
-    <ion-button expand="block" (click)="inviteToFamily()">Send Invitation</ion-button>
+    <ion-button expand="block" (click)="inviteToFamily()">{{ 'FAMILY.SEND_INVITATION' | translate }}</ion-button>
   </div>
 </ion-content>

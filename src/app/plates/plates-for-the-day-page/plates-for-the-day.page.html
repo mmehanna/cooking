@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="'/landing'" slot="start"></ion-back-button>
     </ion-buttons>
-    <ion-title> Choose a date</ion-title>
+    <ion-title>{{ 'PLATES_FOR_DAY.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
-    <ion-label>Date:</ion-label>
+    <ion-label>{{ 'PLATES_FOR_DAY.DATE' | translate }}</ion-label>
     <ion-datetime (ionChange)="onSelectDate()" [(ngModel)]="plateService.date"
                   presentation="date"
                   display-format="DD/MM/YYYY"></ion-datetime>
@@ -18,7 +18,7 @@
   <!-- Breakfast section -->
   <ion-card *ngIf="breakfastPlates && breakfastPlates.length > 0">
     <ion-card-header>
-      <ion-card-title>Breakfast</ion-card-title>
+      <ion-card-title>{{ 'PLATES_FOR_DAY.BREAKFAST' | translate }}</ion-card-title>
     </ion-card-header>
     <ion-list>
       <ion-item *ngFor="let plate of breakfastPlates">
@@ -33,7 +33,7 @@
   <!-- Lunch section -->
   <ion-card *ngIf="lunchPlates && lunchPlates.length > 0">
     <ion-card-header>
-      <ion-card-title>Lunch</ion-card-title>
+      <ion-card-title>{{ 'PLATES_FOR_DAY.LUNCH' | translate }}</ion-card-title>
     </ion-card-header>
     <ion-list>
       <ion-item *ngFor="let plate of lunchPlates">
@@ -48,7 +48,7 @@
   <!-- Dinner section -->
   <ion-card *ngIf="dinnerPlates && dinnerPlates.length > 0">
     <ion-card-header>
-      <ion-card-title>Dinner</ion-card-title>
+      <ion-card-title>{{ 'PLATES_FOR_DAY.DINNER' | translate }}</ion-card-title>
     </ion-card-header>
     <ion-list>
       <ion-item *ngFor="let plate of dinnerPlates">
@@ -63,7 +63,7 @@
   <!-- Message if no plates exist -->
   <ion-card *ngIf="!hasAnyPlates()">
     <ion-card-content>
-      <p>There is no plate for this date.</p>
+      <p>{{ 'PLATES_FOR_DAY.NO_PLATES' | translate }}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>

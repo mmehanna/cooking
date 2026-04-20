@@ -2,18 +2,19 @@
   <ion-menu contentId="main-content">
     <ion-header [translucent]="true">
       <ion-toolbar>
-        <ion-title>Choose there</ion-title>
+        <ion-title>{{ 'APP.MENU_TITLE' | translate }}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <p routerLink="/landing" (click)="closeMenu()">Home</p>
-      <p routerLink="/choose-date" (click)="closeMenu()">Create your day list</p>
-      <p routerLink="/plates-for-the-day" (click)="closeMenu()">Plate for the day</p>
-      <p routerLink="/manage-plates" (click)="closeMenu()">Manage your plates</p>
-      <p routerLink="/family" (click)="closeMenu()">Manage your families</p>
-      <p routerLink="/shared-plates" (click)="closeMenu()">View shared plates</p>
+      <p routerLink="/landing" (click)="closeMenu()">{{ 'APP.HOME' | translate }}</p>
+      <p routerLink="/choose-date" (click)="closeMenu()">{{ 'APP.CREATE_DAY_LIST' | translate }}</p>
+      <p routerLink="/plates-for-the-day" (click)="closeMenu()">{{ 'APP.PLATE_FOR_DAY' | translate }}</p>
+      <p routerLink="/manage-plates" (click)="closeMenu()">{{ 'APP.MANAGE_PLATES' | translate }}</p>
+      <p routerLink="/family" (click)="closeMenu()">{{ 'APP.MANAGE_FAMILIES' | translate }}</p>
+      <p routerLink="/shared-plates" (click)="closeMenu()">{{ 'APP.VIEW_SHARED_PLATES' | translate }}</p>
+      <p routerLink="/settings" (click)="closeMenu()">{{ 'APP.SETTINGS' | translate }}</p>
 
-      <button (click)="logout()" style="color: red">Logout</button>
+      <button (click)="logout()" style="color: red">{{ 'APP.LOGOUT' | translate }}</button>
     </ion-content>
   </ion-menu>
 

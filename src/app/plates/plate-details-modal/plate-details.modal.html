@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title size="large">Manage your plate</ion-title>
+    <ion-title size="large">{{ 'PLATE_DETAILS.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">
         <ion-icon name="close"></ion-icon>
@@ -12,33 +12,33 @@
 <ion-content class="ion-padding">
   <form [formGroup]="plateForm">
     <ion-item>
-      <ion-label>Plate name:</ion-label>
+      <ion-label>{{ 'PLATE_DETAILS.PLATE_NAME' | translate }}</ion-label>
       <input formControlName="label"
              maxlength="20"
              type="text">
     </ion-item>
     <ion-item>
-      <ion-label>Plate description:</ion-label>
+      <ion-label>{{ 'PLATE_DETAILS.PLATE_DESCRIPTION' | translate }}</ion-label>
       <input formControlName="description"
              maxlength="20"
              type="text">
     </ion-item>
     <br/>
-    <ion-label>Category:</ion-label>
+    <ion-label>{{ 'PLATE_DETAILS.CATEGORY' | translate }}</ion-label>
     <br/>
     <ion-radio-group [(ngModel)]="selectedCategory" formControlName="category">
       <ion-item>
-        <ion-label>Breakfast</ion-label>
+        <ion-label>{{ 'PLATE_DETAILS.BREAKFAST' | translate }}</ion-label>
         <ion-radio slot="start" value="breakfast"></ion-radio>
       </ion-item>
 
       <ion-item>
-        <ion-label>Lunch</ion-label>
+        <ion-label>{{ 'PLATE_DETAILS.LUNCH' | translate }}</ion-label>
         <ion-radio slot="start" value="lunch"></ion-radio>
       </ion-item>
 
       <ion-item>
-        <ion-label>Dinner</ion-label>
+        <ion-label>{{ 'PLATE_DETAILS.DINNER' | translate }}</ion-label>
         <ion-radio slot="start" value="dinner"></ion-radio>
       </ion-item>
     </ion-radio-group>
@@ -59,9 +59,9 @@
     <br/>
   </form>
   <br/>
-  <ion-button>take a picture</ion-button>
+  <ion-button>{{ 'PLATE_DETAILS.TAKE_PICTURE' | translate }}</ion-button>
   <ion-button (click)="savePlate()"
-              id="open-toast">Save
+              id="open-toast">{{ 'PLATE_DETAILS.SAVE' | translate }}
   </ion-button>
 </ion-content>
 
