@@ -1,0 +1,35 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form (ngSubmit)="onChangePassword()" [formGroup]="passwordForm">
+      <ion-item>
+        <ion-label position="floating">{{ 'ACCOUNT.CURRENT_PASSWORD' | translate }}</ion-label>
+        <ion-input formControlName="currentPassword" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{ 'ACCOUNT.NEW_PASSWORD' | translate }}</ion-label>
+        <ion-input formControlName="newPassword" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{ 'ACCOUNT.CONFIRM_NEW_PASSWORD' | translate }}</ion-label>
+        <ion-input formControlName="confirmPassword" type="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="passwordForm.get('confirmPassword')?.errors?.['mismatch'] && passwordForm.get('confirmPassword')?.touched">
+        <ion-text color="danger">{{ 'ACCOUNT.PASSWORDS_DO_NOT_MATCH' | translate }}</ion-text>
+      </ion-item>
+      <ion-button [disabled]="passwordForm.invalid" expand="full" type="submit">{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title color="danger">{{ 'ACCOUNT.DANGER_ZONE' | translate }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-button expand="full" color="danger" (click)="onDeleteAccount()">{{ 'ACCOUNT.DELETE_ACCOUNT' | translate }}</ion-button>
+    <p>{{ 'ACCOUNT.DELETE_WARNING' | translate }}</p>
+  </ion-card-content>
+</ion-card>

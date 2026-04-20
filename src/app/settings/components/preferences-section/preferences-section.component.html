@@ -1,0 +1,27 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ 'PREFERENCES.TITLE' | translate }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="preferencesForm">
+      <ion-item>
+        <ion-label>{{ 'PREFERENCES.LANGUAGE' | translate }}</ion-label>
+        <ion-select formControlName="language" interface="popover">
+          <ion-select-option value="en">{{ 'PREFERENCES.ENGLISH' | translate }}</ion-select-option>
+          <ion-select-option value="fr">{{ 'PREFERENCES.FRENCH' | translate }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ 'PREFERENCES.DARK_MODE' | translate }}</ion-label>
+        <ion-toggle [checked]="preferencesForm.get('theme')?.value === 'dark'"
+          (ionChange)="onThemeChange($event)">
+        </ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ 'PREFERENCES.NOTIFICATIONS' | translate }}</ion-label>
+        <ion-toggle formControlName="notifications"></ion-toggle>
+      </ion-item>
+      <ion-button expand="full" type="submit">{{ 'PREFERENCES.SAVE' | translate }}</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
