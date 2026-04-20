@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
+import {TranslateModule} from '@ngx-translate/core';
 
 import {RegisterPageRoutingModule} from './register-routing.module';
 
@@ -14,7 +15,8 @@ import {RegisterPage} from './register.page';
     FormsModule,
     IonicModule,
     RegisterPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   declarations: [RegisterPage]
 })

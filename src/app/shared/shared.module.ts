@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { FamilyManagementComponent } from '../plates/family-management/family-management.component';
 import { SharedPlatesListComponent } from '../plates/shared-plates-list/shared-plates-list.component';
 
@@ -15,11 +16,13 @@ import { SharedPlatesListComponent } from '../plates/shared-plates-list/shared-p
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   exports: [
     FamilyManagementComponent,
-    SharedPlatesListComponent
+    SharedPlatesListComponent,
+    TranslateModule
   ]
 })
 export class SharedModule { }

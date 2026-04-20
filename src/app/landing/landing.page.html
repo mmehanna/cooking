@@ -4,14 +4,20 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Menu</ion-title>
-      <ion-text slot="end" class="ion-padding-end" *ngIf="userEmail">
-        <small>{{ userEmail }}</small>
-      </ion-text>
+      <ion-title>{{ 'LANDING.TITLE' | translate }}</ion-title>
+      <div slot="end" class="ion-padding-end user-info" *ngIf="userProfile">
+        <ion-avatar class="user-avatar" *ngIf="userProfile.avatar">
+          <img [src]="userProfile.avatar" alt="Avatar">
+        </ion-avatar>
+        <div class="user-details">
+          <span class="user-name">{{ userProfile.name || ('LANDING.USER' | translate) }}</span>
+          <small class="user-email">{{ userProfile.email }}</small>
+        </div>
+      </div>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu.
-    <h2>Plates for the week</h2>
+  <ion-content class="ion-padding"> {{ 'LANDING.PLATES_FOR_WEEK' | translate }}
+    <h2>{{ 'LANDING.PLATES_FOR_WEEK' | translate }}</h2>
     <ng-container *ngFor="let plate of plateForWeek">
       <ion-list>
         <ion-item>
@@ -24,4 +30,3 @@
     </ng-container>
   </ion-content>
 </div>
-

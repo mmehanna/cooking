@@ -3,6 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 import {IonicModule, IonicRouteStrategy, MenuController} from '@ionic/angular';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {TranslateModule} from '@ngx-translate/core';
+import {provideTranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG} from '@ngx-translate/http-loader';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -12,12 +14,18 @@ import {AuthInterceptor} from "./_clients/interceptor.client";
 import {FamilyClient} from "./_clients/family.client";
 import {AuthService} from "./plates/services/auth.service";
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: provideTranslateHttpLoader({
+        prefix: './assets/i18n/',
+        suffix: '.json'
+      })
+    }),
     AppRoutingModule,
     IonicModule.forRoot(),
     CalendarModule.forRoot({
@@ -42,8 +50,7 @@ import {AuthService} from "./plates/services/auth.service";
   bootstrap: [
     AppComponent
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add this line
-
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

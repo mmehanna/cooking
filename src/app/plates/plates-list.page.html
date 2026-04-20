@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-back-button slot="start"></ion-back-button>
-    <ion-title size="large">Manage your plates</ion-title>
+    <ion-title size="large">{{ 'PLATES.MANAGE' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleSelectionMode()">
-        {{ isSelectionMode ? 'Cancel' : 'Select' }}
+        {{ isSelectionMode ? ('PLATES.CANCEL' | translate) : ('PLATES.SELECT' | translate) }}
       </ion-button>
       <ion-button *ngIf="isSelectionMode && selectedPlates.length > 0" (click)="presentBatchShareModal()">
         <ion-icon name="share"></ion-icon>
@@ -19,7 +19,7 @@
       <ion-checkbox *ngIf="isSelectionMode" [checked]="isPlateSelected(plate.id)" slot="start"></ion-checkbox>
       {{ plate.label }}
       <ion-button *ngIf="!isSelectionMode" (click)="presentDetailEditPlateModal(plate)" fill="clear">
-        edit
+        {{ 'PLATES.EDIT' | translate }}
       </ion-button>
       <ion-button *ngIf="!isSelectionMode" (click)="presentSharePlateModal(plate)" fill="clear" color="primary">
         <ion-icon name="share"></ion-icon>

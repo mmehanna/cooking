@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="{{ 'SETTINGS.BACK' | translate }}" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'SETTINGS.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment-button value="profile">
+      <ion-label>{{ 'SETTINGS.PROFILE' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="preferences">
+      <ion-label>{{ 'SETTINGS.PREFERENCES' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="account">
+      <ion-label>{{ 'SETTINGS.ACCOUNT' | translate }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
+        <app-profile-section *ngIf="selectedSegment === 'profile'"></app-profile-section>
+        <app-preferences-section *ngIf="selectedSegment === 'preferences'"></app-preferences-section>
+        <app-account-section *ngIf="selectedSegment === 'account'"></app-account-section>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

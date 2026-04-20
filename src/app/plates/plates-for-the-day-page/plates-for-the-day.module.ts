@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {PlatesForTheDayPage} from './plates-for-the-day.page';
 import {PlatesForTheDayRoutingModule} from './plates-for-the-day-routing.module';
 import {CalendarMonthModule} from "angular-calendar";
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import {CalendarMonthModule} from "angular-calendar";
     IonicModule,
     PlatesForTheDayRoutingModule,
     CalendarMonthModule,
+    TranslateModule,
   ],
   declarations: [PlatesForTheDayPage]
 })

@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'shared-plates',
     loadChildren: () => import('./plates/shared-plates/shared-plates.module').then(m => m.SharedPlatesPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
   }
 
 ];
