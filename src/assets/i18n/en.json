@@ -7,6 +7,7 @@
     "MANAGE_PLATES": "Manage your plates",
     "MANAGE_FAMILIES": "Manage your families",
     "VIEW_SHARED_PLATES": "View shared plates",
+    "GROCERY_LIST": "Grocery List",
     "SETTINGS": "Settings",
     "LOGOUT": "Logout"
   },
@@ -230,6 +231,23 @@
     "SAVE": "Save",
     "AUTH_REQUIRED": "Authentication required. Please log in.",
     "UPDATED": "Your food is up to date!",
-    "ADDED": "Your food is added!"
+    "ADDED": "Your food is added!",
+    "INGREDIENTS": "Ingredients",
+    "INGREDIENT_NAME": "Name",
+    "QUANTITY": "Qty",
+    "UNIT": "Unit",
+    "ADD_INGREDIENT": "Add ingredient"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "Grocery List",
+    "WEEK_OF": "Week of {{date}}",
+    "EMPTY": "No ingredients found for this week. Add ingredients to your plates first.",
+    "REGENERATE": "Regenerate List",
+    "REGENERATE_CONFIRM": "This will reset your checked items. Continue?",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "REGENERATE_SUCCESS": "Grocery list regenerated",
+    "REGENERATE_FAILED": "Failed to regenerate grocery list",
+    "TOGGLE_FAILED": "Failed to update item"
   }
 }

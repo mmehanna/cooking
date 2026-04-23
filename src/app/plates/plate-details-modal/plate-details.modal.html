@@ -58,6 +58,23 @@
 
     <br/>
   </form>
+
+  <ion-list>
+    <ion-list-header>{{ 'PLATE_DETAILS.INGREDIENTS' | translate }}</ion-list-header>
+    <ion-item *ngFor="let ingredient of ingredients; let i = index">
+      <ion-input [(ngModel)]="ingredient.name" placeholder="{{ 'PLATE_DETAILS.INGREDIENT_NAME' | translate }}"></ion-input>
+      <ion-input [(ngModel)]="ingredient.quantity" placeholder="{{ 'PLATE_DETAILS.QUANTITY' | translate }}" style="max-width: 60px;"></ion-input>
+      <ion-input [(ngModel)]="ingredient.unit" placeholder="{{ 'PLATE_DETAILS.UNIT' | translate }}" style="max-width: 60px;"></ion-input>
+      <ion-button fill="clear" color="danger" (click)="removeIngredientRow(i)">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-button fill="clear" (click)="addIngredientRow()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      {{ 'PLATE_DETAILS.ADD_INGREDIENT' | translate }}
+    </ion-button>
+  </ion-list>
+
   <br/>
   <ion-button>{{ 'PLATE_DETAILS.TAKE_PICTURE' | translate }}</ion-button>
   <ion-button (click)="savePlate()"

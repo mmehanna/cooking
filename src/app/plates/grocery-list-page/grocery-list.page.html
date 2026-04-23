@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="'GROCERY_LIST.TITLE' | translate" defaultHref="/landing"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'GROCERY_LIST.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <!-- Week navigation -->
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-button fill="clear" (click)="onWeekChange('prev')">
+                <ion-icon name="chevron-back" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="6" class="ion-text-center">
+              <ion-label>{{ 'GROCERY_LIST.WEEK_OF' | translate: { date: weekLabel } }}</ion-label>
+            </ion-col>
+            <ion-col size="3" class="ion-text-end">
+              <ion-button fill="clear" (click)="onWeekChange('next')">
+                <ion-icon name="chevron-forward" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-spinner *ngIf="loading" name="crescent" class="ion-padding"></ion-spinner>
+
+        <!-- Grocery items list -->
+        <ion-list *ngIf="!loading && groceryList?.items?.length > 0; else emptyList">
+          <ion-item *ngFor="let item of groceryList.items">
+            <ion-checkbox
+              [checked]="item.checked"
+              (ionChange)="toggleItem(item)"
+              slot="start">
+            </ion-checkbox>
+            <ion-label [class.line-through]="item.checked" [class.checked-item]="item.checked">
+              {{ item.quantity }} {{ item.unit }} - {{ item.name }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ng-template #emptyList>
+          <ion-card *ngIf="!loading">
+            <ion-card-content>
+              <p class="ion-text-center">{{ 'GROCERY_LIST.EMPTY' | translate }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- FAB for regenerate -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="regenerateList()">
+      <ion-icon name="refresh"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -6,6 +6,7 @@ import {PlateService} from "../services/plate.service";
 import {PlateItemBo} from "../bos/plate-item.bo";
 import {firstValueFrom} from "rxjs";
 import {AuthService} from "../services/auth.service";
+import {IngredientService} from "../services/ingredient.service";
 
 @Component({
   selector: 'plate-details-modal',
@@ -17,6 +18,7 @@ export class PlateDetailsModal implements OnInit {
   @Input() plateForEdit: PlateItemBo;
   @Output() saveEvent = new EventEmitter<void>();
   selectedCategory: string = '';
+  ingredients: { name: string; quantity: string; unit: string }[] = [];
   public plateForm = this.formBuilder.group({
     label: ['', Validators.required],
     description: ['', Validators.required],
@@ -28,7 +30,8 @@ export class PlateDetailsModal implements OnInit {
               private plateService: PlateService,
               private modalController: ModalController,
               private toastController: ToastController,
-              private authService: AuthService
+              private authService: AuthService,
+              private ingredientService: IngredientService
   ) {
   }
 
@@ -42,16 +45,31 @@ export class PlateDetailsModal implements OnInit {
       category: this.plateForEdit.category
     });
     this.selectedCategory = this.plateForEdit.category;
+
+    this.ingredientService.getIngredientsForPlate(this.plateForEdit.id).subscribe({
+      next: (data) => {
+        this.ingredients = data.map(i => ({ name: i.name, quantity: i.quantity, unit: i.unit }));
+      },
+      error: () => {
+        this.ingredients = [];
+      }
+    });
+  }
+
+  public addIngredientRow() {
+    this.ingredients.push({ name: '', quantity: '', unit: '' });
+  }
+
+  public removeIngredientRow(index: number) {
+    this.ingredients.splice(index, 1);
   }
 
   public async savePlate() {
-    // Check if user is authenticated before making API calls
     const isAuthenticated = this.authService.isAuthenticated();
     console.log('User is authenticated:', isAuthenticated);
 
     if (!isAuthenticated) {
       console.error('User is not authenticated. Cannot save plate.');
-      // Show an error message to the user
       const toast = await this.toastController.create({
         message: 'Authentication required. Please log in.',
         duration: 3000
@@ -62,6 +80,13 @@ export class PlateDetailsModal implements OnInit {
 
     if (this.plateService.editable) {
       await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, this.plateForm.value));
+
+      const validIngredients = this.ingredients.filter(i => i.name.trim() !== '');
+      if (validIngredients.length > 0) {
+        await firstValueFrom(this.ingredientService.addIngredientsBulk(this.plateForEdit.id, validIngredients));
+      } else {
+        await firstValueFrom(this.ingredientService.addIngredientsBulk(this.plateForEdit.id, []));
+      }
     } else {
       await firstValueFrom(this.plateService.createPlate(this.plateForm.value));
       console.log(this.plateForm.value);

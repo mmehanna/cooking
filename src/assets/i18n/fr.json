@@ -7,6 +7,7 @@
     "MANAGE_PLATES": "Gérer vos plats",
     "MANAGE_FAMILIES": "Gérer vos familles",
     "VIEW_SHARED_PLATES": "Voir les plats partagés",
+    "GROCERY_LIST": "Liste de courses",
     "SETTINGS": "Paramètres",
     "LOGOUT": "Déconnexion"
   },
@@ -230,6 +231,23 @@
     "SAVE": "Enregistrer",
     "AUTH_REQUIRED": "Authentification requise. Veuillez vous connecter.",
     "UPDATED": "Votre plat est à jour !",
-    "ADDED": "Votre plat est ajouté !"
+    "ADDED": "Votre plat est ajouté !",
+    "INGREDIENTS": "Ingrédients",
+    "INGREDIENT_NAME": "Nom",
+    "QUANTITY": "Qté",
+    "UNIT": "Unité",
+    "ADD_INGREDIENT": "Ajouter un ingrédient"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "Liste de courses",
+    "WEEK_OF": "Semaine du {{date}}",
+    "EMPTY": "Aucun ingrédient trouvé pour cette semaine. Ajoutez des ingrédients à vos plats d'abord.",
+    "REGENERATE": "Régénérer la liste",
+    "REGENERATE_CONFIRM": "Cela réinitialisera vos éléments cochés. Continuer ?",
+    "CANCEL": "Annuler",
+    "CONFIRM": "Confirmer",
+    "REGENERATE_SUCCESS": "Liste de courses régénérée",
+    "REGENERATE_FAILED": "Échec de la régénération de la liste de courses",
+    "TOGGLE_FAILED": "Échec de la mise à jour de l'élément"
   }
 }
