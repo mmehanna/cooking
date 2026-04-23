@@ -43,6 +43,10 @@ const routes: Routes = [
     loadChildren: () => import('./plates/shared-plates/shared-plates.module').then(m => m.SharedPlatesPageModule)
   },
   {
+    path: 'grocery-list',
+    loadChildren: () => import('./plates/grocery-list-page/grocery-list.module').then(m => m.GroceryListPageModule)
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
   }
