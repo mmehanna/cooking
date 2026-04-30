@@ -19,6 +19,7 @@ export class PlateDetailsModal implements OnInit {
   @Output() saveEvent = new EventEmitter<void>();
   selectedCategory: string = '';
   ingredients: { name: string; quantity: string; unit: string }[] = [];
+  steps: string = '';
   public plateForm = this.formBuilder.group({
     label: ['', Validators.required],
     description: ['', Validators.required],
@@ -45,6 +46,7 @@ export class PlateDetailsModal implements OnInit {
       category: this.plateForEdit.category
     });
     this.selectedCategory = this.plateForEdit.category;
+    this.steps = this.plateForEdit.steps || '';
 
     this.ingredientService.getIngredientsForPlate(this.plateForEdit.id).subscribe({
       next: (data) => {
@@ -78,8 +80,10 @@ export class PlateDetailsModal implements OnInit {
       return;
     }
 
+    const plateData = { ...this.plateForm.value, steps: this.steps };
+
     if (this.plateService.editable) {
-      await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, this.plateForm.value));
+      await firstValueFrom(this.plateService.updatePlateDetails(this.plateForEdit.id, plateData));
 
       const validIngredients = this.ingredients.filter(i => i.name.trim() !== '');
       if (validIngredients.length > 0) {
@@ -88,8 +92,8 @@ export class PlateDetailsModal implements OnInit {
         await firstValueFrom(this.ingredientService.addIngredientsBulk(this.plateForEdit.id, []));
       }
     } else {
-      await firstValueFrom(this.plateService.createPlate(this.plateForm.value));
-      console.log(this.plateForm.value);
+      await firstValueFrom(this.plateService.createPlate(plateData));
+      console.log(plateData);
     }
 
     await this.presentToast();

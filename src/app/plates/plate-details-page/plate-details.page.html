@@ -4,9 +4,27 @@
   </ion-buttons>
 </ion-toolbar>
 <ion-content>
-  <ng-container *ngIf=plateDetails>
+  <ng-container *ngIf="plateDetails">
     <img [src]="plateDetails?.imgUrl">
     <h2>{{ plateDetails?.label }}</h2>
     <p>{{ plateDetails?.description }}</p>
+
+    <ion-list *ngIf="ingredients.length > 0">
+      <ion-list-header>{{ 'PLATE_DETAILS.INGREDIENTS' | translate }}</ion-list-header>
+      <ion-item *ngFor="let ingredient of ingredients">
+        <ion-label>
+          {{ ingredient.quantity }} {{ ingredient.unit }} - {{ ingredient.name }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="plateDetails?.steps">
+      <ion-list-header>{{ 'PLATE_DETAILS.STEPS' | translate }}</ion-list-header>
+      <ion-item *ngFor="let step of steps; let i = index">
+        <ion-label>
+          <strong>{{ i + 1 }}.</strong> {{ step }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ng-container>
 </ion-content>

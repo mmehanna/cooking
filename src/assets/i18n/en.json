@@ -236,7 +236,9 @@
     "INGREDIENT_NAME": "Name",
     "QUANTITY": "Qty",
     "UNIT": "Unit",
-    "ADD_INGREDIENT": "Add ingredient"
+    "ADD_INGREDIENT": "Add ingredient",
+    "STEPS": "Preparation Steps",
+    "STEPS_PLACEHOLDER": "Enter each step on a new line"
   },
   "GROCERY_LIST": {
     "TITLE": "Grocery List",

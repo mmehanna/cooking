@@ -59,6 +59,11 @@
     <br/>
   </form>
 
+  <ion-item>
+    <ion-label position="stacked">{{ 'PLATE_DETAILS.STEPS' | translate }}</ion-label>
+    <textarea [(ngModel)]="steps" rows="5" placeholder="{{ 'PLATE_DETAILS.STEPS_PLACEHOLDER' | translate }}" style="width: 100%;"></textarea>
+  </ion-item>
+
   <ion-list>
     <ion-list-header>{{ 'PLATE_DETAILS.INGREDIENTS' | translate }}</ion-list-header>
     <ion-item *ngFor="let ingredient of ingredients; let i = index">
