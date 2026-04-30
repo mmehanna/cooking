@@ -4,6 +4,8 @@ import {Subscription} from "rxjs";
 
 import {PlateService} from "../services/plate.service";
 import {PLateModel} from "../../_clients/models/PLateModel";
+import {IngredientModel} from "../../_clients/models/IngredientModel";
+import {IngredientService} from "../services/ingredient.service";
 
 @Component({
   templateUrl: './plate-details.page.html',
@@ -11,11 +13,14 @@ import {PLateModel} from "../../_clients/models/PLateModel";
 })
 export class PlateDetailsPage implements OnInit, OnDestroy {
   public plateDetails: PLateModel;
+  public ingredients: IngredientModel[] = [];
+  public steps: string[] = [];
   private subscription = new Subscription();
   private plateId: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private plateService: PlateService
+              private plateService: PlateService,
+              private ingredientService: IngredientService
   ) {
   }
 
@@ -24,8 +29,18 @@ export class PlateDetailsPage implements OnInit, OnDestroy {
 
     const plateSubscription$ = this.plateService
       .getPlateDetails(this.plateId)
-      .subscribe((food: PLateModel) => this.plateDetails = food);
+      .subscribe((food: PLateModel) => {
+        this.plateDetails = food;
+        if (food?.steps) {
+          this.steps = food.steps.split('\n').filter((s: string) => s.trim() !== '');
+        }
+      });
     this.subscription.add(plateSubscription$);
+
+    const ingredientSubscription$ = this.ingredientService
+      .getIngredientsForPlate(this.plateId)
+      .subscribe((ingredients: IngredientModel[]) => this.ingredients = ingredients);
+    this.subscription.add(ingredientSubscription$);
   }
 
   ngOnDestroy() {
