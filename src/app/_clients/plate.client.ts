@@ -89,4 +89,13 @@ export class PlateClient {
       })
     );
   }
+
+  public generateWeekPlates(weekStartDate: string): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/plates-for-day/generate-week/${weekStartDate}`, {}).pipe(
+      catchError((error: any) => {
+        console.error('Error generating week plates', error);
+        return of(error);
+      })
+    );
+  }
 }

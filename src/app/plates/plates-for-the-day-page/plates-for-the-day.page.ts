@@ -212,6 +212,41 @@ export class PlatesForTheDayPage implements OnInit {
            this.dinnerPlates.length > 0;
   }
 
+  public async generateWeekPlates() {
+    const baseDate = this.selectedDate ? new Date(this.selectedDate) : new Date();
+    const weekStartDate = this.getMonday(baseDate);
+
+    try {
+      await firstValueFrom(this.platesService.generateWeekPlates(weekStartDate));
+
+      const successToast = await this.toastController.create({
+        message: 'Weekly plates generated successfully',
+        duration: 2000,
+        color: 'success'
+      });
+      await successToast.present();
+
+      if (this.selectedDate) {
+        this.listPlatesForTargetedDate(this.selectedDate);
+      }
+    } catch (error) {
+      const errorToast = await this.toastController.create({
+        message: 'Failed to generate weekly plates',
+        duration: 3000,
+        color: 'danger'
+      });
+      await errorToast.present();
+    }
+  }
+
+  private getMonday(date: Date): string {
+    const result = new Date(date);
+    const day = result.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
+    result.setDate(result.getDate() + diff);
+    return result.toISOString().split('T')[0];
+  }
+
   goBack() {
     // Navigate back to the landing page
     this.router.navigate(['/landing']).then();

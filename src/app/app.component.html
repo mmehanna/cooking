@@ -2,7 +2,10 @@
   <ion-menu contentId="main-content">
     <ion-header [translucent]="true">
       <ion-toolbar>
-        <ion-title>{{ 'APP.MENU_TITLE' | translate }}</ion-title>
+        <div class="menu-brand">
+          <img src="assets/images/logo.jpeg" alt="Logo" class="menu-logo">
+          <ion-title>{{ 'APP.MENU_TITLE' | translate }}</ion-title>
+        </div>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">

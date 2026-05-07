@@ -14,7 +14,15 @@
   "LANDING": {
     "TITLE": "Menu",
     "USER": "Utilisateur",
-    "PLATES_FOR_WEEK": "Plats de la semaine"
+    "PLATES_FOR_WEEK": "Plats de la semaine",
+    "GENERATE_WEEK": "Générer automatiquement la semaine",
+    "EDIT_DAY_MENU": "Modifier le menu du jour",
+    "CONFIRM_GENERATE_TITLE": "Confirmation",
+    "CONFIRM_GENERATE_MESSAGE": "Voulez-vous vraiment générer automatiquement les plats de la semaine ?",
+    "CANCEL": "Annuler",
+    "CONFIRM": "Confirmer",
+    "GENERATE_SUCCESS": "Les plats de la semaine ont été générés avec succès",
+    "GENERATE_FAILED": "Échec de la génération des plats de la semaine"
   },
   "LOGIN": {
     "TITLE": "Connexion",
@@ -105,6 +113,7 @@
   "CHOOSE_PLATE": {
     "TITLE": "Choisissez vos plats",
     "SAVE": "Enregistrer",
+    "CANCEL": "Annuler",
     "ALL": "Tous",
     "BREAKFAST": "Petit-déjeuner",
     "LUNCH": "Déjeuner",
@@ -132,7 +141,8 @@
     "DELETE_ALL_CONFIRM": "Êtes-vous sûr de vouloir supprimer tous les plats de cette journée ?",
     "ALL_DELETED_SUCCESS": "Plats supprimés avec succès",
     "NO_PLATES_FOUND": "Aucun plat trouvé pour cette date.",
-    "ALL_DELETE_FAILED": "Échec de la suppression des plats. Veuillez réessayer plus tard."
+    "ALL_DELETE_FAILED": "Échec de la suppression des plats. Veuillez réessayer plus tard.",
+    "GENERATE_WEEK": "Générer automatiquement la semaine"
   },
   "FAMILY": {
     "TITLE": "Gestion des familles",

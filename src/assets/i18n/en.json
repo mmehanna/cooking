@@ -14,7 +14,15 @@
   "LANDING": {
     "TITLE": "Menu",
     "USER": "User",
-    "PLATES_FOR_WEEK": "Plates for the week"
+    "PLATES_FOR_WEEK": "Plates for the week",
+    "GENERATE_WEEK": "Auto-generate week",
+    "EDIT_DAY_MENU": "Edit day menu",
+    "CONFIRM_GENERATE_TITLE": "Confirmation",
+    "CONFIRM_GENERATE_MESSAGE": "Do you really want to auto-generate the week's plates?",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "GENERATE_SUCCESS": "Weekly plates generated successfully",
+    "GENERATE_FAILED": "Failed to generate weekly plates"
   },
   "LOGIN": {
     "TITLE": "login",
@@ -105,6 +113,7 @@
   "CHOOSE_PLATE": {
     "TITLE": "Choose your plates",
     "SAVE": "Save",
+    "CANCEL": "Cancel",
     "ALL": "All",
     "BREAKFAST": "Breakfast",
     "LUNCH": "Lunch",
@@ -132,7 +141,8 @@
     "DELETE_ALL_CONFIRM": "Are you sure you want to delete all plates for this day?",
     "ALL_DELETED_SUCCESS": "Plates deleted successfully",
     "NO_PLATES_FOUND": "No plates found for this date.",
-    "ALL_DELETE_FAILED": "Failed to delete plates. Please try again later."
+    "ALL_DELETE_FAILED": "Failed to delete plates. Please try again later.",
+    "GENERATE_WEEK": "Auto-generate week"
   },
   "FAMILY": {
     "TITLE": "Family Management",

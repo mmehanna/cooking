@@ -106,6 +106,14 @@ export class PlateService {
     )
   }
 
+  public generateWeekPlates(weekStartDate: string): Observable<any> {
+    return this.plateClient.generateWeekPlates(weekStartDate).pipe(
+      tap(() => {
+        this.refreshPlateList();
+      })
+    );
+  }
+
   public deletePlate(plateId: string): Observable<any> {
     return this.plateClient.deletePlate(plateId).pipe(
       tap(() => {

@@ -16,15 +16,25 @@
       </div>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> {{ 'LANDING.PLATES_FOR_WEEK' | translate }}
+  <ion-content class="ion-padding">
+    <ion-button expand="block" color="primary" (click)="autoGenerateWeek()">
+      {{ 'LANDING.GENERATE_WEEK' | translate }}
+    </ion-button>
     <h2>{{ 'LANDING.PLATES_FOR_WEEK' | translate }}</h2>
     <ng-container *ngFor="let plate of plateForWeek">
       <ion-list>
         <ion-item>
           <div>
+            <strong>{{ getWeekdayLabel(plate.date) }}</strong><br>
             <strong>{{ plate.date }}</strong><br>
-            <span *ngFor="let singlePlate of plate.plates">{{ singlePlate }}, </span>
+            <br>
+            <div *ngFor="let singlePlate of plate.plates">
+              <strong>{{ getMealTypeLabel(singlePlate) }}</strong>: {{ getMealPlateLabel(singlePlate) }}
+            </div>
           </div>
+          <ion-button slot="end" fill="outline" size="small" (click)="editDayMenu(plate.date)">
+            {{ 'LANDING.EDIT_DAY_MENU' | translate }}
+          </ion-button>
         </ion-item>
       </ion-list>
     </ng-container>

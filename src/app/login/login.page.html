@@ -6,6 +6,9 @@
 
 <ion-content [fullscreen]="true">
   <div class="login-container">
+    <div class="login-logo-wrap">
+      <img src="assets/images/logo.jpeg" alt="Logo" class="login-logo">
+    </div>
     <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
       <ion-item>
         <ion-label position="floating">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
