@@ -1,0 +1,17 @@
+.login-container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.login-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 14px;
+}
+
+.login-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 18px;
+  object-fit: cover;
+}

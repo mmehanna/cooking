@@ -61,9 +61,42 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
           }
         });
 
+        this.restoreSelectionForCurrentDate();
         console.log(this.plateList);
       });
     this.subscription$.add(plateListSubscription$);
+  }
+
+  private async restoreSelectionForCurrentDate() {
+    if (!this.plateService.date) {
+      return;
+    }
+
+    try {
+      const formattedDate = formatDate(this.plateService.date, 'yyyy-MM-dd', 'en-US');
+      const selectedPlates = await lastValueFrom(this.plateService.listPlatesForTargetedDate(formattedDate));
+      const mealTypeByPlateId = new Map<string, 'breakfast' | 'lunch' | 'dinner'>();
+
+      selectedPlates.forEach((plate) => {
+        const mealType = (plate.mealType || 'dinner') as 'breakfast' | 'lunch' | 'dinner';
+        mealTypeByPlateId.set(plate.id, mealType);
+      });
+
+      this.plateListWithMealType = new LinkPlateListIdToSelectedDateDto([]);
+      this.plateList.forEach((plate) => {
+        const mealType = mealTypeByPlateId.get(plate.id);
+        plate.isSelected = !!mealType;
+        if (mealType) {
+          plate.selectedMealType = mealType;
+          this.plateListWithMealType.plateList.push({
+            plateId: plate.id,
+            mealType
+          });
+        }
+      });
+    } catch (err) {
+      console.error('Error restoring selected plates for date:', err);
+    }
   }
 
   public async togglePlateSelection(plate: PlateItemBo) {
@@ -169,6 +202,10 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
 
   public goToChooseDate() {
     this.router.navigate(['/choose-date']);
+  }
+
+  public cancelAndClose() {
+    this.router.navigate(['/landing']);
   }
 
   ngOnDestroy() {

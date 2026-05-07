@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title>{{ 'CHOOSE_PLATE.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
+      <ion-button fill="clear" color="medium" (click)="cancelAndClose()">
+        {{ 'CHOOSE_PLATE.CANCEL' | translate }}
+      </ion-button>
       <ion-button (click)="linkPlateListToDate()" id="open-toast">{{ 'CHOOSE_PLATE.SAVE' | translate }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
