@@ -15,6 +15,8 @@
     "TITLE": "Menu",
     "USER": "User",
     "PLATES_FOR_WEEK": "Plates for the week",
+    "VIEW_MODE": "View",
+    "EDIT_MODE": "Edit",
     "GENERATE_WEEK": "Auto-generate week",
     "EDIT_DAY_MENU": "Edit day menu",
     "CONFIRM_GENERATE_TITLE": "Confirmation",

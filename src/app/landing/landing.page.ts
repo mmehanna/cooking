@@ -1,10 +1,11 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import {PlateService} from "../plates/services/plate.service";
 import {AuthService} from "../plates/services/auth.service";
 import {UserService} from "../settings/services/user.service";
 import {UserProfileModel} from "../_clients/models/UserProfileModel";
 import {firstValueFrom, lastValueFrom, Subscription, take} from "rxjs";
-import {PLateForWeekModel} from "../_clients/models/PLateForWeekModel";
+import {PLateForWeekModel, PlateForWeekEntry} from "../_clients/models/PLateForWeekModel";
 import {AlertController, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
@@ -16,6 +17,10 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class LandingPage implements OnInit, OnDestroy {
   plateForWeek: PLateForWeekModel[] = [];
+  mode: 'view' | 'edit' = 'view';
+  weekStartDate = '';
+  private touchStartX: number | null = null;
+  private readonly swipeThreshold = 50;
   private refreshSubscription?: Subscription;
   userEmail: string | null = null;
   userProfile: UserProfileModel | null = null;
@@ -46,6 +51,7 @@ export class LandingPage implements OnInit, OnDestroy {
     } catch (error) {
       // Profile not available (e.g. not authenticated)
     }
+    this.weekStartDate = this.getMonday(new Date());
     await this.loadPlatesForWeek();
 
     // Écouter les changements de liste de plats pour rafraîchir automatiquement
@@ -55,15 +61,17 @@ export class LandingPage implements OnInit, OnDestroy {
   }
 
   async loadPlatesForWeek() {
-    const startDate = new Date().toISOString().split('T')[0];
-
     try {
-      const platesForWeek = await lastValueFrom(await this.plateService.getPlatesForWeek(startDate));
+      const platesForWeek = await lastValueFrom(await this.plateService.getPlatesForWeek(this.weekStartDate));
       this.plateForWeek = platesForWeek.map((day) => ({
         ...day,
-        plates: [...day.plates].sort((a, b) => this.getMealTypeOrder(a) - this.getMealTypeOrder(b))
+        plates: [...day.plates].sort((a, b) => this.getMealTypeOrder(a.mealType) - this.getMealTypeOrder(b.mealType))
       }));
     } catch (error) {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
+        this.authService.logout();
+        return;
+      }
       console.error('Error fetching plates:', error);
     }
   }
@@ -87,10 +95,8 @@ export class LandingPage implements OnInit, OnDestroy {
         {
           text: this.translate.instant('LANDING.CONFIRM'),
           handler: async () => {
-            const weekStartDate = this.getMonday(new Date());
-
             try {
-              await firstValueFrom(this.plateService.generateWeekPlates(weekStartDate));
+              await firstValueFrom(this.plateService.generateWeekPlates(this.weekStartDate));
               await this.loadPlatesForWeek();
 
               const toast = await this.toastController.create({
@@ -128,6 +134,35 @@ export class LandingPage implements OnInit, OnDestroy {
     await this.router.navigate(['/choose-plate']);
   }
 
+  public async openPlateDetails(plateId: string) {
+    await this.router.navigate(['/choose-plate/plate-details-page', plateId]);
+  }
+
+  public onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0]?.clientX ?? null;
+  }
+
+  public async onTouchEnd(event: TouchEvent) {
+    if (this.touchStartX === null) {
+      return;
+    }
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? this.touchStartX;
+    const deltaX = touchEndX - this.touchStartX;
+    this.touchStartX = null;
+
+    if (Math.abs(deltaX) < this.swipeThreshold) {
+      return;
+    }
+
+    if (deltaX < 0) {
+      await this.changeWeek(7);
+      return;
+    }
+
+    await this.changeWeek(-7);
+  }
+
   private getMonday(date: Date): string {
     const result = new Date(date);
     const day = result.getDay();
@@ -142,9 +177,9 @@ export class LandingPage implements OnInit, OnDestroy {
     }
   }
 
-  private getMealTypeOrder(plate: string): number {
-    const mealType = plate.split(':')[0]?.trim()?.toLowerCase();
-    return this.mealTypeOrder[mealType] ?? Number.MAX_SAFE_INTEGER;
+  private getMealTypeOrder(mealType: string): number {
+    const normalizedMealType = mealType?.trim()?.toLowerCase();
+    return this.mealTypeOrder[normalizedMealType] ?? Number.MAX_SAFE_INTEGER;
   }
 
   public getWeekdayLabel(date: string): string {
@@ -153,12 +188,27 @@ export class LandingPage implements OnInit, OnDestroy {
     return new Intl.DateTimeFormat(lang, {weekday: 'long'}).format(parsedDate);
   }
 
-  public getMealTypeLabel(plate: string): string {
-    return plate.split(':')[0]?.trim() || '';
+  public getWeekRangeLabel(): string {
+    const lang = this.translate.currentLang || this.translate.defaultLang || 'en';
+    const start = new Date(`${this.weekStartDate}T00:00:00`);
+    const end = new Date(start);
+    end.setDate(end.getDate() + 6);
+    const formatter = new Intl.DateTimeFormat(lang, {month: 'short', day: 'numeric'});
+    return `${formatter.format(start)} - ${formatter.format(end)}`;
   }
 
-  public getMealPlateLabel(plate: string): string {
-    return plate.split(':').slice(1).join(':').trim();
+  public getMealTypeLabel(plate: PlateForWeekEntry): string {
+    const key = plate.mealType?.trim()?.toLowerCase();
+    if (key === 'breakfast') {
+      return this.translate.instant('CHOOSE_PLATE.BREAKFAST');
+    }
+    if (key === 'lunch') {
+      return this.translate.instant('CHOOSE_PLATE.LUNCH');
+    }
+    if (key === 'dinner') {
+      return this.translate.instant('CHOOSE_PLATE.DINNER');
+    }
+    return plate.mealType;
   }
 
   private translateOrFallback(key: string, frFallback: string, enFallback: string): string {
@@ -168,6 +218,13 @@ export class LandingPage implements OnInit, OnDestroy {
     }
     const lang = (this.translate.currentLang || this.translate.defaultLang || 'en').toLowerCase();
     return lang.startsWith('fr') ? frFallback : enFallback;
+  }
+
+  private async changeWeek(dayOffset: number) {
+    const nextWeek = new Date(`${this.weekStartDate}T00:00:00`);
+    nextWeek.setDate(nextWeek.getDate() + dayOffset);
+    this.weekStartDate = this.getMonday(nextWeek);
+    await this.loadPlatesForWeek();
   }
 
 }

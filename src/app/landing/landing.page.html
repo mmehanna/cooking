@@ -17,26 +17,49 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-button expand="block" color="primary" (click)="autoGenerateWeek()">
-      {{ 'LANDING.GENERATE_WEEK' | translate }}
-    </ion-button>
-    <h2>{{ 'LANDING.PLATES_FOR_WEEK' | translate }}</h2>
-    <ng-container *ngFor="let plate of plateForWeek">
-      <ion-list>
-        <ion-item>
-          <div>
-            <strong>{{ getWeekdayLabel(plate.date) }}</strong><br>
-            <strong>{{ plate.date }}</strong><br>
-            <br>
-            <div *ngFor="let singlePlate of plate.plates">
-              <strong>{{ getMealTypeLabel(singlePlate) }}</strong>: {{ getMealPlateLabel(singlePlate) }}
+    <div class="week-shell" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+      <ion-segment [(ngModel)]="mode" class="mode-switch">
+        <ion-segment-button value="view">
+          <ion-label>{{ 'LANDING.VIEW_MODE' | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="edit">
+          <ion-label>{{ 'LANDING.EDIT_MODE' | translate }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="week-range">{{ getWeekRangeLabel() }}</div>
+
+      <ion-button *ngIf="mode === 'edit'" expand="block" color="primary" (click)="autoGenerateWeek()">
+        {{ 'LANDING.GENERATE_WEEK' | translate }}
+      </ion-button>
+
+      <h2>{{ 'LANDING.PLATES_FOR_WEEK' | translate }}</h2>
+      <ng-container *ngFor="let plate of plateForWeek">
+        <ion-card class="day-card">
+          <ion-card-content>
+            <div class="day-header">
+              <div>
+                <div class="weekday-label">{{ getWeekdayLabel(plate.date) }}</div>
+                <div class="date-label">{{ plate.date }}</div>
+              </div>
+              <ion-button *ngIf="mode === 'edit'" fill="outline" size="small" (click)="editDayMenu(plate.date)">
+                {{ 'LANDING.EDIT_DAY_MENU' | translate }}
+              </ion-button>
             </div>
-          </div>
-          <ion-button slot="end" fill="outline" size="small" (click)="editDayMenu(plate.date)">
-            {{ 'LANDING.EDIT_DAY_MENU' | translate }}
-          </ion-button>
-        </ion-item>
-      </ion-list>
-    </ng-container>
+
+            <div class="plates-list">
+              <div
+                *ngFor="let singlePlate of plate.plates"
+                class="plate-row"
+                [class.plate-row-view]="mode === 'view'"
+                [class.plate-row-static]="mode === 'edit'"
+                (click)="mode === 'view' && openPlateDetails(singlePlate.id)">
+                <span><strong>{{ getMealTypeLabel(singlePlate) }}</strong>: {{ singlePlate.label }}</span>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </div>
   </ion-content>
 </div>
