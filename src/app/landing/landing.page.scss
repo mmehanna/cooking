@@ -24,3 +24,68 @@
   font-size: 11px;
   opacity: 0.7;
 }
+
+.mode-switch {
+  margin-bottom: 16px;
+}
+
+.week-shell {
+  min-height: 100%;
+}
+
+.week-range {
+  margin-bottom: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.day-card {
+  margin: 0 0 16px;
+}
+
+.day-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.weekday-label {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.date-label {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.plates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.plate-row {
+  width: 100%;
+  background: transparent;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-align: left;
+  color: inherit;
+}
+
+.plate-row-view {
+  background: rgba(var(--ion-color-primary-rgb), 0.08);
+  cursor: pointer;
+}
+
+.plate-row-static {
+  background: rgba(var(--ion-color-medium-rgb), 0.08);
+}
