@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GroceryListService } from '../services/grocery-list.service';
 import { GroceryListModel } from '../../_clients/models/GroceryListModel';
+import { GroceryItemModel, GroceryListGroupItemModel } from '../../_clients/models/GroceryItemModel';
 import { AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-grocery-list',
@@ -14,6 +14,8 @@ export class GroceryListPage implements OnInit {
   groceryList: GroceryListModel | null = null;
   weekStartDate: string;
   weekLabel: string;
+  minWeekStartDate: string;
+  maxWeekStartDate: string;
   loading = false;
 
   constructor(
@@ -24,6 +26,11 @@ export class GroceryListPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 3);
+
+    this.minWeekStartDate = this.getMonday(new Date());
+    this.maxWeekStartDate = this.getMonday(maxDate);
     this.weekStartDate = this.getMonday(new Date());
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
     this.loadGroceryList();
@@ -55,18 +62,75 @@ export class GroceryListPage implements OnInit {
   }
 
   public onWeekChange(direction: 'prev' | 'next') {
-    const d = new Date(this.weekStartDate);
+    const d = new Date(`${this.weekStartDate}T00:00:00`);
     d.setDate(d.getDate() + (direction === 'next' ? 7 : -7));
-    this.weekStartDate = d.toISOString().split('T')[0];
+    const nextWeekStartDate = d.toISOString().split('T')[0];
+
+    if (nextWeekStartDate < this.minWeekStartDate || nextWeekStartDate > this.maxWeekStartDate) {
+      return;
+    }
+
+    this.weekStartDate = nextWeekStartDate;
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
     this.loadGroceryList();
   }
 
-  public toggleItem(item: { id: string; checked: boolean }) {
+  public get canGoPreviousWeek(): boolean {
+    return this.weekStartDate > this.minWeekStartDate;
+  }
+
+  public get canGoNextWeek(): boolean {
+    return this.weekStartDate < this.maxWeekStartDate;
+  }
+
+  public getWeekdayLabel(date: string): string {
+    const parsedDate = new Date(`${date}T00:00:00`);
+    if (Number.isNaN(parsedDate.getTime())) {
+      return '';
+    }
+
+    const lang = this.translate.currentLang || this.translate.defaultLang || 'en';
+    return new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(parsedDate);
+  }
+
+  public get hasGroceryGroups(): boolean {
+    return (this.groceryList?.groups?.length ?? 0) > 0;
+  }
+
+  public toggleItem(item: GroceryItemModel) {
     const newChecked = !item.checked;
     this.groceryListService.toggleItem(item.id, newChecked).subscribe({
       next: () => {
         item.checked = newChecked;
+      },
+      error: async () => {
+        const toast = await this.toastCtrl.create({
+          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'),
+          duration: 2000
+        });
+        await toast.present();
+      }
+    });
+  }
+
+  public toggleGroupItem(item: GroceryListGroupItemModel) {
+    if (!item.groceryItemId) {
+      return;
+    }
+
+    const newChecked = !item.checked;
+    this.groceryListService.toggleItem(item.groceryItemId, newChecked).subscribe({
+      next: () => {
+        item.checked = newChecked;
+        this.groceryList?.items
+          ?.filter(groceryItem => groceryItem.id === item.groceryItemId)
+          .forEach(groceryItem => groceryItem.checked = newChecked);
+        this.groceryList?.groups
+          ?.forEach(group => {
+            group.items
+              .filter(groupItem => groupItem.groceryItemId === item.groceryItemId)
+              .forEach(groupItem => groupItem.checked = newChecked);
+          });
       },
       error: async () => {
         const toast = await this.toastCtrl.create({

@@ -182,15 +182,32 @@ export class LandingPage implements OnInit, OnDestroy {
     return this.mealTypeOrder[normalizedMealType] ?? Number.MAX_SAFE_INTEGER;
   }
 
+  private parseDate(date: string): Date | null {
+    if (!date) {
+      return null;
+    }
+
+    const parsedDate = new Date(`${date}T00:00:00`);
+    return Number.isNaN(parsedDate.getTime()) ? null : parsedDate;
+  }
+
   public getWeekdayLabel(date: string): string {
     const lang = this.translate.currentLang || this.translate.defaultLang || 'en';
-    const parsedDate = new Date(`${date}T00:00:00`);
+    const parsedDate = this.parseDate(date);
+    if (!parsedDate) {
+      return '';
+    }
+
     return new Intl.DateTimeFormat(lang, {weekday: 'long'}).format(parsedDate);
   }
 
   public getWeekRangeLabel(): string {
     const lang = this.translate.currentLang || this.translate.defaultLang || 'en';
-    const start = new Date(`${this.weekStartDate}T00:00:00`);
+    const start = this.parseDate(this.weekStartDate);
+    if (!start) {
+      return '';
+    }
+
     const end = new Date(start);
     end.setDate(end.getDate() + 6);
     const formatter = new Intl.DateTimeFormat(lang, {month: 'short', day: 'numeric'});
@@ -221,7 +238,7 @@ export class LandingPage implements OnInit, OnDestroy {
   }
 
   private async changeWeek(dayOffset: number) {
-    const nextWeek = new Date(`${this.weekStartDate}T00:00:00`);
+    const nextWeek = this.parseDate(this.weekStartDate) ?? new Date();
     nextWeek.setDate(nextWeek.getDate() + dayOffset);
     this.weekStartDate = this.getMonday(nextWeek);
     await this.loadPlatesForWeek();

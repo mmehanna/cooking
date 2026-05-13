@@ -1,4 +1,52 @@
+.page-title {
+  left: 0;
+  padding-inline: 56px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+
 .line-through {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.grocery-item-main {
+  font-weight: 500;
+}
+
+.grocery-group-divider {
+  --background: #ffffff;
+  --color: var(--ion-color-dark);
+  background: #ffffff;
+  border-bottom: 1px solid var(--ion-color-light-shade);
+  min-height: 58px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.grocery-group-title {
+  background: #ffffff;
+  color: var(--ion-color-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.grocery-group-plate,
+.grocery-group-date {
+  display: block;
+}
+
+.grocery-group-date {
+  margin-top: 2px;
+  font-size: 0.95rem;
+}
+
+.grocery-item-sources {
+  margin-top: 4px;
+  color: var(--ion-color-medium);
+  font-size: 0.85rem;
+  line-height: 1.35;
 }
