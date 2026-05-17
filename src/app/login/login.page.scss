@@ -1,22 +1,224 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0.4);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px rgba(var(--ion-color-primary-rgb), 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.login-hero {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.hero-text p {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
 .login-container {
   max-width: 420px;
   margin: 0 auto;
+  padding: 0 20px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .login-logo-wrap {
   display: flex;
   justify-content: center;
-  margin: 18px 0 14px;
+  margin: -40px 0 16px;
 }
 
 .login-logo {
-  width: 150px;
-  height: 150px;
-  border-radius: 18px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  animation: pulse 2.5s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  background: white;
+}
+
+.login-logo:hover {
+  transform: scale(1.08);
+}
+
+.login-icons-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 8px 0 20px;
+}
+
+.deco-icon {
+  font-size: 28px;
+  color: var(--ion-color-primary);
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.deco-icon:hover {
+  transform: scale(1.2) rotate(8deg);
+  opacity: 1;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--ion-color-medium);
+  --highlight-color-focused: var(--ion-color-primary);
+  margin-bottom: 12px;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+ion-item.item-has-focus {
+  box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.25);
+  --border-color: var(--ion-color-primary);
+}
+
+ion-button[type="submit"] {
+  margin-top: 20px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ion-button[type="submit"]:not([disabled]):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--ion-color-primary-rgb), 0.35);
+}
+
+ion-button[type="submit"]:not([disabled]):active {
+  transform: translateY(0);
+}
+
+ion-button[type="submit"][disabled] {
+  opacity: 0.6;
+}
+
+.deco-images-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.deco-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.deco-img:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.deco-img:hover {
+  transform: scale(1.08);
 }
 
 .register-link {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 24px;
+  padding-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.register-link a {
+  color: var(--ion-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
+}
+
+.register-link a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--ion-color-primary);
+  transition: width 0.3s ease;
+}
+
+.register-link a:hover {
+  color: var(--ion-color-secondary);
+}
+
+.register-link a:hover::after {
+  width: 100%;
 }
