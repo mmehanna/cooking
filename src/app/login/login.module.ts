@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {RouterModule} from '@angular/router';
 
 import {LoginPageRoutingModule} from './login-routing.module';
 
@@ -16,7 +17,8 @@ import {LoginPage} from './login.page';
     IonicModule,
     LoginPageRoutingModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    RouterModule
   ],
   exports: [LoginPage],
   declarations: [LoginPage]
