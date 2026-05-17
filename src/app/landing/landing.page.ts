@@ -9,6 +9,7 @@ import {PLateForWeekModel, PlateForWeekEntry} from "../_clients/models/PLateForW
 import {AlertController, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
+import {SubscriptionService} from "../plates/services/subscription.service";
 
 @Component({
   selector: 'app-landing',
@@ -24,6 +25,7 @@ export class LandingPage implements OnInit, OnDestroy {
   private refreshSubscription?: Subscription;
   userEmail: string | null = null;
   userProfile: UserProfileModel | null = null;
+  public canGenerateWeek = false;
   private readonly mealTypeOrder: Record<string, number> = {
     breakfast: 0,
     lunch: 1,
@@ -36,7 +38,8 @@ export class LandingPage implements OnInit, OnDestroy {
               private alertController: AlertController,
               private toastController: ToastController,
               private router: Router,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private subscriptionService: SubscriptionService) {
   }
 
 
@@ -51,6 +54,10 @@ export class LandingPage implements OnInit, OnDestroy {
     } catch (error) {
       // Profile not available (e.g. not authenticated)
     }
+    await this.subscriptionService.loadTier();
+    this.subscriptionService.tier$.subscribe(tier => {
+      this.canGenerateWeek = this.subscriptionService.isAtLeast('family');
+    });
     this.weekStartDate = this.getMonday(new Date());
     await this.loadPlatesForWeek();
 
@@ -129,6 +136,10 @@ export class LandingPage implements OnInit, OnDestroy {
     await alert.present();
   }
 
+  public goToPricing() {
+    this.router.navigate(['/pricing']);
+  }
+
   public async editDayMenu(date: string) {
     this.plateService.date = date;
     await this.router.navigate(['/choose-plate']);
@@ -164,11 +175,14 @@ export class LandingPage implements OnInit, OnDestroy {
   }
 
   private getMonday(date: Date): string {
-    const result = new Date(date);
+    const result = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const day = result.getDay();
     const diff = day === 0 ? -6 : 1 - day;
     result.setDate(result.getDate() + diff);
-    return result.toISOString().split('T')[0];
+    const year = result.getFullYear();
+    const month = String(result.getMonth() + 1).padStart(2, '0');
+    const dayOfMonth = String(result.getDate()).padStart(2, '0');
+    return `${year}-${month}-${dayOfMonth}`;
   }
 
   ngOnDestroy() {
@@ -240,8 +254,46 @@ export class LandingPage implements OnInit, OnDestroy {
   private async changeWeek(dayOffset: number) {
     const nextWeek = this.parseDate(this.weekStartDate) ?? new Date();
     nextWeek.setDate(nextWeek.getDate() + dayOffset);
-    this.weekStartDate = this.getMonday(nextWeek);
+    const proposedWeekStart = this.getMonday(nextWeek);
+
+    const minWeekStart = this.getPreviousMonday(new Date());
+    if (proposedWeekStart < minWeekStart) {
+      const toast = await this.toastController.create({
+        message: this.translate.instant('LANDING.NO_PAST_WEEKS'),
+        duration: 2000,
+        position: 'top',
+        color: 'warning'
+      });
+      await toast.present();
+      return;
+    }
+
+    const maxWeekStart = this.getMaxWeekStart(new Date());
+    if (proposedWeekStart > maxWeekStart) {
+      const toast = await this.toastController.create({
+        message: this.translate.instant('LANDING.NO_FUTURE_WEEKS'),
+        duration: 2000,
+        position: 'top',
+        color: 'warning'
+      });
+      await toast.present();
+      return;
+    }
+
+    this.weekStartDate = proposedWeekStart;
     await this.loadPlatesForWeek();
+  }
+
+  private getPreviousMonday(date: Date): string {
+    const currentMonday = this.getMonday(date);
+    const mondayDate = this.parseDate(currentMonday) ?? new Date();
+    mondayDate.setDate(mondayDate.getDate() - 7);
+    return this.getMonday(mondayDate);
+  }
+
+  private getMaxWeekStart(date: Date): string {
+    const futureDate = new Date(date.getFullYear(), date.getMonth() + 3, date.getDate());
+    return this.getMonday(futureDate);
   }
 
 }

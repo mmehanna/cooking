@@ -29,8 +29,11 @@
 
       <div class="week-range">{{ getWeekRangeLabel() }}</div>
 
-      <ion-button *ngIf="mode === 'edit'" expand="block" color="primary" (click)="autoGenerateWeek()">
+      <ion-button *ngIf="mode === 'edit' && canGenerateWeek" expand="block" color="primary" (click)="autoGenerateWeek()">
         {{ 'LANDING.GENERATE_WEEK' | translate }}
+      </ion-button>
+      <ion-button *ngIf="mode === 'edit' && !canGenerateWeek" expand="block" color="medium" (click)="goToPricing()">
+        {{ 'LANDING.UPGRADE_FOR_GENERATE' | translate }}
       </ion-button>
 
       <h2>{{ 'LANDING.PLATES_FOR_WEEK' | translate }}</h2>
