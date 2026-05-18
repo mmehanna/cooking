@@ -1,0 +1,263 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0.4);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px rgba(var(--ion-color-primary-rgb), 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0);
+  }
+}
+
+.login-hero {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.hero-brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.hero-tagline {
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: none;
+  opacity: 0.95;
+  margin-top: 8px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.login-container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.login-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin: -40px 0 16px;
+}
+
+.login-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  animation: pulse 2.5s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  background: white;
+}
+
+.login-logo:hover {
+  transform: scale(1.08);
+}
+
+.login-icons-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 8px 0 32px;
+}
+
+.deco-icon {
+  font-size: 28px;
+  color: white;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.deco-icon:hover {
+  transform: scale(1.2) rotate(8deg);
+  opacity: 1;
+}
+
+.login-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+ion-content {
+  --background: transparent;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url('/assets/images/login/table-food.jpg') center/cover no-repeat;
+}
+
+.card-title {
+  margin: 0 0 20px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ion-color-dark);
+}
+
+.input-item {
+  --background: #f8f9fa;
+  --border-color: transparent;
+  --highlight-color-focused: var(--ion-color-primary);
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --inner-padding-end: 14px;
+  --min-height: 56px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.input-item ion-icon {
+  font-size: 22px;
+  margin-right: 10px;
+  color: var(--ion-color-primary);
+}
+
+.input-item.item-has-focus {
+  --background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.2), 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+ion-item ion-label {
+  color: var(--ion-color-dark);
+  font-weight: 500;
+}
+
+.login-btn {
+  margin-top: 16px;
+  height: 52px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 14px;
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  --background-hover: linear-gradient(135deg, var(--ion-color-primary-shade) 0%, var(--ion-color-secondary-shade) 100%);
+  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-btn:not([disabled]):hover {
+  transform: translateY(-2px);
+  --box-shadow: 0 10px 28px rgba(var(--ion-color-primary-rgb), 0.5);
+}
+
+.login-btn:not([disabled]):active {
+  transform: translateY(0);
+}
+
+.login-btn[disabled] {
+  opacity: 0.5;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.register-link a {
+  color: var(--ion-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
+}
+
+.register-link a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--ion-color-primary);
+  transition: width 0.3s ease;
+}
+
+.register-link a:hover {
+  color: var(--ion-color-secondary);
+}
+
+.register-link a:hover::after {
+  width: 100%;
+}
+
+.error-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--ion-color-danger);
+  font-size: 0.85rem;
+  margin: -10px 8px 12px;
+}
+
+.error-text ion-icon {
+  margin-top: 1px;
+  flex-shrink: 0;
+}
