@@ -142,8 +142,10 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/assets/images/login/wood-texture.jpg') center/cover no-repeat;
-  opacity: 0.3;
+  background:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url('/assets/images/login/wood-texture.jpg') center/cover no-repeat;
+  opacity: 0.75;
   pointer-events: none;
 }
 
