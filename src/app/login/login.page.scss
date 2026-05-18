@@ -24,15 +24,6 @@
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
 .login-hero {
   position: relative;
   width: 100%;
@@ -201,31 +192,6 @@ ion-item ion-label {
 
 .login-btn[disabled] {
   opacity: 0.5;
-}
-
-.deco-images-row {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.deco-img {
-  width: 90px;
-  height: 90px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  animation: float 3s ease-in-out infinite;
-  transition: transform 0.3s ease;
-}
-
-.deco-img:nth-child(2) {
-  animation-delay: 0.8s;
-}
-
-.deco-img:hover {
-  transform: scale(1.08);
 }
 
 .register-link {

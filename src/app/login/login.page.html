@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scroll-y="false">
   <div class="login-hero">
     <img src="assets/images/login/hero-food.jpg" alt="Delicious food" class="hero-image">
     <div class="hero-overlay"></div>
@@ -43,11 +43,6 @@
         <ion-icon name="person-add-outline" size="small" color="primary"></ion-icon>
         <a routerLink="/register">{{ 'LOGIN.NOT_REGISTERED' | translate }}</a>
       </div>
-    </div>
-
-    <div class="deco-images-row">
-      <img src="assets/images/login/deco-salad.jpg" alt="Salad" class="deco-img">
-      <img src="assets/images/login/deco-pancakes.jpg" alt="Pancakes" class="deco-img">
     </div>
   </div>
 </ion-content>
