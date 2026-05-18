@@ -4,7 +4,7 @@ import {RouteReuseStrategy} from '@angular/router';
 import {IonicModule, IonicRouteStrategy, MenuController} from '@ionic/angular';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TranslateModule} from '@ngx-translate/core';
-import {provideTranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG} from '@ngx-translate/http-loader';
+import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -20,11 +20,7 @@ import {AuthService} from "./plates/services/auth.service";
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: provideTranslateHttpLoader({
-        prefix: './assets/i18n/',
-        suffix: '.json'
-      })
+      lang: 'en'
     }),
     AppRoutingModule,
     IonicModule.forRoot(),
@@ -34,6 +30,10 @@ import {AuthService} from "./plates/services/auth.service";
     })
   ],
   providers: [
+    ...provideTranslateHttpLoader({
+      prefix: './assets/i18n/',
+      suffix: '.json'
+    }),
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

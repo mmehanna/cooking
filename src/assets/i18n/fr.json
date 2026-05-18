@@ -31,7 +31,9 @@
     "EMAIL": "Email",
     "PASSWORD": "Mot de passe",
     "SUBMIT": "Se connecter",
-    "NOT_REGISTERED": "Pas encore inscrit ? Cliquez ici !"
+    "NOT_REGISTERED": "Pas encore inscrit ? Cliquez ici !",
+    "HERO_TITLE": "Bienvenue",
+    "HERO_SUBTITLE": "Planifiez vos repas en un clic"
   },
   "REGISTER": {
     "TITLE": "Inscription",
