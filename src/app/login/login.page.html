@@ -38,16 +38,16 @@
           {{ 'LOGIN.SUBMIT' | translate }}
         </ion-button>
       </form>
+
+      <div class="register-link">
+        <ion-icon name="person-add-outline" size="small" color="primary"></ion-icon>
+        <a routerLink="/register">{{ 'LOGIN.NOT_REGISTERED' | translate }}</a>
+      </div>
     </div>
 
     <div class="deco-images-row">
       <img src="assets/images/login/deco-salad.jpg" alt="Salad" class="deco-img">
       <img src="assets/images/login/deco-pancakes.jpg" alt="Pancakes" class="deco-img">
     </div>
-  </div>
-
-  <div class="register-link">
-    <ion-icon name="person-add-outline" size="small" color="primary"></ion-icon>
-    <a routerLink="/register">{{ 'LOGIN.NOT_REGISTERED' | translate }}</a>
   </div>
 </ion-content>
