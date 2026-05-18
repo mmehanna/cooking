@@ -128,14 +128,18 @@
 }
 
 .login-card {
-  background: linear-gradient(135deg, #3e2723 0%, #bf360c 50%, #e65100 100%);
+  background: white;
   border-radius: 20px;
   padding: 28px 24px 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
   margin-top: -20px;
   position: relative;
   z-index: 2;
   overflow: hidden;
+}
+
+ion-content {
+  --background: url('/assets/images/login/%C3%A9chantillon%20de%20plancher.webp') center/cover no-repeat;
 }
 
 .card-title {
@@ -143,8 +147,7 @@
   font-size: 1.4rem;
   font-weight: 700;
   text-align: center;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  color: var(--ion-color-dark);
 }
 
 .input-item {
@@ -229,24 +232,22 @@ ion-item ion-label {
   text-align: center;
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   animation: fadeInUp 0.8s ease-out 0.2s both;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  color: white;
 }
 
 .register-link a {
-  color: white;
+  color: var(--ion-color-primary);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
   position: relative;
   padding-bottom: 2px;
   transition: color 0.3s ease;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .register-link a::after {
@@ -256,12 +257,12 @@ ion-item ion-label {
   left: 0;
   width: 0;
   height: 2px;
-  background: white;
+  background: var(--ion-color-primary);
   transition: width 0.3s ease;
 }
 
 .register-link a:hover {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--ion-color-secondary);
 }
 
 .register-link a:hover::after {
