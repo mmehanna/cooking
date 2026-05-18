@@ -9,8 +9,8 @@
     <img src="assets/images/login/hero-food.jpg" alt="Delicious food" class="hero-image">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-      <h1>{{ 'APP.MENU_TITLE' | translate }}</h1>
-      <p>{{ 'APP.CREATE_DAY_LIST' | translate }}</p>
+      <h1>{{ 'LOGIN.HERO_TITLE' | translate }}</h1>
+      <p>{{ 'LOGIN.HERO_SUBTITLE' | translate }}</p>
     </div>
   </div>
 
@@ -25,22 +25,26 @@
       <ion-icon name="cafe-outline" class="deco-icon"></ion-icon>
     </div>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-      <ion-item>
-        <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-        <ion-label position="floating">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
-        <ion-label position="floating">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
-        <ion-input formControlName="password" type="password"></ion-input>
-      </ion-item>
-      <ion-button [disabled]="loginForm.invalid" expand="full" type="submit">
-        <ion-icon name="log-in-outline" slot="start"></ion-icon>
-        {{ 'LOGIN.SUBMIT' | translate }}
-      </ion-button>
-    </form>
+    <div class="login-card">
+      <h2 class="card-title">{{ 'LOGIN.TITLE' | translate }}</h2>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <ion-item lines="none" class="input-item">
+          <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+          <ion-label position="floating">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="input-item">
+          <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
+          <ion-label position="floating">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-button [disabled]="loginForm.invalid" expand="full" type="submit" class="login-btn">
+          <ion-icon name="log-in-outline" slot="start"></ion-icon>
+          {{ 'LOGIN.SUBMIT' | translate }}
+        </ion-button>
+      </form>
+    </div>
 
     <div class="deco-images-row">
       <img src="assets/images/login/deco-salad.jpg" alt="Salad" class="deco-img">
