@@ -29,20 +29,26 @@ export class AppComponent {
   }
 
   private loadUserLanguage() {
+    const fallback = 'en';
     if (this.authService.isAuthenticated()) {
       this.userService.loadProfile().subscribe({
         next: (profile) => {
-          if (profile?.language) {
-            this.translate.use(profile.language);
+          const lang = profile?.language || fallback;
+          if (lang !== this.translate.currentLang) {
+            this.translate.use(lang);
           }
           if (profile?.theme === 'dark') {
             document.body.classList.add('dark');
           }
         },
         error: () => {
-          // Not authenticated or profile not available, use default language
+          if (!this.translate.currentLang) {
+            this.translate.use(fallback);
+          }
         }
       });
+    } else if (!this.translate.currentLang) {
+      this.translate.use(fallback);
     }
   }
 }
