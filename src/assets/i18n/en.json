@@ -32,6 +32,7 @@
     "PASSWORD": "Password",
     "SUBMIT": "Login",
     "NOT_REGISTERED": "Not registered? Click here!",
+    "ALREADY_REGISTERED": "Already registered? Sign in",
     "HERO_TITLE": "Welcome",
     "HERO_SUBTITLE": "Plan your meals in one click"
   },

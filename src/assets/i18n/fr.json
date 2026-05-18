@@ -32,6 +32,7 @@
     "PASSWORD": "Mot de passe",
     "SUBMIT": "Se connecter",
     "NOT_REGISTERED": "Pas encore inscrit ? Cliquez ici !",
+    "ALREADY_REGISTERED": "Déjà inscrit ? Se connecter",
     "HERO_TITLE": "Bienvenue",
     "HERO_SUBTITLE": "Planifiez vos repas en un clic"
   },
