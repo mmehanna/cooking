@@ -130,7 +130,16 @@
 }
 
 ion-content {
-  --background: url('/assets/images/login/%C3%A9chantillon%20de%20plancher.webp') center top / 100% auto no-repeat, #5d4037;
+  --background: transparent;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)),
+    url('/assets/images/login/%C3%A9chantillon%20de%20plancher.webp') center top / 100% auto no-repeat;
 }
 
 .card-title {
