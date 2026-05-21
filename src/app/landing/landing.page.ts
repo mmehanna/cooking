@@ -214,6 +214,19 @@ export class LandingPage implements OnInit, OnDestroy {
     return `${formatter.format(start)} - ${formatter.format(end)}`;
   }
 
+  public isToday(date: string): boolean {
+    const today = new Date();
+    const parsed = this.parseDate(date);
+    if (!parsed) return false;
+    return today.toISOString().split('T')[0] === date;
+  }
+
+  public getDayNumber(date: string): string {
+    const parsed = this.parseDate(date);
+    if (!parsed) return '';
+    return String(parsed.getDate()).padStart(2, '0');
+  }
+
   public getMealTypeLabel(plate: PlateForWeekEntry): string {
     const key = plate.mealType?.trim()?.toLowerCase();
     if (key === 'breakfast') {
@@ -237,7 +250,7 @@ export class LandingPage implements OnInit, OnDestroy {
     return lang.startsWith('fr') ? frFallback : enFallback;
   }
 
-  private async changeWeek(dayOffset: number) {
+  public async changeWeek(dayOffset: number) {
     const nextWeek = this.parseDate(this.weekStartDate) ?? new Date();
     nextWeek.setDate(nextWeek.getDate() + dayOffset);
     this.weekStartDate = this.getMonday(nextWeek);
