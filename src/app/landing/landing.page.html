@@ -20,16 +20,6 @@
   <ion-content class="landing-content">
     <div class="page-bg"></div>
 
-    <div class="welcome-banner" *ngIf="userProfile">
-      <div class="welcome-greeting">
-        <span class="greeting-icon">{{ getGreetingIcon() }}</span>
-        <div class="greeting-text">
-          <span class="greeting-label">{{ getGreetingLabel() }}</span>
-          <span class="greeting-name" *ngIf="userProfile.name">{{ userProfile.name }} !</span>
-        </div>
-      </div>
-    </div>
-
     <div class="week-nav">
       <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(-7)">
         <ion-icon name="chevron-back-outline"></ion-icon>
