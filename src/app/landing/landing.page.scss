@@ -114,14 +114,24 @@ ion-content {
 }
 
 .day-card {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.88);
   border-radius: 20px;
   padding: 18px 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.day-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--day-bg) center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
 }
 
 .day-card:hover {
@@ -139,6 +149,8 @@ ion-content {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .day-date {
@@ -171,6 +183,8 @@ ion-content {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  position: relative;
+  z-index: 1;
 }
 
 .meal-row {

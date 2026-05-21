@@ -214,6 +214,22 @@ export class LandingPage implements OnInit, OnDestroy {
     return `${formatter.format(start)} - ${formatter.format(end)}`;
   }
 
+  public getDayImage(date: string): string {
+    const parsed = this.parseDate(date);
+    if (!parsed) return '';
+    const day = parsed.getDay();
+    const images: Record<number, string> = {
+      0: 'sunday.jpg',
+      1: 'monday.jpg',
+      2: 'tuesday.jpg',
+      3: 'wednesday.jpg',
+      4: 'thursday.jpg',
+      5: 'friday.jpg',
+      6: 'saturday.jpg'
+    };
+    return `url('/assets/images/landing/${images[day]}')`;
+  }
+
   public isToday(date: string): boolean {
     const today = new Date();
     const parsed = this.parseDate(date);

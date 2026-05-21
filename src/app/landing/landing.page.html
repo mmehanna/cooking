@@ -48,7 +48,8 @@
 
     <div class="days-list" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
       <ng-container *ngFor="let plate of plateForWeek">
-        <div class="day-card" [class.day-card--today]="isToday(plate.date)">
+        <div class="day-card" [class.day-card--today]="isToday(plate.date)" [ngStyle]="{'--day-bg': getDayImage(plate.date)}">
+          <div class="day-bg"></div>
           <div class="day-header">
             <div class="day-date">
               <span class="day-weekday">{{ getWeekdayLabel(plate.date) }}</span>
