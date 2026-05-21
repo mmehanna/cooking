@@ -20,6 +20,16 @@
   <ion-content class="landing-content">
     <div class="page-bg"></div>
 
+    <div class="welcome-banner" *ngIf="userProfile">
+      <div class="welcome-greeting">
+        <span class="greeting-icon">{{ getGreetingIcon() }}</span>
+        <div class="greeting-text">
+          <span class="greeting-label">{{ getGreetingLabel() }}</span>
+          <span class="greeting-name" *ngIf="userProfile.name">{{ userProfile.name }} !</span>
+        </div>
+      </div>
+    </div>
+
     <div class="week-nav">
       <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(-7)">
         <ion-icon name="chevron-back-outline"></ion-icon>
@@ -54,6 +64,7 @@
             <div class="day-date">
               <span class="day-weekday">{{ getWeekdayLabel(plate.date) }}</span>
               <span class="day-number">{{ getDayNumber(plate.date) }}</span>
+              <span class="today-badge" *ngIf="isToday(plate.date)">{{ 'LANDING.TODAY' | translate }}</span>
             </div>
             <ion-button *ngIf="mode === 'edit'" fill="clear" size="small" class="edit-btn" (click)="editDayMenu(plate.date)">
               <ion-icon name="pencil-outline"></ion-icon>
@@ -66,11 +77,13 @@
               class="meal-row"
               [class.meal-row--clickable]="mode === 'view'"
               (click)="mode === 'view' && openPlateDetails(singlePlate.id)">
+              <span class="meal-emoji">{{ getMealEmoji(singlePlate.mealType) }}</span>
               <span class="meal-type">{{ getMealTypeLabel(singlePlate) }}</span>
               <span class="meal-name">{{ singlePlate.label }}</span>
             </div>
             <div class="meal-row meal-row--empty" *ngIf="plate.plates.length === 0">
-              <span class="meal-name">—</span>
+              <span class="meal-emoji">🍽️</span>
+              <span class="meal-name">{{ 'LANDING.NO_PLATE' | translate }}</span>
             </div>
           </div>
         </div>

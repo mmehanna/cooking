@@ -24,7 +24,9 @@
     "CANCEL": "Cancel",
     "CONFIRM": "Confirm",
     "GENERATE_SUCCESS": "Weekly plates generated successfully",
-    "GENERATE_FAILED": "Failed to generate weekly plates"
+    "GENERATE_FAILED": "Failed to generate weekly plates",
+    "TODAY": "Today",
+    "NO_PLATE": "No plate yet"
   },
   "LOGIN": {
     "TITLE": "login",

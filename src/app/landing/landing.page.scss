@@ -61,6 +61,43 @@ ion-content {
   --padding-bottom: 24px;
 }
 
+.welcome-banner {
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.welcome-greeting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.greeting-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.greeting-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.greeting-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.greeting-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
 .week-nav {
   display: flex;
   align-items: center;
@@ -174,6 +211,19 @@ ion-content {
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
+.today-badge {
+  background: var(--ion-color-primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-left: 4px;
+  box-shadow: 0 2px 6px rgba(var(--ion-color-primary-rgb), 0.4);
+}
+
 .edit-btn {
   --color: var(--ion-color-primary);
   --padding-start: 6px;
@@ -218,13 +268,19 @@ ion-content {
   background: rgba(var(--ion-color-primary-rgb), 0.12);
 }
 
+.meal-emoji {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-right: 2px;
+}
+
 .meal-type {
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--ion-color-primary);
-  min-width: 68px;
+  min-width: 56px;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
 }
 

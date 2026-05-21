@@ -214,6 +214,37 @@ export class LandingPage implements OnInit, OnDestroy {
     return `${formatter.format(start)} - ${formatter.format(end)}`;
   }
 
+  public getGreetingIcon(): string {
+    const hour = new Date().getHours();
+    if (hour < 6) return '🌙';
+    if (hour < 12) return '☀️';
+    if (hour < 14) return '🍽️';
+    if (hour < 18) return '☕';
+    if (hour < 22) return '🍷';
+    return '🌙';
+  }
+
+  public getGreetingLabel(): string {
+    const hour = new Date().getHours();
+    const lang = (this.translate.currentLang || this.translate.defaultLang || 'en').toLowerCase();
+    const isFr = lang.startsWith('fr');
+
+    if (hour < 6) return isFr ? 'Bonne nuit' : 'Good night';
+    if (hour < 12) return isFr ? 'Bonjour' : 'Good morning';
+    if (hour < 14) return isFr ? 'Bon appétit' : 'Enjoy your meal';
+    if (hour < 18) return isFr ? 'Bon après-midi' : 'Good afternoon';
+    if (hour < 22) return isFr ? 'Bonsoir' : 'Good evening';
+    return isFr ? 'Bonne nuit' : 'Good night';
+  }
+
+  public getMealEmoji(mealType: string): string {
+    const key = mealType?.trim()?.toLowerCase();
+    if (key === 'breakfast') return '🍳';
+    if (key === 'lunch') return '🥗';
+    if (key === 'dinner') return '🍽️';
+    return '🍴';
+  }
+
   public getDayImage(date: string): string {
     const parsed = this.parseDate(date);
     if (!parsed) return '';
