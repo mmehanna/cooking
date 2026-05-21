@@ -1,6 +1,15 @@
 .landing-header ion-toolbar {
-  --background: transparent;
+  --background: rgba(0, 0, 0, 0.25);
   --border-color: transparent;
+  backdrop-filter: blur(8px);
+}
+
+.landing-header ion-title {
+  color: white;
+}
+
+.landing-header ion-menu-button {
+  color: white;
 }
 
 .user-info {
@@ -12,6 +21,7 @@
 .user-avatar {
   width: 32px;
   height: 32px;
+  border: 2px solid white;
 }
 
 .user-details {
@@ -23,18 +33,31 @@
 .user-name {
   font-weight: 500;
   font-size: 14px;
+  color: white;
 }
 
 .user-email {
   font-size: 11px;
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+ion-content {
+  --background: transparent;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('/assets/images/login/table-food.jpg') center/cover no-repeat;
 }
 
 .landing-content {
-  --background: #f8f9fa;
   --padding-start: 16px;
   --padding-end: 16px;
-  --padding-top: 8px;
+  --padding-top: 12px;
   --padding-bottom: 24px;
 }
 
@@ -47,9 +70,13 @@
 }
 
 .nav-arrow {
-  --color: var(--ion-color-primary);
+  --color: white;
   --padding-start: 8px;
   --padding-end: 8px;
+}
+
+.nav-arrow ion-icon {
+  font-size: 22px;
 }
 
 .week-info {
@@ -61,9 +88,10 @@
 
 .week-label {
   font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ion-color-dark);
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .mode-toggle {
@@ -73,9 +101,10 @@
 }
 
 .mode-toggle ion-button {
-  --color: var(--ion-color-primary);
+  --color: white;
   font-weight: 500;
   font-size: 0.85rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .days-list {
@@ -85,24 +114,30 @@
 }
 
 .day-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 14px 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.2s ease;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.day-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
 .day-card--today {
-  border-color: rgba(var(--ion-color-primary-rgb), 0.25);
-  box-shadow: 0 0 0 1px rgba(var(--ion-color-primary-rgb), 0.15), 0 4px 12px rgba(var(--ion-color-primary-rgb), 0.08);
+  border-color: rgba(var(--ion-color-primary-rgb), 0.5);
+  box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.25), 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .day-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .day-date {
@@ -112,7 +147,7 @@
 }
 
 .day-weekday {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--ion-color-dark);
   text-transform: capitalize;
@@ -125,6 +160,7 @@
 }
 
 .edit-btn {
+  --color: var(--ion-color-primary);
   --padding-start: 6px;
   --padding-end: 6px;
   margin: 0;
@@ -133,47 +169,45 @@
 .meals {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .meal-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(var(--ion-color-primary-rgb), 0.06);
+  transition: background 0.15s ease;
 }
 
 .meal-row:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .meal-row--empty {
-  opacity: 0.4;
+  opacity: 0.5;
   justify-content: center;
-  padding: 12px 0;
+  background: rgba(var(--ion-color-medium-rgb), 0.06);
 }
 
 .meal-row--clickable {
   cursor: pointer;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin: 0 -10px;
-  transition: background 0.15s ease;
 }
 
 .meal-row--clickable:hover,
 .meal-row--clickable:active {
-  background: rgba(var(--ion-color-primary-rgb), 0.06);
+  background: rgba(var(--ion-color-primary-rgb), 0.12);
 }
 
 .meal-type {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: var(--ion-color-primary);
-  min-width: 72px;
+  min-width: 68px;
 }
 
 .meal-name {
@@ -189,7 +223,11 @@
 
 .generate-action ion-button {
   --border-radius: 14px;
-  height: 50px;
-  font-weight: 600;
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  --background-hover: linear-gradient(135deg, var(--ion-color-primary-shade) 0%, var(--ion-color-secondary-shade) 100%);
+  height: 52px;
+  font-weight: 700;
+  font-size: 1.05rem;
   letter-spacing: 0.02em;
+  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.5);
 }
