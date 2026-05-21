@@ -21,13 +21,13 @@
     <div class="page-bg"></div>
 
     <div class="week-nav">
-      <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(-7)">
+      <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(-7)" [disabled]="!canGoBack()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
       <div class="week-info">
         <span class="week-label">{{ getWeekRangeLabel() }}</span>
       </div>
-      <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(7)">
+      <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(7)" [disabled]="!canGoForward()">
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
     </div>
@@ -48,7 +48,7 @@
 
     <div class="days-list" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
       <ng-container *ngFor="let plate of plateForWeek">
-        <div class="day-card" [class.day-card--today]="isToday(plate.date)" [ngStyle]="{'--day-bg': getDayImage(plate.date)}">
+        <div class="day-card" [class.day-card--today]="isToday(plate.date)" [class.day-card--past]="isPastDay(plate.date) && !isCurrentWeek()" [class.day-card--future]="isFutureWeek()" [ngStyle]="{'--day-bg': getDayImage(plate.date)}">
           <div class="day-bg"></div>
           <div class="day-header">
             <div class="day-date">
@@ -56,9 +56,13 @@
               <span class="day-number">{{ getDayNumber(plate.date) }}</span>
               <span class="today-badge" *ngIf="isToday(plate.date)">{{ 'LANDING.TODAY' | translate }}</span>
             </div>
-            <ion-button *ngIf="mode === 'edit'" fill="clear" size="small" class="edit-btn" (click)="editDayMenu(plate.date)">
-              <ion-icon name="pencil-outline"></ion-icon>
-            </ion-button>
+            <div class="day-badges">
+              <span class="week-badge" *ngIf="isFutureWeek()">{{ getWeekRelativeLabel() }}</span>
+              <span class="week-badge week-badge--past" *ngIf="isPastWeek()">{{ getPastWeekRelativeLabel() }}</span>
+              <ion-button *ngIf="mode === 'edit'" fill="clear" size="small" class="edit-btn" (click)="editDayMenu(plate.date)">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>
+            </div>
           </div>
 
           <div class="meals">
@@ -80,7 +84,7 @@
       </ng-container>
     </div>
 
-    <div class="generate-action" *ngIf="mode === 'edit'">
+    <div class="generate-action" *ngIf="mode === 'edit' && isCurrentOrFutureWeek()">
       <ion-button expand="block" (click)="autoGenerateWeek()">
         <ion-icon name="sparkles-outline" slot="start"></ion-icon>
         {{ 'LANDING.GENERATE_WEEK' | translate }}

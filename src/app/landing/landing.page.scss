@@ -112,6 +112,12 @@ ion-content {
   --padding-end: 8px;
 }
 
+.nav-arrow[disabled] {
+  --color: rgba(255, 255, 255, 0.35);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .nav-arrow ion-icon {
   font-size: 22px;
 }
@@ -179,6 +185,67 @@ ion-content {
 .day-card--today {
   border-color: rgba(var(--ion-color-primary-rgb), 0.55);
   box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.25), 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.day-card--past {
+  opacity: 0.85;
+  filter: grayscale(0.15);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.day-card--past .day-header {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.day-card--past .meals {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.day-card--past .day-weekday,
+.day-card--past .day-number {
+  color: #666;
+}
+
+.day-card--future {
+  border: 1px dashed rgba(130, 195, 165, 0.45);
+  background: rgba(248, 255, 252, 0.92);
+}
+
+.day-card--future .day-header {
+  background: rgba(248, 255, 252, 0.8);
+}
+
+.day-card--future .meals {
+  background: rgba(248, 255, 252, 0.88);
+}
+
+.day-card--future .day-weekday {
+  color: #3d8b6a;
+}
+
+.day-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.week-badge {
+  background: rgba(130, 195, 165, 0.14);
+  color: #3d8b6a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(130, 195, 165, 0.35);
+  white-space: nowrap;
+}
+
+.week-badge--past {
+  background: rgba(var(--ion-color-medium-rgb), 0.12);
+  color: var(--ion-color-medium);
+  border: 1px solid rgba(var(--ion-color-medium-rgb), 0.25);
 }
 
 .day-header {
