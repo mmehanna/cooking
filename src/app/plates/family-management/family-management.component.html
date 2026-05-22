@@ -1,84 +1,109 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ 'FAMILY.TITLE' | translate }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <div class="family-section">
-    <h2>{{ 'FAMILY.CREATE_FAMILY' | translate }}</h2>
-    <ion-item>
-      <ion-input
-        [(ngModel)]="newFamilyName"
-        [placeholder]="'FAMILY.ENTER_FAMILY_NAME' | translate"
-        type="text">
-      </ion-input>
-    </ion-item>
-    <ion-button expand="block" (click)="createFamily()">{{ 'FAMILY.CREATE' | translate }}</ion-button>
-  </div>
-
-  <div class="family-section" *ngIf="families.length > 0">
-    <h2>{{ 'FAMILY.YOUR_FAMILIES' | translate }}</h2>
-    <ion-list>
-      <ion-item *ngFor="let family of families">
-        <ion-label>
-          <h2>{{ family.name }}</h2>
-          <p>{{ 'FAMILY.OWNER' | translate }}{{ family.owner?.name || family.owner?.email }}</p>
-          <p>{{ 'FAMILY.MEMBERS' | translate }}{{ family.users?.length || 0 }}</p>
-
-          <!-- Show family members if available -->
-          <div *ngIf="family.users && family.users.length > 0">
-            <p><strong>{{ 'FAMILY.FAMILY_MEMBERS' | translate }}</strong></p>
-            <ion-list>
-              <ion-item *ngFor="let userFamily of family.users">
-                <ion-label>
-                  <h3>{{ userFamily.user?.name || userFamily.user?.email }}</h3>
-                  <p>{{ 'FAMILY.ROLE' | translate }}{{ userFamily.role || 'member' }}</p>
-                </ion-label>
-                <!-- Button to remove member (only for owner or admin) -->
-                <ion-button
-                  *ngIf="canRemoveMember(family, userFamily.user?.id)"
-                  slot="end"
-                  fill="clear"
-                  color="danger"
-                  (click)="confirmRemoveMember(family.id, userFamily.user?.id, userFamily.user?.name || userFamily.user?.email)">
-                  <ion-icon name="trash"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </ion-list>
-          </div>
-        </ion-label>
-
-        <!-- Button to delete family (only for owner) -->
-        <ion-button
-          *ngIf="isFamilyOwner(family)"
-          slot="end"
-          fill="clear"
-          color="danger"
-          (click)="confirmDeleteFamily(family.id, family.name)">
-          <ion-icon name="trash"></ion-icon>
+  <div class="family-container">
+    <!-- Create Family Card -->
+    <div class="family-card">
+      <div class="card-header">
+        <ion-icon name="people-circle-outline" class="card-icon"></ion-icon>
+        <h2 class="card-title">{{ 'FAMILY.CREATE_FAMILY' | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <ion-item lines="none" class="custom-input">
+          <ion-input
+            [(ngModel)]="newFamilyName"
+            [placeholder]="'FAMILY.ENTER_FAMILY_NAME' | translate"
+            type="text">
+          </ion-input>
+        </ion-item>
+        <ion-button expand="block" class="action-btn" (click)="createFamily()">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          {{ 'FAMILY.CREATE' | translate }}
         </ion-button>
-      </ion-item>
-    </ion-list>
-  </div>
+      </div>
+    </div>
 
-  <div class="family-section" *ngIf="families.length > 0">
-    <h2>{{ 'FAMILY.INVITE_TO_FAMILY' | translate }}</h2>
-    <ion-item>
-      <ion-label>{{ 'FAMILY.SELECT_FAMILY' | translate }}</ion-label>
-      <ion-select [(ngModel)]="selectedFamilyId" [placeholder]="'FAMILY.CHOOSE_FAMILY' | translate">
-        <ion-select-option *ngFor="let family of families" [value]="family.id">
-          {{ family.name }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-input
-        [(ngModel)]="inviteEmail"
-        [placeholder]="'FAMILY.ENTER_EMAIL' | translate"
-        type="email">
-      </ion-input>
-    </ion-item>
-    <ion-button expand="block" (click)="inviteToFamily()">{{ 'FAMILY.SEND_INVITATION' | translate }}</ion-button>
+    <!-- Families List -->
+    <div class="family-card" *ngIf="families.length > 0">
+      <div class="card-header">
+        <ion-icon name="list-outline" class="card-icon"></ion-icon>
+        <h2 class="card-title">{{ 'FAMILY.YOUR_FAMILIES' | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="family-list">
+          <div class="family-item" *ngFor="let family of families">
+            <div class="family-info">
+              <div class="family-name-row">
+                <span class="family-name">{{ family.name }}</span>
+                <ion-button
+                  *ngIf="isFamilyOwner(family)"
+                  fill="clear"
+                  size="small"
+                  color="danger"
+                  class="delete-btn"
+                  (click)="confirmDeleteFamily(family.id, family.name)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </div>
+              <div class="family-meta">
+                <span class="meta-tag">
+                  <ion-icon name="person-outline"></ion-icon>
+                  {{ family.owner?.name || family.owner?.email }}
+                </span>
+                <span class="meta-tag">
+                  <ion-icon name="people-outline"></ion-icon>
+                  {{ family.users?.length || 0 }}
+                </span>
+              </div>
+
+              <!-- Members sub-list -->
+              <div class="members-section" *ngIf="family.users && family.users.length > 0">
+                <div class="members-title">{{ 'FAMILY.FAMILY_MEMBERS' | translate }}</div>
+                <div class="member-item" *ngFor="let userFamily of family.users">
+                  <div class="member-info">
+                    <span class="member-name">{{ userFamily.user?.name || userFamily.user?.email }}</span>
+                    <span class="member-role">{{ userFamily.role || 'member' }}</span>
+                  </div>
+                  <ion-button
+                    *ngIf="canRemoveMember(family, userFamily.user?.id)"
+                    fill="clear"
+                    size="small"
+                    color="danger"
+                    (click)="confirmRemoveMember(family.id, userFamily.user?.id, userFamily.user?.name || userFamily.user?.email)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Invite Card -->
+    <div class="family-card" *ngIf="families.length > 0">
+      <div class="card-header">
+        <ion-icon name="mail-outline" class="card-icon"></ion-icon>
+        <h2 class="card-title">{{ 'FAMILY.INVITE_TO_FAMILY' | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <ion-item lines="none" class="custom-input">
+          <ion-label position="stacked">{{ 'FAMILY.SELECT_FAMILY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="selectedFamilyId" [placeholder]="'FAMILY.CHOOSE_FAMILY' | translate" interface="popover">
+            <ion-select-option *ngFor="let family of families" [value]="family.id">
+              {{ family.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" class="custom-input">
+          <ion-label position="stacked">{{ 'FAMILY.ENTER_EMAIL' | translate }}</ion-label>
+          <ion-input
+            [(ngModel)]="inviteEmail"
+            [placeholder]="'user@example.com'"
+            type="email">
+          </ion-input>
+        </ion-item>
+        <ion-button expand="block" class="action-btn action-btn--secondary" (click)="inviteToFamily()">
+          <ion-icon name="send-outline" slot="start"></ion-icon>
+          {{ 'FAMILY.SEND_INVITATION' | translate }}
+        </ion-button>
+      </div>
+    </div>
   </div>
-</ion-content>
