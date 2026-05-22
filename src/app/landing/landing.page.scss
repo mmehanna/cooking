@@ -1,3 +1,17 @@
+.landing-header ion-toolbar {
+  --background: rgba(0, 0, 0, 0.25);
+  --border-color: transparent;
+  backdrop-filter: blur(8px);
+}
+
+.landing-header ion-title {
+  color: white;
+}
+
+.landing-header ion-menu-button {
+  color: white;
+}
+
 .user-info {
   display: flex;
   align-items: center;
@@ -7,6 +21,7 @@
 .user-avatar {
   width: 32px;
   height: 32px;
+  border: 2px solid white;
 }
 
 .user-details {
@@ -18,74 +33,345 @@
 .user-name {
   font-weight: 500;
   font-size: 14px;
+  color: white;
 }
 
 .user-email {
   font-size: 11px;
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.mode-switch {
-  margin-bottom: 16px;
+ion-content {
+  --background: transparent;
 }
 
-.week-shell {
-  min-height: 100%;
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('/assets/images/login/table-food.jpg') center/cover no-repeat;
 }
 
-.week-range {
-  margin-bottom: 14px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  opacity: 0.7;
+.landing-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 24px;
+}
+
+.welcome-banner {
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.welcome-greeting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.greeting-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.greeting-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.greeting-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.greeting-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.nav-arrow {
+  --color: white;
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+.nav-arrow[disabled] {
+  --color: rgba(255, 255, 255, 0.35);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.nav-arrow ion-icon {
+  font-size: 22px;
+}
+
+.week-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+}
+
+.week-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.mode-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.mode-toggle ion-button {
+  --color: white;
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.days-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .day-card {
-  margin: 0 0 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.day-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--day-bg) center/cover no-repeat;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.day-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.day-card--today {
+  border-color: rgba(var(--ion-color-primary-rgb), 0.55);
+  box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.25), 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.day-card--past {
+  opacity: 0.85;
+  filter: grayscale(0.15);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.day-card--past .day-header {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.day-card--past .meals {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.day-card--past .day-weekday,
+.day-card--past .day-number {
+  color: #666;
+}
+
+.day-card--future {
+  border: 1px dashed rgba(130, 195, 165, 0.45);
+  background: rgba(248, 255, 252, 0.92);
+}
+
+.day-card--future .day-header {
+  background: rgba(248, 255, 252, 0.8);
+}
+
+.day-card--future .meals {
+  background: rgba(248, 255, 252, 0.88);
+}
+
+.day-card--future .day-weekday {
+  color: #3d8b6a;
+}
+
+.day-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.week-badge {
+  background: rgba(130, 195, 165, 0.14);
+  color: #3d8b6a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(130, 195, 165, 0.35);
+  white-space: nowrap;
+}
+
+.week-badge--past {
+  background: rgba(var(--ion-color-medium-rgb), 0.12);
+  color: var(--ion-color-medium);
+  border: 1px solid rgba(var(--ion-color-medium-rgb), 0.25);
 }
 
 .day-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 0;
+  padding: 14px 18px 10px;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.weekday-label {
-  font-size: 18px;
-  font-weight: 700;
+.day-date {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.day-weekday {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a1a1a;
   text-transform: capitalize;
 }
 
-.date-label {
-  font-size: 13px;
-  opacity: 0.7;
+.day-number {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
 }
 
-.plates-list {
+.today-badge {
+  background: var(--ion-color-primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-left: 4px;
+  box-shadow: 0 2px 6px rgba(var(--ion-color-primary-rgb), 0.4);
+}
+
+.edit-btn {
+  --color: var(--ion-color-primary);
+  --padding-start: 6px;
+  --padding-end: 6px;
+  margin: 0;
+}
+
+.meals {
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+  padding: 12px 18px 16px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.meal-row {
+  display: flex;
+  align-items: center;
   gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(var(--ion-color-primary-rgb), 0.06);
+  transition: background 0.15s ease;
 }
 
-.plate-row {
-  width: 100%;
-  background: transparent;
-  padding: 12px 14px;
-  border-radius: 12px;
-  text-align: left;
-  color: inherit;
+.meal-row:last-child {
+  margin-bottom: 0;
 }
 
-.plate-row-view {
-  background: rgba(var(--ion-color-primary-rgb), 0.08);
+.meal-row--empty {
+  opacity: 0.5;
+  justify-content: center;
+  background: rgba(var(--ion-color-medium-rgb), 0.06);
+}
+
+.meal-row--clickable {
   cursor: pointer;
 }
 
-.plate-row-static {
-  background: rgba(var(--ion-color-medium-rgb), 0.08);
+.meal-row--clickable:hover,
+.meal-row--clickable:active {
+  background: rgba(var(--ion-color-primary-rgb), 0.12);
+}
+
+.meal-emoji {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-right: 2px;
+}
+
+.meal-type {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ion-color-primary);
+  min-width: 56px;
+}
+
+.meal-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #222;
+  flex: 1;
+}
+
+.generate-action {
+  margin-top: 20px;
+  padding: 0 4px;
+}
+
+.generate-action ion-button {
+  --border-radius: 14px;
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  --background-hover: linear-gradient(135deg, var(--ion-color-primary-shade) 0%, var(--ion-color-secondary-shade) 100%);
+  height: 52px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.5);
 }

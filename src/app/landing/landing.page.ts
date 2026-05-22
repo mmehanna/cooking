@@ -83,6 +83,12 @@ export class LandingPage implements OnInit, OnDestroy {
     }
   }
 
+  public isCurrentOrFutureWeek(): boolean {
+    const today = new Date();
+    const currentMonday = this.getMonday(today);
+    return this.weekStartDate >= currentMonday;
+  }
+
   public async autoGenerateWeek() {
     const alert = await this.alertController.create({
       header: this.translate.instant('LANDING.CONFIRM_GENERATE_TITLE'),
@@ -97,6 +103,10 @@ export class LandingPage implements OnInit, OnDestroy {
           handler: async () => {
             try {
               await firstValueFrom(this.plateService.generateWeekPlates(this.weekStartDate));
+
+              // Supprimer les plats des jours antérieurs à aujourd'hui dans la semaine courante
+              await this.clearPastDaysInCurrentWeek();
+
               await this.loadPlatesForWeek();
 
               const toast = await this.toastController.create({
@@ -127,6 +137,37 @@ export class LandingPage implements OnInit, OnDestroy {
     });
 
     await alert.present();
+  }
+
+  private async clearPastDaysInCurrentWeek(): Promise<void> {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const currentMonday = this.getMonday(today);
+
+    // Ne faire que pour la semaine courante
+    if (this.weekStartDate !== currentMonday) {
+      return;
+    }
+
+    // Construire les dates du lundi à hier
+    const start = this.parseDate(this.weekStartDate);
+    if (!start) {
+      return;
+    }
+
+    const promises: Promise<any>[] = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(start);
+      d.setDate(d.getDate() + i);
+      const dateStr = d.toISOString().split('T')[0];
+      if (dateStr < todayStr) {
+        promises.push(firstValueFrom(this.plateService.deletePlateForDay(dateStr)));
+      }
+    }
+
+    if (promises.length > 0) {
+      await Promise.all(promises);
+    }
   }
 
   public async editDayMenu(date: string) {
@@ -214,6 +255,127 @@ export class LandingPage implements OnInit, OnDestroy {
     return `${formatter.format(start)} - ${formatter.format(end)}`;
   }
 
+  public getGreetingIcon(): string {
+    const hour = new Date().getHours();
+    if (hour < 6) return '🌙';
+    if (hour < 12) return '☀️';
+    if (hour < 14) return '🍽️';
+    if (hour < 18) return '☕';
+    if (hour < 22) return '🍷';
+    return '🌙';
+  }
+
+  public getGreetingLabel(): string {
+    const hour = new Date().getHours();
+    const lang = (this.translate.currentLang || this.translate.defaultLang || 'en').toLowerCase();
+    const isFr = lang.startsWith('fr');
+
+    if (hour < 6) return isFr ? 'Bonne nuit' : 'Good night';
+    if (hour < 12) return isFr ? 'Bonjour' : 'Good morning';
+    if (hour < 14) return isFr ? 'Bon appétit' : 'Enjoy your meal';
+    if (hour < 18) return isFr ? 'Bon après-midi' : 'Good afternoon';
+    if (hour < 22) return isFr ? 'Bonsoir' : 'Good evening';
+    return isFr ? 'Bonne nuit' : 'Good night';
+  }
+
+  public getMealEmoji(mealType: string): string {
+    const key = mealType?.trim()?.toLowerCase();
+    if (key === 'breakfast') return '🍳';
+    if (key === 'lunch') return '🥗';
+    if (key === 'dinner') return '🍽️';
+    return '🍴';
+  }
+
+  public getDayImage(date: string): string {
+    const parsed = this.parseDate(date);
+    if (!parsed) return '';
+    const day = parsed.getDay();
+    const images: Record<number, string> = {
+      0: 'sunday.jpg',
+      1: 'monday.jpg',
+      2: 'tuesday.jpg',
+      3: 'wednesday.jpg',
+      4: 'thursday.jpg',
+      5: 'friday.jpg',
+      6: 'saturday.jpg'
+    };
+    return `url('/assets/images/landing/${images[day]}')`;
+  }
+
+  public isToday(date: string): boolean {
+    const today = new Date();
+    const parsed = this.parseDate(date);
+    if (!parsed) return false;
+    return today.toISOString().split('T')[0] === date;
+  }
+
+  public isPastDay(date: string): boolean {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    return date < todayStr;
+  }
+
+  public isCurrentWeek(): boolean {
+    const today = new Date();
+    const currentMonday = this.getMonday(today);
+    return this.weekStartDate === currentMonday;
+  }
+
+  public isFutureWeek(): boolean {
+    const today = new Date();
+    const currentMonday = this.getMonday(today);
+    return this.weekStartDate > currentMonday;
+  }
+
+  public isPastWeek(): boolean {
+    const today = new Date();
+    const currentMonday = this.getMonday(today);
+    return this.weekStartDate < currentMonday;
+  }
+
+  public getPastWeekRelativeLabel(): string {
+    const today = new Date();
+    const currentMonday = this.parseDate(this.getMonday(today));
+    const targetMonday = this.parseDate(this.weekStartDate);
+    if (!currentMonday || !targetMonday) return '';
+
+    const diffTime = currentMonday.getTime() - targetMonday.getTime();
+    const diffWeeks = Math.round(diffTime / (7 * 24 * 60 * 60 * 1000));
+
+    if (diffWeeks === 1) {
+      return this.translateOrFallback('LANDING.LAST_WEEK', 'Semaine dernière', 'Last week');
+    }
+    const frLabel = `Il y a ${diffWeeks} semaines`;
+    const enLabel = `${diffWeeks} weeks ago`;
+    return this.translateOrFallback('LANDING.N_WEEKS_AGO', frLabel, enLabel).replace('{{n}}', String(diffWeeks));
+  }
+
+  public getWeekRelativeLabel(): string {
+    const today = new Date();
+    const currentMonday = this.parseDate(this.getMonday(today));
+    const targetMonday = this.parseDate(this.weekStartDate);
+    if (!currentMonday || !targetMonday) return '';
+
+    const diffTime = targetMonday.getTime() - currentMonday.getTime();
+    const diffWeeks = Math.round(diffTime / (7 * 24 * 60 * 60 * 1000));
+
+    if (diffWeeks <= 0) {
+      return this.translateOrFallback('LANDING.THIS_WEEK', 'Cette semaine', 'This week');
+    }
+    if (diffWeeks === 1) {
+      return this.translateOrFallback('LANDING.NEXT_WEEK', 'La semaine prochaine', 'Next week');
+    }
+    const frLabel = `Dans ${diffWeeks} semaines`;
+    const enLabel = `In ${diffWeeks} weeks`;
+    return this.translateOrFallback('LANDING.IN_N_WEEKS', frLabel, enLabel).replace('{{n}}', String(diffWeeks));
+  }
+
+  public getDayNumber(date: string): string {
+    const parsed = this.parseDate(date);
+    if (!parsed) return '';
+    return String(parsed.getDate()).padStart(2, '0');
+  }
+
   public getMealTypeLabel(plate: PlateForWeekEntry): string {
     const key = plate.mealType?.trim()?.toLowerCase();
     if (key === 'breakfast') {
@@ -237,10 +399,55 @@ export class LandingPage implements OnInit, OnDestroy {
     return lang.startsWith('fr') ? frFallback : enFallback;
   }
 
-  private async changeWeek(dayOffset: number) {
-    const nextWeek = this.parseDate(this.weekStartDate) ?? new Date();
+  public canGoBack(): boolean {
+    const today = new Date();
+    const currentMonday = this.parseDate(this.getMonday(today));
+    if (!currentMonday) return false;
+    const minDate = new Date(currentMonday);
+    minDate.setDate(minDate.getDate() - 14); // 2 semaines en arrière
+    const target = this.parseDate(this.weekStartDate);
+    if (!target) return false;
+    const nextWeek = new Date(target);
+    nextWeek.setDate(nextWeek.getDate() - 7);
+    return nextWeek >= minDate;
+  }
+
+  public canGoForward(): boolean {
+    const today = new Date();
+    const currentMonday = this.parseDate(this.getMonday(today));
+    if (!currentMonday) return false;
+    const maxDate = new Date(currentMonday);
+    maxDate.setMonth(maxDate.getMonth() + 3); // 3 mois en avant
+    const target = this.parseDate(this.weekStartDate);
+    if (!target) return false;
+    const nextWeek = new Date(target);
+    nextWeek.setDate(nextWeek.getDate() + 7);
+    return nextWeek <= maxDate;
+  }
+
+  public async changeWeek(dayOffset: number) {
+    const target = this.parseDate(this.weekStartDate) ?? new Date();
+    const nextWeek = new Date(target);
     nextWeek.setDate(nextWeek.getDate() + dayOffset);
-    this.weekStartDate = this.getMonday(nextWeek);
+
+    const today = new Date();
+    const currentMonday = this.parseDate(this.getMonday(today));
+    if (!currentMonday) return;
+
+    const minDate = new Date(currentMonday);
+    minDate.setDate(minDate.getDate() - 14);
+    const maxDate = new Date(currentMonday);
+    maxDate.setMonth(maxDate.getMonth() + 3);
+
+    const nextMonday = this.getMonday(nextWeek);
+    const nextMondayDate = this.parseDate(nextMonday);
+    if (!nextMondayDate) return;
+
+    if (nextMondayDate < minDate || nextMondayDate > maxDate) {
+      return;
+    }
+
+    this.weekStartDate = nextMonday;
     await this.loadPlatesForWeek();
   }
 

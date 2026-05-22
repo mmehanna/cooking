@@ -24,7 +24,14 @@
     "CANCEL": "Annuler",
     "CONFIRM": "Confirmer",
     "GENERATE_SUCCESS": "Les plats de la semaine ont été générés avec succès",
-    "GENERATE_FAILED": "Échec de la génération des plats de la semaine"
+    "GENERATE_FAILED": "Échec de la génération des plats de la semaine",
+    "TODAY": "Aujourd'hui",
+    "NO_PLATE": "Pas encore de plat",
+    "THIS_WEEK": "Cette semaine",
+    "NEXT_WEEK": "La semaine prochaine",
+    "IN_N_WEEKS": "Dans {{n}} semaines",
+    "LAST_WEEK": "Semaine dernière",
+    "N_WEEKS_AGO": "Il y a {{n}} semaines"
   },
   "LOGIN": {
     "TITLE": "Connexion",

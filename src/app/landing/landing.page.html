@@ -1,5 +1,5 @@
 <div class="ion-page" id="main-content">
-  <ion-header>
+  <ion-header class="landing-header">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
@@ -16,50 +16,79 @@
       </div>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">
-    <div class="week-shell" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
-      <ion-segment [(ngModel)]="mode" class="mode-switch">
-        <ion-segment-button value="view">
-          <ion-label>{{ 'LANDING.VIEW_MODE' | translate }}</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="edit">
-          <ion-label>{{ 'LANDING.EDIT_MODE' | translate }}</ion-label>
-        </ion-segment-button>
-      </ion-segment>
 
-      <div class="week-range">{{ getWeekRangeLabel() }}</div>
+  <ion-content class="landing-content">
+    <div class="page-bg"></div>
 
-      <ion-button *ngIf="mode === 'edit'" expand="block" color="primary" (click)="autoGenerateWeek()">
-        {{ 'LANDING.GENERATE_WEEK' | translate }}
+    <div class="week-nav">
+      <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(-7)" [disabled]="!canGoBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
+      <div class="week-info">
+        <span class="week-label">{{ getWeekRangeLabel() }}</span>
+      </div>
+      <ion-button fill="clear" size="small" class="nav-arrow" (click)="changeWeek(7)" [disabled]="!canGoForward()">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
 
-      <h2>{{ 'LANDING.PLATES_FOR_WEEK' | translate }}</h2>
+    <div class="mode-toggle" *ngIf="mode === 'view'">
+      <ion-button fill="clear" size="small" (click)="mode = 'edit'">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        {{ 'LANDING.EDIT_MODE' | translate }}
+      </ion-button>
+    </div>
+
+    <div class="mode-toggle" *ngIf="mode === 'edit'">
+      <ion-button fill="clear" size="small" (click)="mode = 'view'">
+        <ion-icon name="eye-outline" slot="start"></ion-icon>
+        {{ 'LANDING.VIEW_MODE' | translate }}
+      </ion-button>
+    </div>
+
+    <div class="days-list" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
       <ng-container *ngFor="let plate of plateForWeek">
-        <ion-card class="day-card">
-          <ion-card-content>
-            <div class="day-header">
-              <div>
-                <div class="weekday-label">{{ getWeekdayLabel(plate.date) }}</div>
-                <div class="date-label">{{ plate.date }}</div>
-              </div>
-              <ion-button *ngIf="mode === 'edit'" fill="outline" size="small" (click)="editDayMenu(plate.date)">
-                {{ 'LANDING.EDIT_DAY_MENU' | translate }}
+        <div class="day-card" [class.day-card--today]="isToday(plate.date)" [class.day-card--past]="isPastDay(plate.date) && !isCurrentWeek()" [class.day-card--future]="isFutureWeek()" [ngStyle]="{'--day-bg': getDayImage(plate.date)}">
+          <div class="day-bg"></div>
+          <div class="day-header">
+            <div class="day-date">
+              <span class="day-weekday">{{ getWeekdayLabel(plate.date) }}</span>
+              <span class="day-number">{{ getDayNumber(plate.date) }}</span>
+              <span class="today-badge" *ngIf="isToday(plate.date)">{{ 'LANDING.TODAY' | translate }}</span>
+            </div>
+            <div class="day-badges">
+              <span class="week-badge" *ngIf="isFutureWeek()">{{ getWeekRelativeLabel() }}</span>
+              <span class="week-badge week-badge--past" *ngIf="isPastWeek()">{{ getPastWeekRelativeLabel() }}</span>
+              <ion-button *ngIf="mode === 'edit'" fill="clear" size="small" class="edit-btn" (click)="editDayMenu(plate.date)">
+                <ion-icon name="pencil-outline"></ion-icon>
               </ion-button>
             </div>
+          </div>
 
-            <div class="plates-list">
-              <div
-                *ngFor="let singlePlate of plate.plates"
-                class="plate-row"
-                [class.plate-row-view]="mode === 'view'"
-                [class.plate-row-static]="mode === 'edit'"
-                (click)="mode === 'view' && openPlateDetails(singlePlate.id)">
-                <span><strong>{{ getMealTypeLabel(singlePlate) }}</strong>: {{ singlePlate.label }}</span>
-              </div>
+          <div class="meals">
+            <div
+              *ngFor="let singlePlate of plate.plates"
+              class="meal-row"
+              [class.meal-row--clickable]="mode === 'view'"
+              (click)="mode === 'view' && openPlateDetails(singlePlate.id)">
+              <span class="meal-emoji">{{ getMealEmoji(singlePlate.mealType) }}</span>
+              <span class="meal-type">{{ getMealTypeLabel(singlePlate) }}</span>
+              <span class="meal-name">{{ singlePlate.label }}</span>
             </div>
-          </ion-card-content>
-        </ion-card>
+            <div class="meal-row meal-row--empty" *ngIf="plate.plates.length === 0">
+              <span class="meal-emoji">🍽️</span>
+              <span class="meal-name">{{ 'LANDING.NO_PLATE' | translate }}</span>
+            </div>
+          </div>
+        </div>
       </ng-container>
+    </div>
+
+    <div class="generate-action" *ngIf="mode === 'edit' && isCurrentOrFutureWeek()">
+      <ion-button expand="block" (click)="autoGenerateWeek()">
+        <ion-icon name="sparkles-outline" slot="start"></ion-icon>
+        {{ 'LANDING.GENERATE_WEEK' | translate }}
+      </ion-button>
     </div>
   </ion-content>
 </div>
