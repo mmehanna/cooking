@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from './plates/services/auth.service';
 import { UserService } from './settings/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UserProfileModel } from './_clients/models/UserProfileModel';
 
 @Component({
   selector: 'app-root',
   styleUrls: ['app.component.scss'],
   templateUrl: 'app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  userProfile: UserProfileModel | null = null;
+
   constructor(
     private menuController: MenuController,
     private authService: AuthService,
@@ -17,6 +20,15 @@ export class AppComponent {
     private translate: TranslateService
   ) {
     this.loadUserLanguage();
+  }
+
+  ngOnInit() {
+    this.userService.profile$.subscribe(profile => {
+      this.userProfile = profile;
+    });
+    if (this.authService.isAuthenticated()) {
+      this.userService.loadProfile().subscribe();
+    }
   }
 
   closeMenu() {
