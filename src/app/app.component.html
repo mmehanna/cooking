@@ -1,25 +1,83 @@
 <ion-app>
-  <ion-menu contentId="main-content">
-    <ion-header [translucent]="true">
-      <ion-toolbar>
-        <div class="menu-brand">
+  <ion-menu contentId="main-content" class="app-menu" side="start" type="overlay">
+    <div class="menu-header">
+      <div class="menu-brand">
+        <div class="menu-logo-wrap">
           <img src="assets/images/logo.jpeg" alt="Logo" class="menu-logo">
-          <ion-title>{{ 'APP.MENU_TITLE' | translate }}</ion-title>
         </div>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <p routerLink="/landing" (click)="closeMenu()">{{ 'APP.HOME' | translate }}</p>
-      <p routerLink="/choose-date" (click)="closeMenu()">{{ 'APP.CREATE_DAY_LIST' | translate }}</p>
-      <p routerLink="/plates-for-the-day" (click)="closeMenu()">{{ 'APP.PLATE_FOR_DAY' | translate }}</p>
-      <p routerLink="/manage-plates" (click)="closeMenu()">{{ 'APP.MANAGE_PLATES' | translate }}</p>
-      <p routerLink="/family" (click)="closeMenu()">{{ 'APP.MANAGE_FAMILIES' | translate }}</p>
-      <p routerLink="/shared-plates" (click)="closeMenu()">{{ 'APP.VIEW_SHARED_PLATES' | translate }}</p>
-      <p routerLink="/grocery-list" (click)="closeMenu()">{{ 'APP.GROCERY_LIST' | translate }}</p>
-      <p routerLink="/settings" (click)="closeMenu()">{{ 'APP.SETTINGS' | translate }}</p>
+        <div class="menu-brand-text">
+          <span class="menu-app-name">Atepla</span>
+          <span class="menu-app-tagline">{{ 'APP.MENU_TITLE' | translate }}</span>
+        </div>
+      </div>
+    </div>
 
-      <button (click)="logout()" style="color: red">{{ 'APP.LOGOUT' | translate }}</button>
+    <ion-content class="menu-content">
+      <nav class="menu-nav">
+        <a class="menu-item" routerLink="/landing" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="home-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.HOME' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/choose-date" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="calendar-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.CREATE_DAY_LIST' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/plates-for-the-day" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="restaurant-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.PLATE_FOR_DAY' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/manage-plates" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="fast-food-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.MANAGE_PLATES' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/family" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="people-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.MANAGE_FAMILIES' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/shared-plates" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="share-social-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.VIEW_SHARED_PLATES' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/grocery-list" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="cart-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.GROCERY_LIST' | translate }}</span>
+        </a>
+
+        <a class="menu-item" routerLink="/settings" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="settings-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'APP.SETTINGS' | translate }}</span>
+        </a>
+      </nav>
     </ion-content>
+
+    <div class="menu-footer">
+      <button class="logout-btn" (click)="logout()">
+        <ion-icon name="log-out-outline" class="logout-btn__icon"></ion-icon>
+        <span class="logout-btn__label">{{ 'APP.LOGOUT' | translate }}</span>
+      </button>
+    </div>
   </ion-menu>
 
   <ion-router-outlet id="main-content"></ion-router-outlet>
