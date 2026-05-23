@@ -4,8 +4,8 @@
   --menu-item-hover: rgba(var(--ion-color-primary-rgb), 0.06);
   --menu-item-active: rgba(var(--ion-color-primary-rgb), 0.10);
   --menu-item-active-border: var(--ion-color-primary);
-  --menu-text: #1a1a1a;
-  --menu-text-muted: #777;
+  --menu-text: #000000;
+  --menu-text-muted: #555;
   --menu-icon-bg: rgba(var(--ion-color-primary-rgb), 0.10);
   --menu-icon-color: var(--ion-color-primary);
 }
@@ -170,8 +170,8 @@ ion-menu::part(container) {
 }
 
 .menu-item__label {
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.98rem;
+  font-weight: 700;
   color: var(--menu-text);
 }
 
