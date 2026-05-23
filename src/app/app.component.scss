@@ -32,7 +32,7 @@ ion-menu::part(container) {
 /* Header */
 .menu-header {
   background: var(--menu-header-bg);
-  padding: 32px 20px 24px;
+  padding: 32px 20px 24px 12px;
   position: relative;
   overflow: hidden;
 }
@@ -65,6 +65,7 @@ ion-menu::part(container) {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transform: translateX(-10px);
 }
 
 .menu-logo {
@@ -91,6 +92,18 @@ ion-menu::part(container) {
   font-size: 0.82rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
+}
+
+.menu-user-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
 }
 
 /* Content */
