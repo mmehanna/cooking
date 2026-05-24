@@ -71,6 +71,13 @@
           <span class="menu-item__label">{{ 'APP.SETTINGS' | translate }}</span>
         </a>
 
+        <a class="menu-item" routerLink="/subscription" (click)="closeMenu()" routerLinkActive="menu-item--active">
+          <span class="menu-item__icon-wrap">
+            <ion-icon name="diamond-outline" class="menu-item__icon"></ion-icon>
+          </span>
+          <span class="menu-item__label">{{ 'SUBSCRIPTION.TITLE' | translate }}</span>
+        </a>
+
         <a class="menu-item" routerLink="/help" (click)="closeMenu()" routerLinkActive="menu-item--active">
           <span class="menu-item__icon-wrap">
             <ion-icon name="help-circle-outline" class="menu-item__icon"></ion-icon>

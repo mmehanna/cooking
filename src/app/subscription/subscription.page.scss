@@ -1,0 +1,239 @@
+.subscription-content {
+  --background: #f8f7f5;
+}
+
+.subscription-container {
+  padding: 20px 16px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Hero */
+.subscription-hero {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 20px 0;
+}
+
+.hero-icon {
+  font-size: 3rem;
+  color: var(--ion-color-primary);
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: #777;
+  margin: 0;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Plans Grid */
+.plans-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.plan-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 2px solid transparent;
+  padding: 28px 24px;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card--selected {
+  border-color: var(--ion-color-primary);
+}
+
+.plan-card--popular {
+  border-color: var(--ion-color-primary);
+  background: linear-gradient(180deg, rgba(var(--ion-color-primary-rgb), 0.04) 0%, rgba(255, 255, 255, 0.95) 100%);
+}
+
+/* Badges */
+.plan-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--ion-color-primary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.plan-badge--trial {
+  background: var(--ion-color-success);
+  top: 46px;
+}
+
+/* Plan Header */
+.plan-header {
+  margin-bottom: 16px;
+}
+
+.plan-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.plan-description {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Price */
+.plan-price {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.price-value {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+}
+
+.price-currency {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+.price-interval {
+  font-size: 0.9rem;
+  color: #888;
+  margin-left: 4px;
+}
+
+/* Features */
+.plan-features {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: #444;
+}
+
+.feature-icon {
+  font-size: 1.1rem;
+  color: var(--ion-color-success);
+  flex-shrink: 0;
+}
+
+/* CTA Button */
+.plan-cta {
+  --border-radius: 16px;
+  height: 52px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.plan-cta--popular {
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.4);
+}
+
+/* Current Subscription */
+.current-subscription {
+  margin-top: 32px;
+}
+
+.info-card {
+  background: rgba(var(--ion-color-success-rgb), 0.08);
+  border: 1px solid rgba(var(--ion-color-success-rgb), 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.info-icon {
+  font-size: 1.8rem;
+  color: var(--ion-color-success);
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ion-color-success);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* Spinner */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .plan-card--popular {
+    transform: scale(1.04);
+  }
+
+  .plan-card--popular:hover {
+    transform: scale(1.04) translateY(-4px);
+  }
+}

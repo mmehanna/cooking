@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="clear">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'SUBSCRIPTION.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="subscription-content">
+  <div class="subscription-container">
+    <!-- Header Section -->
+    <div class="subscription-hero">
+      <ion-icon name="diamond-outline" class="hero-icon"></ion-icon>
+      <h1 class="hero-title">{{ 'SUBSCRIPTION.HERO_TITLE' | translate }}</h1>
+      <p class="hero-subtitle">{{ 'SUBSCRIPTION.HERO_SUBTITLE' | translate }}</p>
+    </div>
+
+    <!-- Plans Grid -->
+    <div class="plans-grid">
+      <div class="plan-card"
+        *ngFor="let plan of plans"
+        [class.plan-card--popular]="plan.isPopular"
+        [class.plan-card--selected]="selectedPlanId === plan.id"
+        (click)="selectPlan(plan.id)">
+
+        <div class="plan-badge" *ngIf="plan.isPopular">{{ 'SUBSCRIPTION.POPULAR' | translate }}</div>
+        <div class="plan-badge plan-badge--trial" *ngIf="plan.trialDays">{{ plan.trialDays }} {{ 'SUBSCRIPTION.DAYS_FREE' | translate }}</div>
+
+        <div class="plan-header">
+          <h3 class="plan-name">{{ plan.name }}</h3>
+          <p class="plan-description">{{ plan.description }}</p>
+        </div>
+
+        <div class="plan-price">
+          <span class="price-value">{{ plan.price }}</span>
+          <span class="price-currency">{{ plan.currency }}</span>
+          <span class="price-interval">/ {{ plan.interval === 'month' ? ('SUBSCRIPTION.PER_MONTH' | translate) : ('SUBSCRIPTION.PER_YEAR' | translate) }}</span>
+        </div>
+
+        <ul class="plan-features">
+          <li class="feature-item" *ngFor="let feature of plan.features">
+            <ion-icon name="checkmark-circle-outline" class="feature-icon"></ion-icon>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+
+        <ion-button
+          expand="block"
+          class="plan-cta"
+          [class.plan-cta--popular]="plan.isPopular"
+          (click)="subscribeToPlan(plan); $event.stopPropagation();"
+          [disabled]="isLoading"
+        >
+          <ion-icon *ngIf="isLoading" name="sync-outline" class="spin"></ion-icon>
+          <span *ngIf="!isLoading">{{ 'SUBSCRIPTION.SUBSCRIBE' | translate }}</span>
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Current subscription info -->
+    <div class="current-subscription" *ngIf="isSubscribed">
+      <div class="info-card">
+        <ion-icon name="shield-checkmark-outline" class="info-icon"></ion-icon>
+        <div class="info-text">
+          <span class="info-label">{{ 'SUBSCRIPTION.ACTIVE_PLAN' | translate }}</span>
+          <span class="info-value">{{ userSubscription?.plan?.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
