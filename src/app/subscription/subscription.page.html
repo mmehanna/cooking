@@ -69,6 +69,10 @@
           <span class="info-value">{{ userSubscription?.plan?.name }}</span>
         </div>
       </div>
+      <ion-button expand="block" color="danger" fill="outline" class="cancel-btn" (click)="cancelSubscription()">
+        <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+        {{ 'SUBSCRIPTION.CANCEL_SUBSCRIPTION' | translate }}
+      </ion-button>
     </div>
   </div>
 </ion-content>

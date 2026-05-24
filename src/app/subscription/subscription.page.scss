@@ -210,6 +210,12 @@
   color: #1a1a1a;
 }
 
+.cancel-btn {
+  margin-top: 16px;
+  --border-radius: 14px;
+  height: 48px;
+}
+
 /* Spinner */
 .spin {
   animation: spin 1s linear infinite;

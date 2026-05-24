@@ -32,6 +32,9 @@ export class SubscriptionPage implements OnInit {
     this.subscriptionService.getUserSubscription().subscribe(sub => {
       this.userSubscription = sub;
     });
+
+    // Charger le statut de l'abonnement au démarrage
+    this.subscriptionService.loadSubscriptionStatus().subscribe();
   }
 
   public selectPlan(planId: string) {
@@ -39,9 +42,34 @@ export class SubscriptionPage implements OnInit {
   }
 
   public async subscribeToPlan(plan: SubscriptionPlanModel) {
+    this.isLoading = true;
+
+    try {
+      const result = await firstValueFrom(this.subscriptionService.createCheckoutSession(plan.id));
+
+      if (result.url) {
+        // Rediriger vers Stripe Checkout
+        window.location.href = result.url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      const toast = await this.toastController.create({
+        message: this.translate.instant('SUBSCRIPTION.ERROR'),
+        duration: 3000,
+        color: 'danger'
+      });
+      await toast.present();
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  public async cancelSubscription() {
     const alert = await this.alertController.create({
-      header: this.translate.instant('SUBSCRIPTION.CONFIRM_TITLE'),
-      message: this.translate.instant('SUBSCRIPTION.CONFIRM_MESSAGE', { planName: plan.name, price: plan.price + '€/' + plan.interval }),
+      header: this.translate.instant('SUBSCRIPTION.CANCEL_CONFIRM_TITLE'),
+      message: this.translate.instant('SUBSCRIPTION.CANCEL_CONFIRM_MESSAGE'),
       buttons: [
         {
           text: this.translate.instant('SUBSCRIPTION.CANCEL'),
@@ -50,13 +78,12 @@ export class SubscriptionPage implements OnInit {
         {
           text: this.translate.instant('SUBSCRIPTION.CONFIRM'),
           handler: async () => {
-            this.isLoading = true;
             try {
-              const result = await firstValueFrom(this.subscriptionService.subscribeToPlan(plan.id));
+              const result = await firstValueFrom(this.subscriptionService.cancelSubscription());
               const toast = await this.toastController.create({
                 message: result.message,
                 duration: 3000,
-                color: 'success'
+                color: result.success ? 'success' : 'danger'
               });
               await toast.present();
             } catch (error) {
@@ -66,8 +93,6 @@ export class SubscriptionPage implements OnInit {
                 color: 'danger'
               });
               await toast.present();
-            } finally {
-              this.isLoading = false;
             }
           }
         }

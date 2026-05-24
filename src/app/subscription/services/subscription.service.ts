@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
 import {SubscriptionPlanModel, UserSubscriptionModel} from '../../_clients/models/SubscriptionPlanModel';
+import {StripeClient} from '../../_clients/stripe.client';
 
 @Injectable({providedIn: 'root'})
 export class SubscriptionService {
@@ -10,11 +12,18 @@ export class SubscriptionService {
   private subscriptionSubject = new BehaviorSubject<UserSubscriptionModel | null>(null);
   public subscription$ = this.subscriptionSubject.asObservable();
 
-  constructor() {
-    this.loadMockPlans();
+  // Price IDs Stripe - À configurer selon ton compte Stripe
+  private readonly stripePriceIds: Record<string, string> = {
+    basic: 'price_basic_placeholder',
+    pro: 'price_pro_placeholder',
+    premium: 'price_premium_placeholder'
+  };
+
+  constructor(private stripeClient: StripeClient) {
+    this.loadPlans();
   }
 
-  private loadMockPlans(): void {
+  private loadPlans(): void {
     const plans: SubscriptionPlanModel[] = [
       {
         id: 'basic',
@@ -77,14 +86,62 @@ export class SubscriptionService {
     return this.subscription$;
   }
 
-  public subscribeToPlan(planId: string): Observable<{ success: boolean; message: string }> {
-    // TODO: Connecter au backend pour le vrai paiement
-    console.log('Subscription requested for plan:', planId);
-    return of({ success: true, message: 'Subscription initiated' });
+  public getStripePriceId(planId: string): string {
+    return this.stripePriceIds[planId] || '';
+  }
+
+  public createCheckoutSession(planId: string): Observable<{ url: string }> {
+    const priceId = this.getStripePriceId(planId);
+    const successUrl = `${window.location.origin}/subscription/success`;
+    const cancelUrl = `${window.location.origin}/subscription`;
+
+    return this.stripeClient.createCheckoutSession({
+      priceId,
+      successUrl,
+      cancelUrl
+    }).pipe(
+      map(session => ({ url: session.url })),
+      catchError(error => {
+        console.error('Error creating checkout session:', error);
+        throw error;
+      })
+    );
+  }
+
+  public loadSubscriptionStatus(): Observable<UserSubscriptionModel | null> {
+    return this.stripeClient.getSubscriptionStatus().pipe(
+      map(status => {
+        if (status.status === 'active' || status.status === 'trialing') {
+          const plan = this.plansSubject.getValue().find(p => p.id === status.planId);
+          return {
+            id: '',
+            userId: '',
+            planId: status.planId || '',
+            status: status.status as any,
+            currentPeriodStart: '',
+            currentPeriodEnd: '',
+            cancelAtPeriodEnd: false,
+            plan
+          };
+        }
+        return null;
+      }),
+      tap(subscription => this.subscriptionSubject.next(subscription)),
+      catchError(error => {
+        console.error('Error loading subscription status:', error);
+        this.subscriptionSubject.next(null);
+        return of(null);
+      })
+    );
   }
 
   public cancelSubscription(): Observable<{ success: boolean; message: string }> {
-    // TODO: Connecter au backend
-    return of({ success: true, message: 'Subscription canceled' });
+    return this.stripeClient.cancelSubscription().pipe(
+      tap(() => this.subscriptionSubject.next(null)),
+      catchError(error => {
+        console.error('Error canceling subscription:', error);
+        return of({ success: false, message: 'Failed to cancel subscription' });
+      })
+    );
   }
 }
