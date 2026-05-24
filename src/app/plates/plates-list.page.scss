@@ -2,6 +2,16 @@
   --background: #f8f7f5;
 }
 
+.plates-searchbar {
+  --background: rgba(255, 255, 255, 0.95);
+  --border-radius: 16px;
+  --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --icon-color: var(--ion-color-primary);
+  --clear-button-color: var(--ion-color-medium);
+  padding: 0 0 16px 0;
+  border-radius: 16px;
+}
+
 .plates-container {
   padding: 16px;
   max-width: 800px;

@@ -17,12 +17,20 @@
 
 <ion-content class="plates-content">
   <div class="plates-container">
-    <div class="plates-header" *ngIf="plateList?.length">
-      <span class="plates-count">{{ plateList.length }} plat(s)</span>
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      [placeholder]="'Rechercher un plat...'"
+      animated="true"
+      class="plates-searchbar"
+      showClearButton="focus">
+    </ion-searchbar>
+
+    <div class="plates-header" *ngIf="filteredPlateList?.length">
+      <span class="plates-count">{{ filteredPlateList.length }} plat(s)</span>
     </div>
 
-    <div class="plates-grid">
-      <div class="plate-card" *ngFor="let plate of plateList" (click)="isSelectionMode && togglePlateSelection(plate)">
+    <div class="plates-grid" *ngIf="filteredPlateList?.length">
+      <div class="plate-card" *ngFor="let plate of filteredPlateList" (click)="isSelectionMode && togglePlateSelection(plate)">
         <div class="plate-card__body">
           <div class="plate-checkbox" *ngIf="isSelectionMode">
             <ion-checkbox [checked]="isPlateSelected(plate.id)"></ion-checkbox>
@@ -54,6 +62,11 @@
       <ion-button (click)="presentDetailAddPlateModal()" class="empty-state__btn">
         Créer un plat
       </ion-button>
+    </div>
+
+    <div class="empty-state" *ngIf="plateList?.length > 0 && filteredPlateList?.length === 0">
+      <ion-icon name="search-outline" class="empty-state__icon"></ion-icon>
+      <p class="empty-state__text">Aucun résultat pour "{{ searchTerm }}"</p>
     </div>
   </div>
 

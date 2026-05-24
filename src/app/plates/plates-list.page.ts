@@ -18,6 +18,7 @@ export class PlatesListPage implements OnInit {
   private subscription$ = new Subscription();
   public isSelectionMode = false;
   public selectedPlates: Array<{ id: string; label: string }> = [];
+  public searchTerm = '';
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
@@ -101,6 +102,17 @@ export class PlatesListPage implements OnInit {
     } else {
       this.selectedPlates.push({ id: plate.id, label: plate.label });
     }
+  }
+
+  public get filteredPlateList(): PlateItemBo[] {
+    if (!this.searchTerm.trim()) {
+      return this.plateList;
+    }
+    const term = this.searchTerm.trim().toLowerCase();
+    return this.plateList.filter(plate =>
+      plate.label?.toLowerCase().includes(term) ||
+      plate.category?.toLowerCase().includes(term)
+    );
   }
 
   public isPlateSelected(plateId: string): boolean {
