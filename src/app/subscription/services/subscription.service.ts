@@ -12,70 +12,30 @@ export class SubscriptionService {
   private subscriptionSubject = new BehaviorSubject<UserSubscriptionModel | null>(null);
   public subscription$ = this.subscriptionSubject.asObservable();
 
-  // Price IDs Stripe - À configurer selon ton compte Stripe
-  private readonly stripePriceIds: Record<string, string> = {
-    basic: 'price_basic_placeholder',
-    pro: 'price_pro_placeholder',
-    premium: 'price_premium_placeholder'
-  };
-
   constructor(private stripeClient: StripeClient) {
-    this.loadPlans();
+    this.loadPlansFromApi();
   }
 
-  private loadPlans(): void {
-    const plans: SubscriptionPlanModel[] = [
-      {
-        id: 'basic',
-        name: 'Basic',
-        description: 'Pour les utilisateurs occasionnels',
-        price: 4.99,
-        currency: 'EUR',
-        interval: 'month',
-        features: [
-          'Jusqu\'à 20 plats personnalisés',
-          'Planification sur 2 semaines',
-          'Liste de courses basique',
-          '1 famille'
-        ]
-      },
-      {
-        id: 'pro',
-        name: 'Pro',
-        description: 'Pour les passionnés de cuisine',
-        price: 9.99,
-        currency: 'EUR',
-        interval: 'month',
-        features: [
-          'Plats illimités',
-          'Planification sur 3 mois',
-          'Liste de courses avancée',
-          'Familles illimitées',
-          'Partage de plats',
-          'Statistiques nutritionnelles'
-        ],
-        isPopular: true,
-        trialDays: 14
-      },
-      {
-        id: 'premium',
-        name: 'Premium',
-        description: 'Pour les chefs en herbe',
-        price: 14.99,
-        currency: 'EUR',
-        interval: 'month',
-        features: [
-          'Tout du forfait Pro',
-          'Recettes IA générées',
-          'Import de recettes web',
-          'Mode collaboratif temps réel',
-          'Export PDF menus',
-          'Support prioritaire'
-        ],
-        trialDays: 14
-      }
-    ];
-    this.plansSubject.next(plans);
+  private loadPlansFromApi(): void {
+    this.stripeClient.getPlans().pipe(
+      map(apiPlans => apiPlans.map(plan => ({
+        id: plan.id,
+        name: plan.name,
+        description: plan.description,
+        price: plan.price,
+        currency: plan.currency,
+        interval: plan.interval as 'month' | 'year',
+        features: plan.features,
+        isPopular: plan.isPopular,
+        trialDays: plan.trialDays
+      }))),
+      catchError(error => {
+        console.error('Error loading plans from API:', error);
+        return of([]);
+      })
+    ).subscribe(plans => {
+      this.plansSubject.next(plans);
+    });
   }
 
   public getPlans(): Observable<SubscriptionPlanModel[]> {
@@ -86,17 +46,12 @@ export class SubscriptionService {
     return this.subscription$;
   }
 
-  public getStripePriceId(planId: string): string {
-    return this.stripePriceIds[planId] || '';
-  }
-
   public createCheckoutSession(planId: string): Observable<{ url: string }> {
-    const priceId = this.getStripePriceId(planId);
     const successUrl = `${window.location.origin}/subscription/success`;
     const cancelUrl = `${window.location.origin}/subscription`;
 
     return this.stripeClient.createCheckoutSession({
-      priceId,
+      priceId: planId,
       successUrl,
       cancelUrl
     }).pipe(

@@ -14,11 +14,27 @@ export interface StripeCheckoutSession {
   status: string;
 }
 
+export interface SubscriptionPlanResponse {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  currency: string;
+  interval: string;
+  features: string[];
+  isPopular: boolean;
+  trialDays: number;
+}
+
 @Injectable({providedIn: 'root'})
 export class StripeClient {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) {}
+
+  public getPlans(): Observable<SubscriptionPlanResponse[]> {
+    return this.httpClient.get<SubscriptionPlanResponse[]>(`${this.apiUrl}/stripe/plans`);
+  }
 
   public createCheckoutSession(dto: CreateCheckoutSessionDto): Observable<StripeCheckoutSession> {
     return this.httpClient.post<StripeCheckoutSession>(`${this.apiUrl}/stripe/create-checkout-session`, dto);

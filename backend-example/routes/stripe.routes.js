@@ -1,13 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const db = require('../config/database');
 
-// Map des plans internes vers les Price IDs Stripe
-const PLAN_PRICE_IDS = {
-  basic: process.env.STRIPE_PRICE_BASIC,
-  pro: process.env.STRIPE_PRICE_PRO,
-  premium: process.env.STRIPE_PRICE_PREMIUM
-};
+/**
+ * GET /stripe/plans
+ * Récupère tous les plans d'abonnement depuis la base de données
+ */
+router.get('/plans', async (req, res) => {
+  try {
+    const [plans] = await db.execute(
+      'SELECT id, name, description, price, currency, interval_type, features, is_popular, trial_days FROM subscription_plans ORDER BY price ASC'
+    );
+
+    // Parser le JSON des features
+    const formattedPlans = plans.map(plan => ({
+      ...plan,
+      features: typeof plan.features === 'string' ? JSON.parse(plan.features) : plan.features,
+      interval: plan.interval_type,
+      isPopular: plan.is_popular === 1,
+      trialDays: plan.trial_days,
+    }));
+
+    res.json(formattedPlans);
+  } catch (error) {
+    console.error('Error fetching plans:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 /**
  * POST /stripe/create-checkout-session
@@ -16,18 +36,34 @@ const PLAN_PRICE_IDS = {
 router.post('/create-checkout-session', async (req, res) => {
   try {
     const { priceId, successUrl, cancelUrl } = req.body;
+    // TODO: Récupérer userId depuis le token JWT
+    const userId = req.body.userId || 1;
 
     if (!priceId || !successUrl || !cancelUrl) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Récupérer le vrai Price ID Stripe depuis le plan interne
-    const stripePriceId = PLAN_PRICE_IDS[priceId] || priceId;
+    // Récupérer le plan depuis la base de données
+    const [plans] = await db.execute(
+      'SELECT stripe_price_id, trial_days FROM subscription_plans WHERE id = ?',
+      [priceId]
+    );
+
+    if (plans.length === 0) {
+      return res.status(404).json({ error: 'Plan not found' });
+    }
+
+    const plan = plans[0];
+    const stripePriceId = plan.stripe_price_id;
+
+    // Récupérer ou créer le customer Stripe
+    let customerId = await getOrCreateStripeCustomer(userId);
 
     // Créer la session Stripe Checkout
-    const session = await stripe.checkout.sessions.create({
+    const sessionConfig = {
       mode: 'subscription',
       payment_method_types: ['card'],
+      customer: customerId,
       line_items: [
         {
           price: stripePriceId,
@@ -36,21 +72,25 @@ router.post('/create-checkout-session', async (req, res) => {
       ],
       success_url: successUrl,
       cancel_url: cancelUrl,
-      // Metadata pour retrouver l'utilisateur après le webhook
       metadata: {
         planId: priceId,
-        // userId: req.user?.id // Décommenter quand auth est en place
+        userId: String(userId),
       },
-      // Configuration de l'essai gratuit si applicable
-      subscription_data: {
-        trial_period_days: priceId === 'pro' || priceId === 'premium' ? 14 : 0,
-      },
-    });
+    };
+
+    // Ajouter la période d'essai si applicable
+    if (plan.trial_days && plan.trial_days > 0) {
+      sessionConfig.subscription_data = {
+        trial_period_days: plan.trial_days,
+      };
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     res.json({
       id: session.id,
       url: session.url,
-      status: session.status
+      status: session.status,
     });
   } catch (error) {
     console.error('Stripe checkout error:', error);
@@ -65,25 +105,43 @@ router.post('/create-checkout-session', async (req, res) => {
 router.get('/subscription-status', async (req, res) => {
   try {
     // TODO: Récupérer l'ID utilisateur depuis le token JWT
-    // const userId = req.user?.id;
-    const userId = req.query.userId || 'demo-user';
+    const userId = req.query.userId || 1;
 
-    // Récupérer l'abonnement depuis la base de données
-    // Ici on simule - en production, tu stockes l'abonnement en DB
-    const subscription = await getUserSubscription(userId);
+    const [subscriptions] = await db.execute(
+      `SELECT us.*, sp.name as plan_name, sp.price, sp.currency, sp.interval_type
+       FROM user_subscriptions us
+       JOIN subscription_plans sp ON us.plan_id = sp.id
+       WHERE us.user_id = ?
+       ORDER BY us.created_at DESC
+       LIMIT 1`,
+      [userId]
+    );
 
-    if (!subscription) {
+    if (subscriptions.length === 0) {
       return res.json({ status: 'inactive', planId: null });
     }
 
-    // Vérifier le statut réel chez Stripe
-    const stripeSubscription = await stripe.subscriptions.retrieve(subscription.stripeSubscriptionId);
+    const subscription = subscriptions[0];
+
+    // Vérifier que l'abonnement n'est pas expiré
+    const now = new Date();
+    const periodEnd = new Date(subscription.current_period_end);
+
+    if (periodEnd < now && subscription.status === 'active') {
+      // Mettre à jour le statut si la période est terminée
+      await db.execute(
+        'UPDATE user_subscriptions SET status = ? WHERE id = ?',
+        ['inactive', subscription.id]
+      );
+      subscription.status = 'inactive';
+    }
 
     res.json({
-      status: stripeSubscription.status,
-      planId: subscription.planId,
-      currentPeriodEnd: stripeSubscription.current_period_end,
-      cancelAtPeriodEnd: stripeSubscription.cancel_at_period_end
+      status: subscription.status,
+      planId: subscription.plan_id,
+      planName: subscription.plan_name,
+      currentPeriodEnd: subscription.current_period_end,
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
     });
   } catch (error) {
     console.error('Stripe status error:', error);
@@ -98,26 +156,39 @@ router.get('/subscription-status', async (req, res) => {
 router.post('/cancel-subscription', async (req, res) => {
   try {
     // TODO: Récupérer l'ID utilisateur depuis le token JWT
-    // const userId = req.user?.id;
-    const userId = req.body.userId || 'demo-user';
+    const userId = req.body.userId || 1;
 
-    const subscription = await getUserSubscription(userId);
+    // Récupérer l'abonnement actif
+    const [subscriptions] = await db.execute(
+      `SELECT * FROM user_subscriptions
+       WHERE user_id = ? AND status IN ('active', 'trialing')
+       ORDER BY created_at DESC
+       LIMIT 1`,
+      [userId]
+    );
 
-    if (!subscription) {
+    if (subscriptions.length === 0) {
       return res.status(404).json({ error: 'No active subscription found' });
     }
 
+    const subscription = subscriptions[0];
+
     // Annuler chez Stripe (à la fin de la période)
-    await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+    await stripe.subscriptions.update(subscription.stripe_subscription_id, {
       cancel_at_period_end: true,
     });
 
     // Mettre à jour en base de données
-    await updateSubscriptionCancelStatus(userId, true);
+    await db.execute(
+      `UPDATE user_subscriptions
+       SET cancel_at_period_end = TRUE, status = 'canceled', updated_at = NOW()
+       WHERE id = ?`,
+      [subscription.id]
+    );
 
     res.json({
       success: true,
-      message: 'Subscription will be canceled at the end of the current period'
+      message: 'Subscription will be canceled at the end of the current period',
     });
   } catch (error) {
     console.error('Stripe cancel error:', error);
@@ -144,29 +215,107 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
 
   // Gérer les événements
   switch (event.type) {
-    case 'checkout.session.completed':
+    case 'checkout.session.completed': {
       const session = event.data.object;
       console.log('Checkout completed:', session.id);
-      // TODO: Activer l'abonnement en base de données
-      // await activateSubscription(session.metadata.userId, session.subscription);
-      break;
 
-    case 'invoice.payment_succeeded':
+      const { userId, planId } = session.metadata;
+      const stripeSubscriptionId = session.subscription;
+
+      // Récupérer les détails de l'abonnement Stripe
+      const stripeSubscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+
+      // Insérer ou mettre à jour l'abonnement en base de données
+      await db.execute(
+        `INSERT INTO user_subscriptions
+         (user_id, plan_id, stripe_customer_id, stripe_subscription_id, status,
+          current_period_start, current_period_end, cancel_at_period_end, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), FALSE, NOW(), NOW())
+         ON DUPLICATE KEY UPDATE
+         status = VALUES(status),
+         current_period_start = VALUES(current_period_start),
+         current_period_end = VALUES(current_period_end),
+         updated_at = NOW()`,
+        [
+          userId,
+          planId,
+          session.customer,
+          stripeSubscriptionId,
+          stripeSubscription.status,
+          stripeSubscription.current_period_start,
+          stripeSubscription.current_period_end,
+        ]
+      );
+      break;
+    }
+
+    case 'invoice.payment_succeeded': {
       const invoice = event.data.object;
       console.log('Payment succeeded:', invoice.id);
-      break;
 
-    case 'invoice.payment_failed':
+      // Enregistrer le paiement
+      if (invoice.subscription) {
+        const [subs] = await db.execute(
+          'SELECT id, user_id FROM user_subscriptions WHERE stripe_subscription_id = ?',
+          [invoice.subscription]
+        );
+
+        if (subs.length > 0) {
+          await db.execute(
+            `INSERT INTO subscription_payments
+             (user_id, subscription_id, stripe_invoice_id, amount, currency, status, paid_at, created_at)
+             VALUES (?, ?, ?, ?, ?, 'succeeded', NOW(), NOW())`,
+            [
+              subs[0].user_id,
+              subs[0].id,
+              invoice.id,
+              invoice.amount_paid / 100, // Stripe retourne les montants en cents
+              invoice.currency.toUpperCase(),
+            ]
+          );
+        }
+      }
+      break;
+    }
+
+    case 'invoice.payment_failed': {
       const failedInvoice = event.data.object;
       console.log('Payment failed:', failedInvoice.id);
-      // TODO: Notifier l'utilisateur et suspendre l'accès
-      break;
 
-    case 'customer.subscription.deleted':
-      const subscription = event.data.object;
-      console.log('Subscription canceled:', subscription.id);
-      // TODO: Désactiver l'abonnement en base de données
+      // Notifier l'utilisateur (TODO: envoyer un email)
       break;
+    }
+
+    case 'customer.subscription.updated': {
+      const updatedSub = event.data.object;
+      console.log('Subscription updated:', updatedSub.id);
+
+      await db.execute(
+        `UPDATE user_subscriptions
+         SET status = ?, cancel_at_period_end = ?, current_period_end = FROM_UNIXTIME(?), updated_at = NOW()
+         WHERE stripe_subscription_id = ?`,
+        [
+          updatedSub.status,
+          updatedSub.cancel_at_period_end,
+          updatedSub.current_period_end,
+          updatedSub.id,
+        ]
+      );
+      break;
+    }
+
+    case 'customer.subscription.deleted': {
+      const deletedSub = event.data.object;
+      console.log('Subscription canceled:', deletedSub.id);
+
+      await db.execute(
+        `UPDATE user_subscriptions
+         SET status = 'canceled', cancel_at_period_end = TRUE, updated_at = NOW()
+         WHERE stripe_subscription_id = ?`,
+        [deletedSub.id]
+      );
+      break;
+    }
 
     default:
       console.log(`Unhandled event type: ${event.type}`);
@@ -175,17 +324,32 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
   res.json({ received: true });
 });
 
-// Fonctions helpers (à remplacer par des appels DB réels)
-async function getUserSubscription(userId) {
-  // TODO: Implémenter la récupération depuis la base de données
-  // Exemple avec Prisma ou Mongoose :
-  // return await db.subscription.findFirst({ where: { userId, status: 'active' } });
-  return null;
-}
+// ============================================
+// Helpers
+// ============================================
 
-async function updateSubscriptionCancelStatus(userId, cancelAtPeriodEnd) {
-  // TODO: Implémenter la mise à jour en base de données
-  console.log(`Updated subscription for user ${userId}: cancelAtPeriodEnd=${cancelAtPeriodEnd}`);
+async function getOrCreateStripeCustomer(userId) {
+  // Vérifier si l'utilisateur a déjà un customer Stripe
+  const [subscriptions] = await db.execute(
+    'SELECT stripe_customer_id FROM user_subscriptions WHERE user_id = ? LIMIT 1',
+    [userId]
+  );
+
+  if (subscriptions.length > 0 && subscriptions[0].stripe_customer_id) {
+    return subscriptions[0].stripe_customer_id;
+  }
+
+  // TODO: Récupérer les infos utilisateur depuis la base de données
+  // const [users] = await db.execute('SELECT email, name FROM users WHERE id = ?', [userId]);
+
+  // Créer un nouveau customer Stripe
+  const customer = await stripe.customers.create({
+    metadata: { userId: String(userId) },
+    // email: users[0]?.email,
+    // name: users[0]?.name,
+  });
+
+  return customer.id;
 }
 
 module.exports = router;
