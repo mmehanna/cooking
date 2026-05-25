@@ -52,10 +52,11 @@
           class="plan-cta"
           [class.plan-cta--popular]="plan.isPopular"
           (click)="subscribeToPlan(plan); $event.stopPropagation();"
-          [disabled]="isLoading"
+          [disabled]="isLoading || isSubscribed"
         >
           <ion-icon *ngIf="isLoading" name="sync-outline" class="spin"></ion-icon>
-          <span *ngIf="!isLoading">{{ 'SUBSCRIPTION.SUBSCRIBE' | translate }}</span>
+          <span *ngIf="!isLoading && !isSubscribed">{{ 'SUBSCRIPTION.SUBSCRIBE' | translate }}</span>
+          <span *ngIf="isSubscribed">{{ 'SUBSCRIPTION.ALREADY_SUBSCRIBED' | translate }}</span>
         </ion-button>
       </div>
     </div>

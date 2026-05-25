@@ -33,18 +33,18 @@ export class StripeClient {
   constructor(private httpClient: HttpClient) {}
 
   public getPlans(): Observable<SubscriptionPlanResponse[]> {
-    return this.httpClient.get<SubscriptionPlanResponse[]>(`${this.apiUrl}/stripe/plans`);
+    return this.httpClient.get<SubscriptionPlanResponse[]>(`${this.apiUrl}/subscription/plans`);
   }
 
   public createCheckoutSession(dto: CreateCheckoutSessionDto): Observable<StripeCheckoutSession> {
-    return this.httpClient.post<StripeCheckoutSession>(`${this.apiUrl}/stripe/create-checkout-session`, dto);
+    return this.httpClient.post<StripeCheckoutSession>(`${this.apiUrl}/subscription/create-checkout-session`, dto);
   }
 
   public getSubscriptionStatus(): Observable<{ status: string; planId: string | null }> {
-    return this.httpClient.get<{ status: string; planId: string | null }>(`${this.apiUrl}/stripe/subscription-status`);
+    return this.httpClient.get<{ status: string; planId: string | null }>(`${this.apiUrl}/subscription/subscription-status`);
   }
 
   public cancelSubscription(): Observable<{ success: boolean; message: string }> {
-    return this.httpClient.post<{ success: boolean; message: string }>(`${this.apiUrl}/stripe/cancel-subscription`, {});
+    return this.httpClient.post<{ success: boolean; message: string }>(`${this.apiUrl}/subscription/cancel-subscription`, {});
   }
 }

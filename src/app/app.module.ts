@@ -25,7 +25,7 @@ import {NgxStripeModule} from 'ngx-stripe';
     }),
     AppRoutingModule,
     IonicModule.forRoot(),
-    NgxStripeModule.forRoot('pk_test_YOUR_STRIPE_PUBLISHABLE_KEY'),
+    NgxStripeModule.forRoot('pk_test_51Tajyn6OaGM1cAweYAKmsjd06IZReiaCN3k5iYmehQIazNbuVXx8RdEPrMrEIu42vxA1JBsEVUIPBylqJIcphhSR00CjCdDxFo'),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

@@ -34,7 +34,15 @@ export class SubscriptionPage implements OnInit {
     });
 
     // Charger le statut de l'abonnement au démarrage
-    this.subscriptionService.loadSubscriptionStatus().subscribe();
+    this.subscriptionService.loadSubscriptionStatus().subscribe(sub => {
+      if (sub?.status === 'active' || sub?.status === 'trialing') {
+        this.toastController.create({
+          message: this.translate.instant('SUBSCRIPTION.SUCCESS_MESSAGE') || 'Abonnement activé avec succès !',
+          duration: 3000,
+          color: 'success'
+        }).then(toast => toast.present());
+      }
+    });
   }
 
   public selectPlan(planId: string) {

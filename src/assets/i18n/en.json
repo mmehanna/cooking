@@ -290,6 +290,7 @@
     "CONFIRM": "Confirm",
     "ERROR": "An error occurred. Please try again.",
     "ACTIVE_PLAN": "Active plan",
+    "ALREADY_SUBSCRIBED": "Already subscribed",
     "CANCEL_SUBSCRIPTION": "Cancel my subscription",
     "CANCEL_CONFIRM_TITLE": "Cancel subscription",
     "CANCEL_CONFIRM_MESSAGE": "Are you sure you want to cancel your subscription? You will keep access until the end of the current period.",

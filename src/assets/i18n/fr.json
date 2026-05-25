@@ -290,6 +290,7 @@
     "CONFIRM": "Confirmer",
     "ERROR": "Une erreur s'est produite. Veuillez réessayer.",
     "ACTIVE_PLAN": "Forfait actif",
+    "ALREADY_SUBSCRIBED": "Déjà abonné",
     "CANCEL_SUBSCRIPTION": "Annuler mon abonnement",
     "CANCEL_CONFIRM_TITLE": "Annuler l'abonnement",
     "CANCEL_CONFIRM_MESSAGE": "Êtes-vous sûr de vouloir annuler votre abonnement ? Vous conserverez l'accès jusqu'à la fin de la période en cours.",

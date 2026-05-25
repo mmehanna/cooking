@@ -47,7 +47,7 @@ export class SubscriptionService {
   }
 
   public createCheckoutSession(planId: string): Observable<{ url: string }> {
-    const successUrl = `${window.location.origin}/subscription/success`;
+    const successUrl = `${window.location.origin}/subscription`;
     const cancelUrl = `${window.location.origin}/subscription`;
 
     return this.stripeClient.createCheckoutSession({
