@@ -274,5 +274,26 @@
     "REGENERATE_SUCCESS": "Grocery list regenerated",
     "REGENERATE_FAILED": "Failed to regenerate grocery list",
     "TOGGLE_FAILED": "Failed to update item"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "Subscription",
+    "HERO_TITLE": "Choose your plan",
+    "HERO_SUBTITLE": "Unlock all Atepla features to plan your meals without limits.",
+    "POPULAR": "Popular",
+    "DAYS_FREE": "days free",
+    "PER_MONTH": "month",
+    "PER_YEAR": "year",
+    "SUBSCRIBE": "Subscribe",
+    "CONFIRM_TITLE": "Confirm subscription",
+    "CONFIRM_MESSAGE": "You are about to subscribe to the {{planName}} plan at {{price}}. Confirm?",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "ERROR": "An error occurred. Please try again.",
+    "ACTIVE_PLAN": "Active plan",
+    "ALREADY_SUBSCRIBED": "Already subscribed",
+    "CANCEL_SUBSCRIPTION": "Cancel my subscription",
+    "CANCEL_CONFIRM_TITLE": "Cancel subscription",
+    "CANCEL_CONFIRM_MESSAGE": "Are you sure you want to cancel your subscription? You will keep access until the end of the current period.",
+    "MANAGE_SUBSCRIPTION": "Manage my subscription"
   }
 }

@@ -274,5 +274,26 @@
     "REGENERATE_SUCCESS": "Liste de courses régénérée",
     "REGENERATE_FAILED": "Échec de la régénération de la liste de courses",
     "TOGGLE_FAILED": "Échec de la mise à jour de l'élément"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "Abonnement",
+    "HERO_TITLE": "Choisissez votre forfait",
+    "HERO_SUBTITLE": "Débloquez toutes les fonctionnalités d'Atepla pour planifier vos repas sans limites.",
+    "POPULAR": "Populaire",
+    "DAYS_FREE": "jours gratuits",
+    "PER_MONTH": "mois",
+    "PER_YEAR": "an",
+    "SUBSCRIBE": "S'abonner",
+    "CONFIRM_TITLE": "Confirmer l'abonnement",
+    "CONFIRM_MESSAGE": "Vous êtes sur le point de souscrire au forfait {{planName}} à {{price}}. Confirmez-vous ?",
+    "CANCEL": "Annuler",
+    "CONFIRM": "Confirmer",
+    "ERROR": "Une erreur s'est produite. Veuillez réessayer.",
+    "ACTIVE_PLAN": "Forfait actif",
+    "ALREADY_SUBSCRIBED": "Déjà abonné",
+    "CANCEL_SUBSCRIPTION": "Annuler mon abonnement",
+    "CANCEL_CONFIRM_TITLE": "Annuler l'abonnement",
+    "CANCEL_CONFIRM_MESSAGE": "Êtes-vous sûr de vouloir annuler votre abonnement ? Vous conserverez l'accès jusqu'à la fin de la période en cours.",
+    "MANAGE_SUBSCRIPTION": "Gérer mon abonnement"
   }
 }

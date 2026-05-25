@@ -13,6 +13,7 @@ import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {AuthInterceptor} from "./_clients/interceptor.client";
 import {FamilyClient} from "./_clients/family.client";
 import {AuthService} from "./plates/services/auth.service";
+import {NgxStripeModule} from 'ngx-stripe';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import {AuthService} from "./plates/services/auth.service";
     }),
     AppRoutingModule,
     IonicModule.forRoot(),
+    NgxStripeModule.forRoot('pk_test_51Tajyn6OaGM1cAweYAKmsjd06IZReiaCN3k5iYmehQIazNbuVXx8RdEPrMrEIu42vxA1JBsEVUIPBylqJIcphhSR00CjCdDxFo'),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
