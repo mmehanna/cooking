@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'auth/callback',
+    loadChildren: () => import('./auth-callback/auth-callback.module').then(m => m.AuthCallbackPageModule)
+  },
+  {
     path: 'landing',
     loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule),
     canMatch: [AuthGuard]

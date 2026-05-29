@@ -24,6 +24,14 @@ export class AuthService {
     return this.authClient.register(user);
   }
 
+  public loginWithGoogle(): void {
+    window.location.href = this.authClient.getGoogleLoginUrl();
+  }
+
+  public completeGoogleLogin(token: string): void {
+    localStorage.setItem('accessToken', token);
+  }
+
   // Méthode de logout
   public logout() {
     // Supprimer le token du localStorage ou sessionStorage
@@ -92,5 +100,4 @@ export class AuthService {
   }
 
 }
-
 

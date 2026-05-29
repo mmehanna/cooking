@@ -1,0 +1,10 @@
+<ion-content [fullscreen]="true" class="auth-callback-content">
+  <div class="auth-callback-state">
+    <ion-spinner *ngIf="!hasError" name="crescent"></ion-spinner>
+    <h2>{{ hasError ? 'Connexion Google impossible' : 'Connexion en cours...' }}</h2>
+    <p *ngIf="hasError">Aucun jeton de connexion valide n'a ete recu.</p>
+    <ion-button *ngIf="hasError" routerLink="/login">
+      Retour a la connexion
+    </ion-button>
+  </div>
+</ion-content>

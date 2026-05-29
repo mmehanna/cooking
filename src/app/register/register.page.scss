@@ -203,6 +203,36 @@ ion-item ion-label {
   opacity: 0.5;
 }
 
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 14px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.google-btn {
+  height: 52px;
+  font-weight: 700;
+  font-size: 1rem;
+  --background: #ffffff;
+  --background-hover: #f8f8f8;
+  --color: #202124;
+  --border-color: rgba(0, 0, 0, 0.14);
+  --border-style: solid;
+  --border-width: 1px;
+  --box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
 .register-link {
   text-align: center;
   margin-top: 20px;
