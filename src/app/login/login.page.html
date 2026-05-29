@@ -41,6 +41,13 @@
         </ion-button>
       </form>
 
+      <div class="auth-divider"><span>ou</span></div>
+
+      <ion-button expand="full" type="button" class="google-btn" (click)="loginWithGoogle()">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+        {{ 'LOGIN.CONTINUE_WITH_GOOGLE' | translate }}
+      </ion-button>
+
       <div class="register-link">
         <ion-icon name="person-add-outline" size="small" color="primary"></ion-icon>
         <a routerLink="/register">{{ 'LOGIN.NOT_REGISTERED' | translate }}</a>

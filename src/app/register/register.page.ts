@@ -49,4 +49,8 @@ export class RegisterPage implements OnInit {
     }
   }
 
+  public registerWithGoogle(): void {
+    this.authService.loginWithGoogle();
+  }
+
 }

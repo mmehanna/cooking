@@ -27,4 +27,8 @@ export class AuthClient {
   public register(user: any): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/register`, user);
   }
+
+  public getGoogleLoginUrl(): string {
+    return `${this.apiUrl}/google`;
+  }
 }

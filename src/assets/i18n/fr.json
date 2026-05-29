@@ -39,6 +39,7 @@
     "EMAIL": "Email",
     "PASSWORD": "Mot de passe",
     "SUBMIT": "Se connecter",
+    "CONTINUE_WITH_GOOGLE": "Continuer avec Google",
     "NOT_REGISTERED": "Pas encore inscrit ? Cliquez ici !",
     "ALREADY_REGISTERED": "Déjà inscrit ? Se connecter",
     "HERO_TITLE": "Bienvenue",

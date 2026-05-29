@@ -41,4 +41,8 @@ export class LoginPage implements OnInit {
     }
   }
 
+  public loginWithGoogle(): void {
+    this.authService.loginWithGoogle();
+  }
+
 }
