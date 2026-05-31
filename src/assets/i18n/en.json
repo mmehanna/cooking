@@ -10,7 +10,8 @@
     "GROCERY_LIST": "Grocery List",
     "SETTINGS": "Settings",
     "HELP": "Help",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "WORLDWIDE_RECIPES": "Worldwide recipes"
   },
   "LANDING": {
     "TITLE": "Menu",
@@ -296,5 +297,24 @@
     "CANCEL_CONFIRM_TITLE": "Cancel subscription",
     "CANCEL_CONFIRM_MESSAGE": "Are you sure you want to cancel your subscription? You will keep access until the end of the current period.",
     "MANAGE_SUBSCRIPTION": "Manage my subscription"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "Worldwide recipes",
+    "SUBTITLE": "Browse 100 dinner ideas for each corner of the globe.",
+    "RECIPE_COUNT": "{{count}} recipes",
+    "RECIPE_LABEL": "recipes",
+    "REGION_LABEL": "regions",
+    "POPULAR_TITLE": "Most popular",
+    "POPULAR_SUBTITLE": "The world's favourite dinner recipes, ranked by global fame.",
+    "ADD_TO_PLATES": "Add to my plates",
+    "ADD_SUCCESS": "\"{{label}}\" added to your plates",
+    "ADD_FAILED": "Failed to add plate",
+    "REGIONS": {
+      "AFRICA": "Africa",
+      "AMERICAS": "Americas",
+      "ASIA": "Asia",
+      "EUROPE": "Europe",
+      "OCEANIA": "Oceania"
+    }
   }
 }
