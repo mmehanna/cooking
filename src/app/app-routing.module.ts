@@ -62,6 +62,11 @@ const routes: Routes = [
     canMatch: [AuthGuard]
   },
   {
+    path: 'worldwide-recipes',
+    loadChildren: () => import('./worldwide-recipes/worldwide-recipes.module').then(m => m.WorldwideRecipesPageModule),
+    canMatch: [AuthGuard]
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule),
     canMatch: [AuthGuard]

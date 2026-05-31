@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'WORLDWIDE_RECIPES.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="worldwide-content">
+  <ion-refresher slot="fixed" (ionRefresh)="loadRecipes($event); loadPopularRecipes();">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="worldwide-page">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-gradient"></div>
+      <div class="hero-content">
+        <div class="hero-icon">
+          <ion-icon name="earth"></ion-icon>
+        </div>
+        <h1>{{ 'WORLDWIDE_RECIPES.TITLE' | translate }}</h1>
+        <p>{{ 'WORLDWIDE_RECIPES.SUBTITLE' | translate }}</p>
+
+        <div class="hero-stats" *ngIf="!loading && regions.length > 0">
+          <div class="stat-pill">
+            <span class="stat-value">{{ regions.length }}</span>
+            <span class="stat-label">{{ 'WORLDWIDE_RECIPES.REGION_LABEL' | translate }}</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-value">{{ getTotalRecipes() }}</span>
+            <span class="stat-label">{{ 'WORLDWIDE_RECIPES.RECIPE_LABEL' | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-state" *ngIf="loading || loadingPopular">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <ion-accordion-group *ngIf="!loading && !loadingPopular" [multiple]="true" class="region-list">
+      <!-- Popular / Trending Accordion -->
+      <ion-accordion
+        *ngIf="popularRecipes.length > 0"
+        value="popular"
+        class="region-card popular-card"
+        [style.--stagger-index]="0"
+      >
+        <ion-item slot="header" class="region-header">
+          <div class="region-emoji" slot="start">
+            🏆
+          </div>
+          <ion-label>
+            <h2>{{ 'WORLDWIDE_RECIPES.POPULAR_TITLE' | translate }}</h2>
+            <p>
+              <ion-icon name="trophy"></ion-icon>
+              {{ popularRecipes.length }} {{ 'WORLDWIDE_RECIPES.RECIPE_LABEL' | translate }}
+            </p>
+          </ion-label>
+          <div class="region-badge popular-badge" slot="end">
+            <span class="region-count">{{ popularRecipes.length }}</span>
+          </div>
+        </ion-item>
+
+        <div slot="content" class="recipe-grid popular-grid">
+          <div
+            class="recipe-card popular-recipe-card"
+            *ngFor="let recipe of popularRecipes; let i = index"
+            [ngClass]="{ 'top-3': i < 3 }"
+            [style.--recipe-index]="i"
+          >
+            <div class="recipe-number popular-rank">
+              <span class="rank-number" [ngClass]="'rank-' + (i + 1)">{{ i + 1 }}</span>
+            </div>
+            <div class="recipe-info">
+              <span class="recipe-name">{{ recipe.name }}</span>
+              <div class="popular-meta">
+                <span class="recipe-tag">
+                  {{ getRegionEmoji(recipe.region || '') }} {{ recipe.region }}
+                </span>
+                <span class="popular-score" *ngIf="recipe.popularityScore">
+                  <ion-icon name="flame"></ion-icon>
+                  {{ recipe.popularityScore }}
+                </span>
+              </div>
+            </div>
+            <ion-button
+              class="add-btn"
+              fill="solid"
+              size="small"
+              shape="round"
+              (click)="addRecipeToPlates(recipe)"
+            >
+              <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion
+        *ngFor="let region of regions; let i = index"
+        [value]="region.region"
+        class="region-card"
+        [ngClass]="'region-' + region.region.toLowerCase()"
+        [style.--stagger-index]="i + 1"
+      >
+        <ion-item slot="header" class="region-header">
+          <div class="region-emoji" slot="start">
+            {{ getRegionEmoji(region.region) }}
+          </div>
+          <ion-label>
+            <h2>{{ 'WORLDWIDE_RECIPES.REGIONS.' + region.region.toUpperCase() | translate }}</h2>
+            <p>
+              <ion-icon [name]="getRegionIcon(region.region)"></ion-icon>
+              {{ 'WORLDWIDE_RECIPES.RECIPE_COUNT' | translate: { count: region.recipes.length } }}
+            </p>
+          </ion-label>
+          <div class="region-badge" slot="end">
+            <span class="region-count">{{ region.recipes.length }}</span>
+          </div>
+        </ion-item>
+
+        <div slot="content" class="recipe-grid">
+          <div
+            class="recipe-card"
+            *ngFor="let recipe of region.recipes; let index = index"
+            [style.--recipe-index]="index"
+          >
+            <div class="recipe-number">{{ index + 1 }}</div>
+            <div class="recipe-info">
+              <span class="recipe-name">{{ recipe.name }}</span>
+              <span class="recipe-tag">{{ region.region }}</span>
+            </div>
+            <ion-button
+              class="add-btn"
+              fill="solid"
+              size="small"
+              shape="round"
+              (click)="addRecipeToPlates(recipe)"
+            >
+              <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+</ion-content>

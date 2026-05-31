@@ -10,7 +10,8 @@
     "GROCERY_LIST": "Liste de courses",
     "SETTINGS": "Paramètres",
     "HELP": "Aide",
-    "LOGOUT": "Déconnexion"
+    "LOGOUT": "Déconnexion",
+    "WORLDWIDE_RECIPES": "Recettes du monde"
   },
   "LANDING": {
     "TITLE": "Menu",
@@ -296,5 +297,24 @@
     "CANCEL_CONFIRM_TITLE": "Annuler l'abonnement",
     "CANCEL_CONFIRM_MESSAGE": "Êtes-vous sûr de vouloir annuler votre abonnement ? Vous conserverez l'accès jusqu'à la fin de la période en cours.",
     "MANAGE_SUBSCRIPTION": "Gérer mon abonnement"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "Recettes du monde",
+    "SUBTITLE": "Découvrez 100 idées de souper pour chaque coin du globe.",
+    "RECIPE_COUNT": "{{count}} recettes",
+    "RECIPE_LABEL": "recettes",
+    "REGION_LABEL": "régions",
+    "POPULAR_TITLE": "Les plus populaires",
+    "POPULAR_SUBTITLE": "Les recettes de souper préférées dans le monde, classées par notoriété.",
+    "ADD_TO_PLATES": "Ajouter à mes plats",
+    "ADD_SUCCESS": "\"{{label}}\" ajouté à vos plats",
+    "ADD_FAILED": "Échec de l'ajout du plat",
+    "REGIONS": {
+      "AFRICA": "Afrique",
+      "AMERICAS": "Amériques",
+      "ASIA": "Asie",
+      "EUROPE": "Europe",
+      "OCEANIA": "Océanie"
+    }
   }
 }
