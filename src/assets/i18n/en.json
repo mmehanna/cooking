@@ -13,6 +13,9 @@
     "LOGOUT": "Logout",
     "WORLDWIDE_RECIPES": "Worldwide recipes"
   },
+  "COMMON": {
+    "BACK": "Back"
+  },
   "LANDING": {
     "TITLE": "Menu",
     "USER": "User",
@@ -120,9 +123,15 @@
     "REMOVE_FAILED": "Remove unsuccessful"
   },
   "CHOOSE_DATE": {
-    "NEXT": "next",
+    "NEXT": "Next",
     "TITLE": "choose the date",
     "TITLE_LARGE": "Choose your date",
+    "STEP_LABEL": "Planning",
+    "SUBTITLE": "Select the day you want to prepare meals for.",
+    "CALENDAR_LABEL": "Calendar",
+    "SELECT_DAY": "Select a day",
+    "SELECTED_LABEL": "Selected date",
+    "NO_DATE_SELECTED": "No date selected",
     "UNAVAILABLE": "This date is unavailable."
   },
   "CHOOSE_PLATE": {
@@ -138,7 +147,12 @@
     "WEEK_LIST_SAVED": "Your week list is saved!",
     "SAVE_SUCCESS": "Plates saved successfully!",
     "SAVE_FAILED": "Failed to save plates. Please try again.",
-    "MAX_PLATES_EXCEEDED": "You have exceeded the number of food per day! The number allowed is three."
+    "MAX_PLATES_EXCEEDED": "You have exceeded the number of food per day! The number allowed is three.",
+    "STEP_LABEL": "Meal selection",
+    "HERO_SUBTITLE": "Choose up to three plates and assign each one to the right moment of the day.",
+    "SELECTED_COUNT": "plates selected",
+    "EMPTY_TITLE": "No plates found",
+    "EMPTY_SUBTITLE": "Try another filter or add a new plate."
   },
   "PLATES_FOR_DAY": {
     "TITLE": "Choose a date",

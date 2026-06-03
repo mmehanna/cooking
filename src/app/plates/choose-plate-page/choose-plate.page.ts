@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ModalController, ToastController} from "@ionic/angular";
 import {lastValueFrom, Subscription} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
-import {formatDate} from "@angular/common";
+import {formatDate, Location} from "@angular/common";
+import {TranslateService} from "@ngx-translate/core";
 import {PlateService} from "../services/plate.service";
 import {PlateItemBo} from "../bos/plate-item.bo";
 import {LinkPlateListIdToSelectedDateDto} from "./dtos/link-plate-list-id-to-selected-date.dto";
@@ -11,22 +12,31 @@ import {PlateDetailsModal} from "../plate-details-modal/plate-details.modal";
 import {Router} from "@angular/router";
 
 @Component({
-  templateUrl: 'choose-plate.page.html',
-  styleUrls: ['choose-plate.page.scss'],
+  templateUrl: "choose-plate.page.html",
+  styleUrls: ["choose-plate.page.scss"],
 })
 
 export class ChoosePlatePage implements OnInit, OnDestroy {
   public plateList: PlateItemBo[] = [];
+  public filteredPlateList: PlateItemBo[] = [];
+  public selectedMealType: "breakfast" | "lunch" | "dinner" = "dinner";
+  public selectedSegment: "all" | "breakfast" | "lunch" | "dinner" = "all";
+  public maxPlates = 3;
+
   private subscription$ = new Subscription();
   private plateListWithMealType: LinkPlateListIdToSelectedDateDto = new LinkPlateListIdToSelectedDateDto([]);
-  public filteredPlateList: PlateItemBo[] = [];
-  public selectedMealType: 'breakfast' | 'lunch' | 'dinner' = 'dinner'; // Valeur par défaut
 
   constructor(private plateService: PlateService,
               private modalController: ModalController,
               private toastController: ToastController,
               private router: Router,
+              private location: Location,
+              private translate: TranslateService,
   ) {
+  }
+
+  public get selectedPlateCount(): number {
+    return this.plateListWithMealType.plateList.length;
   }
 
   ngOnInit() {
@@ -34,16 +44,22 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
   }
 
   public onSegmentChange(event: any) {
-    const selectedSegment = event.detail.value;
-    this.selectedMealType = selectedSegment;
+    const selectedSegment = event.detail.value as "all" | "breakfast" | "lunch" | "dinner";
+    this.applySegmentFilter(selectedSegment);
+  }
 
-    if (selectedSegment === 'all') {
+  public setSegment(value: "all" | "breakfast" | "lunch" | "dinner") {
+    this.applySegmentFilter(value);
+  }
+
+  private applySegmentFilter(selectedSegment: "all" | "breakfast" | "lunch" | "dinner") {
+    this.selectedSegment = selectedSegment;
+
+    if (selectedSegment === "all") {
       this.filteredPlateList = this.plateList;
-      console.log('Tous les plats :', this.filteredPlateList);
-
     } else {
+      this.selectedMealType = selectedSegment;
       this.filteredPlateList = this.plateList.filter(plate => plate.category === selectedSegment);
-      console.log('Plats filtrés :', this.filteredPlateList);
     }
   }
 
@@ -52,9 +68,8 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       .getPlates()
       .subscribe((plateList: PlateItemBo[]) => {
         this.plateList = plateList;
-        this.filteredPlateList = [...this.plateList]; // Mettre à jour filteredPlateList avec les données récupérées
+        this.filteredPlateList = [...this.plateList];
 
-        // Initialize selectedMealType for each plate
         this.plateList.forEach(plate => {
           if (!plate.selectedMealType) {
             plate.selectedMealType = this.selectedMealType;
@@ -62,7 +77,6 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
         });
 
         this.restoreSelectionForCurrentDate();
-        console.log(this.plateList);
       });
     this.subscription$.add(plateListSubscription$);
   }
@@ -73,12 +87,12 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
     }
 
     try {
-      const formattedDate = formatDate(this.plateService.date, 'yyyy-MM-dd', 'en-US');
+      const formattedDate = formatDate(this.plateService.date, "yyyy-MM-dd", "en-US");
       const selectedPlates = await lastValueFrom(this.plateService.listPlatesForTargetedDate(formattedDate));
-      const mealTypeByPlateId = new Map<string, 'breakfast' | 'lunch' | 'dinner'>();
+      const mealTypeByPlateId = new Map<string, "breakfast" | "lunch" | "dinner">();
 
       selectedPlates.forEach((plate) => {
-        const mealType = (plate.mealType || 'dinner') as 'breakfast' | 'lunch' | 'dinner';
+        const mealType = (plate.mealType || "dinner") as "breakfast" | "lunch" | "dinner";
         mealTypeByPlateId.set(plate.id, mealType);
       });
 
@@ -95,45 +109,35 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
         }
       });
     } catch (err) {
-      console.error('Error restoring selected plates for date:', err);
+      console.error("Error restoring selected plates for date:", err);
     }
   }
 
   public async togglePlateSelection(plate: PlateItemBo) {
-    // Créer une copie de l'état avant modification
     const wasSelected = plate.isSelected;
-
-    // Inverser l'état de sélection
     plate.isSelected = !wasSelected;
 
     if (plate.isSelected) {
-      // Vérifier la limite avant d'ajouter
-      if (this.plateListWithMealType.plateList.length >= 3) {
+      if (this.plateListWithMealType.plateList.length >= this.maxPlates) {
         await this.quantityErrorMessage();
-        // Annuler la sélection si la limite est atteinte
         plate.isSelected = false;
         return;
       }
 
-      // Ajouter le plat avec son type de repas
       const plateWithMealType: PlateWithMealTypeDto = {
         plateId: plate.id,
         mealType: plate.selectedMealType || this.selectedMealType
       };
       this.plateListWithMealType.plateList.push(plateWithMealType);
     } else {
-      // Retirer l'entrée spécifique de la liste
       const index = this.plateListWithMealType.plateList.findIndex(item => item.plateId === plate.id);
       if (index > -1) {
         this.plateListWithMealType.plateList.splice(index, 1);
       }
     }
-
-    console.log(`Plate ${plate.label} selected: ${plate.isSelected}, Total selected: ${this.plateListWithMealType.plateList.length}`);
   }
 
   public updatePlateMealType(plate: PlateItemBo) {
-    // Find and update the meal type for this plate in the list
     const existingIndex = this.plateListWithMealType.plateList.findIndex(item => item.plateId === plate.id);
     if (existingIndex > -1) {
       this.plateListWithMealType.plateList[existingIndex].mealType = plate.selectedMealType;
@@ -142,42 +146,34 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
 
   public async linkPlateListToDate() {
     try {
-      this.plateService.date = formatDate(this.plateService.date, 'yyyy-MM-dd', 'en-US');
-      const response = await lastValueFrom(this.plateService.linkPlateListToDate(this.plateService.date, this.plateListWithMealType));
+      this.plateService.date = formatDate(this.plateService.date, "yyyy-MM-dd", "en-US");
+      await lastValueFrom(this.plateService.linkPlateListToDate(this.plateService.date, this.plateListWithMealType));
 
-      // Afficher un message de succès et rediriger
       const toast = await this.toastController.create({
-        message: 'Plates saved successfully!',
+        message: this.translate.instant("CHOOSE_PLATE.SAVE_SUCCESS"),
         duration: 2000,
-        color: 'success'
+        color: "success"
       });
       await toast.present();
 
-      // Rediriger vers la page landing après un court délai
       setTimeout(() => {
-        this.router.navigate(['/landing']);
+        this.router.navigate(["/landing"]);
       }, 2000);
 
     } catch (err) {
-      // Log the error details, including the response body
-      console.error('Error on the service:', err);
+      console.error("Error on the service:", err);
       if (err instanceof HttpErrorResponse) {
-        console.error('Response body:', err.error);
+        console.error("Response body:", err.error);
 
-        // Handle specific validation errors
         if (err.status === 400 && err.error && err.error.message) {
-          const validationMessages = err.error.message;
-
-          // Display validation messages to the user or handle them appropriately
-          console.error('Validation Errors:', validationMessages);
+          console.error("Validation Errors:", err.error.message);
         }
       }
 
-      // Afficher un message d'erreur
       const errorToast = await this.toastController.create({
-        message: 'Failed to save plates. Please try again.',
+        message: this.translate.instant("CHOOSE_PLATE.SAVE_FAILED"),
         duration: 2000,
-        color: 'danger'
+        color: "danger"
       });
       await errorToast.present();
     }
@@ -188,24 +184,23 @@ export class ChoosePlatePage implements OnInit, OnDestroy {
       component: PlateDetailsModal
     }).then(modal => {
       modal.present();
-    })
+    });
   }
-
   private async quantityErrorMessage() {
     const toast = await this.toastController.create({
-      message: "You have exceeded the number of food per day! The number allowed is three.",
+      message: this.translate.instant("CHOOSE_PLATE.MAX_PLATES_EXCEEDED"),
       duration: 3000,
-      position: 'top'
+      position: "top"
     });
     await toast.present();
   }
 
-  public goToChooseDate() {
-    this.router.navigate(['/choose-date']);
+  public goBack() {
+    this.location.back();
   }
 
   public cancelAndClose() {
-    this.router.navigate(['/landing']);
+    this.router.navigate(["/landing"]);
   }
 
   ngOnDestroy() {
