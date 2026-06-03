@@ -1,66 +1,127 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="goToChooseDate()"></ion-back-button>
+      <ion-back-button [text]="'COMMON.BACK' | translate" defaultHref="/landing" (click)="goBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'CHOOSE_PLATE.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="medium" (click)="cancelAndClose()">
-        {{ 'CHOOSE_PLATE.CANCEL' | translate }}
+      <ion-button fill="clear" class="cancel-button" (click)="cancelAndClose()">
+        {{ "CHOOSE_PLATE.CANCEL" | translate }}
       </ion-button>
-      <ion-button (click)="linkPlateListToDate()" id="open-toast">{{ 'CHOOSE_PLATE.SAVE' | translate }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-segment (ionChange)="onSegmentChange($event)" value="all">
-    <ion-segment-button value="all">
-      <ion-label>{{ 'CHOOSE_PLATE.ALL' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="breakfast">
-      <ion-label>{{ 'CHOOSE_PLATE.BREAKFAST' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="lunch">
-      <ion-label>{{ 'CHOOSE_PLATE.LUNCH' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="dinner">
-      <ion-label>{{ 'CHOOSE_PLATE.DINNER' | translate }}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 
-  <ion-list>
-    <ion-item *ngFor="let plate of filteredPlateList">
-      <ion-checkbox
-        [checked]="plate.isSelected"
-        (ionChange)="togglePlateSelection(plate)"
-        justify="start"
-        labelPlacement="end">
-        {{ plate.label }}
-      </ion-checkbox>
-      <ion-button fill="clear" [routerLink]="['plate-details-page',plate.id]" slot="end">
-        {{ 'CHOOSE_PLATE.DETAILS' | translate }}
-      </ion-button>
-      <!-- Meal type selection for selected plates -->
-      <ion-select
-        *ngIf="plate.isSelected"
-        [(ngModel)]="plate.selectedMealType"
-        [placeholder]="'CHOOSE_PLATE.SELECT_MEAL_TYPE' | translate"
-        (ionChange)="updatePlateMealType(plate)">
-        <ion-select-option value="breakfast">{{ 'CHOOSE_PLATE.BREAKFAST' | translate }}</ion-select-option>
-        <ion-select-option value="lunch">{{ 'CHOOSE_PLATE.LUNCH' | translate }}</ion-select-option>
-        <ion-select-option value="dinner">{{ 'CHOOSE_PLATE.DINNER' | translate }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+<ion-content [fullscreen]="true" class="choose-plate-content">
+  <div class="page-shell">
+    <section class="page-intro">
+      <h1>{{ "CHOOSE_PLATE.TITLE" | translate }}</h1>
+    </section>
+    <section class="page-intro">
+      <p>{{ "CHOOSE_PLATE.STEP_LABEL" | translate }}</p>
+    </section>
 
-  <ion-fab (click)="presentCreatePlateModal()" horizontal="end" slot="fixed" vertical="bottom">
+    <section class="selection-hero">
+      <h6>{{ "CHOOSE_PLATE.HERO_SUBTITLE" | translate }}</h6>
+
+      <div class="selection-summary">
+        <strong>{{ selectedPlateCount }}/{{ maxPlates }}</strong>
+        <span>{{ "CHOOSE_PLATE.SELECTED_COUNT" | translate }}</span>
+      </div>
+    </section>
+
+    <section class="filter-panel">
+      <!-- Desktop / tablet: classic segment -->
+      <ion-segment class="filter-segment-desktop" (ionChange)="onSegmentChange($event)" [value]="selectedSegment" mode="ios">
+        <ion-segment-button value="all">
+          <ion-icon name="restaurant-outline"></ion-icon>
+          <ion-label>{{ "CHOOSE_PLATE.ALL" | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="breakfast">
+          <ion-icon name="cafe-outline"></ion-icon>
+          <ion-label>{{ "CHOOSE_PLATE.BREAKFAST" | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="lunch">
+          <ion-icon name="sunny-outline"></ion-icon>
+          <ion-label>{{ "CHOOSE_PLATE.LUNCH" | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="dinner">
+          <ion-icon name="moon-outline"></ion-icon>
+          <ion-label>{{ "CHOOSE_PLATE.DINNER" | translate }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <!-- Mobile: visual 2×2 grid — no scroll needed -->
+      <div class="filter-grid-mobile">
+        <button class="filter-chip" [class.active]="selectedSegment === 'all'" (click)="setSegment('all')">
+          <ion-icon name="restaurant-outline"></ion-icon>
+          <span>{{ "CHOOSE_PLATE.ALL" | translate }}</span>
+        </button>
+        <button class="filter-chip" [class.active]="selectedSegment === 'breakfast'" (click)="setSegment('breakfast')">
+          <ion-icon name="cafe-outline"></ion-icon>
+          <span>{{ "CHOOSE_PLATE.BREAKFAST" | translate }}</span>
+        </button>
+        <button class="filter-chip" [class.active]="selectedSegment === 'lunch'" (click)="setSegment('lunch')">
+          <ion-icon name="sunny-outline"></ion-icon>
+          <span>{{ "CHOOSE_PLATE.LUNCH" | translate }}</span>
+        </button>
+        <button class="filter-chip" [class.active]="selectedSegment === 'dinner'" (click)="setSegment('dinner')">
+          <ion-icon name="moon-outline"></ion-icon>
+          <span>{{ "CHOOSE_PLATE.DINNER" | translate }}</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="plate-list" *ngIf="filteredPlateList.length > 0; else emptyState">
+      <article class="plate-card" *ngFor="let plate of filteredPlateList" [class.selected]="plate.isSelected">
+        <div class="plate-main">
+          <ion-checkbox
+            [checked]="plate.isSelected"
+            (ionChange)="togglePlateSelection(plate)"
+            justify="start"
+            labelPlacement="end">
+            <span>{{ plate.label }}</span>
+          </ion-checkbox>
+
+          <ion-button fill="clear" class="details-button" [routerLink]="['plate-details-page', plate.id]"
+                      aria-label="Details">
+            <ion-icon name="information-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="meal-select" *ngIf="plate.isSelected">
+          <ion-label>{{ "CHOOSE_PLATE.SELECT_MEAL_TYPE" | translate }}</ion-label>
+          <ion-select
+            interface="popover"
+            [(ngModel)]="plate.selectedMealType"
+            [placeholder]="'CHOOSE_PLATE.SELECT_MEAL_TYPE' | translate"
+            (ionChange)="updatePlateMealType(plate)">
+            <ion-select-option value="breakfast">{{ "CHOOSE_PLATE.BREAKFAST" | translate }}</ion-select-option>
+            <ion-select-option value="lunch">{{ "CHOOSE_PLATE.LUNCH" | translate }}</ion-select-option>
+            <ion-select-option value="dinner">{{ "CHOOSE_PLATE.DINNER" | translate }}</ion-select-option>
+          </ion-select>
+        </div>
+      </article>
+    </section>
+
+    <ng-template #emptyState>
+      <section class="empty-state">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        <h2>{{ "CHOOSE_PLATE.EMPTY_TITLE" | translate }}</h2>
+        <p>{{ "CHOOSE_PLATE.EMPTY_SUBTITLE" | translate }}</p>
+      </section>
+    </ng-template>
+  </div>
+
+  <ion-fab (click)="presentCreatePlateModal()" horizontal="end" slot="fixed" vertical="bottom" class="add-fab">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-toast [duration]="2000"
-             message="Your week list is saved!"
-             trigger="open-toast">
-  </ion-toast>
+  <div class="bottom-action">
+    <ion-button expand="block" size="large" (click)="linkPlateListToDate()">
+      {{ "CHOOSE_PLATE.SAVE" | translate }}
+      <ion-icon name="checkmark-outline" slot="end"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>

@@ -1,29 +1,33 @@
-import {Component} from '@angular/core';
+import {Component} from "@angular/core";
 import {PlateService} from "../services/plate.service";
 import {ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-choose-date-page',
-  templateUrl: './choose-date.page.html',
-  styleUrls: ['./choose-date.page.scss'],
+  selector: "app-choose-date-page",
+  templateUrl: "./choose-date.page.html",
+  styleUrls: ["./choose-date.page.scss"],
 })
 export class ChooseDatePage {
+  public minDate = this.getTodayIsoDate();
+
   constructor(public plateService: PlateService,
               private toastController: ToastController,
               private router: Router,
-              private location: Location
+              private location: Location,
+              private translate: TranslateService
   ) {
   }
 
   public goBack() {
-    this.router.navigate(['/landing']);
+    this.router.navigate(["/landing"]);
   }
 
   public nextPageValidation() {
     if (this.timeValidation() == true) {
-      this.router.navigate(['/choose-plate']);
+      this.router.navigate(["/choose-plate"]);
     } else {
       this.dateTimeErrorMessage().then(r => {
       });
@@ -56,37 +60,19 @@ export class ChooseDatePage {
 
   private async dateTimeErrorMessage() {
     const toast = await this.toastController.create({
-      message: "This date is unavailable.",
+      message: this.translate.instant("CHOOSE_DATE.UNAVAILABLE"),
       duration: 3000,
-      position: 'top'
+      position: "top"
     });
     await toast.present();
   }
+
+  private getTodayIsoDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = `${today.getMonth() + 1}`.padStart(2, "0");
+    const day = `${today.getDate()}`.padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
 }
-
-// public oneSelectedDate() {
-//   if (this.foodService.date) {
-//     const dateTime = new Date(this.foodService.date);
-//     const today = new Date();
-//
-//     console.log("date de this.foodService.date" + this.foodService.date);
-//
-//     if(dateTime < today){
-//       console.log("this date is unavailable");
-//     }
-//   } else {
-//     console.error('this.date is undefined.'); // Log an error or handle the situation accordingly
-//   }
-// }
-
-// public oneSelectedDate() {
-//   if (this.foodService.date) {
-//
-//     //Écrir dans la base de donnée
-//     console.log(this.foodService.date);
-//     this.foodService.addDate(this.foodService.date)
-//       .subscribe(date => this.foodService.date = date);
-//   } else {
-//     console.error('this.date is undefined.'); // Log an error or handle the situation accordingly
-//   }
-// }

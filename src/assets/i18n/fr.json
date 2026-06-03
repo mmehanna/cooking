@@ -13,6 +13,9 @@
     "LOGOUT": "Déconnexion",
     "WORLDWIDE_RECIPES": "Recettes du monde"
   },
+  "COMMON": {
+    "BACK": "Retour"
+  },
   "LANDING": {
     "TITLE": "Menu",
     "USER": "Utilisateur",
@@ -120,9 +123,15 @@
     "REMOVE_FAILED": "Échec du retrait"
   },
   "CHOOSE_DATE": {
-    "NEXT": "suivant",
+    "NEXT": "Suivant",
     "TITLE": "choisir la date",
     "TITLE_LARGE": "Choisissez votre date",
+    "STEP_LABEL": "Planification",
+    "SUBTITLE": "Sélectionnez le jour pour lequel vous souhaitez préparer des repas.",
+    "CALENDAR_LABEL": "Calendrier",
+    "SELECT_DAY": "Sélectionnez un jour",
+    "SELECTED_LABEL": "Date sélectionnée",
+    "NO_DATE_SELECTED": "Aucune date sélectionnée",
     "UNAVAILABLE": "Cette date n'est pas disponible."
   },
   "CHOOSE_PLATE": {
@@ -138,7 +147,12 @@
     "WEEK_LIST_SAVED": "Votre liste de la semaine est enregistrée !",
     "SAVE_SUCCESS": "Plats enregistrés avec succès !",
     "SAVE_FAILED": "Échec de l'enregistrement des plats. Veuillez réessayer.",
-    "MAX_PLATES_EXCEEDED": "Vous avez dépassé le nombre de plats par jour ! Le nombre autorisé est de trois."
+    "MAX_PLATES_EXCEEDED": "Vous avez dépassé le nombre de plats par jour ! Le nombre autorisé est de trois.",
+    "STEP_LABEL": "Sélection des repas",
+    "HERO_SUBTITLE": "Choisissez jusqu'à trois plats et assignez-les au bon moment de la journée.",
+    "SELECTED_COUNT": "plats sélectionnés",
+    "EMPTY_TITLE": "Aucun plat trouvé",
+    "EMPTY_SUBTITLE": "Essayez un autre filtre ou ajoutez un nouveau plat."
   },
   "PLATES_FOR_DAY": {
     "TITLE": "Choisir une date",

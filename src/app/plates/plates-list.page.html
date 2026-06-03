@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-back-button slot="start" defaultHref="/landing"></ion-back-button>
+    <ion-back-button [text]="'COMMON.BACK' | translate" slot="start" defaultHref="/landing"></ion-back-button>
     <ion-title>{{ 'PLATES.MANAGE' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleSelectionMode()" fill="clear">
