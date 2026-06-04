@@ -1,89 +1,145 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title size="large">{{ 'PLATE_DETAILS.TITLE' | translate }}</ion-title>
+<ion-header class="modal-header">
+  <ion-toolbar class="modal-toolbar">
+    <div class="modal-header__brand">
+      <div class="modal-header__icon-wrap">
+        <ion-icon name="restaurant-outline" class="modal-header__icon"></ion-icon>
+      </div>
+      <div class="modal-header__text">
+        <h1 class="modal-header__title">{{ modalTitle }}</h1>
+        <p class="modal-header__subtitle">{{ modalSubtitle }}</p>
+      </div>
+    </div>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">
-        <ion-icon name="close"></ion-icon>
+      <ion-button (click)="closeModal()" class="modal-close-btn">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form [formGroup]="plateForm">
-    <ion-item>
-      <ion-label>{{ 'PLATE_DETAILS.PLATE_NAME' | translate }}</ion-label>
-      <input formControlName="label"
-             maxlength="20"
-             type="text">
-    </ion-item>
-    <ion-item>
-      <ion-label>{{ 'PLATE_DETAILS.PLATE_DESCRIPTION' | translate }}</ion-label>
-      <input formControlName="description"
-             maxlength="20"
-             type="text">
-    </ion-item>
-    <br/>
-    <ion-label>{{ 'PLATE_DETAILS.CATEGORY' | translate }}</ion-label>
-    <br/>
-    <ion-radio-group [(ngModel)]="selectedCategory" formControlName="category">
-      <ion-item>
-        <ion-label>{{ 'PLATE_DETAILS.BREAKFAST' | translate }}</ion-label>
-        <ion-radio slot="start" value="breakfast"></ion-radio>
-      </ion-item>
+<ion-content class="modal-content">
+  <div class="modal-shell">
+    <form [formGroup]="plateForm">
 
-      <ion-item>
-        <ion-label>{{ 'PLATE_DETAILS.LUNCH' | translate }}</ion-label>
-        <ion-radio slot="start" value="lunch"></ion-radio>
-      </ion-item>
+      <!-- Card: General Info -->
+      <div class="form-card">
+        <div class="form-card__header">
+          <ion-icon name="information-circle-outline" class="form-card__icon"></ion-icon>
+          <span class="form-card__title">{{ 'PLATE_DETAILS.PLATE_NAME' | translate }}</span>
+        </div>
 
-      <ion-item>
-        <ion-label>{{ 'PLATE_DETAILS.DINNER' | translate }}</ion-label>
-        <ion-radio slot="start" value="dinner"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
+        <div class="form-field">
+          <label class="form-field__label">Nom du plat</label>
+          <input
+            class="form-field__input"
+            formControlName="label"
+            maxlength="40"
+            placeholder="Ex: Poulet rôti aux herbes"
+            type="text">
+        </div>
 
+        <div class="form-field">
+          <label class="form-field__label">Description</label>
+          <input
+            class="form-field__input"
+            formControlName="description"
+            maxlength="120"
+            placeholder="Une courte description de votre plat"
+            type="text">
+        </div>
+      </div>
 
-    <!--        <ion-item>-->
-    <!--      <ion-checkbox alignment="start" formControlName="breakfast" label-placement="stacked">Breakfast</ion-checkbox>-->
-    <!--    </ion-item>-->
+      <!-- Card: Category -->
+      <div class="form-card">
+        <div class="form-card__header">
+          <ion-icon name="albums-outline" class="form-card__icon"></ion-icon>
+          <span class="form-card__title">Catégorie</span>
+        </div>
 
-    <!--    <ion-item>-->
-    <!--      <ion-checkbox alignment="start" formControlName="lunch" label-placement="stacked">Lunch</ion-checkbox>-->
-    <!--    </ion-item>-->
+        <div class="category-grid">
+          <div
+            class="category-option"
+            *ngFor="let cat of categories"
+            [class.category-option--active]="selectedCategory === cat.value"
+            (click)="selectedCategory = cat.value; plateForm.patchValue({ category: cat.value })">
+            <div class="category-option__icon-wrap">
+              <ion-icon [name]="cat.icon" class="category-option__icon"></ion-icon>
+            </div>
+            <span class="category-option__label">{{ cat.label }}</span>
+            <span class="category-option__desc">{{ cat.desc }}</span>
+            <div class="category-option__check" *ngIf="selectedCategory === cat.value">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!--    <ion-item>-->
-    <!--      <ion-checkbox alignment="start" formControlName="dinner" label-placement="stacked">Dinner</ion-checkbox>-->
-    <!--    </ion-item>-->
+      <!-- Card: Steps -->
+      <div class="form-card">
+        <div class="form-card__header">
+          <ion-icon name="list-outline" class="form-card__icon"></ion-icon>
+          <span class="form-card__title">{{ 'PLATE_DETAILS.STEPS' | translate }}</span>
+        </div>
+        <textarea
+          [(ngModel)]="steps"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-textarea"
+          placeholder="{{ 'PLATE_DETAILS.STEPS_PLACEHOLDER' | translate }}"
+          rows="5"></textarea>
+      </div>
 
-    <br/>
-  </form>
+      <!-- Card: Ingredients -->
+      <div class="form-card">
+        <div class="form-card__header">
+          <ion-icon name="flask-outline" class="form-card__icon"></ion-icon>
+          <span class="form-card__title">{{ 'PLATE_DETAILS.INGREDIENTS' | translate }}</span>
+          <span class="form-card__badge" *ngIf="ingredients.length">{{ ingredients.length }}</span>
+        </div>
 
-  <ion-item>
-    <ion-label position="stacked">{{ 'PLATE_DETAILS.STEPS' | translate }}</ion-label>
-    <textarea [(ngModel)]="steps" rows="5" placeholder="{{ 'PLATE_DETAILS.STEPS_PLACEHOLDER' | translate }}" style="width: 100%;"></textarea>
-  </ion-item>
+        <div class="ingredients-list" *ngIf="ingredients.length > 0">
+          <div class="ingredient-row" *ngFor="let ingredient of ingredients; let i = index">
+            <div class="ingredient-row__num">{{ i + 1 }}</div>
+            <input [(ngModel)]="ingredient.name" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--name" placeholder="Nom" type="text">
+            <input [(ngModel)]="ingredient.quantity" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--qty" placeholder="Qté" type="text">
+            <input [(ngModel)]="ingredient.unit" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--unit" placeholder="Unité" type="text">
+            <button class="ingredient-delete" (click)="removeIngredientRow(i)" title="Retirer">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
 
-  <ion-list>
-    <ion-list-header>{{ 'PLATE_DETAILS.INGREDIENTS' | translate }}</ion-list-header>
-    <ion-item *ngFor="let ingredient of ingredients; let i = index">
-      <ion-input [(ngModel)]="ingredient.name" placeholder="{{ 'PLATE_DETAILS.INGREDIENT_NAME' | translate }}"></ion-input>
-      <ion-input [(ngModel)]="ingredient.quantity" placeholder="{{ 'PLATE_DETAILS.QUANTITY' | translate }}" style="max-width: 60px;"></ion-input>
-      <ion-input [(ngModel)]="ingredient.unit" placeholder="{{ 'PLATE_DETAILS.UNIT' | translate }}" style="max-width: 60px;"></ion-input>
-      <ion-button fill="clear" color="danger" (click)="removeIngredientRow(i)">
-        <ion-icon name="trash" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-item>
-    <ion-button fill="clear" (click)="addIngredientRow()">
-      <ion-icon name="add" slot="start"></ion-icon>
-      {{ 'PLATE_DETAILS.ADD_INGREDIENT' | translate }}
-    </ion-button>
-  </ion-list>
+        <div class="ingredients-empty" *ngIf="ingredients.length === 0">
+          <ion-icon name="flask-outline" class="ingredients-empty__icon"></ion-icon>
+          <p class="ingredients-empty__text">Aucun ingrédient pour le moment</p>
+        </div>
 
-  <br/>
-  <ion-button>{{ 'PLATE_DETAILS.TAKE_PICTURE' | translate }}</ion-button>
-  <ion-button (click)="savePlate()"
-              id="open-toast">{{ 'PLATE_DETAILS.SAVE' | translate }}
-  </ion-button>
+        <button class="add-ingredient-btn" (click)="addIngredientRow()">
+          <ion-icon name="add-circle-outline" class="add-ingredient-btn__icon"></ion-icon>
+          <span>{{ 'PLATE_DETAILS.ADD_INGREDIENT' | translate }}</span>
+        </button>
+      </div>
+
+      <!-- Card: Photo (optional) -->
+      <div class="form-card">
+        <div class="form-card__header">
+          <ion-icon name="camera-outline" class="form-card__icon"></ion-icon>
+          <span class="form-card__title">Photo</span>
+        </div>
+        <button class="photo-btn">
+          <ion-icon name="camera-outline" class="photo-btn__icon"></ion-icon>
+          <span>{{ 'PLATE_DETAILS.TAKE_PICTURE' | translate }}</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
 </ion-content>
 
+<ion-footer class="modal-footer">
+  <ion-toolbar class="modal-footer__toolbar">
+    <ion-button (click)="savePlate()" class="save-btn" expand="block" shape="round">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      {{ saveLabel }}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

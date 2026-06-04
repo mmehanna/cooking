@@ -1,13 +1,13 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="manage-header">
   <ion-toolbar>
     <ion-back-button [text]="'COMMON.BACK' | translate" slot="start" defaultHref="/landing"></ion-back-button>
     <ion-title>{{ 'PLATES.MANAGE' | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="toggleSelectionMode()" fill="clear">
+      <ion-button (click)="toggleSelectionMode()" fill="clear" class="header-action-btn">
         <ion-icon [name]="isSelectionMode ? 'close-outline' : 'checkmark-circle-outline'" slot="start"></ion-icon>
         {{ isSelectionMode ? ('PLATES.CANCEL' | translate) : ('PLATES.SELECT' | translate) }}
       </ion-button>
-      <ion-button *ngIf="isSelectionMode && selectedPlates.length > 0" (click)="presentBatchShareModal()" fill="clear" color="primary">
+      <ion-button *ngIf="isSelectionMode && selectedPlates.length > 0" (click)="presentBatchShareModal()" fill="clear" color="primary" class="header-action-btn">
         <ion-icon name="share-outline" slot="start"></ion-icon>
         ({{ selectedPlates.length }})
       </ion-button>
@@ -16,60 +16,133 @@
 </ion-header>
 
 <ion-content class="plates-content">
-  <div class="plates-container">
-    <ion-searchbar
-      [(ngModel)]="searchTerm"
-      [placeholder]="'Rechercher un plat...'"
-      animated="true"
-      class="plates-searchbar"
-      showClearButton="focus">
-    </ion-searchbar>
-
-    <div class="plates-header" *ngIf="filteredPlateList?.length">
-      <span class="plates-count">{{ filteredPlateList.length }} plat(s)</span>
+  <div class="plates-shell">
+    <!-- Hero Section -->
+    <div class="plates-hero" *ngIf="!isSelectionMode">
+      <div class="plates-hero__text">
+        <p class="plates-hero__subtitle">{{ 'PLATES.MANAGE' | translate }}</p>
+        <h1 class="plates-hero__title">Mes plats</h1>
+      </div>
+      <div class="plates-hero__stat" *ngIf="plateList?.length">
+        <strong>{{ plateList.length }}</strong>
+        <span>plat{{ plateList.length > 1 ? 's' : '' }}</span>
+      </div>
     </div>
 
-    <div class="plates-grid" *ngIf="filteredPlateList?.length">
-      <div class="plate-card" *ngFor="let plate of filteredPlateList" (click)="isSelectionMode && togglePlateSelection(plate)">
-        <div class="plate-card__body">
-          <div class="plate-checkbox" *ngIf="isSelectionMode">
-            <ion-checkbox [checked]="isPlateSelected(plate.id)"></ion-checkbox>
-          </div>
+    <!-- Selection Banner -->
+    <div class="selection-banner" *ngIf="isSelectionMode">
+      <div class="selection-banner__info">
+        <ion-icon name="checkmark-circle-outline" class="selection-banner__icon"></ion-icon>
+        <span class="selection-banner__text">{{ selectedPlates.length }} sélectionné{{ selectedPlates.length > 1 ? 's' : '' }}</span>
+      </div>
+      <ion-button *ngIf="selectedPlates.length > 0" (click)="presentBatchShareModal()" size="small" fill="solid" color="primary" class="selection-banner__btn">
+        <ion-icon name="share-outline" slot="start"></ion-icon>
+        Partager
+      </ion-button>
+    </div>
 
-          <div class="plate-info" [class.plate-info--selectable]="isSelectionMode">
-            <span class="plate-label">{{ plate.label }}</span>
-            <span class="plate-category" *ngIf="plate.category">{{ plate.category }}</span>
+    <!-- Search -->
+    <div class="search-wrap">
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        [placeholder]="'Rechercher un plat...'"
+        animated="true"
+        class="plates-searchbar"
+        showClearButton="focus">
+      </ion-searchbar>
+    </div>
+
+    <!-- Results Header -->
+    <div class="results-header" *ngIf="filteredPlateList?.length">
+      <span class="results-count">{{ filteredPlateList.length }} résultat{{ filteredPlateList.length > 1 ? 's' : '' }}</span>
+    </div>
+
+    <!-- Grid -->
+    <div class="plates-grid" *ngIf="filteredPlateList?.length">
+      <div
+        class="plate-card"
+        *ngFor="let plate of filteredPlateList"
+        [class.plate-card--selected]="isSelectionMode && isPlateSelected(plate.id)"
+        (click)="isSelectionMode && togglePlateSelection(plate)">
+
+        <!-- Checkbox overlay for selection mode -->
+        <div class="plate-card__selection-overlay" *ngIf="isSelectionMode">
+          <div class="plate-card__check-circle" [class.plate-card__check-circle--active]="isPlateSelected(plate.id)">
+            <ion-icon name="checkmark" *ngIf="isPlateSelected(plate.id)"></ion-icon>
           </div>
         </div>
 
+        <div class="plate-card__body">
+          <!-- Avatar -->
+          <div class="plate-avatar" [class]="'plate-avatar--' + getCategoryColorClass(plate.category)">
+            <span class="plate-avatar__initial">{{ getPlateInitial(plate.label) }}</span>
+            <div class="plate-avatar__icon-wrap">
+              <ion-icon [name]="getCategoryIcon(plate.category)" class="plate-avatar__icon"></ion-icon>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="plate-info" [class.plate-info--selectable]="isSelectionMode">
+            <div class="plate-info__top">
+              <span class="plate-label">{{ plate.label }}</span>
+              <span class="plate-category" *ngIf="plate.category" [class]="'plate-category--' + getCategoryColorClass(plate.category)">
+                {{ plate.category }}
+              </span>
+            </div>
+            <p class="plate-description" *ngIf="plate.description">
+              {{ plate.description }}
+            </p>
+            <p class="plate-description plate-description--empty" *ngIf="!plate.description">
+              Aucune description
+            </p>
+          </div>
+        </div>
+
+        <!-- Actions -->
         <div class="plate-card__actions" *ngIf="!isSelectionMode">
-          <ion-button fill="clear" size="small" class="action-btn action-btn--edit" (click)="presentDetailEditPlateModal(plate)">
-            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
-          </ion-button>
-          <ion-button fill="clear" size="small" class="action-btn action-btn--share" (click)="presentSharePlateModal(plate)">
-            <ion-icon name="share-outline" slot="icon-only"></ion-icon>
-          </ion-button>
-          <ion-button fill="clear" size="small" class="action-btn action-btn--delete" (click)="deletePlate(plate)">
-            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-          </ion-button>
+          <div class="action-group">
+            <button class="action-pill action-pill--edit" (click)="presentDetailEditPlateModal(plate); $event.stopPropagation()" title="Modifier">
+              <ion-icon name="create-outline"></ion-icon>
+            </button>
+            <button class="action-pill action-pill--share" (click)="presentSharePlateModal(plate); $event.stopPropagation()" title="Partager">
+              <ion-icon name="share-outline"></ion-icon>
+            </button>
+            <button class="action-pill action-pill--delete" (click)="deletePlate(plate); $event.stopPropagation()" title="Supprimer">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Empty State: No plates at all -->
     <div class="empty-state" *ngIf="plateList?.length === 0">
-      <ion-icon name="fast-food-outline" class="empty-state__icon"></ion-icon>
-      <p class="empty-state__text">Aucun plat pour le moment</p>
-      <ion-button (click)="presentDetailAddPlateModal()" class="empty-state__btn">
+      <div class="empty-state__art">
+        <div class="empty-state__orbit">
+          <ion-icon name="fast-food-outline" class="empty-state__icon empty-state__icon--main"></ion-icon>
+        </div>
+      </div>
+      <h2 class="empty-state__title">Aucun plat pour le moment</h2>
+      <p class="empty-state__hint">Commencez par créer votre premier plat et organisez vos repas.</p>
+      <ion-button (click)="presentDetailAddPlateModal()" class="empty-state__btn" shape="round" size="large">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
         Créer un plat
       </ion-button>
     </div>
 
+    <!-- Empty State: Search with no results -->
     <div class="empty-state" *ngIf="plateList?.length > 0 && filteredPlateList?.length === 0">
-      <ion-icon name="search-outline" class="empty-state__icon"></ion-icon>
-      <p class="empty-state__text">Aucun résultat pour "{{ searchTerm }}"</p>
+      <div class="empty-state__art">
+        <div class="empty-state__orbit">
+          <ion-icon name="search-outline" class="empty-state__icon empty-state__icon--main"></ion-icon>
+        </div>
+      </div>
+      <h2 class="empty-state__title">Aucun résultat</h2>
+      <p class="empty-state__hint">Essayez un autre mot-clé pour trouver votre plat.</p>
     </div>
   </div>
 
+  <!-- FAB -->
   <ion-fab horizontal="end" slot="fixed" vertical="bottom" *ngIf="!isSelectionMode">
     <ion-fab-button (click)="presentDetailAddPlateModal()" class="add-fab">
       <ion-icon name="add"></ion-icon>
