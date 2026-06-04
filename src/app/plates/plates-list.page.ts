@@ -82,7 +82,10 @@ export class PlatesListPage implements OnInit {
     this.plateService.editable = false;
 
     await this.modalController.create({
-      component: PlateDetailsModal
+      component: PlateDetailsModal,
+      componentProps: {
+        'saveEvent': () => this.refreshPage()
+      }
     }).then(modal => {
       modal.present();
     })
@@ -117,6 +120,82 @@ export class PlatesListPage implements OnInit {
 
   public isPlateSelected(plateId: string): boolean {
     return this.selectedPlates.some(p => p.id === plateId);
+  }
+
+  public getPlateInitial(label?: string): string {
+    return label?.charAt(0)?.toUpperCase() || '?';
+  }
+
+  public getCategoryColorClass(category?: string): string {
+    if (!category) { return 'default'; }
+    const cat = category.trim().toLowerCase();
+    const map: Record<string, string> = {
+      'viande': 'meat',
+      'meat': 'meat',
+      'poulet': 'meat',
+      'boeuf': 'meat',
+      'porc': 'meat',
+      'poisson': 'fish',
+      'fish': 'fish',
+      'fruits de mer': 'fish',
+      'légumes': 'veg',
+      'legumes': 'veg',
+      'vegetables': 'veg',
+      'salade': 'veg',
+      'pâtes': 'pasta',
+      'pates': 'pasta',
+      'pasta': 'pasta',
+      'riz': 'pasta',
+      'rice': 'pasta',
+      'soupe': 'soup',
+      'soup': 'soup',
+      'dessert': 'dessert',
+      'sucré': 'dessert',
+      'sucre': 'dessert',
+      'petit-déjeuner': 'breakfast',
+      'petit-dejeuner': 'breakfast',
+      'breakfast': 'breakfast',
+      'plat principal': 'main',
+      'main': 'main',
+      'entrée': 'starter',
+      'entree': 'starter',
+      'starter': 'starter',
+    };
+    return map[cat] || 'default';
+  }
+
+  public getCategoryIcon(category?: string): string {
+    if (!category) { return 'restaurant-outline'; }
+    const cat = category.trim().toLowerCase();
+    const map: Record<string, string> = {
+      'viande': 'flame-outline',
+      'meat': 'flame-outline',
+      'poulet': 'flame-outline',
+      'poisson': 'fish-outline',
+      'fish': 'fish-outline',
+      'légumes': 'leaf-outline',
+      'legumes': 'leaf-outline',
+      'vegetables': 'leaf-outline',
+      'salade': 'leaf-outline',
+      'pâtes': 'bonfire-outline',
+      'pates': 'bonfire-outline',
+      'pasta': 'bonfire-outline',
+      'riz': 'bonfire-outline',
+      'soupe': 'water-outline',
+      'soup': 'water-outline',
+      'dessert': 'ice-cream-outline',
+      'sucré': 'ice-cream-outline',
+      'sucre': 'ice-cream-outline',
+      'petit-déjeuner': 'sunny-outline',
+      'petit-dejeuner': 'sunny-outline',
+      'breakfast': 'sunny-outline',
+      'plat principal': 'fast-food-outline',
+      'main': 'fast-food-outline',
+      'entrée': 'cafe-outline',
+      'entree': 'cafe-outline',
+      'starter': 'cafe-outline',
+    };
+    return map[cat] || 'restaurant-outline';
   }
 
   public async presentBatchShareModal() {

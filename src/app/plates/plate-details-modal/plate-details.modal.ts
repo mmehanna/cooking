@@ -98,7 +98,13 @@ export class PlateDetailsModal implements OnInit {
 
     await this.presentToast();
     await this.closeModal();
-    window.location.reload();
+
+    // Prefer event emission over full reload
+    if (this.saveEvent) {
+      this.saveEvent.emit();
+    } else {
+      window.location.reload();
+    }
     console.log(this.selectedCategory);
   }
 
@@ -120,5 +126,27 @@ export class PlateDetailsModal implements OnInit {
 
   public async closeModal() {
     await this.modalController.dismiss();
+  }
+
+  public get categories() {
+    return [
+      { value: 'breakfast', label: 'Petit-déjeuner', icon: 'sunny-outline', desc: 'Commencez la journée du bon pied' },
+      { value: 'lunch', label: 'Déjeuner', icon: 'restaurant-outline', desc: 'Une pause savoureuse' },
+      { value: 'dinner', label: 'Dîner', icon: 'moon-outline', desc: 'Terminez la journée en beauté' }
+    ];
+  }
+
+  public get modalTitle(): string {
+    return this.plateService.editable ? 'Modifier le plat' : 'Nouveau plat';
+  }
+
+  public get modalSubtitle(): string {
+    return this.plateService.editable
+      ? 'Mettez à jour les informations de votre plat'
+      : 'Créez un nouveau plat pour vos repas';
+  }
+
+  public get saveLabel(): string {
+    return this.plateService.editable ? 'Enregistrer les modifications' : 'Créer le plat';
   }
 }
