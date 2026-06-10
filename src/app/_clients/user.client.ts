@@ -5,10 +5,11 @@ import { UserProfileModel } from "./models/UserProfileModel";
 import { UpdateProfileDto } from "./models/UpdateProfileDto";
 import { UpdatePreferencesDto } from "./models/UpdatePreferencesDto";
 import { ChangePasswordDto } from "./models/ChangePasswordDto";
+import { API_BASE_URL } from "./api-url";
 
 @Injectable({ providedIn: 'root' })
 export class UserClient {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = API_BASE_URL;
 
   constructor(private httpClient: HttpClient) { }
 

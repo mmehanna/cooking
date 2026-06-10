@@ -6,10 +6,11 @@ import { SharedPlateModel } from "./models/SharedPlateModel";
 import { SharePlateDto, BatchSharePlateDto } from "./models/SharePlateDto";
 import { CreateFamilyDto } from "./models/CreateFamilyDto";
 import { InviteFamilyMemberDto } from "./models/InviteFamilyMemberDto";
+import { API_BASE_URL } from "./api-url";
 
 @Injectable({ providedIn: 'root' })
 export class FamilyClient {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = API_BASE_URL;
 
   constructor(private httpClient: HttpClient) { }
 

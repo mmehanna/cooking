@@ -3,10 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IngredientModel } from "./models/IngredientModel";
 import { GroceryListModel } from "./models/GroceryListModel";
+import { API_BASE_URL } from "./api-url";
 
 @Injectable({ providedIn: 'root' })
 export class GroceryListClient {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = API_BASE_URL;
 
   constructor(private httpClient: HttpClient) {}
 

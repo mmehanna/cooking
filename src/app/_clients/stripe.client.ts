@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { API_BASE_URL } from "./api-url";
 
 export interface CreateCheckoutSessionDto {
   priceId: string;
@@ -28,7 +29,7 @@ export interface SubscriptionPlanResponse {
 
 @Injectable({providedIn: 'root'})
 export class StripeClient {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = API_BASE_URL;
 
   constructor(private httpClient: HttpClient) {}
 
