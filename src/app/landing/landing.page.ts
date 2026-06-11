@@ -61,7 +61,7 @@ export class LandingPage implements OnInit, OnDestroy {
     }
     this.weekStartDate = this.getMonday(new Date());
     await this.loadPlatesForWeek();
-    await this.loadChefPlatesForWeek();
+    await this.checkFamilyMembership();
 
     // Écouter les changements de liste de plats pour rafraîchir automatiquement
     this.refreshSubscription = this.plateService.plateListTrigger$.subscribe(async () => {
@@ -71,6 +71,23 @@ export class LandingPage implements OnInit, OnDestroy {
         await this.loadChefPlatesForWeek();
       }
     });
+  }
+
+  async checkFamilyMembership() {
+    try {
+      const families = await lastValueFrom(this.familyClient.getUserFamilies());
+      this.hasFamily = families && families.length > 0;
+      console.log('[Landing] Family check:', this.hasFamily, families);
+      if (this.hasFamily) {
+        // Preload chef name from first family
+        const family = families[0];
+        this.chefName = family.owner?.name || family.owner?.email || 'Chef';
+        await this.loadChefPlatesForWeek();
+      }
+    } catch (error: any) {
+      this.hasFamily = false;
+      console.error('[Landing] Error checking family membership:', error);
+    }
   }
 
   async loadPlatesForWeek() {
@@ -92,7 +109,7 @@ export class LandingPage implements OnInit, OnDestroy {
   async loadChefPlatesForWeek() {
     try {
       const data = await lastValueFrom(this.familyClient.getMyChefWeekPlates(this.weekStartDate));
-      this.hasFamily = true;
+      console.log('[Landing] Chef plates loaded:', data);
       if (data.members && data.members.length > 0) {
         this.chefName = data.members[0].name || 'Chef';
         const memberDates = data.members[0].dates;
@@ -104,10 +121,8 @@ export class LandingPage implements OnInit, OnDestroy {
         this.chefPlateForWeek = [];
       }
     } catch (error: any) {
-      if (error.status === 404) {
-        this.hasFamily = false;
-      }
-      console.error('Error fetching chef plates:', error);
+      console.error('[Landing] Error fetching chef plates:', error.status, error.message, error);
+      // Do not hide the toggle on transient errors; chef plates just won't load
     }
   }
 
