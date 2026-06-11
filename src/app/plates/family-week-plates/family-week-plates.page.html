@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="'COMMON.BACK' | translate" [defaultHref]="'/family'" slot="start"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Family Weekly Plates</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Week navigation -->
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="previousWeek()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Previous
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="small" class="ion-text-center">
+      Week of {{ weekStartDate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="nextWeek()">
+        Next
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Loading spinner -->
+  <div *ngIf="isLoading" class="ion-padding ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading weekly plates...</p>
+  </div>
+
+  <!-- Error message -->
+  <ion-card *ngIf="errorMessage && !isLoading" color="danger">
+    <ion-card-content>
+      <p>{{ errorMessage }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Members week plates -->
+  <ng-container *ngIf="!isLoading && familyWeekPlates">
+    <ion-card *ngFor="let member of familyWeekPlates.members; trackBy: trackByMember">
+      <ion-card-header>
+        <ion-card-title>{{ member.name || 'Unknown' }}</ion-card-title>
+        <ion-card-subtitle>Weekly Schedule</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let day of member.dates; trackBy: trackByDate" class="day-item">
+            <ion-label>
+              <h3>{{ getDayLabel(day.date) }}</h3>
+              <div class="meals">
+                <div class="meal" *ngIf="day.plates.length === 0">
+                  <ion-note color="medium">No plates</ion-note>
+                </div>
+                <div class="meal" *ngFor="let plate of day.plates">
+                  <ion-badge
+                    [color]="plate.mealType === 'breakfast' ? 'warning' : plate.mealType === 'lunch' ? 'success' : 'primary'">
+                    {{ plate.mealType }}
+                  </ion-badge>
+                  <span class="plate-label">{{ plate.label }}</span>
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- No data -->
+  <ion-card *ngIf="!isLoading && familyWeekPlates && familyWeekPlates.members.length === 0">
+    <ion-card-content class="ion-text-center">
+      <p>No members found in this family.</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { FamilyModel } from "./models/FamilyModel";
+import { FamilyWeekPlatesModel } from "./models/FamilyWeekPlatesModel";
 import { SharedPlateModel } from "./models/SharedPlateModel";
 import { SharePlateDto, BatchSharePlateDto } from "./models/SharePlateDto";
 import { CreateFamilyDto } from "./models/CreateFamilyDto";
@@ -20,6 +21,12 @@ export class FamilyClient {
 
   public getFamilyById(familyId: string): Observable<FamilyModel> {
     return this.httpClient.get<FamilyModel>(`${this.apiUrl}/family/${familyId}`);
+  }
+
+  public getFamilyWeekPlates(familyId: string, weekStartDate: string): Observable<FamilyWeekPlatesModel> {
+    return this.httpClient.get<FamilyWeekPlatesModel>(
+      `${this.apiUrl}/family/${familyId}/plates-for-week?weekStartDate=${weekStartDate}`
+    );
   }
 
   public getUserFamilies(): Observable<FamilyModel[]> {

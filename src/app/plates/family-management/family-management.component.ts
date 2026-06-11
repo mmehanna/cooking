@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FamilyService } from '../services/family.service';
 import { FamilyModel } from '../../_clients/models/FamilyModel';
 import { CreateFamilyDto } from '../../_clients/models/CreateFamilyDto';
@@ -21,8 +22,13 @@ export class FamilyManagementComponent implements OnInit {
     private familyService: FamilyService,
     private toastController: ToastController,
     private alertController: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
+
+  viewFamilyWeekPlates(familyId: string): void {
+    this.router.navigate(['/family-week-plates', familyId]).then();
+  }
 
   ngOnInit() {
     this.loadFamilies();

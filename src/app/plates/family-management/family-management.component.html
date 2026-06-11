@@ -36,6 +36,15 @@
                   *ngIf="isFamilyOwner(family)"
                   fill="clear"
                   size="small"
+                  color="primary"
+                  class="view-week-btn"
+                  (click)="viewFamilyWeekPlates(family.id)">
+                  <ion-icon name="calendar-outline"></ion-icon>
+                </ion-button>
+                <ion-button
+                  *ngIf="isFamilyOwner(family)"
+                  fill="clear"
+                  size="small"
                   color="danger"
                   class="delete-btn"
                   (click)="confirmDeleteFamily(family.id, family.name)">

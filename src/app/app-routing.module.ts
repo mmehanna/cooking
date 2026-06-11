@@ -52,6 +52,11 @@ const routes: Routes = [
     canMatch: [AuthGuard]
   },
   {
+    path: 'family-week-plates/:familyId',
+    loadChildren: () => import('./plates/family-week-plates/family-week-plates.module').then(m => m.FamilyWeekPlatesModule),
+    canMatch: [AuthGuard]
+  },
+  {
     path: 'shared-plates',
     loadChildren: () => import('./plates/shared-plates/shared-plates.module').then(m => m.SharedPlatesPageModule),
     canMatch: [AuthGuard]

@@ -1,0 +1,32 @@
+.day-item {
+  --padding-start: 8px;
+  --inner-padding-end: 8px;
+
+  h3 {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+}
+
+.meals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plate-label {
+  font-size: 0.9rem;
+}
+
+ion-badge {
+  text-transform: capitalize;
+  min-width: 72px;
+  text-align: center;
+}
