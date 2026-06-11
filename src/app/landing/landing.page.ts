@@ -508,8 +508,11 @@ export class LandingPage implements OnInit, OnDestroy {
     }
 
     this.weekStartDate = nextMonday;
-    await this.loadPlatesForWeek();
-    await this.loadChefPlatesForWeek();
+    if (this.viewMode === 'my') {
+      await this.loadPlatesForWeek();
+    } else {
+      await this.loadChefPlatesForWeek();
+    }
   }
 
 }
