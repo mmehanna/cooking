@@ -29,6 +29,12 @@ export class FamilyClient {
     );
   }
 
+  public getMyChefWeekPlates(weekStartDate: string): Observable<FamilyWeekPlatesModel> {
+    return this.httpClient.get<FamilyWeekPlatesModel>(
+      `${this.apiUrl}/family/my-chef-week-plates?weekStartDate=${weekStartDate}`
+    );
+  }
+
   public getUserFamilies(): Observable<FamilyModel[]> {
     return this.httpClient.get<FamilyModel[]>(`${this.apiUrl}/family`);
   }

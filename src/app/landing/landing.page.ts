@@ -3,7 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {PlateService} from "../plates/services/plate.service";
 import {AuthService} from "../plates/services/auth.service";
 import {UserService} from "../settings/services/user.service";
+import {FamilyClient} from "../_clients/family.client";
 import {UserProfileModel} from "../_clients/models/UserProfileModel";
+import {FamilyWeekPlatesModel} from "../_clients/models/FamilyWeekPlatesModel";
 import {firstValueFrom, lastValueFrom, Subscription, take} from "rxjs";
 import {PLateForWeekModel, PlateForWeekEntry} from "../_clients/models/PLateForWeekModel";
 import {AlertController, ToastController} from "@ionic/angular";
@@ -30,9 +32,15 @@ export class LandingPage implements OnInit, OnDestroy {
     dinner: 2
   };
 
+  viewMode: 'my' | 'chef' = 'my';
+  chefPlateForWeek: PLateForWeekModel[] = [];
+  hasFamily = false;
+  chefName = '';
+
   constructor(private plateService: PlateService,
               private authService: AuthService,
               private userService: UserService,
+              private familyClient: FamilyClient,
               private alertController: AlertController,
               private toastController: ToastController,
               private router: Router,
@@ -53,10 +61,15 @@ export class LandingPage implements OnInit, OnDestroy {
     }
     this.weekStartDate = this.getMonday(new Date());
     await this.loadPlatesForWeek();
+    await this.loadChefPlatesForWeek();
 
     // Écouter les changements de liste de plats pour rafraîchir automatiquement
     this.refreshSubscription = this.plateService.plateListTrigger$.subscribe(async () => {
-      await this.loadPlatesForWeek();
+      if (this.viewMode === 'my') {
+        await this.loadPlatesForWeek();
+      } else {
+        await this.loadChefPlatesForWeek();
+      }
     });
   }
 
@@ -73,6 +86,28 @@ export class LandingPage implements OnInit, OnDestroy {
         return;
       }
       console.error('Error fetching plates:', error);
+    }
+  }
+
+  async loadChefPlatesForWeek() {
+    try {
+      const data = await lastValueFrom(this.familyClient.getMyChefWeekPlates(this.weekStartDate));
+      this.hasFamily = true;
+      if (data.members && data.members.length > 0) {
+        this.chefName = data.members[0].name || 'Chef';
+        const memberDates = data.members[0].dates;
+        this.chefPlateForWeek = memberDates.map((day) => ({
+          date: day.date,
+          plates: [...day.plates].sort((a: any, b: any) => this.getMealTypeOrder(a.mealType) - this.getMealTypeOrder(b.mealType))
+        }));
+      } else {
+        this.chefPlateForWeek = [];
+      }
+    } catch (error: any) {
+      if (error.status === 404) {
+        this.hasFamily = false;
+      }
+      console.error('Error fetching chef plates:', error);
     }
   }
 
@@ -425,6 +460,16 @@ export class LandingPage implements OnInit, OnDestroy {
     return nextWeek <= maxDate;
   }
 
+  public async setViewMode(mode: string) {
+    const newMode = mode as 'my' | 'chef';
+    this.viewMode = newMode;
+    if (newMode === 'chef') {
+      await this.loadChefPlatesForWeek();
+    } else {
+      await this.loadPlatesForWeek();
+    }
+  }
+
   public async changeWeek(dayOffset: number) {
     const target = this.parseDate(this.weekStartDate) ?? new Date();
     const nextWeek = new Date(target);
@@ -449,6 +494,7 @@ export class LandingPage implements OnInit, OnDestroy {
 
     this.weekStartDate = nextMonday;
     await this.loadPlatesForWeek();
+    await this.loadChefPlatesForWeek();
   }
 
 }
