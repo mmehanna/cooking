@@ -34,16 +34,13 @@ export class FamilyWeekPlatesPage implements OnInit {
     }
 
     this.weekStartDate = this.getMonday(new Date());
-    this.verifyOwnershipAndLoad();
+    this.verifyMembershipAndLoad();
   }
 
-  private verifyOwnershipAndLoad(): void {
+  private verifyMembershipAndLoad(): void {
+    // getFamilyById already verifies backend-side that the user is a family member
     const familySub$ = this.familyClient.getFamilyById(this.familyId).subscribe({
-      next: (family: FamilyModel) => {
-        if (!this.isFamilyOwner(family)) {
-          this.router.navigate(['/family']).then();
-          return;
-        }
+      next: () => {
         this.loadWeekPlates();
       },
       error: () => {
@@ -51,11 +48,6 @@ export class FamilyWeekPlatesPage implements OnInit {
       }
     });
     this.subscription.add(familySub$);
-  }
-
-  private isFamilyOwner(family: FamilyModel): boolean {
-    const currentUserId = this.authService.getUserId();
-    return family.ownerUserId === currentUserId || family.owner?.id === currentUserId;
   }
 
   public loadWeekPlates(): void {
