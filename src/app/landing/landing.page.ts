@@ -36,6 +36,9 @@ export class LandingPage implements OnInit, OnDestroy {
   chefPlateForWeek: PLateForWeekModel[] = [];
   hasFamily = false;
   chefName = '';
+  isChef = false;
+  weekPublished = false;
+  weekPublishLoading = false;
 
   constructor(private plateService: PlateService,
               private authService: AuthService,
@@ -79,14 +82,76 @@ export class LandingPage implements OnInit, OnDestroy {
       this.hasFamily = families && families.length > 0;
       console.log('[Landing] Family check:', this.hasFamily, families);
       if (this.hasFamily) {
-        // Preload chef name from first family
         const family = families[0];
         this.chefName = family.owner?.name || family.owner?.email || 'Chef';
+        const currentUserId = this.authService.getUserId();
+        this.isChef = !!currentUserId && family.ownerUserId === currentUserId;
         await this.loadChefPlatesForWeek();
+        if (this.isChef) {
+          await this.loadWeekPublishStatus();
+        }
       }
     } catch (error: any) {
       this.hasFamily = false;
       console.error('[Landing] Error checking family membership:', error);
+    }
+  }
+
+  async loadWeekPublishStatus() {
+    try {
+      const status = await lastValueFrom(this.familyClient.getWeekPublishStatus(this.weekStartDate));
+      this.weekPublished = status.isPublished;
+    } catch (error) {
+      console.error('[Landing] Error loading publish status:', error);
+      this.weekPublished = false;
+    }
+  }
+
+  async publishWeek() {
+    this.weekPublishLoading = true;
+    try {
+      await lastValueFrom(this.familyClient.publishWeek(this.weekStartDate));
+      this.weekPublished = true;
+      const toast = await this.toastController.create({
+        message: 'Week published successfully! Family members can now see your plates.',
+        duration: 2000,
+        color: 'success'
+      });
+      await toast.present();
+    } catch (error) {
+      console.error('[Landing] Error publishing week:', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to publish week. Please try again.',
+        duration: 2000,
+        color: 'danger'
+      });
+      await toast.present();
+    } finally {
+      this.weekPublishLoading = false;
+    }
+  }
+
+  async unpublishWeek() {
+    this.weekPublishLoading = true;
+    try {
+      await lastValueFrom(this.familyClient.unpublishWeek(this.weekStartDate));
+      this.weekPublished = false;
+      const toast = await this.toastController.create({
+        message: 'Week unpublished. Family members will no longer see these plates.',
+        duration: 2000,
+        color: 'warning'
+      });
+      await toast.present();
+    } catch (error) {
+      console.error('[Landing] Error unpublishing week:', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to unpublish week. Please try again.',
+        duration: 2000,
+        color: 'danger'
+      });
+      await toast.present();
+    } finally {
+      this.weekPublishLoading = false;
     }
   }
 
@@ -512,6 +577,9 @@ export class LandingPage implements OnInit, OnDestroy {
       await this.loadPlatesForWeek();
     } else {
       await this.loadChefPlatesForWeek();
+    }
+    if (this.isChef) {
+      await this.loadWeekPublishStatus();
     }
   }
 

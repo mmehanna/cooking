@@ -43,6 +43,37 @@
       </ion-chip>
     </div>
 
+    <!-- Publish controls for Chef -->
+    <div class="publish-controls" *ngIf="isChef && viewMode === 'my'">
+      <ion-chip *ngIf="weekPublished" color="success">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <ion-label>Published</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="!weekPublished" color="medium">
+        <ion-icon name="eye-off-outline"></ion-icon>
+        <ion-label>Draft — not visible to family</ion-label>
+      </ion-chip>
+      <ion-button
+        *ngIf="!weekPublished"
+        size="small"
+        color="primary"
+        (click)="publishWeek()"
+        [disabled]="weekPublishLoading">
+        <ion-icon name="share-outline" slot="start"></ion-icon>
+        Publish Week
+      </ion-button>
+      <ion-button
+        *ngIf="weekPublished"
+        size="small"
+        color="warning"
+        fill="outline"
+        (click)="unpublishWeek()"
+        [disabled]="weekPublishLoading">
+        <ion-icon name="eye-off-outline" slot="start"></ion-icon>
+        Unpublish
+      </ion-button>
+    </div>
+
     <div class="mode-toggle" *ngIf="mode === 'view' && viewMode === 'my'">
       <ion-button fill="clear" size="small" (click)="mode = 'edit'">
         <ion-icon name="create-outline" slot="start"></ion-icon>

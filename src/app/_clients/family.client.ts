@@ -35,6 +35,20 @@ export class FamilyClient {
     );
   }
 
+  public publishWeek(weekStartDate: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/family/publish-week?weekStartDate=${weekStartDate}`, {});
+  }
+
+  public unpublishWeek(weekStartDate: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/family/unpublish-week?weekStartDate=${weekStartDate}`, {});
+  }
+
+  public getWeekPublishStatus(weekStartDate: string): Observable<{ weekStartDate: string; isPublished: boolean; publishedAt: string | null }> {
+    return this.httpClient.get<{ weekStartDate: string; isPublished: boolean; publishedAt: string | null }>(
+      `${this.apiUrl}/family/week-publish-status?weekStartDate=${weekStartDate}`
+    );
+  }
+
   public getUserFamilies(): Observable<FamilyModel[]> {
     return this.httpClient.get<FamilyModel[]>(`${this.apiUrl}/family`);
   }

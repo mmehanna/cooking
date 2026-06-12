@@ -179,6 +179,27 @@ ion-content {
   backdrop-filter: blur(8px);
 }
 
+.publish-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.publish-controls ion-chip {
+  --color: white;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.publish-controls ion-button {
+  --border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
 .day-card--chef {
   border-color: rgba(var(--ion-color-warning-rgb), 0.4);
 }
