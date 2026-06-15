@@ -23,16 +23,14 @@ export class ProfileSectionComponent implements OnInit {
   ngOnInit() {
     this.profileForm = this.fb.group({
       name: [''],
-      email: ['', [Validators.email]],
-      avatar: ['']
+      email: ['', [Validators.email]]
     });
 
     this.userService.profile$.pipe(take(1)).subscribe(profile => {
       if (profile) {
         this.profileForm.patchValue({
           name: profile.name || '',
-          email: profile.email,
-          avatar: profile.avatar || ''
+          email: profile.email
         });
       }
     });
