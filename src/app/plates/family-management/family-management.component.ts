@@ -64,7 +64,8 @@ export class FamilyManagementComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors de la création de la famille:', error);
-        this.showErrorToast('Failed to create family: ' + error.message);
+        const backendMessage = error?.error?.message || 'Failed to create family';
+        this.showErrorToast(backendMessage);
       }
     });
   }
@@ -91,7 +92,8 @@ export class FamilyManagementComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors de l\'invitation:', error);
-        this.showErrorToast('Failed to send invitation: ' + error.message);
+        const backendMessage = error?.error?.message || 'Failed to send invitation';
+        this.showErrorToast(backendMessage);
       }
     });
   }
@@ -191,7 +193,8 @@ export class FamilyManagementComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error deleting family:', error);
-        this.showErrorToast('Failed to delete family: ' + error.message);
+        const backendMessage = error?.error?.message || 'Failed to delete family';
+        this.showErrorToast(backendMessage);
       }
     });
   }
@@ -204,7 +207,8 @@ export class FamilyManagementComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error removing member:', error);
-        this.showErrorToast('Failed to remove member: ' + error.message);
+        const backendMessage = error?.error?.message || 'Failed to remove member';
+        this.showErrorToast(backendMessage);
       }
     });
   }
