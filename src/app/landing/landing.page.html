@@ -112,9 +112,7 @@
             <div class="meals">
               <div
                 *ngFor="let singlePlate of plate.plates"
-                class="meal-row"
-                [class.meal-row--clickable]="mode === 'view'"
-                (click)="mode === 'view' && openPlateDetails(singlePlate.id)">
+                class="meal-row">
                 <span class="meal-emoji">{{ getMealEmoji(singlePlate.mealType) }}</span>
                 <span class="meal-type">{{ getMealTypeLabel(singlePlate) }}</span>
                 <span class="meal-name">{{ singlePlate.label }}</span>
@@ -148,9 +146,7 @@
             <div class="meals">
               <div
                 *ngFor="let singlePlate of plate.plates"
-                class="meal-row"
-                [class.meal-row--clickable]="true"
-                (click)="openPlateDetails(singlePlate.id)">
+                class="meal-row">
                 <span class="meal-emoji">{{ getMealEmoji(singlePlate.mealType) }}</span>
                 <span class="meal-type">{{ getMealTypeLabel(singlePlate) }}</span>
                 <span class="meal-name">{{ singlePlate.label }}</span>
