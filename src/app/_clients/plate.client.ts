@@ -9,10 +9,11 @@ import {
 } from "../plates/choose-plate-page/dtos/link-plate-list-id-to-selected-date.dto";
 import {PlateForUpdateDto} from "../plates/choose-plate-page/dtos/plate-for-update.dto";
 import {PLateForWeekModel} from "./models/PLateForWeekModel";
+import {API_BASE_URL} from "./api-url";
 
 @Injectable({providedIn: 'root'})
 export class PlateClient {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = API_BASE_URL;
 
   constructor(private httpClient: HttpClient) {
   }

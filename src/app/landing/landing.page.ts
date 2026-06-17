@@ -3,7 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {PlateService} from "../plates/services/plate.service";
 import {AuthService} from "../plates/services/auth.service";
 import {UserService} from "../settings/services/user.service";
+import {FamilyClient} from "../_clients/family.client";
 import {UserProfileModel} from "../_clients/models/UserProfileModel";
+import {FamilyWeekPlatesModel} from "../_clients/models/FamilyWeekPlatesModel";
 import {firstValueFrom, lastValueFrom, Subscription, take} from "rxjs";
 import {PLateForWeekModel, PlateForWeekEntry} from "../_clients/models/PLateForWeekModel";
 import {AlertController, ToastController} from "@ionic/angular";
@@ -30,9 +32,18 @@ export class LandingPage implements OnInit, OnDestroy {
     dinner: 2
   };
 
+  viewMode: 'my' | 'chef' = 'my';
+  chefPlateForWeek: PLateForWeekModel[] = [];
+  hasFamily = false;
+  chefName = '';
+  isChef = false;
+  weekPublished = false;
+  weekPublishLoading = false;
+
   constructor(private plateService: PlateService,
               private authService: AuthService,
               private userService: UserService,
+              private familyClient: FamilyClient,
               private alertController: AlertController,
               private toastController: ToastController,
               private router: Router,
@@ -53,11 +64,95 @@ export class LandingPage implements OnInit, OnDestroy {
     }
     this.weekStartDate = this.getMonday(new Date());
     await this.loadPlatesForWeek();
+    await this.checkFamilyMembership();
 
     // Écouter les changements de liste de plats pour rafraîchir automatiquement
     this.refreshSubscription = this.plateService.plateListTrigger$.subscribe(async () => {
-      await this.loadPlatesForWeek();
+      if (this.viewMode === 'my') {
+        await this.loadPlatesForWeek();
+      } else {
+        await this.loadChefPlatesForWeek();
+      }
     });
+  }
+
+  async checkFamilyMembership() {
+    try {
+      const families = await lastValueFrom(this.familyClient.getUserFamilies());
+      this.hasFamily = families && families.length > 0;
+      console.log('[Landing] Family check:', this.hasFamily, families);
+      if (this.hasFamily) {
+        const family = families[0];
+        this.chefName = family.owner?.name || family.owner?.email || 'Chef';
+        const currentUserId = this.authService.getUserId();
+        this.isChef = !!currentUserId && family.ownerUserId === currentUserId;
+        await this.loadChefPlatesForWeek();
+        if (this.isChef) {
+          await this.loadWeekPublishStatus();
+        }
+      }
+    } catch (error: any) {
+      this.hasFamily = false;
+      console.error('[Landing] Error checking family membership:', error);
+    }
+  }
+
+  async loadWeekPublishStatus() {
+    try {
+      const status = await lastValueFrom(this.familyClient.getWeekPublishStatus(this.weekStartDate));
+      this.weekPublished = status.isPublished;
+    } catch (error) {
+      console.error('[Landing] Error loading publish status:', error);
+      this.weekPublished = false;
+    }
+  }
+
+  async publishWeek() {
+    this.weekPublishLoading = true;
+    try {
+      await lastValueFrom(this.familyClient.publishWeek(this.weekStartDate));
+      this.weekPublished = true;
+      const toast = await this.toastController.create({
+        message: 'Week published successfully! Family members can now see your plates.',
+        duration: 2000,
+        color: 'success'
+      });
+      await toast.present();
+    } catch (error) {
+      console.error('[Landing] Error publishing week:', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to publish week. Please try again.',
+        duration: 2000,
+        color: 'danger'
+      });
+      await toast.present();
+    } finally {
+      this.weekPublishLoading = false;
+    }
+  }
+
+  async unpublishWeek() {
+    this.weekPublishLoading = true;
+    try {
+      await lastValueFrom(this.familyClient.unpublishWeek(this.weekStartDate));
+      this.weekPublished = false;
+      const toast = await this.toastController.create({
+        message: 'Week unpublished. Family members will no longer see these plates.',
+        duration: 2000,
+        color: 'warning'
+      });
+      await toast.present();
+    } catch (error) {
+      console.error('[Landing] Error unpublishing week:', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to unpublish week. Please try again.',
+        duration: 2000,
+        color: 'danger'
+      });
+      await toast.present();
+    } finally {
+      this.weekPublishLoading = false;
+    }
   }
 
   async loadPlatesForWeek() {
@@ -73,6 +168,26 @@ export class LandingPage implements OnInit, OnDestroy {
         return;
       }
       console.error('Error fetching plates:', error);
+    }
+  }
+
+  async loadChefPlatesForWeek() {
+    try {
+      const data = await lastValueFrom(this.familyClient.getMyChefWeekPlates(this.weekStartDate));
+      console.log('[Landing] Chef plates loaded:', data);
+      if (data.members && data.members.length > 0) {
+        this.chefName = data.members[0].name || 'Chef';
+        const memberDates = data.members[0].dates;
+        this.chefPlateForWeek = memberDates.map((day) => ({
+          date: day.date,
+          plates: [...day.plates].sort((a: any, b: any) => this.getMealTypeOrder(a.mealType) - this.getMealTypeOrder(b.mealType))
+        }));
+      } else {
+        this.chefPlateForWeek = [];
+      }
+    } catch (error: any) {
+      console.error('[Landing] Error fetching chef plates:', error.status, error.message, error);
+      // Do not hide the toggle on transient errors; chef plates just won't load
     }
   }
 
@@ -425,6 +540,16 @@ export class LandingPage implements OnInit, OnDestroy {
     return nextWeek <= maxDate;
   }
 
+  public async setViewMode(mode: string) {
+    const newMode = mode as 'my' | 'chef';
+    this.viewMode = newMode;
+    if (newMode === 'chef') {
+      await this.loadChefPlatesForWeek();
+    } else {
+      await this.loadPlatesForWeek();
+    }
+  }
+
   public async changeWeek(dayOffset: number) {
     const target = this.parseDate(this.weekStartDate) ?? new Date();
     const nextWeek = new Date(target);
@@ -448,7 +573,14 @@ export class LandingPage implements OnInit, OnDestroy {
     }
 
     this.weekStartDate = nextMonday;
-    await this.loadPlatesForWeek();
+    if (this.viewMode === 'my') {
+      await this.loadPlatesForWeek();
+    } else {
+      await this.loadChefPlatesForWeek();
+    }
+    if (this.isChef) {
+      await this.loadWeekPublishStatus();
+    }
   }
 
 }

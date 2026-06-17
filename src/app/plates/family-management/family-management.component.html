@@ -33,12 +33,23 @@
               <div class="family-name-row">
                 <span class="family-name">{{ family.name }}</span>
                 <ion-button
+                  fill="clear"
+                  size="small"
+                  color="primary"
+                  class="view-week-btn"
+                  (click)="viewFamilyWeekPlates(family.id)"
+                  title="View owner's weekly plates"
+                >
+                  <ion-icon name="calendar-outline"></ion-icon>
+                </ion-button>
+                <ion-button
                   *ngIf="isFamilyOwner(family)"
                   fill="clear"
                   size="small"
                   color="danger"
                   class="delete-btn"
-                  (click)="confirmDeleteFamily(family.id, family.name)">
+                  (click)="confirmDeleteFamily(family.id, family.name)"
+                >
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
               </div>

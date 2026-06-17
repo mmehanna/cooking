@@ -2,14 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { FamilyModel } from "./models/FamilyModel";
+import { FamilyWeekPlatesModel } from "./models/FamilyWeekPlatesModel";
 import { SharedPlateModel } from "./models/SharedPlateModel";
 import { SharePlateDto, BatchSharePlateDto } from "./models/SharePlateDto";
 import { CreateFamilyDto } from "./models/CreateFamilyDto";
 import { InviteFamilyMemberDto } from "./models/InviteFamilyMemberDto";
+import { API_BASE_URL } from "./api-url";
 
 @Injectable({ providedIn: 'root' })
 export class FamilyClient {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = API_BASE_URL;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,6 +21,32 @@ export class FamilyClient {
 
   public getFamilyById(familyId: string): Observable<FamilyModel> {
     return this.httpClient.get<FamilyModel>(`${this.apiUrl}/family/${familyId}`);
+  }
+
+  public getFamilyWeekPlates(familyId: string, weekStartDate: string): Observable<FamilyWeekPlatesModel> {
+    return this.httpClient.get<FamilyWeekPlatesModel>(
+      `${this.apiUrl}/family/${familyId}/plates-for-week?weekStartDate=${weekStartDate}`
+    );
+  }
+
+  public getMyChefWeekPlates(weekStartDate: string): Observable<FamilyWeekPlatesModel> {
+    return this.httpClient.get<FamilyWeekPlatesModel>(
+      `${this.apiUrl}/family/my-chef-week-plates?weekStartDate=${weekStartDate}`
+    );
+  }
+
+  public publishWeek(weekStartDate: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/family/publish-week?weekStartDate=${weekStartDate}`, {});
+  }
+
+  public unpublishWeek(weekStartDate: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/family/unpublish-week?weekStartDate=${weekStartDate}`, {});
+  }
+
+  public getWeekPublishStatus(weekStartDate: string): Observable<{ weekStartDate: string; isPublished: boolean; publishedAt: string | null }> {
+    return this.httpClient.get<{ weekStartDate: string; isPublished: boolean; publishedAt: string | null }>(
+      `${this.apiUrl}/family/week-publish-status?weekStartDate=${weekStartDate}`
+    );
   }
 
   public getUserFamilies(): Observable<FamilyModel[]> {
