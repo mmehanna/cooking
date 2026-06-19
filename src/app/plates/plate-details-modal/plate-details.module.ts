@@ -6,7 +6,6 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {CreatePlatePageRoutingModule} from './plate-details-routing.module';
 import {PlateDetailsModal} from './plate-details.modal';
-import {Camera} from "@ionic-native/camera/ngx";
 
 @NgModule({
   imports: [
@@ -16,9 +15,6 @@ import {Camera} from "@ionic-native/camera/ngx";
     CreatePlatePageRoutingModule,
     ReactiveFormsModule,
     TranslateModule,
-  ],
-  providers: [
-    Camera
   ],
   exports: [
     PlateDetailsModal
