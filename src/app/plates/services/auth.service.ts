@@ -12,7 +12,7 @@ export class AuthService {
   }
 
   public getToken(): string | null {
-    return localStorage.getItem('accessToken');
+    return sessionStorage.getItem('accessToken');
   }
 
 
@@ -29,13 +29,13 @@ export class AuthService {
   }
 
   public completeGoogleLogin(token: string): void {
-    localStorage.setItem('accessToken', token);
+    sessionStorage.setItem('accessToken', token);
   }
 
   // Méthode de logout
   public logout() {
-    // Supprimer le token du localStorage ou sessionStorage
-    localStorage.removeItem('accessToken');
+    // Supprimer le token du sessionStorage ou sessionStorage
+    sessionStorage.removeItem('accessToken');
 
     // Rediriger vers la page de login ou d'accueil
     this.router.navigate(['/login']);
@@ -43,7 +43,7 @@ export class AuthService {
 
   // Pour vérifier si l'utilisateur est authentifié
   public isAuthenticated(): boolean {
-    return !!localStorage.getItem('accessToken');
+    return !!sessionStorage.getItem('accessToken');
   }
 
   // Simple JWT token decoder
