@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {catchError, Observable, of} from "rxjs";
 import {PLateModel} from "./models/PLateModel";
 import {listPlatesForTargetedDateModel} from "./models/list-plates-for-targeted-date.model";

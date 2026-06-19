@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ModalController, ToastController} from "@ionic/angular";
 import {lastValueFrom, Subscription} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
+import { HttpErrorResponse } from "@angular/common/http";
 import {formatDate, Location} from "@angular/common";
 import {TranslateService} from "@ngx-translate/core";
 import {PlateService} from "../services/plate.service";
