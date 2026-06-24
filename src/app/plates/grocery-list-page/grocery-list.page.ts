@@ -15,7 +15,6 @@ export class GroceryListPage implements OnInit {
   minWeekStartDate: string;
   maxWeekStartDate: string;
   loading = false;
-  isAddModalOpen = false;
   newIngredients: { name: string; quantity: string; unit: string }[] = [];
 
   constructor(
@@ -33,6 +32,7 @@ export class GroceryListPage implements OnInit {
     this.maxWeekStartDate = this.getMonday(maxDate);
     this.weekStartDate = this.getMonday(new Date());
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
+    this.newIngredients = [{ name: '', quantity: '', unit: '' }];
     this.loadManualItems();
   }
 
@@ -93,16 +93,6 @@ export class GroceryListPage implements OnInit {
     return new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(parsedDate);
   }
 
-  public openAddModal() {
-    this.newIngredients = [{ name: '', quantity: '', unit: '' }];
-    this.isAddModalOpen = true;
-  }
-
-  public closeAddModal() {
-    this.isAddModalOpen = false;
-    this.newIngredients = [];
-  }
-
   public addIngredientRow() {
     this.newIngredients.push({ name: '', quantity: '', unit: '' });
   }
@@ -132,7 +122,7 @@ export class GroceryListPage implements OnInit {
 
     this.groceryListClient.createManualItemsBulk(dtos).subscribe({
       next: () => {
-        this.closeAddModal();
+        this.newIngredients = [{ name: '', quantity: '', unit: '' }];
         this.loadManualItems();
       },
       error: async () => {
