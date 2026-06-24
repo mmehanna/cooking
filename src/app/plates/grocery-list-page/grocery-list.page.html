@@ -73,8 +73,57 @@
 
   <!-- FAB: Add item -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addManualItem()">
+    <ion-fab-button (click)="openAddModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <!-- Modal: Add ingredients inline -->
+  <ion-modal [isOpen]="isAddModalOpen" (didDismiss)="closeAddModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Ajouter des articles</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeAddModal()">
+              <ion-icon name="close" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <div class="ingredients-list" *ngIf="newIngredients.length > 0">
+          <div class="ingredient-row" *ngFor="let ingredient of newIngredients; let i = index">
+            <div class="ingredient-row__num">{{ i + 1 }}</div>
+            <input [(ngModel)]="ingredient.name" class="ingredient-input ingredient-input--name" placeholder="Nom" type="text">
+            <input [(ngModel)]="ingredient.quantity" class="ingredient-input ingredient-input--qty" placeholder="Qté" type="text">
+            <input [(ngModel)]="ingredient.unit" class="ingredient-input ingredient-input--unit" placeholder="Unité" type="text">
+            <button class="ingredient-delete" (click)="removeIngredientRow(i)" title="Retirer">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="ingredients-empty" *ngIf="newIngredients.length === 0">
+          <ion-icon name="flask-outline" class="ingredients-empty__icon"></ion-icon>
+          <p class="ingredients-empty__text">Aucun article pour le moment</p>
+        </div>
+
+        <button class="add-ingredient-btn" (click)="addIngredientRow()">
+          <ion-icon name="add-circle-outline" class="add-ingredient-btn__icon"></ion-icon>
+          <span>Ajouter un article</span>
+        </button>
+      </ion-content>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-button (click)="saveNewIngredients()" expand="block" shape="round">
+            <ion-icon name="save-outline" slot="start"></ion-icon>
+            Enregistrer
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </ion-content>

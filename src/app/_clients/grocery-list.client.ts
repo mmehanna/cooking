@@ -39,6 +39,10 @@ export class GroceryListClient {
     return this.httpClient.post(`${this.apiUrl}/grocery-list/manual`, dto);
   }
 
+  public createManualItemsBulk(dtos: { name: string; quantity?: string; unit?: string; weekStartDate: string }[]): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/grocery-list/manual/bulk`, { items: dtos });
+  }
+
   public updateManualItem(itemId: string, dto: { name?: string; quantity?: string; unit?: string; checked?: boolean }): Observable<any> {
     return this.httpClient.patch(`${this.apiUrl}/grocery-list/manual/${itemId}`, dto);
   }

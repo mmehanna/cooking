@@ -15,6 +15,8 @@ export class GroceryListPage implements OnInit {
   minWeekStartDate: string;
   maxWeekStartDate: string;
   loading = false;
+  isAddModalOpen = false;
+  newIngredients: { name: string; quantity: string; unit: string }[] = [];
 
   constructor(
     private groceryListClient: GroceryListClient,
@@ -91,40 +93,55 @@ export class GroceryListPage implements OnInit {
     return new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(parsedDate);
   }
 
-  public async addManualItem() {
-    const alert = await this.alertCtrl.create({
-      header: 'Ajouter un article',
-      inputs: [
-        { name: 'name', type: 'text', placeholder: 'Nom (ex: Lait)' },
-        { name: 'quantity', type: 'text', placeholder: 'Quantité (ex: 2)' },
-        { name: 'unit', type: 'text', placeholder: 'Unité (ex: litres)' }
-      ],
-      buttons: [
-        { text: 'Annuler', role: 'cancel' },
-        {
-          text: 'Ajouter',
-          handler: (data) => {
-            if (!data.name) return false;
-            this.groceryListClient.createManualItem({
-              name: data.name,
-              quantity: data.quantity,
-              unit: data.unit,
-              weekStartDate: this.weekStartDate
-            }).subscribe({
-              next: () => this.loadManualItems(),
-              error: async () => {
-                const toast = await this.toastCtrl.create({
-                  message: 'Erreur lors de l\'ajout', duration: 2000, color: 'danger'
-                });
-                await toast.present();
-              }
-            });
-            return true;
-          }
-        }
-      ]
+  public openAddModal() {
+    this.newIngredients = [{ name: '', quantity: '', unit: '' }];
+    this.isAddModalOpen = true;
+  }
+
+  public closeAddModal() {
+    this.isAddModalOpen = false;
+    this.newIngredients = [];
+  }
+
+  public addIngredientRow() {
+    this.newIngredients.push({ name: '', quantity: '', unit: '' });
+  }
+
+  public removeIngredientRow(index: number) {
+    this.newIngredients.splice(index, 1);
+  }
+
+  public async saveNewIngredients() {
+    const validIngredients = this.newIngredients.filter(i => i.name.trim() !== '');
+    if (validIngredients.length === 0) {
+      const toast = await this.toastCtrl.create({
+        message: 'Ajoutez au moins un ingrédient avec un nom.',
+        duration: 2000,
+        color: 'warning'
+      });
+      await toast.present();
+      return;
+    }
+
+    const dtos = validIngredients.map(i => ({
+      name: i.name,
+      quantity: i.quantity || undefined,
+      unit: i.unit || undefined,
+      weekStartDate: this.weekStartDate
+    }));
+
+    this.groceryListClient.createManualItemsBulk(dtos).subscribe({
+      next: () => {
+        this.closeAddModal();
+        this.loadManualItems();
+      },
+      error: async () => {
+        const toast = await this.toastCtrl.create({
+          message: 'Erreur lors de l\'ajout', duration: 2000, color: 'danger'
+        });
+        await toast.present();
+      }
     });
-    await alert.present();
   }
 
   public async editManualItem(item: any) {
