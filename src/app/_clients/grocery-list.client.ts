@@ -31,20 +31,6 @@ export class GroceryListClient {
     return this.httpClient.delete(`${this.apiUrl}/plates/ingredients/${ingredientId}`);
   }
 
-  public getGroceryList(weekStartDate: string): Observable<GroceryListModel> {
-    return this.httpClient.get<GroceryListModel>(`${this.apiUrl}/grocery-list/${weekStartDate}`);
-  }
-
-  public regenerateGroceryList(weekStartDate: string): Observable<GroceryListModel> {
-    return this.httpClient.post<GroceryListModel>(`${this.apiUrl}/grocery-list/${weekStartDate}/regenerate`, {});
-  }
-
-  public toggleGroceryItem(itemId: string, checked: boolean): Observable<any> {
-    return this.httpClient.patch(`${this.apiUrl}/grocery-list/items/${itemId}/toggle`, { itemId, checked });
-  }
-
-  // ── Manual Items ──
-
   public getManualItems(weekStartDate: string): Observable<any[]> {
     return this.httpClient.get<any[]>(`${this.apiUrl}/grocery-list/manual/${weekStartDate}`);
   }
@@ -59,11 +45,5 @@ export class GroceryListClient {
 
   public deleteManualItem(itemId: string): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/grocery-list/manual/${itemId}`);
-  }
-
-  // ── Chef Week List ──
-
-  public getChefWeekGroceryList(weekStartDate: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/grocery-list/chef-week/${weekStartDate}`);
   }
 }

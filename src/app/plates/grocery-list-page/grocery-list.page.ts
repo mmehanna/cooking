@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroceryListService } from '../services/grocery-list.service';
 import { GroceryListClient } from '../../_clients/grocery-list.client';
-import { GroceryListModel } from '../../_clients/models/GroceryListModel';
-import { GroceryItemModel, GroceryListGroupItemModel } from '../../_clients/models/GroceryItemModel';
 import { AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -12,18 +9,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./grocery-list.page.scss'],
 })
 export class GroceryListPage implements OnInit {
-  groceryList: GroceryListModel | null = null;
   manualItems: any[] = [];
-  chefWeekList: any = null;
   weekStartDate: string;
   weekLabel: string;
   minWeekStartDate: string;
   maxWeekStartDate: string;
   loading = false;
-  viewMode: 'my' | 'chef' = 'my';
 
   constructor(
-    private groceryListService: GroceryListService,
     private groceryListClient: GroceryListClient,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
@@ -38,7 +31,7 @@ export class GroceryListPage implements OnInit {
     this.maxWeekStartDate = this.getMonday(maxDate);
     this.weekStartDate = this.getMonday(new Date());
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
-    this.loadGroceryList();
+    this.loadManualItems();
   }
 
   private getMonday(date: Date): string {
@@ -53,16 +46,8 @@ export class GroceryListPage implements OnInit {
     return dateStr;
   }
 
-  private loadGroceryList() {
-    this.loading = true;
-    if (this.viewMode === 'my') {
-      this.loadManualItems();
-    } else {
-      this.loadChefWeekList();
-    }
-  }
-
   private loadManualItems() {
+    this.loading = true;
     this.groceryListClient.getManualItems(this.weekStartDate).subscribe({
       next: (items) => {
         this.manualItems = items;
@@ -72,24 +57,6 @@ export class GroceryListPage implements OnInit {
         this.loading = false;
       }
     });
-  }
-
-  private loadChefWeekList() {
-    this.groceryListClient.getChefWeekGroceryList(this.weekStartDate).subscribe({
-      next: (list) => {
-        this.chefWeekList = list;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
-    });
-  }
-
-  public async setViewMode(mode: string) {
-    this.viewMode = mode as 'my' | 'chef';
-    this.loading = true;
-    this.loadGroceryList();
   }
 
   public onWeekChange(direction: 'prev' | 'next') {
@@ -103,7 +70,7 @@ export class GroceryListPage implements OnInit {
 
     this.weekStartDate = nextWeekStartDate;
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
-    this.loadGroceryList();
+    this.loadManualItems();
   }
 
   public get canGoPreviousWeek(): boolean {
@@ -122,55 +89,6 @@ export class GroceryListPage implements OnInit {
 
     const lang = this.translate.currentLang || this.translate.defaultLang || 'en';
     return new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(parsedDate);
-  }
-
-  public get hasGroceryGroups(): boolean {
-    return (this.groceryList?.groups?.length ?? 0) > 0;
-  }
-
-  public toggleItem(item: GroceryItemModel) {
-    const newChecked = !item.checked;
-    this.groceryListService.toggleItem(item.id, newChecked).subscribe({
-      next: () => {
-        item.checked = newChecked;
-      },
-      error: async () => {
-        const toast = await this.toastCtrl.create({
-          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'),
-          duration: 2000
-        });
-        await toast.present();
-      }
-    });
-  }
-
-  public toggleGroupItem(item: GroceryListGroupItemModel) {
-    if (!item.groceryItemId) {
-      return;
-    }
-
-    const newChecked = !item.checked;
-    this.groceryListService.toggleItem(item.groceryItemId, newChecked).subscribe({
-      next: () => {
-        item.checked = newChecked;
-        this.groceryList?.items
-          ?.filter(groceryItem => groceryItem.id === item.groceryItemId)
-          .forEach(groceryItem => groceryItem.checked = newChecked);
-        this.groceryList?.groups
-          ?.forEach(group => {
-            group.items
-              .filter(groupItem => groupItem.groceryItemId === item.groceryItemId)
-              .forEach(groupItem => groupItem.checked = newChecked);
-          });
-      },
-      error: async () => {
-        const toast = await this.toastCtrl.create({
-          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'),
-          duration: 2000
-        });
-        await toast.present();
-      }
-    });
   }
 
   public async addManualItem() {
@@ -283,45 +201,5 @@ export class GroceryListPage implements OnInit {
 
   public get hasManualItems(): boolean {
     return this.manualItems.length > 0;
-  }
-
-  public get hasChefWeekGroups(): boolean {
-    return this.chefWeekList?.groups?.length > 0;
-  }
-
-  public async regenerateList() {
-    const alert = await this.alertCtrl.create({
-      header: this.translate.instant('GROCERY_LIST.REGENERATE'),
-      message: this.translate.instant('GROCERY_LIST.REGENERATE_CONFIRM'),
-      buttons: [
-        { text: this.translate.instant('GROCERY_LIST.CANCEL'), role: 'cancel' },
-        {
-          text: this.translate.instant('GROCERY_LIST.CONFIRM'),
-          handler: () => {
-            this.loading = true;
-            this.groceryListService.regenerateGroceryList(this.weekStartDate).subscribe({
-              next: async (list) => {
-                this.groceryList = list;
-                this.loading = false;
-                const toast = await this.toastCtrl.create({
-                  message: this.translate.instant('GROCERY_LIST.REGENERATE_SUCCESS'),
-                  duration: 2000
-                });
-                await toast.present();
-              },
-              error: async () => {
-                this.loading = false;
-                const toast = await this.toastCtrl.create({
-                  message: this.translate.instant('GROCERY_LIST.REGENERATE_FAILED'),
-                  duration: 2000
-                });
-                await toast.present();
-              }
-            });
-          }
-        }
-      ]
-    });
-    await alert.present();
   }
 }
