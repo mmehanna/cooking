@@ -94,22 +94,10 @@ export class GroceryListPage implements OnInit {
   }
 
   public addIngredientRow() {
-    this.newIngredients.push({ name: '', quantity: '', unit: '' });
-  }
-
-  public removeIngredientRow(index: number) {
-    this.newIngredients.splice(index, 1);
-  }
-
-  public async saveNewIngredients() {
     const validIngredients = this.newIngredients.filter(i => i.name.trim() !== '');
+
     if (validIngredients.length === 0) {
-      const toast = await this.toastCtrl.create({
-        message: 'Ajoutez au moins un ingrédient avec un nom.',
-        duration: 2000,
-        color: 'warning'
-      });
-      await toast.present();
+      this.newIngredients.push({ name: '', quantity: '', unit: '' });
       return;
     }
 
@@ -133,6 +121,14 @@ export class GroceryListPage implements OnInit {
       }
     });
   }
+
+  public removeIngredientRow(index: number) {
+    this.newIngredients.splice(index, 1);
+    if (this.newIngredients.length === 0) {
+      this.newIngredients = [{ name: '', quantity: '', unit: '' }];
+    }
+  }
+
 
   public async editManualItem(item: any) {
     const alert = await this.alertCtrl.create({
