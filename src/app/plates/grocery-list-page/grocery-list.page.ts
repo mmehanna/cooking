@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GroceryListService } from '../services/grocery-list.service';
+import { GroceryListClient } from '../../_clients/grocery-list.client';
 import { GroceryListModel } from '../../_clients/models/GroceryListModel';
 import { GroceryItemModel, GroceryListGroupItemModel } from '../../_clients/models/GroceryItemModel';
 import { AlertController, ToastController } from '@ionic/angular';
@@ -12,14 +13,18 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class GroceryListPage implements OnInit {
   groceryList: GroceryListModel | null = null;
+  manualItems: any[] = [];
+  chefWeekList: any = null;
   weekStartDate: string;
   weekLabel: string;
   minWeekStartDate: string;
   maxWeekStartDate: string;
   loading = false;
+  viewMode: 'my' | 'chef' = 'my';
 
   constructor(
     private groceryListService: GroceryListService,
+    private groceryListClient: GroceryListClient,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private translate: TranslateService
@@ -50,15 +55,41 @@ export class GroceryListPage implements OnInit {
 
   private loadGroceryList() {
     this.loading = true;
-    this.groceryListService.getGroceryList(this.weekStartDate).subscribe({
-      next: (list) => {
-        this.groceryList = list;
+    if (this.viewMode === 'my') {
+      this.loadManualItems();
+    } else {
+      this.loadChefWeekList();
+    }
+  }
+
+  private loadManualItems() {
+    this.groceryListClient.getManualItems(this.weekStartDate).subscribe({
+      next: (items) => {
+        this.manualItems = items;
         this.loading = false;
       },
       error: () => {
         this.loading = false;
       }
     });
+  }
+
+  private loadChefWeekList() {
+    this.groceryListClient.getChefWeekGroceryList(this.weekStartDate).subscribe({
+      next: (list) => {
+        this.chefWeekList = list;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+
+  public async setViewMode(mode: string) {
+    this.viewMode = mode as 'my' | 'chef';
+    this.loading = true;
+    this.loadGroceryList();
   }
 
   public onWeekChange(direction: 'prev' | 'next') {
@@ -140,6 +171,122 @@ export class GroceryListPage implements OnInit {
         await toast.present();
       }
     });
+  }
+
+  public async addManualItem() {
+    const alert = await this.alertCtrl.create({
+      header: 'Ajouter un article',
+      inputs: [
+        { name: 'name', type: 'text', placeholder: 'Nom (ex: Lait)' },
+        { name: 'quantity', type: 'text', placeholder: 'Quantité (ex: 2)' },
+        { name: 'unit', type: 'text', placeholder: 'Unité (ex: litres)' }
+      ],
+      buttons: [
+        { text: 'Annuler', role: 'cancel' },
+        {
+          text: 'Ajouter',
+          handler: (data) => {
+            if (!data.name) return false;
+            this.groceryListClient.createManualItem({
+              name: data.name,
+              quantity: data.quantity,
+              unit: data.unit,
+              weekStartDate: this.weekStartDate
+            }).subscribe({
+              next: () => this.loadManualItems(),
+              error: async () => {
+                const toast = await this.toastCtrl.create({
+                  message: 'Erreur lors de l\'ajout', duration: 2000, color: 'danger'
+                });
+                await toast.present();
+              }
+            });
+            return true;
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  public async editManualItem(item: any) {
+    const alert = await this.alertCtrl.create({
+      header: 'Modifier l\'article',
+      inputs: [
+        { name: 'name', type: 'text', value: item.name, placeholder: 'Nom' },
+        { name: 'quantity', type: 'text', value: item.quantity || '', placeholder: 'Quantité' },
+        { name: 'unit', type: 'text', value: item.unit || '', placeholder: 'Unité' }
+      ],
+      buttons: [
+        { text: 'Annuler', role: 'cancel' },
+        {
+          text: 'Enregistrer',
+          handler: (data) => {
+            this.groceryListClient.updateManualItem(item.id, {
+              name: data.name,
+              quantity: data.quantity,
+              unit: data.unit
+            }).subscribe({
+              next: () => this.loadManualItems(),
+              error: async () => {
+                const toast = await this.toastCtrl.create({
+                  message: 'Erreur lors de la modification', duration: 2000, color: 'danger'
+                });
+                await toast.present();
+              }
+            });
+            return true;
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  public async deleteManualItem(item: any) {
+    const alert = await this.alertCtrl.create({
+      header: 'Supprimer',
+      message: `Supprimer "${item.name}" ?`,
+      buttons: [
+        { text: 'Annuler', role: 'cancel' },
+        {
+          text: 'Supprimer',
+          handler: () => {
+            this.groceryListClient.deleteManualItem(item.id).subscribe({
+              next: () => this.loadManualItems(),
+              error: async () => {
+                const toast = await this.toastCtrl.create({
+                  message: 'Erreur lors de la suppression', duration: 2000, color: 'danger'
+                });
+                await toast.present();
+              }
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  public toggleManualItem(item: any) {
+    const newChecked = !item.checked;
+    this.groceryListClient.updateManualItem(item.id, { checked: newChecked }).subscribe({
+      next: () => { item.checked = newChecked; },
+      error: async () => {
+        const toast = await this.toastCtrl.create({
+          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'), duration: 2000
+        });
+        await toast.present();
+      }
+    });
+  }
+
+  public get hasManualItems(): boolean {
+    return this.manualItems.length > 0;
+  }
+
+  public get hasChefWeekGroups(): boolean {
+    return this.chefWeekList?.groups?.length > 0;
   }
 
   public async regenerateList() {

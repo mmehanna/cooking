@@ -42,4 +42,28 @@ export class GroceryListClient {
   public toggleGroceryItem(itemId: string, checked: boolean): Observable<any> {
     return this.httpClient.patch(`${this.apiUrl}/grocery-list/items/${itemId}/toggle`, { itemId, checked });
   }
+
+  // ── Manual Items ──
+
+  public getManualItems(weekStartDate: string): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.apiUrl}/grocery-list/manual/${weekStartDate}`);
+  }
+
+  public createManualItem(dto: { name: string; quantity?: string; unit?: string; weekStartDate: string }): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/grocery-list/manual`, dto);
+  }
+
+  public updateManualItem(itemId: string, dto: { name?: string; quantity?: string; unit?: string; checked?: boolean }): Observable<any> {
+    return this.httpClient.patch(`${this.apiUrl}/grocery-list/manual/${itemId}`, dto);
+  }
+
+  public deleteManualItem(itemId: string): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/grocery-list/manual/${itemId}`);
+  }
+
+  // ── Chef Week List ──
+
+  public getChefWeekGroceryList(weekStartDate: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/grocery-list/chef-week/${weekStartDate}`);
+  }
 }
