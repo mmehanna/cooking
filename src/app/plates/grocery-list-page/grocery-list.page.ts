@@ -23,6 +23,7 @@ export class GroceryListPage implements OnInit {
   chefItems: any[] = [];
   chefName = '';
   isCurrentUserChef = false;
+  viewMode: 'member' | 'chef' = 'member';
 
   constructor(
     private groceryListClient: GroceryListClient,

@@ -32,43 +32,57 @@
 
         <ion-spinner *ngIf="loading" name="crescent" class="ion-padding"></ion-spinner>
 
-        <!-- My Manual List -->
-        <ion-list *ngIf="!loading && hasManualItems; else emptyList">
-          <ion-item-sliding *ngFor="let item of manualItems">
-            <ion-item>
-              <ion-checkbox
-                [checked]="item.checked"
-                (ionChange)="toggleManualItem(item)"
-                slot="start">
-              </ion-checkbox>
-              <ion-label [class.line-through]="item.checked" [class.checked-item]="item.checked">
-                <span *ngIf="item.quantity">{{ item.quantity }}</span>
-                <span *ngIf="item.unit">{{ item.unit }}</span>
-                <span *ngIf="item.quantity || item.unit"> - </span>
-                {{ item.name }}
-              </ion-label>
-              <ion-button fill="clear" size="small" color="danger" (click)="deleteManualItem(item)">
-                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-              </ion-button>
-            </ion-item>
-            <ion-item-options side="end">
-              <ion-item-option color="danger" (click)="deleteManualItem(item)">
-                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-              </ion-item-option>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-list>
+        <!-- View mode toggle for members -->
+        <ion-segment *ngIf="!loading && !isCurrentUserChef"
+          [(ngModel)]="viewMode"
+          class="ion-margin-top ion-margin-bottom">
+          <ion-segment-button value="member">
+            <ion-label>Ma liste</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="chef">
+            <ion-label>Liste du chef</ion-label>
+          </ion-segment-button>
+        </ion-segment>
 
-        <ng-template #emptyList>
-          <ion-card *ngIf="!loading">
-            <ion-card-content>
-              <p class="ion-text-center">Ta liste d'épicerie est vide pour cette semaine.</p>
-            </ion-card-content>
-          </ion-card>
-        </ng-template>
+        <!-- Member view: editable own list -->
+        <ng-container *ngIf="!loading && (isCurrentUserChef || viewMode === 'member')">
+          <ion-list *ngIf="hasManualItems; else emptyMemberList">
+            <ion-item-sliding *ngFor="let item of manualItems">
+              <ion-item>
+                <ion-checkbox
+                  [checked]="item.checked"
+                  (ionChange)="toggleManualItem(item)"
+                  slot="start">
+                </ion-checkbox>
+                <ion-label [class.line-through]="item.checked" [class.checked-item]="item.checked">
+                  <span *ngIf="item.quantity">{{ item.quantity }}</span>
+                  <span *ngIf="item.unit">{{ item.unit }}</span>
+                  <span *ngIf="item.quantity || item.unit"> - </span>
+                  {{ item.name }}
+                </ion-label>
+                <ion-button fill="clear" size="small" color="danger" (click)="deleteManualItem(item)">
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="deleteManualItem(item)">
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
 
-        <!-- Chef's Grocery List (for members) -->
-        <div *ngIf="!loading && !isCurrentUserChef" class="chef-list-section">
+          <ng-template #emptyMemberList>
+            <ion-card *ngIf="!loading">
+              <ion-card-content>
+                <p class="ion-text-center">Ta liste d'épicerie est vide pour cette semaine.</p>
+              </ion-card-content>
+            </ion-card>
+          </ng-template>
+        </ng-container>
+
+        <!-- Chef view: read-only chef list -->
+        <ng-container *ngIf="!loading && !isCurrentUserChef && viewMode === 'chef'">
           <ion-list *ngIf="hasChefItems; else emptyChefList">
             <ion-list-header class="chef-list-header">
               <ion-label>
@@ -107,15 +121,15 @@
               </ion-card-content>
             </ion-card>
           </ng-template>
-        </div>
+        </ng-container>
 
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<!-- Quick Add Bar -->
-<ion-footer class="quick-add-footer">
+<!-- Quick Add Bar (only for own list) -->
+<ion-footer class="quick-add-footer" *ngIf="isCurrentUserChef || viewMode === 'member'">
   <ion-toolbar class="quick-add-toolbar">
     <div class="quick-add-main">
       <ion-item lines="none" class="quick-add-item">
