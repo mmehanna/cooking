@@ -131,3 +131,30 @@
   letter-spacing: 0.04em;
   margin-bottom: 2px;
 }
+
+/* ── Chef List Section ── */
+.chef-list-section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1.5px dashed #e0e0e0;
+}
+
+.chef-list-header {
+  --background: transparent;
+  padding-left: 16px;
+  min-height: 36px;
+}
+
+.chef-list-header__icon {
+  color: var(--ion-color-warning);
+  margin-right: 6px;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.chef-list-header__name {
+  color: var(--ion-color-medium);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-left: 4px;
+}

@@ -20,6 +20,10 @@ export class GroceryListPage implements OnInit {
   newItemQtyUnit = '';
   showDetails = false;
 
+  chefItems: any[] = [];
+  chefName = '';
+  isCurrentUserChef = true;
+
   constructor(
     private groceryListClient: GroceryListClient,
     private alertCtrl: AlertController,
@@ -55,6 +59,20 @@ export class GroceryListPage implements OnInit {
     this.groceryListClient.getManualItems(this.weekStartDate).subscribe({
       next: (items) => {
         this.manualItems = items;
+        this.loadChefItems();
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+
+  private loadChefItems() {
+    this.groceryListClient.getChefGroceryList(this.weekStartDate).subscribe({
+      next: (data) => {
+        this.chefItems = data.items;
+        this.chefName = data.chefName;
+        this.isCurrentUserChef = data.isCurrentUserChef;
         this.loading = false;
       },
       error: () => {
@@ -202,5 +220,9 @@ export class GroceryListPage implements OnInit {
 
   public get hasManualItems(): boolean {
     return this.manualItems.length > 0;
+  }
+
+  public get hasChefItems(): boolean {
+    return this.chefItems.length > 0;
   }
 }

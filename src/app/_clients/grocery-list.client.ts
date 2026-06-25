@@ -50,4 +50,8 @@ export class GroceryListClient {
   public deleteManualItem(itemId: string): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/grocery-list/manual/${itemId}`);
   }
+
+  public getChefGroceryList(weekStartDate: string): Observable<{ items: any[]; chefName: string; isCurrentUserChef: boolean }> {
+    return this.httpClient.get<{ items: any[]; chefName: string; isCurrentUserChef: boolean }>(`${this.apiUrl}/grocery-list/chef/${weekStartDate}`);
+  }
 }
