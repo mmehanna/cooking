@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroceryListService } from '../services/grocery-list.service';
-import { GroceryListModel } from '../../_clients/models/GroceryListModel';
-import { GroceryItemModel, GroceryListGroupItemModel } from '../../_clients/models/GroceryItemModel';
+import { GroceryListClient } from '../../_clients/grocery-list.client';
 import { AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,15 +9,24 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./grocery-list.page.scss'],
 })
 export class GroceryListPage implements OnInit {
-  groceryList: GroceryListModel | null = null;
+  manualItems: any[] = [];
   weekStartDate: string;
   weekLabel: string;
   minWeekStartDate: string;
   maxWeekStartDate: string;
   loading = false;
+  newItemName = '';
+  newItemQty = '';
+  newItemQtyUnit = '';
+  showDetails = false;
+
+  chefItems: any[] = [];
+  chefName = '';
+  isCurrentUserChef = false;
+  viewMode: 'member' | 'chef' = 'chef';
 
   constructor(
-    private groceryListService: GroceryListService,
+    private groceryListClient: GroceryListClient,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private translate: TranslateService
@@ -33,7 +40,7 @@ export class GroceryListPage implements OnInit {
     this.maxWeekStartDate = this.getMonday(maxDate);
     this.weekStartDate = this.getMonday(new Date());
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
-    this.loadGroceryList();
+    this.loadManualItems();
   }
 
   private getMonday(date: Date): string {
@@ -48,14 +55,34 @@ export class GroceryListPage implements OnInit {
     return dateStr;
   }
 
-  private loadGroceryList() {
+  private loadManualItems() {
     this.loading = true;
-    this.groceryListService.getGroceryList(this.weekStartDate).subscribe({
-      next: (list) => {
-        this.groceryList = list;
-        this.loading = false;
+    this.groceryListClient.getManualItems(this.weekStartDate).subscribe({
+      next: (items) => {
+        this.manualItems = items;
       },
       error: () => {
+        this.manualItems = [];
+      },
+      complete: () => {
+        this.loadChefItems();
+      }
+    });
+  }
+
+  private loadChefItems() {
+    this.groceryListClient.getChefGroceryList(this.weekStartDate).subscribe({
+      next: (data) => {
+        this.chefItems = data.items;
+        this.chefName = data.chefName;
+        this.isCurrentUserChef = data.isCurrentUserChef;
+      },
+      error: () => {
+        this.chefItems = [];
+        this.chefName = '';
+        this.isCurrentUserChef = false;
+      },
+      complete: () => {
         this.loading = false;
       }
     });
@@ -72,7 +99,7 @@ export class GroceryListPage implements OnInit {
 
     this.weekStartDate = nextWeekStartDate;
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
-    this.loadGroceryList();
+    this.loadManualItems();
   }
 
   public get canGoPreviousWeek(): boolean {
@@ -93,80 +120,53 @@ export class GroceryListPage implements OnInit {
     return new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(parsedDate);
   }
 
-  public get hasGroceryGroups(): boolean {
-    return (this.groceryList?.groups?.length ?? 0) > 0;
-  }
-
-  public toggleItem(item: GroceryItemModel) {
-    const newChecked = !item.checked;
-    this.groceryListService.toggleItem(item.id, newChecked).subscribe({
-      next: () => {
-        item.checked = newChecked;
-      },
-      error: async () => {
-        const toast = await this.toastCtrl.create({
-          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'),
-          duration: 2000
-        });
-        await toast.present();
-      }
-    });
-  }
-
-  public toggleGroupItem(item: GroceryListGroupItemModel) {
-    if (!item.groceryItemId) {
+  public async quickAddItem() {
+    const name = this.newItemName.trim();
+    if (!name) {
+      const toast = await this.toastCtrl.create({
+        message: 'Entrez un nom pour l\'article.', duration: 2000, color: 'warning'
+      });
+      await toast.present();
       return;
     }
 
-    const newChecked = !item.checked;
-    this.groceryListService.toggleItem(item.groceryItemId, newChecked).subscribe({
+    this.groceryListClient.createManualItem({
+      name,
+      quantity: this.newItemQty || undefined,
+      unit: this.newItemQtyUnit || undefined,
+      weekStartDate: this.weekStartDate
+    }).subscribe({
       next: () => {
-        item.checked = newChecked;
-        this.groceryList?.items
-          ?.filter(groceryItem => groceryItem.id === item.groceryItemId)
-          .forEach(groceryItem => groceryItem.checked = newChecked);
-        this.groceryList?.groups
-          ?.forEach(group => {
-            group.items
-              .filter(groupItem => groupItem.groceryItemId === item.groceryItemId)
-              .forEach(groupItem => groupItem.checked = newChecked);
-          });
+        this.newItemName = '';
+        this.newItemQty = '';
+        this.newItemQtyUnit = '';
+        this.showDetails = false;
+        this.loadManualItems();
       },
       error: async () => {
         const toast = await this.toastCtrl.create({
-          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'),
-          duration: 2000
+          message: 'Erreur lors de l\'ajout', duration: 2000, color: 'danger'
         });
         await toast.present();
       }
     });
   }
 
-  public async regenerateList() {
+
+  public async deleteManualItem(item: any) {
     const alert = await this.alertCtrl.create({
-      header: this.translate.instant('GROCERY_LIST.REGENERATE'),
-      message: this.translate.instant('GROCERY_LIST.REGENERATE_CONFIRM'),
+      header: 'Supprimer',
+      message: `Supprimer "${item.name}" ?`,
       buttons: [
-        { text: this.translate.instant('GROCERY_LIST.CANCEL'), role: 'cancel' },
+        { text: 'Annuler', role: 'cancel' },
         {
-          text: this.translate.instant('GROCERY_LIST.CONFIRM'),
+          text: 'Supprimer',
           handler: () => {
-            this.loading = true;
-            this.groceryListService.regenerateGroceryList(this.weekStartDate).subscribe({
-              next: async (list) => {
-                this.groceryList = list;
-                this.loading = false;
-                const toast = await this.toastCtrl.create({
-                  message: this.translate.instant('GROCERY_LIST.REGENERATE_SUCCESS'),
-                  duration: 2000
-                });
-                await toast.present();
-              },
+            this.groceryListClient.deleteManualItem(item.id).subscribe({
+              next: () => this.loadManualItems(),
               error: async () => {
-                this.loading = false;
                 const toast = await this.toastCtrl.create({
-                  message: this.translate.instant('GROCERY_LIST.REGENERATE_FAILED'),
-                  duration: 2000
+                  message: 'Erreur lors de la suppression', duration: 2000, color: 'danger'
                 });
                 await toast.present();
               }
@@ -176,5 +176,26 @@ export class GroceryListPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  public toggleManualItem(item: any) {
+    const newChecked = !item.checked;
+    this.groceryListClient.updateManualItem(item.id, { checked: newChecked }).subscribe({
+      next: () => { item.checked = newChecked; },
+      error: async () => {
+        const toast = await this.toastCtrl.create({
+          message: this.translate.instant('GROCERY_LIST.TOGGLE_FAILED'), duration: 2000
+        });
+        await toast.present();
+      }
+    });
+  }
+
+  public get hasManualItems(): boolean {
+    return this.manualItems.length > 0;
+  }
+
+  public get hasChefItems(): boolean {
+    return this.chefItems.length > 0;
   }
 }

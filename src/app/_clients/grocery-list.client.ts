@@ -31,15 +31,27 @@ export class GroceryListClient {
     return this.httpClient.delete(`${this.apiUrl}/plates/ingredients/${ingredientId}`);
   }
 
-  public getGroceryList(weekStartDate: string): Observable<GroceryListModel> {
-    return this.httpClient.get<GroceryListModel>(`${this.apiUrl}/grocery-list/${weekStartDate}`);
+  public getManualItems(weekStartDate: string): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.apiUrl}/grocery-list/manual/${weekStartDate}`);
   }
 
-  public regenerateGroceryList(weekStartDate: string): Observable<GroceryListModel> {
-    return this.httpClient.post<GroceryListModel>(`${this.apiUrl}/grocery-list/${weekStartDate}/regenerate`, {});
+  public createManualItem(dto: { name: string; quantity?: string; unit?: string; weekStartDate: string }): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/grocery-list/manual`, dto);
   }
 
-  public toggleGroceryItem(itemId: string, checked: boolean): Observable<any> {
-    return this.httpClient.patch(`${this.apiUrl}/grocery-list/items/${itemId}/toggle`, { itemId, checked });
+  public createManualItemsBulk(dtos: { name: string; quantity?: string; unit?: string; weekStartDate: string }[]): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/grocery-list/manual/bulk`, { items: dtos });
+  }
+
+  public updateManualItem(itemId: string, dto: { name?: string; quantity?: string; unit?: string; checked?: boolean }): Observable<any> {
+    return this.httpClient.patch(`${this.apiUrl}/grocery-list/manual/${itemId}`, dto);
+  }
+
+  public deleteManualItem(itemId: string): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/grocery-list/manual/${itemId}`);
+  }
+
+  public getChefGroceryList(weekStartDate: string): Observable<{ items: any[]; chefName: string; isCurrentUserChef: boolean }> {
+    return this.httpClient.get<{ items: any[]; chefName: string; isCurrentUserChef: boolean }>(`${this.apiUrl}/grocery-list/chef/${weekStartDate}`);
   }
 }
