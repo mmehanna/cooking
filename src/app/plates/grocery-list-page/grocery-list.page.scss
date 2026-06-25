@@ -1,159 +1,458 @@
-.page-title {
-  left: 0;
+/***** Grocery List — Modern Clean UI *****/
+
+/* ── Header ── */
+.grocery-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #4a7c59 0%, #6b9e75 100%);
+    --border-color: transparent;
+    --color: #fff;
+    --min-height: 64px;
+  }
+}
+
+.grocery-back {
+  --color: #fff;
+  --icon-font-size: 22px;
+}
+
+.grocery-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
   padding-inline: 56px;
   position: absolute;
+  left: 0;
   right: 0;
-  text-align: center;
 }
 
-.line-through {
-  text-decoration: line-through;
-  opacity: 0.5;
+/* ── Content Shell ── */
+.grocery-content {
+  --background: #f6f4f0;
 }
 
-.grocery-item-main {
+.grocery-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px 16px 120px;
+}
+
+/* ── Week Navigation ── */
+.week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.week-nav__btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: #4a7c59;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.week-nav__btn:hover:not(:disabled) {
+  background: #eaf3ec;
+  transform: scale(1.05);
+}
+
+.week-nav__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.week-nav__btn ion-icon {
+  font-size: 1.2rem;
+}
+
+.week-nav__chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.week-nav__icon {
+  color: #4a7c59;
+  font-size: 1rem;
+}
+
+.week-nav__label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ── Loading ── */
+.grocery-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 12px;
+}
+
+.grocery-loading p {
+  color: #888;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
-.grocery-group-divider {
-  --background: #ffffff;
-  --color: var(--ion-color-dark);
-  background: #ffffff;
-  border-bottom: 1px solid var(--ion-color-light-shade);
-  min-height: 58px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+/* ── View Toggle ── */
+.view-toggle-wrap {
+  margin-bottom: 20px;
 }
 
-.grocery-group-title {
-  background: #ffffff;
-  color: var(--ion-color-dark);
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin: 8px 0;
+.view-toggle {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.grocery-group-plate,
-.grocery-group-date {
-  display: block;
-}
-
-.grocery-group-date {
-  margin-top: 2px;
-  font-size: 0.95rem;
-}
-
-.grocery-item-sources {
-  margin-top: 4px;
-  color: var(--ion-color-medium);
+.view-toggle__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: #888;
   font-size: 0.85rem;
-  line-height: 1.35;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-/* ── Quick Add Bar ── */
-.quick-add-footer {
-  --background: #ffffff;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+.view-toggle__btn--active {
+  background: #4a7c59;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(74, 124, 89, 0.25);
 }
 
-.quick-add-toolbar {
-  --background: #ffffff;
-  --border-color: transparent;
-  --min-height: auto;
+.view-toggle__btn ion-icon {
+  font-size: 1rem;
+}
+
+/* ── Items List ── */
+.items-list {
   display: flex;
   flex-direction: column;
-  padding: 0;
+  gap: 10px;
 }
 
-.quick-add-main {
-  padding: 4px 8px;
+/* ── Item Card ── */
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
 }
 
-.quick-add-item {
-  --padding-start: 0;
-  --inner-padding-end: 0;
-  --background: #f6f4f0;
-  border-radius: 16px;
+.item-card--checked {
+  opacity: 0.55;
+  background: #fafafa;
+}
+
+.item-card__checkbox {
+  --size: 22px;
+  --checkbox-background-checked: #4a7c59;
+  --checkmark-color: #fff;
+  --border-color: #ddd;
+  --border-color-checked: #4a7c59;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.item-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-card__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: all 0.2s ease;
+}
+
+.item-card__name--checked {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.item-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.item-card__qty {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4a7c59;
+  background: rgba(74, 124, 89, 0.08);
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.item-card__unit {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.item-card__delete {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.item-card__delete:hover {
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+  color: var(--ion-color-danger);
+}
+
+.item-card__delete:active {
+  transform: scale(0.92);
+}
+
+.item-card__delete ion-icon {
+  font-size: 1.05rem;
+}
+
+/* ── Readonly variant (chef list) ── */
+.item-card--readonly {
+  background: #faf9f7;
+  border: 1px dashed #e0ddd8;
+}
+
+.item-card--readonly .item-card__name {
+  color: #666;
+}
+
+/* ── Chef Badge ── */
+.chef-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f5e6c8 0%, #f0dcc0 100%);
+  color: #8a6d3b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 0 auto 12px;
+  width: fit-content;
+}
+
+.chef-badge ion-icon {
+  font-size: 1rem;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty-state__icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eaf3ec 0%, #d4e8d9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.empty-state__icon-wrap--chef {
+  background: linear-gradient(135deg, #f5e6c8 0%, #f0dcc0 100%);
+}
+
+.empty-state__icon {
+  font-size: 1.8rem;
+  color: #4a7c59;
+}
+
+.empty-state__icon-wrap--chef .empty-state__icon {
+  color: #8a6d3b;
+}
+
+.empty-state__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 6px;
+}
+
+.empty-state__subtitle {
+  font-size: 0.88rem;
+  color: #999;
+  font-weight: 500;
   margin: 0;
 }
 
-.quick-add-input {
-  --padding-start: 12px;
-  --padding-end: 8px;
+/* ── Quick Add Footer ── */
+.quick-add-footer {
+  --background: transparent;
+  --border-style: none;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.quick-add-shell {
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 12px 16px 24px;
+}
+
+.quick-add-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f6f4f0;
+  border-radius: 16px;
+  padding: 4px 4px 4px 12px;
+}
+
+.quick-add-main__add-icon {
+  font-size: 1.6rem;
+  color: #4a7c59;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.quick-add-main__add-icon:active {
+  transform: scale(0.9);
+}
+
+.quick-add-main__input {
+  flex: 1;
+  --padding-start: 0;
+  --padding-end: 0;
   --placeholder-color: #aaa;
   --placeholder-font-weight: 500;
   font-size: 0.95rem;
   font-weight: 500;
+  color: #1a1a1a;
 }
 
-.quick-add-toggle {
-  --padding-start: 0;
-  --padding-end: 0;
-  --color: #bbb;
-  margin: 0;
-  height: 40px;
-}
-
-.quick-add-btn {
-  --color: var(--ion-color-primary);
-  --background: rgba(var(--ion-color-primary-rgb), 0.08);
-  --background-activated: rgba(var(--ion-color-primary-rgb), 0.15);
-  --border-radius: 50%;
-  --padding-start: 0;
-  --padding-end: 0;
+.quick-add-main__chevron {
   width: 36px;
   height: 36px;
-  margin: 0 4px 0 0;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quick-add-main__chevron:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #888;
+}
+
+.quick-add-main__chevron ion-icon {
+  font-size: 1.1rem;
 }
 
 .quick-add-details {
   display: flex;
-  gap: 8px;
-  padding: 0 12px 8px;
-  background: #fafafa;
-  border-top: 1px solid #f0f0f0;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 0 4px;
 }
 
-.quick-add-detail-item {
-  --background: transparent;
-  --padding-start: 0;
-  --inner-padding-end: 0;
+.quick-add-field {
   flex: 1;
-  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.quick-add-label {
+.quick-add-field__label {
   font-size: 0.7rem;
   font-weight: 700;
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-bottom: 2px;
+  padding-left: 2px;
 }
 
-/* ── Chef List Section ── */
-.chef-list-section {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1.5px dashed #e0e0e0;
-}
-
-.chef-list-header {
-  padding-left: 16px;
-  min-height: 36px;
-}
-
-.chef-list-header__icon {
-  color: var(--ion-color-warning);
-  margin-right: 6px;
-  font-size: 1rem;
-  vertical-align: middle;
-}
-
-.chef-list-header__name {
-  color: var(--ion-color-medium);
-  font-size: 0.85rem;
+.quick-add-field__input {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1.5px solid #e8e8e8;
+  background: #fafafa;
+  color: #1a1a1a;
+  font-size: 0.9rem;
   font-weight: 500;
-  margin-left: 4px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  width: 100%;
+}
+
+.quick-add-field__input:focus {
+  border-color: #4a7c59;
+  background: #fff;
+}
+
+.quick-add-field__input::placeholder {
+  color: #bbb;
+  font-weight: 400;
+}
+
+/* ── Line-through helper ── */
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.5;
 }

@@ -1,161 +1,158 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="grocery-header">
+  <ion-toolbar class="grocery-toolbar">
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="/landing"></ion-back-button>
+      <ion-back-button text="" defaultHref="/landing" class="grocery-back"></ion-back-button>
     </ion-buttons>
-    <ion-title class="page-title">{{ 'GROCERY_LIST.TITLE' | translate }}</ion-title>
+    <ion-title class="grocery-title">{{ 'GROCERY_LIST.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3">
-        <!-- Week navigation -->
-        <ion-grid>
-          <ion-row class="ion-align-items-center">
-            <ion-col size="3">
-              <ion-button fill="clear" [disabled]="!canGoPreviousWeek" (click)="onWeekChange('prev')">
-                <ion-icon name="chevron-back" slot="icon-only"></ion-icon>
-              </ion-button>
-            </ion-col>
-            <ion-col size="6" class="ion-text-center">
-              <ion-label>{{ 'GROCERY_LIST.WEEK_OF' | translate: { date: weekLabel } }}</ion-label>
-            </ion-col>
-            <ion-col size="3" class="ion-text-end">
-              <ion-button fill="clear" [disabled]="!canGoNextWeek" (click)="onWeekChange('next')">
-                <ion-icon name="chevron-forward" slot="icon-only"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+<ion-content [fullscreen]="true" class="grocery-content">
+  <div class="grocery-shell">
 
-        <ion-spinner *ngIf="loading" name="crescent" class="ion-padding"></ion-spinner>
+    <!-- Week Navigation -->
+    <div class="week-nav">
+      <button class="week-nav__btn" [disabled]="!canGoPreviousWeek" (click)="onWeekChange('prev')">
+        <ion-icon name="chevron-back"></ion-icon>
+      </button>
+      <div class="week-nav__chip">
+        <ion-icon name="calendar-outline" class="week-nav__icon"></ion-icon>
+        <span class="week-nav__label">{{ weekLabel }}</span>
+      </div>
+      <button class="week-nav__btn" [disabled]="!canGoNextWeek" (click)="onWeekChange('next')">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
+    </div>
 
-        <!-- View mode toggle for members -->
-        <ion-segment *ngIf="!loading && !isCurrentUserChef"
-          [(ngModel)]="viewMode"
-          class="ion-margin-top ion-margin-bottom">
-          <ion-segment-button value="member">
-            <ion-label>Ma liste</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="chef">
-            <ion-label>Liste du chef</ion-label>
-          </ion-segment-button>
-        </ion-segment>
+    <!-- Loading -->
+    <div *ngIf="loading" class="grocery-loading">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Chargement...</p>
+    </div>
 
-        <!-- Member view: editable own list -->
-        <ng-container *ngIf="!loading && (isCurrentUserChef || viewMode === 'member')">
-          <ion-list *ngIf="hasManualItems; else emptyMemberList">
-            <ion-item-sliding *ngFor="let item of manualItems">
-              <ion-item>
-                <ion-checkbox
-                  [checked]="item.checked"
-                  (ionChange)="toggleManualItem(item)"
-                  slot="start">
-                </ion-checkbox>
-                <ion-label [class.line-through]="item.checked" [class.checked-item]="item.checked">
-                  <span *ngIf="item.quantity">{{ item.quantity }}</span>
-                  <span *ngIf="item.unit">{{ item.unit }}</span>
-                  <span *ngIf="item.quantity || item.unit"> - </span>
-                  {{ item.name }}
-                </ion-label>
-                <ion-button fill="clear" size="small" color="danger" (click)="deleteManualItem(item)">
-                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-                </ion-button>
-              </ion-item>
-              <ion-item-options side="end">
-                <ion-item-option color="danger" (click)="deleteManualItem(item)">
-                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-                </ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
-          </ion-list>
+    <!-- View mode toggle for members -->
+    <div *ngIf="!loading && !isCurrentUserChef" class="view-toggle-wrap">
+      <div class="view-toggle">
+        <button
+          class="view-toggle__btn"
+          [class.view-toggle__btn--active]="viewMode === 'member'"
+          (click)="viewMode = 'member'">
+          <ion-icon name="person-outline"></ion-icon>
+          Ma liste
+        </button>
+        <button
+          class="view-toggle__btn"
+          [class.view-toggle__btn--active]="viewMode === 'chef'"
+          (click)="viewMode = 'chef'">
+          <ion-icon name="restaurant-outline"></ion-icon>
+          Liste du chef
+        </button>
+      </div>
+    </div>
 
-          <ng-template #emptyMemberList>
-            <ion-card *ngIf="!loading">
-              <ion-card-content>
-                <p class="ion-text-center">Ta liste d'épicerie est vide pour cette semaine.</p>
-              </ion-card-content>
-            </ion-card>
-          </ng-template>
-        </ng-container>
+    <!-- Member view -->
+    <ng-container *ngIf="!loading && (isCurrentUserChef || viewMode === 'member')">
+      <div *ngIf="hasManualItems; else emptyMemberList" class="items-list">
+        <div class="item-card" *ngFor="let item of manualItems" [class.item-card--checked]="item.checked">
+          <ion-checkbox
+            [checked]="item.checked"
+            (ionChange)="toggleManualItem(item)"
+            class="item-card__checkbox">
+          </ion-checkbox>
 
-        <!-- Chef view: read-only chef list -->
-        <ng-container *ngIf="!loading && !isCurrentUserChef && viewMode === 'chef'">
-          <ion-list *ngIf="hasChefItems; else emptyChefList">
-            <ion-list-header class="chef-list-header">
-              <ion-label>
-                <ion-icon name="restaurant-outline" class="chef-list-header__icon"></ion-icon>
-                Liste du chef
-                <span *ngIf="chefName" class="chef-list-header__name">({{ chefName }})</span>
-              </ion-label>
-            </ion-list-header>
+          <div class="item-card__body">
+            <div class="item-card__name" [class.item-card__name--checked]="item.checked">
+              {{ item.name }}
+            </div>
+            <div class="item-card__meta" *ngIf="item.quantity || item.unit">
+              <span class="item-card__qty">{{ item.quantity }}</span>
+              <span class="item-card__unit">{{ item.unit }}</span>
+            </div>
+          </div>
 
-            <ion-item *ngFor="let item of chefItems">
-              <ion-checkbox
-                [checked]="item.checked"
-                slot="start"
-                [disabled]="true">
-              </ion-checkbox>
-              <ion-label [class.line-through]="item.checked" [class.checked-item]="item.checked">
-                <span *ngIf="item.quantity">{{ item.quantity }}</span>
-                <span *ngIf="item.unit">{{ item.unit }}</span>
-                <span *ngIf="item.quantity || item.unit"> - </span>
-                {{ item.name }}
-              </ion-label>
-            </ion-item>
-          </ion-list>
+          <button class="item-card__delete" (click)="deleteManualItem(item)" title="Supprimer">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
 
-          <ng-template #emptyChefList>
-            <ion-card *ngIf="!loading">
-              <ion-card-header>
-                <ion-card-title class="ion-text-center">
-                  <ion-icon name="restaurant-outline" class="chef-list-header__icon"></ion-icon>
-                  Liste du chef
-                  <span *ngIf="chefName" class="chef-list-header__name">({{ chefName }})</span>
-                </ion-card-title>
-              </ion-card-header>
-              <ion-card-content>
-                <p class="ion-text-center">Le chef n'a rien ajouté pour cette semaine.</p>
-              </ion-card-content>
-            </ion-card>
-          </ng-template>
-        </ng-container>
+      <ng-template #emptyMemberList>
+        <div class="empty-state">
+          <div class="empty-state__icon-wrap">
+            <ion-icon name="basket-outline" class="empty-state__icon"></ion-icon>
+          </div>
+          <h3 class="empty-state__title">Ta liste est vide</h3>
+          <p class="empty-state__subtitle">Ajoute des articles pour cette semaine</p>
+        </div>
+      </ng-template>
+    </ng-container>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <!-- Chef view -->
+    <ng-container *ngIf="!loading && !isCurrentUserChef && viewMode === 'chef'">
+      <div *ngIf="hasChefItems; else emptyChefList" class="items-list items-list--chef">
+        <div class="chef-badge" *ngIf="chefName">
+          <ion-icon name="restaurant-outline"></ion-icon>
+          <span>Liste de {{ chefName }}</span>
+        </div>
+
+        <div class="item-card item-card--readonly" *ngFor="let item of chefItems">
+          <ion-checkbox
+            [checked]="item.checked"
+            [disabled]="true"
+            class="item-card__checkbox">
+          </ion-checkbox>
+
+          <div class="item-card__body">
+            <div class="item-card__name" [class.item-card__name--checked]="item.checked">
+              {{ item.name }}
+            </div>
+            <div class="item-card__meta" *ngIf="item.quantity || item.unit">
+              <span class="item-card__qty">{{ item.quantity }}</span>
+              <span class="item-card__unit">{{ item.unit }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyChefList>
+        <div class="empty-state">
+          <div class="empty-state__icon-wrap empty-state__icon-wrap--chef">
+            <ion-icon name="restaurant-outline" class="empty-state__icon"></ion-icon>
+          </div>
+          <h3 class="empty-state__title">Rien pour le moment</h3>
+          <p class="empty-state__subtitle" *ngIf="chefName">{{ chefName }} n'a rien ajouté cette semaine</p>
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </div>
 </ion-content>
 
-<!-- Quick Add Bar (only for own list) -->
+<!-- Quick Add Bar -->
 <ion-footer class="quick-add-footer" *ngIf="isCurrentUserChef || viewMode === 'member'">
-  <ion-toolbar class="quick-add-toolbar">
+  <div class="quick-add-shell">
     <div class="quick-add-main">
-      <ion-item lines="none" class="quick-add-item">
-        <ion-input
-          [(ngModel)]="newItemName"
-          placeholder="Ajouter un article..."
-          (keydown.enter)="quickAddItem()"
-          class="quick-add-input"></ion-input>
-        <ion-button fill="clear" size="small" (click)="showDetails = !showDetails" class="quick-add-toggle">
-          <ion-icon [name]="showDetails ? 'chevron-down-outline' : 'chevron-forward-outline'" slot="icon-only"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" (click)="quickAddItem()" class="quick-add-btn">
-          <ion-icon name="add" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-item>
+      <ion-icon name="add-circle" class="quick-add-main__add-icon" (click)="quickAddItem()"></ion-icon>
+      <ion-input
+        [(ngModel)]="newItemName"
+        placeholder="Ajouter un article..."
+        (keydown.enter)="quickAddItem()"
+        class="quick-add-main__input">
+      </ion-input>
+      <button class="quick-add-main__chevron" (click)="showDetails = !showDetails">
+        <ion-icon [name]="showDetails ? 'chevron-down' : 'chevron-forward'"></ion-icon>
+      </button>
     </div>
 
     <div class="quick-add-details" *ngIf="showDetails">
-      <ion-item lines="none" class="quick-add-detail-item">
-        <ion-label position="stacked" class="quick-add-label">Quantité</ion-label>
-        <ion-input [(ngModel)]="newItemQty" placeholder="Ex: 2" type="text"></ion-input>
-      </ion-item>
-      <ion-item lines="none" class="quick-add-detail-item">
-        <ion-label position="stacked" class="quick-add-label">Unité</ion-label>
-        <ion-input [(ngModel)]="newItemQtyUnit" placeholder="Ex: litres" type="text"></ion-input>
-      </ion-item>
+      <div class="quick-add-field">
+        <label class="quick-add-field__label">Qté</label>
+        <input [(ngModel)]="newItemQty" placeholder="2" type="text" class="quick-add-field__input">
+      </div>
+      <div class="quick-add-field">
+        <label class="quick-add-field__label">Unité</label>
+        <input [(ngModel)]="newItemQtyUnit" placeholder="litres" type="text" class="quick-add-field__input">
+      </div>
     </div>
-  </ion-toolbar>
+  </div>
 </ion-footer>
