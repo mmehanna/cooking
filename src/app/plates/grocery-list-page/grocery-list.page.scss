@@ -51,148 +51,83 @@
   line-height: 1.35;
 }
 
-/* ── Inline add-modal ingredient rows (same pattern as manage-plates) ── */
-.ingredients-list {
+/* ── Quick Add Bar ── */
+.quick-add-footer {
+  --background: #ffffff;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.quick-add-toolbar {
+  --background: #ffffff;
+  --border-color: transparent;
+  --min-height: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
+  padding: 0;
 }
 
-.ingredient-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  background: #fafafa;
-  border-radius: 14px;
-  border: 1px solid #f0f0f0;
-  transition: background 0.2s ease;
+.quick-add-main {
+  padding: 4px 8px;
 }
 
-.ingredient-row__num {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: rgba(var(--ion-color-primary-rgb), 0.1);
-  color: var(--ion-color-primary);
-  font-size: 0.72rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.ingredient-input {
-  height: 38px;
-  padding: 0 10px;
-  border-radius: 10px;
-  border: 1.5px solid #e8e8e8;
-  background: #fff;
-  color: #1a1a1a;
-  font-size: 0.88rem;
-  font-weight: 500;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.ingredient-input:focus {
-  border-color: var(--ion-color-primary);
-}
-
-.ingredient-input::placeholder {
-  color: #bbb;
-  font-weight: 400;
-}
-
-.ingredient-input--name {
-  flex: 1;
-  min-width: 0;
-}
-
-.ingredient-input--qty {
-  width: 60px;
-  text-align: center;
-}
-
-.ingredient-input--unit {
-  width: 60px;
-  text-align: center;
-}
-
-.ingredient-delete {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  border: none;
-  background: transparent;
-  color: #bbb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.ingredient-delete:hover {
-  background: rgba(var(--ion-color-danger-rgb), 0.08);
-  color: var(--ion-color-danger);
-}
-
-.ingredient-delete ion-icon {
-  font-size: 1rem;
-}
-
-.ingredients-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 20px;
-  text-align: center;
+.quick-add-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: #f6f4f0;
   border-radius: 16px;
-  background: #fafafa;
-  border: 1.5px dashed #e0e0e0;
-  margin-bottom: 14px;
-}
-
-.ingredients-empty__icon {
-  font-size: 2rem;
-  color: #ddd;
-  margin-bottom: 8px;
-}
-
-.ingredients-empty__text {
   margin: 0;
-  font-size: 0.88rem;
-  color: #aaa;
-  font-weight: 600;
 }
 
-.add-ingredient-btn {
+.quick-add-input {
+  --padding-start: 12px;
+  --padding-end: 8px;
+  --placeholder-color: #aaa;
+  --placeholder-font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.quick-add-toggle {
+  --padding-start: 0;
+  --padding-end: 0;
+  --color: #bbb;
+  margin: 0;
+  height: 40px;
+}
+
+.quick-add-btn {
+  --color: var(--ion-color-primary);
+  --background: rgba(var(--ion-color-primary-rgb), 0.08);
+  --background-activated: rgba(var(--ion-color-primary-rgb), 0.15);
+  --border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 36px;
+  height: 36px;
+  margin: 0 4px 0 0;
+}
+
+.quick-add-details {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 8px;
-  width: 100%;
-  height: 44px;
-  border-radius: 14px;
-  border: 1.5px dashed #ccc;
-  background: transparent;
-  color: var(--ion-color-primary);
-  font-size: 0.88rem;
+  padding: 0 12px 8px;
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+}
+
+.quick-add-detail-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  flex: 1;
+  font-size: 0.85rem;
+}
+
+.quick-add-label {
+  font-size: 0.7rem;
   font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.add-ingredient-btn:hover {
-  background: rgba(var(--ion-color-primary-rgb), 0.04);
-  border-color: var(--ion-color-primary);
-}
-
-.add-ingredient-btn__icon {
-  font-size: 1.2rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
 }

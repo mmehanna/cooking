@@ -15,7 +15,10 @@ export class GroceryListPage implements OnInit {
   minWeekStartDate: string;
   maxWeekStartDate: string;
   loading = false;
-  newIngredients: { name: string; quantity: string; unit: string }[] = [];
+  newItemName = '';
+  newItemQty = '';
+  newItemQtyUnit = '';
+  showDetails = false;
 
   constructor(
     private groceryListClient: GroceryListClient,
@@ -32,7 +35,6 @@ export class GroceryListPage implements OnInit {
     this.maxWeekStartDate = this.getMonday(maxDate);
     this.weekStartDate = this.getMonday(new Date());
     this.weekLabel = this.formatWeekLabel(this.weekStartDate);
-    this.newIngredients = [{ name: '', quantity: '', unit: '' }];
     this.loadManualItems();
   }
 
@@ -93,24 +95,27 @@ export class GroceryListPage implements OnInit {
     return new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(parsedDate);
   }
 
-  public addIngredientRow() {
-    const validIngredients = this.newIngredients.filter(i => i.name.trim() !== '');
-
-    if (validIngredients.length === 0) {
-      this.newIngredients.push({ name: '', quantity: '', unit: '' });
+  public async quickAddItem() {
+    const name = this.newItemName.trim();
+    if (!name) {
+      const toast = await this.toastCtrl.create({
+        message: 'Entrez un nom pour l\'article.', duration: 2000, color: 'warning'
+      });
+      await toast.present();
       return;
     }
 
-    const dtos = validIngredients.map(i => ({
-      name: i.name,
-      quantity: i.quantity || undefined,
-      unit: i.unit || undefined,
+    this.groceryListClient.createManualItem({
+      name,
+      quantity: this.newItemQty || undefined,
+      unit: this.newItemQtyUnit || undefined,
       weekStartDate: this.weekStartDate
-    }));
-
-    this.groceryListClient.createManualItemsBulk(dtos).subscribe({
+    }).subscribe({
       next: () => {
-        this.newIngredients = [{ name: '', quantity: '', unit: '' }];
+        this.newItemName = '';
+        this.newItemQty = '';
+        this.newItemQtyUnit = '';
+        this.showDetails = false;
         this.loadManualItems();
       },
       error: async () => {
@@ -120,13 +125,6 @@ export class GroceryListPage implements OnInit {
         await toast.present();
       }
     });
-  }
-
-  public removeIngredientRow(index: number) {
-    this.newIngredients.splice(index, 1);
-    if (this.newIngredients.length === 0) {
-      this.newIngredients = [{ name: '', quantity: '', unit: '' }];
-    }
   }
 
 
