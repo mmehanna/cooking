@@ -72,6 +72,48 @@
     "PASSWORD_CHANGED": "Password changed successfully",
     "PASSWORD_CHANGE_FAILED": "Failed to change password"
   },
+  "HELP": {
+    "TITLE": "Help",
+    "SECTIONS": {
+      "GENERAL": "General",
+      "LISTS": "Lists and Planning",
+      "ACCOUNT": "Account and Subscription"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "Home",
+        "DESC": "View your weekly meals, publish your menu as a chef, and manage your planning."
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "Manage Plates",
+        "DESC": "Create, edit, and organize your plates. Add ingredients, preparation steps, and photos."
+      },
+      "FAMILY": {
+        "TITLE": "Manage Family",
+        "DESC": "Create a family, invite members, and share your plates with them."
+      },
+      "SHARED_PLATES": {
+        "TITLE": "Shared Plates",
+        "DESC": "Discover plates shared by other members of your family."
+      },
+      "GROCERY": {
+        "TITLE": "Grocery List",
+        "DESC": "Add items manually and view the chef's list to prepare your meals."
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "Week Planning",
+        "DESC": "The chef can publish their weekly menu so the whole family can view it."
+      },
+      "SETTINGS": {
+        "TITLE": "Settings",
+        "DESC": "Update your profile, preferences (language, theme), and manage your password."
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "Subscription",
+        "DESC": "Subscribe to a plan to unlock all Atepla features."
+      }
+    }
+  },
   "PROFILE": {
     "TITLE": "User Profile",
     "AVATAR_URL": "Avatar URL",

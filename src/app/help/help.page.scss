@@ -1,0 +1,39 @@
+.help-list {
+  background: transparent;
+  padding: 0;
+
+  ion-item-divider {
+    --background: transparent;
+    --color: var(--ion-color-medium);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+  }
+
+  ion-item {
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    margin-bottom: 4px;
+    border-radius: 12px;
+    --background: var(--ion-color-light);
+
+    h2 {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+      white-space: normal;
+    }
+
+    ion-icon {
+      font-size: 24px;
+      margin-inline-end: 12px;
+    }
+  }
+}

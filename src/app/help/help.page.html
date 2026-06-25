@@ -1,0 +1,98 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/landing"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'HELP.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+
+        <ion-list lines="none" class="help-list">
+
+          <ion-item-divider>
+            <ion-label>{{ 'HELP.SECTIONS.GENERAL' | translate }}</ion-label>
+          </ion-item-divider>
+
+          <ion-item>
+            <ion-icon name="home-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.LANDING.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.LANDING.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="fast-food-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.MANAGE_PLATES.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.MANAGE_PLATES.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="people-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.FAMILY.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.FAMILY.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="share-social-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.SHARED_PLATES.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.SHARED_PLATES.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item-divider>
+            <ion-label>{{ 'HELP.SECTIONS.LISTS' | translate }}</ion-label>
+          </ion-item-divider>
+
+          <ion-item>
+            <ion-icon name="cart-outline" slot="start" color="success"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.GROCERY.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.GROCERY.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="calendar-outline" slot="start" color="success"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.WEEK_PLANNING.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.WEEK_PLANNING.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item-divider>
+            <ion-label>{{ 'HELP.SECTIONS.ACCOUNT' | translate }}</ion-label>
+          </ion-item-divider>
+
+          <ion-item>
+            <ion-icon name="settings-outline" slot="start" color="medium"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.SETTINGS.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.SETTINGS.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="diamond-outline" slot="start" color="medium"></ion-icon>
+            <ion-label>
+              <h2>{{ 'HELP.ITEMS.SUBSCRIPTION.TITLE' | translate }}</h2>
+              <p>{{ 'HELP.ITEMS.SUBSCRIPTION.DESC' | translate }}</p>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

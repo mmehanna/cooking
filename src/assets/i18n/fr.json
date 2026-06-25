@@ -72,6 +72,48 @@
     "PASSWORD_CHANGED": "Mot de passe modifié avec succès",
     "PASSWORD_CHANGE_FAILED": "Échec du changement de mot de passe"
   },
+  "HELP": {
+    "TITLE": "Aide",
+    "SECTIONS": {
+      "GENERAL": "Général",
+      "LISTS": "Listes et planification",
+      "ACCOUNT": "Compte et abonnement"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "Accueil",
+        "DESC": "Consultez vos repas de la semaine, publiez votre menu en tant que chef et gérez votre planification."
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "Gérer vos plats",
+        "DESC": "Créez, modifiez et organisez vos plats. Ajoutez des ingrédients, des étapes de préparation et des photos."
+      },
+      "FAMILY": {
+        "TITLE": "Gérer votre famille",
+        "DESC": "Créez une famille, invitez des membres et partagez vos plats avec eux."
+      },
+      "SHARED_PLATES": {
+        "TITLE": "Plats partagés",
+        "DESC": "Découvrez les plats partagés par les autres membres de votre famille."
+      },
+      "GROCERY": {
+        "TITLE": "Liste de courses",
+        "DESC": "Ajoutez des articles manuellement et consultez la liste du chef pour préparer vos repas."
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "Planification de la semaine",
+        "DESC": "Le chef peut publier son menu hebdomadaire pour que toute la famille puisse le consulter."
+      },
+      "SETTINGS": {
+        "TITLE": "Paramètres",
+        "DESC": "Modifiez votre profil, vos préférences (langue, thème) et gérez votre mot de passe."
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "Abonnement",
+        "DESC": "Souscrivez à un forfait pour débloquer toutes les fonctionnalités d'Atepla."
+      }
+    }
+  },
   "PROFILE": {
     "TITLE": "Profil utilisateur",
     "AVATAR_URL": "URL de l'avatar",
