@@ -69,15 +69,15 @@
 
         <!-- Chef's Grocery List (for members) -->
         <div *ngIf="!loading && !isCurrentUserChef" class="chef-list-section">
-          <ion-list-header class="chef-list-header">
-            <ion-label>
-              <ion-icon name="restaurant-outline" class="chef-list-header__icon"></ion-icon>
-              Liste du chef
-              <span *ngIf="chefName" class="chef-list-header__name">({{ chefName }})</span>
-            </ion-label>
-          </ion-list-header>
-
           <ion-list *ngIf="hasChefItems; else emptyChefList">
+            <ion-list-header class="chef-list-header">
+              <ion-label>
+                <ion-icon name="restaurant-outline" class="chef-list-header__icon"></ion-icon>
+                Liste du chef
+                <span *ngIf="chefName" class="chef-list-header__name">({{ chefName }})</span>
+              </ion-label>
+            </ion-list-header>
+
             <ion-item *ngFor="let item of chefItems">
               <ion-checkbox
                 [checked]="item.checked"
@@ -95,6 +95,13 @@
 
           <ng-template #emptyChefList>
             <ion-card *ngIf="!loading">
+              <ion-card-header>
+                <ion-card-title class="ion-text-center">
+                  <ion-icon name="restaurant-outline" class="chef-list-header__icon"></ion-icon>
+                  Liste du chef
+                  <span *ngIf="chefName" class="chef-list-header__name">({{ chefName }})</span>
+                </ion-card-title>
+              </ion-card-header>
               <ion-card-content>
                 <p class="ion-text-center">Le chef n'a rien ajouté pour cette semaine.</p>
               </ion-card-content>

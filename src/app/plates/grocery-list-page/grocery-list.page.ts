@@ -22,7 +22,7 @@ export class GroceryListPage implements OnInit {
 
   chefItems: any[] = [];
   chefName = '';
-  isCurrentUserChef = true;
+  isCurrentUserChef = false;
 
   constructor(
     private groceryListClient: GroceryListClient,
@@ -59,10 +59,12 @@ export class GroceryListPage implements OnInit {
     this.groceryListClient.getManualItems(this.weekStartDate).subscribe({
       next: (items) => {
         this.manualItems = items;
-        this.loadChefItems();
       },
       error: () => {
-        this.loading = false;
+        this.manualItems = [];
+      },
+      complete: () => {
+        this.loadChefItems();
       }
     });
   }
@@ -73,9 +75,13 @@ export class GroceryListPage implements OnInit {
         this.chefItems = data.items;
         this.chefName = data.chefName;
         this.isCurrentUserChef = data.isCurrentUserChef;
-        this.loading = false;
       },
       error: () => {
+        this.chefItems = [];
+        this.chefName = '';
+        this.isCurrentUserChef = false;
+      },
+      complete: () => {
         this.loading = false;
       }
     });
@@ -145,40 +151,6 @@ export class GroceryListPage implements OnInit {
     });
   }
 
-
-  public async editManualItem(item: any) {
-    const alert = await this.alertCtrl.create({
-      header: 'Modifier l\'article',
-      inputs: [
-        { name: 'name', type: 'text', value: item.name, placeholder: 'Nom' },
-        { name: 'quantity', type: 'text', value: item.quantity || '', placeholder: 'Quantité' },
-        { name: 'unit', type: 'text', value: item.unit || '', placeholder: 'Unité' }
-      ],
-      buttons: [
-        { text: 'Annuler', role: 'cancel' },
-        {
-          text: 'Enregistrer',
-          handler: (data) => {
-            this.groceryListClient.updateManualItem(item.id, {
-              name: data.name,
-              quantity: data.quantity,
-              unit: data.unit
-            }).subscribe({
-              next: () => this.loadManualItems(),
-              error: async () => {
-                const toast = await this.toastCtrl.create({
-                  message: 'Erreur lors de la modification', duration: 2000, color: 'danger'
-                });
-                await toast.present();
-              }
-            });
-            return true;
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
 
   public async deleteManualItem(item: any) {
     const alert = await this.alertCtrl.create({
