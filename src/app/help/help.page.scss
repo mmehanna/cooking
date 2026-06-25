@@ -1,94 +1,166 @@
-/***** Help Page — Clean UI with Schemas *****/
+/***** Help Page — Modern Beautiful UI *****/
 
-.help-list {
-  background: transparent;
-  padding: 0;
+/* ── Header ── */
+.help-header {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
 
-  ion-item-divider {
-    --background: transparent;
-    --color: var(--ion-color-medium);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-top: 8px;
+.help-toolbar {
+  --background: transparent;
+  --color: #fff;
+}
+
+.help-back {
+  --color: #fff;
+  --icon-font-size: 22px;
+}
+
+.help-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  padding-inline: 56px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+/* ── Content Shell ── */
+.help-content {
+  --background: #f5f7fa;
+}
+
+.help-shell {
+  padding: 16px 16px 32px;
+}
+
+/* ── Section Titles ── */
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #8e9aaf;
+  margin: 20px 0 12px 4px;
+
+  &--schemas {
+    margin-top: 28px;
+  }
+}
+
+/* ── Feature Grid ── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
   }
 
-  ion-item {
-    --padding-start: 16px;
-    --inner-padding-end: 16px;
-    margin-bottom: 4px;
-    border-radius: 12px;
-    --background: var(--ion-color-light);
+  &__icon-wrap {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    h2 {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
+  &__icon {
+    font-size: 24px;
+    color: #fff;
+  }
 
-    p {
-      font-size: 0.85rem;
-      color: var(--ion-color-medium);
-      white-space: normal;
-    }
+  &__body {
+    flex: 1;
+    padding-top: 2px;
+  }
 
-    ion-icon {
-      font-size: 24px;
-      margin-inline-end: 12px;
-    }
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 4px;
+  }
+
+  &__desc {
+    font-size: 0.82rem;
+    color: #718096;
+    line-height: 1.4;
+    margin: 0;
   }
 }
 
 /* ── Schema Cards ── */
-.schema-section {
-  margin-bottom: 24px;
-}
-
-.schema-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ion-color-medium);
-  margin: 20px 16px 12px;
-}
-
 .schema-card {
   background: #fff;
-  border-radius: 16px;
-  margin: 0 16px 16px;
-  padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 
   &__header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
 
-    ion-icon {
-      font-size: 22px;
-    }
+  &__icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
 
-    h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin: 0;
-    }
+  &__icon {
+    font-size: 22px;
+    color: #fff;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
   }
 }
 
+/* ── Schema Steps (vertical timeline) ── */
 .schema-steps {
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding-left: 6px;
 }
 
 .schema-step {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
   position: relative;
   padding-bottom: 18px;
 
@@ -99,83 +171,39 @@
   &:not(:last-child)::after {
     content: '';
     position: absolute;
-    left: 15px;
-    top: 32px;
+    left: 11px;
+    top: 28px;
     width: 2px;
-    height: calc(100% - 20px);
-    background: var(--ion-color-light);
+    height: calc(100% - 14px);
+    background: #e2e8f0;
+    border-radius: 1px;
   }
 
-  &__num {
+  &__dot {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: var(--ion-color-primary);
-    color: #fff;
-    font-size: 0.85rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-top: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     z-index: 1;
   }
 
   &__body {
     flex: 1;
-    padding-top: 4px;
+    padding-top: 2px;
   }
 
   &__label {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 600;
-    color: var(--ion-color-dark);
+    color: #2d3748;
     margin-bottom: 2px;
   }
 
   &__desc {
     font-size: 0.82rem;
-    color: var(--ion-color-medium);
-    line-height: 1.35;
-  }
-}
-
-.schema-step--chef .schema-step__num {
-  background: var(--ion-color-warning);
-}
-
-.schema-step--member .schema-step__num {
-  background: var(--ion-color-success);
-}
-
-.schema-step--grocery .schema-step__num {
-  background: var(--ion-color-tertiary);
-}
-
-.schema-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 8px 16px 20px;
-
-  &__item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    color: var(--ion-color-medium);
-    background: var(--ion-color-light);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  &__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--ion-color-primary);
-
-    &--chef { background: var(--ion-color-warning); }
-    &--member { background: var(--ion-color-success); }
+    color: #718096;
+    line-height: 1.4;
   }
 }

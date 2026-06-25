@@ -1,246 +1,75 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header class="help-header">
+  <ion-toolbar class="help-toolbar">
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="/landing"></ion-back-button>
+      <ion-back-button text="" defaultHref="/landing" class="help-back"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'HELP.TITLE' | translate }}</ion-title>
+    <ion-title class="help-title">{{ 'HELP.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+<ion-content [fullscreen]="true" class="help-content">
+  <div class="help-shell">
 
-        <ion-list lines="none" class="help-list">
-
-          <ion-item-divider>
-            <ion-label>{{ 'HELP.SECTIONS.GENERAL' | translate }}</ion-label>
-          </ion-item-divider>
-
-          <ion-item>
-            <ion-icon name="home-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.LANDING.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.LANDING.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="fast-food-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.MANAGE_PLATES.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.MANAGE_PLATES.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="people-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.FAMILY.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.FAMILY.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="share-social-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.SHARED_PLATES.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.SHARED_PLATES.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item-divider>
-            <ion-label>{{ 'HELP.SECTIONS.LISTS' | translate }}</ion-label>
-          </ion-item-divider>
-
-          <ion-item>
-            <ion-icon name="cart-outline" slot="start" color="success"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.GROCERY.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.GROCERY.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="calendar-outline" slot="start" color="success"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.WEEK_PLANNING.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.WEEK_PLANNING.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item-divider>
-            <ion-label>{{ 'HELP.SECTIONS.ACCOUNT' | translate }}</ion-label>
-          </ion-item-divider>
-
-          <ion-item>
-            <ion-icon name="settings-outline" slot="start" color="medium"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.SETTINGS.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.SETTINGS.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="diamond-outline" slot="start" color="medium"></ion-icon>
-            <ion-label>
-              <h2>{{ 'HELP.ITEMS.SUBSCRIPTION.TITLE' | translate }}</h2>
-              <p>{{ 'HELP.ITEMS.SUBSCRIPTION.DESC' | translate }}</p>
-            </ion-label>
-          </ion-item>
-
-        </ion-list>
-
-        <!-- ── Schémas de fonctionnement ── -->
-        <div class="schema-section">
-
-          <h2 class="schema-title">{{ 'HELP.SCHEMAS.TITLE' | translate }}</h2>
-
-          <div class="schema-card">
-            <div class="schema-card__header">
-              <ion-icon name="restaurant-outline" color="primary"></ion-icon>
-              <h3>{{ 'HELP.SCHEMAS.CREATE_PLATE.TITLE' | translate }}</h3>
-            </div>
-            <div class="schema-steps">
-              <div class="schema-step">
-                <div class="schema-step__num">1</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP1.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP1.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step">
-                <div class="schema-step__num">2</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP2.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP2.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step">
-                <div class="schema-step__num">3</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP3.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP3.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step">
-                <div class="schema-step__num">4</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP4.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CREATE_PLATE.STEP4.DESC' | translate }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="schema-card">
-            <div class="schema-card__header">
-              <ion-icon name="calendar-outline" color="warning"></ion-icon>
-              <h3>{{ 'HELP.SCHEMAS.CHEF_WEEK.TITLE' | translate }}</h3>
-            </div>
-            <div class="schema-steps">
-              <div class="schema-step schema-step--chef">
-                <div class="schema-step__num">1</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP1.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP1.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--chef">
-                <div class="schema-step__num">2</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP2.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP2.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--chef">
-                <div class="schema-step__num">3</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP3.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP3.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--chef">
-                <div class="schema-step__num">4</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP4.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.CHEF_WEEK.STEP4.DESC' | translate }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="schema-card">
-            <div class="schema-card__header">
-              <ion-icon name="people-outline" color="success"></ion-icon>
-              <h3>{{ 'HELP.SCHEMAS.FAMILY.TITLE' | translate }}</h3>
-            </div>
-            <div class="schema-steps">
-              <div class="schema-step schema-step--member">
-                <div class="schema-step__num">1</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.FAMILY.STEP1.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.FAMILY.STEP1.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--member">
-                <div class="schema-step__num">2</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.FAMILY.STEP2.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.FAMILY.STEP2.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--member">
-                <div class="schema-step__num">3</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.FAMILY.STEP3.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.FAMILY.STEP3.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--member">
-                <div class="schema-step__num">4</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.FAMILY.STEP4.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.FAMILY.STEP4.DESC' | translate }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="schema-card">
-            <div class="schema-card__header">
-              <ion-icon name="cart-outline" color="tertiary"></ion-icon>
-              <h3>{{ 'HELP.SCHEMAS.GROCERY.TITLE' | translate }}</h3>
-            </div>
-            <div class="schema-steps">
-              <div class="schema-step schema-step--grocery">
-                <div class="schema-step__num">1</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.GROCERY.STEP1.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.GROCERY.STEP1.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--grocery">
-                <div class="schema-step__num">2</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.GROCERY.STEP2.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.GROCERY.STEP2.DESC' | translate }}</div>
-                </div>
-              </div>
-              <div class="schema-step schema-step--grocery">
-                <div class="schema-step__num">3</div>
-                <div class="schema-step__body">
-                  <div class="schema-step__label">{{ 'HELP.SCHEMAS.GROCERY.STEP3.LABEL' | translate }}</div>
-                  <div class="schema-step__desc">{{ 'HELP.SCHEMAS.GROCERY.STEP3.DESC' | translate }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+    <!-- ── Section: Fonctionnalités ── -->
+    <h2 class="section-title">{{ 'HELP.SECTIONS.GENERAL' | translate }}</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let f of featuresGeneral">
+        <div class="feature-card__icon-wrap" [style.background]="f.gradient">
+          <ion-icon [name]="f.icon" class="feature-card__icon"></ion-icon>
         </div>
+        <div class="feature-card__body">
+          <h3 class="feature-card__title">{{ f.title | translate }}</h3>
+          <p class="feature-card__desc">{{ f.desc | translate }}</p>
+        </div>
+      </div>
+    </div>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <h2 class="section-title">{{ 'HELP.SECTIONS.LISTS' | translate }}</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let f of featuresLists">
+        <div class="feature-card__icon-wrap" [style.background]="f.gradient">
+          <ion-icon [name]="f.icon" class="feature-card__icon"></ion-icon>
+        </div>
+        <div class="feature-card__body">
+          <h3 class="feature-card__title">{{ f.title | translate }}</h3>
+          <p class="feature-card__desc">{{ f.desc | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">{{ 'HELP.SECTIONS.ACCOUNT' | translate }}</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let f of featuresAccount">
+        <div class="feature-card__icon-wrap" [style.background]="f.gradient">
+          <ion-icon [name]="f.icon" class="feature-card__icon"></ion-icon>
+        </div>
+        <div class="feature-card__body">
+          <h3 class="feature-card__title">{{ f.title | translate }}</h3>
+          <p class="feature-card__desc">{{ f.desc | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section: Schémas ── -->
+    <h2 class="section-title section-title--schemas">{{ 'HELP.SCHEMAS.TITLE' | translate }}</h2>
+
+    <div class="schema-card" *ngFor="let s of schemas; let i = index">
+      <div class="schema-card__header">
+        <div class="schema-card__icon-wrap" [style.background]="s.gradient">
+          <ion-icon [name]="s.icon" class="schema-card__icon"></ion-icon>
+        </div>
+        <h3 class="schema-card__title">{{ s.title | translate }}</h3>
+      </div>
+      <div class="schema-steps">
+        <div class="schema-step" *ngFor="let step of s.steps">
+          <div class="schema-step__dot" [style.background]="s.accent"></div>
+          <div class="schema-step__body">
+            <div class="schema-step__label">{{ step.label | translate }}</div>
+            <div class="schema-step__desc">{{ step.desc | translate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </ion-content>
