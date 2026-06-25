@@ -1,3 +1,5 @@
+/***** Help Page — Clean UI with Schemas *****/
+
 .help-list {
   background: transparent;
   padding: 0;
@@ -35,5 +37,145 @@
       font-size: 24px;
       margin-inline-end: 12px;
     }
+  }
+}
+
+/* ── Schema Cards ── */
+.schema-section {
+  margin-bottom: 24px;
+}
+
+.schema-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ion-color-medium);
+  margin: 20px 16px 12px;
+}
+
+.schema-card {
+  background: #fff;
+  border-radius: 16px;
+  margin: 0 16px 16px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+
+    ion-icon {
+      font-size: 22px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+}
+
+.schema-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.schema-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 18px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    width: 2px;
+    height: calc(100% - 20px);
+    background: var(--ion-color-light);
+  }
+
+  &__num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--ion-color-primary);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  &__body {
+    flex: 1;
+    padding-top: 4px;
+  }
+
+  &__label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin-bottom: 2px;
+  }
+
+  &__desc {
+    font-size: 0.82rem;
+    color: var(--ion-color-medium);
+    line-height: 1.35;
+  }
+}
+
+.schema-step--chef .schema-step__num {
+  background: var(--ion-color-warning);
+}
+
+.schema-step--member .schema-step__num {
+  background: var(--ion-color-success);
+}
+
+.schema-step--grocery .schema-step__num {
+  background: var(--ion-color-tertiary);
+}
+
+.schema-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 16px 20px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--ion-color-medium);
+    background: var(--ion-color-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ion-color-primary);
+
+    &--chef { background: var(--ion-color-warning); }
+    &--member { background: var(--ion-color-success); }
   }
 }

@@ -112,6 +112,36 @@
         "TITLE": "Abonnement",
         "DESC": "Souscrivez à un forfait pour débloquer toutes les fonctionnalités d'Atepla."
       }
+    },
+    "SCHEMAS": {
+      "TITLE": "Comment ça marche",
+      "CREATE_PLATE": {
+        "TITLE": "Créer un plat",
+        "STEP1": { "LABEL": "Menu Gérer vos plats", "DESC": "Ouvrez le menu latéral et sélectionnez \"Gérer vos plats\"." },
+        "STEP2": { "LABEL": "Ajouter un plat", "DESC": "Appuyez sur le bouton + pour créer un nouveau plat." },
+        "STEP3": { "LABEL": "Remplir les détails", "DESC": "Ajoutez le nom, une photo, les ingrédients et les étapes de préparation." },
+        "STEP4": { "LABEL": "Enregistrer", "DESC": "Votre plat est maintenant disponible pour la planification." }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "Publier la semaine (Chef)",
+        "STEP1": { "LABEL": "Aller sur l'accueil", "DESC": "Le chef consulte sa page d'accueil pour voir sa semaine." },
+        "STEP2": { "LABEL": "Choisir les plats", "DESC": "Pour chaque jour et repas, sélectionnez un plat de votre collection." },
+        "STEP3": { "LABEL": "Publier", "DESC": "Appuyez sur le bouton Publier pour rendre le menu visible aux membres." },
+        "STEP4": { "LABEL": "La famille consulte", "DESC": "Les membres voient automatiquement le menu du chef sur leur accueil." }
+      },
+      "FAMILY": {
+        "TITLE": "Rejoindre une famille",
+        "STEP1": { "LABEL": "Menu Famille", "DESC": "Ouvrez le menu et sélectionnez \"Gérer votre famille\"." },
+        "STEP2": { "LABEL": "Recevoir l'invitation", "DESC": "Le chef vous envoie une invitation par email ou code." },
+        "STEP3": { "LABEL": "Accepter", "DESC": "Acceptez l'invitation pour rejoindre la famille." },
+        "STEP4": { "LABEL": "Accès partagé", "DESC": "Vous pouvez maintenant voir les plats partagés et le menu du chef." }
+      },
+      "GROCERY": {
+        "TITLE": "Utiliser la liste de courses",
+        "STEP1": { "LABEL": "Ouvrir la liste", "DESC": "Dans le menu, sélectionnez \"Liste de courses\"." },
+        "STEP2": { "LABEL": "Ajouter des articles", "DESC": "Utilisez la barre en bas pour ajouter rapidement des articles avec quantité et unité." },
+        "STEP3": { "LABEL": "Cocher / Consulter", "DESC": "Cochez les articles achetés. En tant que membre, basculez aussi sur la liste du chef." }
+      }
     }
   },
   "PROFILE": {
