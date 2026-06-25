@@ -119,7 +119,7 @@
         "TITLE": "Créer un plat",
         "STEP1": { "LABEL": "Menu Gérer vos plats", "DESC": "Ouvrez le menu latéral et sélectionnez \"Gérer vos plats\"." },
         "STEP2": { "LABEL": "Ajouter un plat", "DESC": "Appuyez sur le bouton + pour créer un nouveau plat." },
-        "STEP3": { "LABEL": "Remplir les détails", "DESC": "Ajoutez le nom, une photo, les ingrédients et les étapes de préparation." },
+        "STEP3": { "LABEL": "Remplir les détails", "DESC": "Ajoutez le nom, les ingrédients et les étapes de préparation." },
         "STEP4": { "LABEL": "Enregistrer", "DESC": "Votre plat est maintenant disponible pour la planification." }
       },
       "CHEF_WEEK": {

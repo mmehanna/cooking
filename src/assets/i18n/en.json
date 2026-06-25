@@ -119,7 +119,7 @@
         "TITLE": "Create a Plate",
         "STEP1": { "LABEL": "Open Manage Plates", "DESC": "Open the side menu and select \"Manage Plates\"." },
         "STEP2": { "LABEL": "Add a Plate", "DESC": "Tap the + button to create a new plate." },
-        "STEP3": { "LABEL": "Fill in Details", "DESC": "Add the name, a photo, ingredients, and preparation steps." },
+        "STEP3": { "LABEL": "Fill in Details", "DESC": "Add the name, ingredients, and preparation steps." },
         "STEP4": { "LABEL": "Save", "DESC": "Your plate is now available for planning." }
       },
       "CHEF_WEEK": {
