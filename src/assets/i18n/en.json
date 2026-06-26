@@ -72,6 +72,78 @@
     "PASSWORD_CHANGED": "Password changed successfully",
     "PASSWORD_CHANGE_FAILED": "Failed to change password"
   },
+  "HELP": {
+    "TITLE": "Help",
+    "SECTIONS": {
+      "GENERAL": "General",
+      "LISTS": "Lists and Planning",
+      "ACCOUNT": "Account and Subscription"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "Home",
+        "DESC": "View your weekly meals, publish your menu as a chef, and manage your planning."
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "Manage Plates",
+        "DESC": "Create, edit, and organize your plates. Add ingredients, preparation steps, and photos."
+      },
+      "FAMILY": {
+        "TITLE": "Manage Family",
+        "DESC": "Create a family, invite members, and share your plates with them."
+      },
+      "SHARED_PLATES": {
+        "TITLE": "Shared Plates",
+        "DESC": "Discover plates shared by other members of your family."
+      },
+      "GROCERY": {
+        "TITLE": "Grocery List",
+        "DESC": "Add items manually and view the chef's list to prepare your meals."
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "Week Planning",
+        "DESC": "The chef can publish their weekly menu so the whole family can view it."
+      },
+      "SETTINGS": {
+        "TITLE": "Settings",
+        "DESC": "Update your profile, preferences (language, theme), and manage your password."
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "Subscription",
+        "DESC": "Subscribe to a plan to unlock all Atepla features."
+      }
+    },
+    "SCHEMAS": {
+      "TITLE": "How it works",
+      "CREATE_PLATE": {
+        "TITLE": "Create a Plate",
+        "STEP1": { "LABEL": "Open Manage Plates", "DESC": "Open the side menu and select \"Manage Plates\"." },
+        "STEP2": { "LABEL": "Add a Plate", "DESC": "Tap the + button to create a new plate." },
+        "STEP3": { "LABEL": "Fill in Details", "DESC": "Add the name, ingredients, and preparation steps." },
+        "STEP4": { "LABEL": "Save", "DESC": "Your plate is now available for planning." }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "Publish the Week (Chef)",
+        "STEP1": { "LABEL": "Go to Home", "DESC": "The chef opens their landing page to view the week." },
+        "STEP2": { "LABEL": "Choose Plates", "DESC": "For each day and meal, select a plate from your collection." },
+        "STEP3": { "LABEL": "Publish", "DESC": "Tap the Publish button to make the menu visible to members." },
+        "STEP4": { "LABEL": "Family Views", "DESC": "Members automatically see the chef's menu on their landing page." }
+      },
+      "FAMILY": {
+        "TITLE": "Join a Family",
+        "STEP1": { "LABEL": "Family Menu", "DESC": "Open the menu and select \"Manage Family\"." },
+        "STEP2": { "LABEL": "Receive Invitation", "DESC": "The chef sends you an invitation via email or code." },
+        "STEP3": { "LABEL": "Accept", "DESC": "Accept the invitation to join the family." },
+        "STEP4": { "LABEL": "Shared Access", "DESC": "You can now view shared plates and the chef's weekly menu." }
+      },
+      "GROCERY": {
+        "TITLE": "Use the Grocery List",
+        "STEP1": { "LABEL": "Open the List", "DESC": "From the menu, select \"Grocery List\"." },
+        "STEP2": { "LABEL": "Add Items", "DESC": "Use the bottom bar to quickly add items with quantity and unit." },
+        "STEP3": { "LABEL": "Check / View", "DESC": "Check off purchased items. As a member, also toggle to the chef's list." }
+      }
+    }
+  },
   "PROFILE": {
     "TITLE": "User Profile",
     "AVATAR_URL": "Avatar URL",

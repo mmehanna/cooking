@@ -1,0 +1,209 @@
+/***** Help Page — Modern Beautiful UI *****/
+
+/* ── Header ── */
+.help-header {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.help-toolbar {
+  --background: transparent;
+  --color: #fff;
+}
+
+.help-back {
+  --color: #fff;
+  --icon-font-size: 22px;
+}
+
+.help-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  padding-inline: 56px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+/* ── Content Shell ── */
+.help-content {
+  --background: #f5f7fa;
+}
+
+.help-shell {
+  padding: 16px 16px 32px;
+}
+
+/* ── Section Titles ── */
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #8e9aaf;
+  margin: 20px 0 12px 4px;
+
+  &--schemas {
+    margin-top: 28px;
+  }
+}
+
+/* ── Feature Grid ── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+
+  &__icon-wrap {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    font-size: 24px;
+    color: #fff;
+  }
+
+  &__body {
+    flex: 1;
+    padding-top: 2px;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 4px;
+  }
+
+  &__desc {
+    font-size: 0.82rem;
+    color: #718096;
+    line-height: 1.4;
+    margin: 0;
+  }
+}
+
+/* ── Schema Cards ── */
+.schema-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  &__icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__icon {
+    font-size: 22px;
+    color: #fff;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+  }
+}
+
+/* ── Schema Steps (vertical timeline) ── */
+.schema-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 6px;
+}
+
+.schema-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
+  padding-bottom: 18px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 28px;
+    width: 2px;
+    height: calc(100% - 14px);
+    background: #e2e8f0;
+    border-radius: 1px;
+  }
+
+  &__dot {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-top: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    z-index: 1;
+  }
+
+  &__body {
+    flex: 1;
+    padding-top: 2px;
+  }
+
+  &__label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 2px;
+  }
+
+  &__desc {
+    font-size: 0.82rem;
+    color: #718096;
+    line-height: 1.4;
+  }
+}

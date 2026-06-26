@@ -1,0 +1,75 @@
+<ion-header class="help-header">
+  <ion-toolbar class="help-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/landing" class="help-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="help-title">{{ 'HELP.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="help-content">
+  <div class="help-shell">
+
+    <!-- ── Section: Fonctionnalités ── -->
+    <h2 class="section-title">{{ 'HELP.SECTIONS.GENERAL' | translate }}</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let f of featuresGeneral">
+        <div class="feature-card__icon-wrap" [style.background]="f.gradient">
+          <ion-icon [name]="f.icon" class="feature-card__icon"></ion-icon>
+        </div>
+        <div class="feature-card__body">
+          <h3 class="feature-card__title">{{ f.title | translate }}</h3>
+          <p class="feature-card__desc">{{ f.desc | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">{{ 'HELP.SECTIONS.LISTS' | translate }}</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let f of featuresLists">
+        <div class="feature-card__icon-wrap" [style.background]="f.gradient">
+          <ion-icon [name]="f.icon" class="feature-card__icon"></ion-icon>
+        </div>
+        <div class="feature-card__body">
+          <h3 class="feature-card__title">{{ f.title | translate }}</h3>
+          <p class="feature-card__desc">{{ f.desc | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">{{ 'HELP.SECTIONS.ACCOUNT' | translate }}</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let f of featuresAccount">
+        <div class="feature-card__icon-wrap" [style.background]="f.gradient">
+          <ion-icon [name]="f.icon" class="feature-card__icon"></ion-icon>
+        </div>
+        <div class="feature-card__body">
+          <h3 class="feature-card__title">{{ f.title | translate }}</h3>
+          <p class="feature-card__desc">{{ f.desc | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section: Schémas ── -->
+    <h2 class="section-title section-title--schemas">{{ 'HELP.SCHEMAS.TITLE' | translate }}</h2>
+
+    <div class="schema-card" *ngFor="let s of schemas; let i = index">
+      <div class="schema-card__header">
+        <div class="schema-card__icon-wrap" [style.background]="s.gradient">
+          <ion-icon [name]="s.icon" class="schema-card__icon"></ion-icon>
+        </div>
+        <h3 class="schema-card__title">{{ s.title | translate }}</h3>
+      </div>
+      <div class="schema-steps">
+        <div class="schema-step" *ngFor="let step of s.steps">
+          <div class="schema-step__dot" [style.background]="s.accent"></div>
+          <div class="schema-step__body">
+            <div class="schema-step__label">{{ step.label | translate }}</div>
+            <div class="schema-step__desc">{{ step.desc | translate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

@@ -80,6 +80,11 @@ const routes: Routes = [
     path: 'subscription',
     loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionPageModule),
     canMatch: [AuthGuard]
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help.module').then(m => m.HelpPageModule),
+    canMatch: [AuthGuard]
   }
 
 ];
