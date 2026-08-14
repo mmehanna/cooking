@@ -1,0 +1,484 @@
+{
+  "APP": {
+    "MENU_TITLE": "ここから選択",
+    "HOME": "ホーム",
+    "CREATE_DAY_LIST": "1日のリストを作成",
+    "PLATE_FOR_DAY": "今日の料理",
+    "MANAGE_PLATES": "料理を管理",
+    "MANAGE_FAMILIES": "家族を管理",
+    "VIEW_SHARED_PLATES": "共有料理を表示",
+    "GROCERY_LIST": "買い物リスト",
+    "SETTINGS": "設定",
+    "HELP": "ヘルプ",
+    "LOGOUT": "ログアウト",
+    "WORLDWIDE_RECIPES": "世界のレシピ"
+  },
+  "COMMON": {
+    "BACK": "戻る"
+  },
+  "LANDING": {
+    "TITLE": "メニュー",
+    "USER": "ユーザー",
+    "PLATES_FOR_WEEK": "今週の料理",
+    "VIEW_MODE": "表示",
+    "EDIT_MODE": "編集",
+    "GENERATE_WEEK": "今週を自動生成",
+    "EDIT_DAY_MENU": "今日のメニューを編集",
+    "CONFIRM_GENERATE_TITLE": "確認",
+    "CONFIRM_GENERATE_MESSAGE": "今週の料理を自動生成してもよろしいですか？",
+    "CANCEL": "キャンセル",
+    "CONFIRM": "確認",
+    "GENERATE_SUCCESS": "今週の料理を生成しました",
+    "GENERATE_FAILED": "今週の料理の生成に失敗しました",
+    "TODAY": "今日",
+    "NO_PLATE": "まだ料理がありません",
+    "NO_PLATE_PLANNED": "計画された料理がありません",
+    "DRAFT_CHIP": "下書き — 家族には非公開",
+    "PUBLISHED": "公開済み",
+    "PUBLISH_WEEK": "今週を公開",
+    "UNPUBLISH": "公開を解除",
+    "MY_WEEK": "マイウィーク",
+    "CHEF": "シェフ",
+    "CHEF_WEEK_VIEWING": "{{name}}の今週を表示中",
+    "THIS_WEEK": "今週",
+    "NEXT_WEEK": "来週",
+    "IN_N_WEEKS": "{{n}}週間後",
+    "LAST_WEEK": "先週",
+    "N_WEEKS_AGO": "{{n}}週間前"
+  },
+  "LOGIN": {
+    "TITLE": "ログイン",
+    "EMAIL": "メールアドレス",
+    "PASSWORD": "パスワード",
+    "SUBMIT": "ログイン",
+    "CONTINUE_WITH_GOOGLE": "Googleで続行",
+    "NOT_REGISTERED": "未登録ですか？こちらをクリック！",
+    "ALREADY_REGISTERED": "登録済みですか？ログイン",
+    "HERO_TITLE": "ようこそ",
+    "HERO_SUBTITLE": "ワンクリックで食事を計画"
+  },
+  "REGISTER": {
+    "TITLE": "登録",
+    "EMAIL": "メールアドレス",
+    "EMAIL_REQUIRED": "メールアドレスは必須で、有効なアドレスである必要があります。",
+    "PASSWORD": "パスワード",
+    "PASSWORD_REQUIREMENTS": "パスワードは6〜8文字で、大文字と特殊文字をそれぞれ1文字以上含める必要があります。",
+    "CONFIRM_PASSWORD": "パスワードの確認",
+    "PASSWORD_MISMATCH": "パスワードが一致する必要があります。",
+    "SUBMIT": "登録"
+  },
+  "SETTINGS": {
+    "TITLE": "設定",
+    "BACK": "戻る",
+    "PROFILE": "プロフィール",
+    "PREFERENCES": "環境設定",
+    "ACCOUNT": "アカウント",
+    "PROFILE_UPDATED": "プロフィールを更新しました",
+    "PROFILE_UPDATE_FAILED": "プロフィールの更新に失敗しました",
+    "PREFERENCES_UPDATED": "環境設定を更新しました",
+    "PREFERENCES_UPDATE_FAILED": "環境設定の更新に失敗しました",
+    "PASSWORD_CHANGED": "パスワードを変更しました",
+    "PASSWORD_CHANGE_FAILED": "パスワードの変更に失敗しました"
+  },
+  "HELP": {
+    "TITLE": "ヘルプ",
+    "SECTIONS": {
+      "GENERAL": "一般",
+      "LISTS": "リストと計画",
+      "ACCOUNT": "アカウントとサブスクリプション"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "ホーム",
+        "DESC": "今週の食事を確認し、シェフとしてメニューを公開し、計画を管理します。"
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "料理を管理",
+        "DESC": "料理を作成、編集、整理します。食材、調理手順、写真を追加できます。"
+      },
+      "FAMILY": {
+        "TITLE": "家族を管理",
+        "DESC": "家族を作成し、メンバーを招待して、料理を共有しましょう。"
+      },
+      "SHARED_PLATES": {
+        "TITLE": "共有料理",
+        "DESC": "家族の他のメンバーが共有した料理を発見しましょう。"
+      },
+      "GROCERY": {
+        "TITLE": "買い物リスト",
+        "DESC": "商品を手動で追加し、食事の準備のためにシェフのリストも表示します。"
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "週間計画",
+        "DESC": "シェフが週間メニューを公開すると、家族全員が確認できます。"
+      },
+      "SETTINGS": {
+        "TITLE": "設定",
+        "DESC": "プロフィール、環境設定（言語、テーマ）の更新とパスワードの管理を行います。"
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "サブスクリプション",
+        "DESC": "プランに登録して、Ateplaのすべての機能を解除しましょう。"
+      }
+    },
+    "SCHEMAS": {
+      "TITLE": "使い方",
+      "CREATE_PLATE": {
+        "TITLE": "料理を作成",
+        "STEP1": {
+          "LABEL": "料理を管理を開く",
+          "DESC": "サイドメニューを開いて「料理を管理」を選択します。"
+        },
+        "STEP2": {
+          "LABEL": "料理を追加",
+          "DESC": "＋ボタンをタップして新しい料理を作成します。"
+        },
+        "STEP3": {
+          "LABEL": "詳細を入力",
+          "DESC": "名前、食材、調理手順を追加します。"
+        },
+        "STEP4": {
+          "LABEL": "保存",
+          "DESC": "作成した料理は計画に使用できるようになります。"
+        }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "今週を公開（シェフ）",
+        "STEP1": {
+          "LABEL": "ホームへ移動",
+          "DESC": "シェフはホーム画面を開いて今週を確認します。"
+        },
+        "STEP2": {
+          "LABEL": "料理を選択",
+          "DESC": "各日・各食事について、コレクションから料理を選択します。"
+        },
+        "STEP3": {
+          "LABEL": "公開",
+          "DESC": "公開ボタンをタップすると、メンバーにメニューが表示されます。"
+        },
+        "STEP4": {
+          "LABEL": "家族が閲覧",
+          "DESC": "メンバーはホーム画面でシェフのメニューを自動的に確認できます。"
+        }
+      },
+      "FAMILY": {
+        "TITLE": "家族に参加",
+        "STEP1": {
+          "LABEL": "家族メニュー",
+          "DESC": "メニューを開いて「家族を管理」を選択します。"
+        },
+        "STEP2": {
+          "LABEL": "招待を受け取る",
+          "DESC": "シェフがメールまたはコードで招待を送信します。"
+        },
+        "STEP3": {
+          "LABEL": "承認",
+          "DESC": "招待を承認して家族に参加します。"
+        },
+        "STEP4": {
+          "LABEL": "共有アクセス",
+          "DESC": "共有料理とシェフの週間メニューを確認できるようになります。"
+        }
+      },
+      "GROCERY": {
+        "TITLE": "買い物リストを使う",
+        "STEP1": {
+          "LABEL": "リストを開く",
+          "DESC": "メニューから「買い物リスト」を選択します。"
+        },
+        "STEP2": {
+          "LABEL": "商品を追加",
+          "DESC": "下部のバーを使って、数量と単位を指定して素早く商品を追加します。"
+        },
+        "STEP3": {
+          "LABEL": "チェック / 表示",
+          "DESC": "購入した商品にチェックを入れます。メンバーはシェフのリストにも切り替えられます。"
+        }
+      }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "ユーザープロフィール",
+    "AVATAR_URL": "アバターURL",
+    "NAME": "名前",
+    "EMAIL": "メールアドレス",
+    "SAVE": "プロフィールを保存"
+  },
+  "PREFERENCES": {
+    "TITLE": "アプリの環境設定",
+    "LANGUAGE": "言語",
+    "LANGUAGE_HINT": "アプリ全体で使用する言語を選択",
+    "ENGLISH": "英語",
+    "FRENCH": "フランス語",
+    "SPANISH": "スペイン語",
+    "ARABIC": "アラビア語",
+    "MANDARIN": "中国語（北京語）",
+    "RUSSIAN": "ロシア語",
+    "POLISH": "ポーランド語",
+    "GERMAN": "ドイツ語",
+    "PORTUGUESE": "ポルトガル語",
+    "ITALIAN": "イタリア語",
+    "JAPANESE": "日本語",
+    "KOREAN": "韓国語",
+    "DARK_MODE": "ダークモード",
+    "DARK_MODE_HINT": "ライトとダークの表示を切り替え",
+    "NOTIFICATIONS": "通知",
+    "NOTIFICATIONS_HINT": "アプリの通知を有効または無効にする",
+    "SAVE": "環境設定を保存"
+  },
+  "ACCOUNT": {
+    "CHANGE_PASSWORD": "パスワードを変更",
+    "CURRENT_PASSWORD": "現在のパスワード",
+    "NEW_PASSWORD": "新しいパスワード",
+    "CONFIRM_NEW_PASSWORD": "新しいパスワードを確認",
+    "PASSWORDS_DO_NOT_MATCH": "パスワードが一致しません",
+    "DANGER_ZONE": "危険な操作",
+    "DELETE_ACCOUNT": "アカウントを削除",
+    "DELETE_WARNING": "この操作は元に戻せません。すべてのデータが完全に削除されます。",
+    "DELETE_CONFIRM_TITLE": "アカウントを削除",
+    "DELETE_CONFIRM_MESSAGE": "本当にアカウントを削除しますか？この操作は元に戻せません。すべての料理、計画、家族データが完全に削除されます。",
+    "CANCEL": "キャンセル",
+    "DELETE": "削除",
+    "FINAL_CONFIRMATION": "最終確認",
+    "TYPE_DELETE": "アカウント削除を確認するために「DELETE」と入力してください。",
+    "TYPE_DELETE_PLACEHOLDER": "DELETE と入力",
+    "PERMANENTLY_DELETE": "完全に削除",
+    "DELETE_FAILED": "アカウントの削除に失敗しました"
+  },
+  "PLATES": {
+    "MANAGE": "料理を管理",
+    "CANCEL": "キャンセル",
+    "SELECT": "選択",
+    "EDIT": "編集",
+    "PLEASE_SELECT": "少なくとも1つの料理を選択してください",
+    "CONFIRM_DELETE": "削除の確認",
+    "CONFIRM_REMOVE": "削除の確認",
+    "DELETE_PLATE_MESSAGE": "料理「{{label}}」を削除してもよろしいですか？",
+    "REMOVE_PLATE_MESSAGE": "共有料理から「{{label}}」を削除してもよろしいですか？",
+    "DELETE_SUCCESS": "削除に成功しました",
+    "REMOVE_SUCCESS": "削除に成功しました",
+    "DELETE_FAILED": "削除に失敗しました",
+    "REMOVE_FAILED": "削除に失敗しました"
+  },
+  "CHOOSE_DATE": {
+    "NEXT": "次へ",
+    "TITLE": "日付を選択",
+    "TITLE_LARGE": "日付を選択してください",
+    "STEP_LABEL": "計画",
+    "SUBTITLE": "食事を準備する日を選択してください。",
+    "CALENDAR_LABEL": "カレンダー",
+    "SELECT_DAY": "日を選択",
+    "SELECTED_LABEL": "選択した日付",
+    "NO_DATE_SELECTED": "日付が選択されていません",
+    "UNAVAILABLE": "この日付は利用できません。"
+  },
+  "CHOOSE_PLATE": {
+    "TITLE": "料理を選択",
+    "SAVE": "保存",
+    "CANCEL": "キャンセル",
+    "ALL": "すべて",
+    "BREAKFAST": "朝食",
+    "LUNCH": "昼食",
+    "DINNER": "夕食",
+    "SELECT_MEAL_TYPE": "食事の種類を選択",
+    "DETAILS": "詳細",
+    "WEEK_LIST_SAVED": "今週のリストが保存されました！",
+    "SAVE_SUCCESS": "料理を保存しました！",
+    "SAVE_FAILED": "料理の保存に失敗しました。もう一度お試しください。",
+    "MAX_PLATES_EXCEEDED": "1日の食事数を超えました！許可されている数は3つです。",
+    "STEP_LABEL": "食事の選択",
+    "HERO_SUBTITLE": "最大3つの料理を選択し、それぞれを1日の適切な時間帯に割り当ててください。",
+    "SELECTED_COUNT": "選択された料理",
+    "EMPTY_TITLE": "料理が見つかりません",
+    "EMPTY_SUBTITLE": "別のフィルタを試すか、新しい料理を追加してください。"
+  },
+  "PLATES_FOR_DAY": {
+    "TITLE": "日付を選択",
+    "DATE": "日付：",
+    "BREAKFAST": "朝食",
+    "LUNCH": "昼食",
+    "DINNER": "夕食",
+    "NO_PLATES": "この日付には料理がありません。",
+    "CONFIRM_DELETE": "削除の確認",
+    "DELETE_SPECIFIC_MESSAGE": "この料理を削除してもよろしいですか？",
+    "CANCEL": "キャンセル",
+    "DELETE": "削除",
+    "DELETE_SUCCESS": "料理を削除しました",
+    "DELETE_FAILED": "料理の削除に失敗しました。後でもう一度お試しください。",
+    "DELETE_ALL_CONFIRM": "この日のすべての料理を削除してもよろしいですか？",
+    "ALL_DELETED_SUCCESS": "料理を削除しました",
+    "NO_PLATES_FOUND": "この日付の料理が見つかりません。",
+    "ALL_DELETE_FAILED": "料理の削除に失敗しました。後でもう一度お試しください。",
+    "GENERATE_WEEK": "今週を自動生成"
+  },
+  "FAMILY": {
+    "TITLE": "家族管理",
+    "BACK": "戻る",
+    "CREATE_FAMILY": "新しい家族を作成",
+    "ENTER_FAMILY_NAME": "家族名を入力",
+    "CREATE": "家族を作成",
+    "YOUR_FAMILIES": "あなたの家族",
+    "OWNER": "所有者：",
+    "MEMBERS": "メンバー：",
+    "FAMILY_MEMBERS": "家族メンバー：",
+    "ROLE": "役割：",
+    "INVITE_TO_FAMILY": "家族に招待",
+    "SELECT_FAMILY": "家族を選択",
+    "CHOOSE_FAMILY": "家族を選択",
+    "ENTER_EMAIL": "招待するメールアドレスを入力",
+    "SEND_INVITATION": "招待を送信",
+    "LOAD_FAILED": "家族の読み込みに失敗しました",
+    "NAME_REQUIRED": "家族名は必須です",
+    "CREATE_SUCCESS": "家族を作成しました！",
+    "CREATE_FAILED": "家族の作成に失敗しました：",
+    "SELECT_FAMILY_FIRST": "まず家族を選択してください",
+    "EMAIL_REQUIRED": "メールアドレスは必須です",
+    "INVITE_SUCCESS": "招待を送信しました！",
+    "INVITE_FAILED": "招待の送信に失敗しました：",
+    "CONFIRM_DELETION": "削除の確認",
+    "DELETE_FAMILY": "家族を削除",
+    "DELETE_FAMILY_MESSAGE": "家族「{{name}}」を削除してもよろしいですか？この操作は元に戻せず、すべてのメンバーが削除されます。",
+    "DELETE_SUCCESS": "家族を削除しました！",
+    "DELETE_FAILED": "家族の削除に失敗しました：",
+    "CONFIRM_REMOVAL": "削除の確認",
+    "REMOVE_MEMBER": "メンバーを削除",
+    "REMOVE_MEMBER_MESSAGE": "家族から「{{name}}」を削除してもよろしいですか？",
+    "REMOVE": "削除",
+    "MEMBER_REMOVED": "メンバーを削除しました！",
+    "REMOVE_FAILED": "メンバーの削除に失敗しました："
+  },
+  "SHARED_PLATES": {
+    "TITLE": "共有料理",
+    "BACK": "戻る",
+    "CANCEL": "キャンセル",
+    "SELECT": "選択",
+    "DESELECT_ALL": "すべて選択解除",
+    "SELECT_ALL": "すべて選択",
+    "RECEIVED": "受信",
+    "SENT": "送信",
+    "PULL_TO_REFRESH": "引っ張って更新...",
+    "REFRESHING": "更新中...",
+    "SHARED_BY": "共有者：",
+    "IN": "",
+    "NO_RECEIVED": "受信した共有料理はありません",
+    "NO_RECEIVED_MESSAGE": "まだ共有料理を受信していません。",
+    "LOADING_RECEIVED": "受信した料理を読み込み中...",
+    "SHARED_WITH": "共有先：",
+    "UNSHARE": "共有を解除",
+    "NO_SENT": "送信した共有料理はありません",
+    "NO_SENT_MESSAGE": "まだ料理を共有していません。",
+    "LOADING_SENT": "送信した料理を読み込み中...",
+    "CONFIRM_UNSHARE": "共有解除の確認",
+    "UNSHARE_MESSAGE": "「{{label}}」の共有を解除してもよろしいですか？",
+    "UNSHARE_SUCCESS": "料理の共有を解除しました",
+    "UNSHARE_FAILED": "料理の共有解除でエラーが発生しました：",
+    "PLEASE_SELECT": "少なくとも1つの料理を選択してください",
+    "BATCH_UNSHARE_MESSAGE": "{{count}}件の料理の共有を解除してもよろしいですか？",
+    "BATCH_UNSHARE_BUTTON": "{{count}}件の共有を解除",
+    "BATCH_SUCCESS": "{{count}}件の料理の共有を解除しました",
+    "BATCH_FAILED": "{{count}}件の料理が失敗しました：{{errorMsg}}",
+    "BATCH_ERROR": "料理の共有解除でエラーが発生しました："
+  },
+  "SHARE_MODAL": {
+    "SHARE_PLATES": "{{count}}件の料理を共有",
+    "SHARE_SINGLE": "「{{label}}」を共有",
+    "CLOSE": "閉じる",
+    "SELECTED_PLATES": "選択した料理（{{count}}件）",
+    "SELECT_FAMILY_OPTIONAL": "家族を選択（任意）",
+    "CHOOSE_FAMILY": "家族を選択",
+    "SELECT_USER": "家族内のユーザーを選択",
+    "CHOOSE_USER": "ユーザーを選択",
+    "SHARE_PLATES_BUTTON": "{{count}}件の料理を共有",
+    "SHARE_PLATE_BUTTON": "料理を共有",
+    "SELECT_USER_ERROR": "ユーザーを選択してください",
+    "NO_PLATES": "料理が選択されていません",
+    "SHARE_SUCCESS": "{{count}}件の料理を共有しました！",
+    "SHARE_FAILED": "{{count}}件の料理が失敗しました：{{errorMsg}}",
+    "SHARE_ERROR": "料理の共有に失敗しました："
+  },
+  "PLATE_DETAILS": {
+    "TITLE": "料理を管理",
+    "PLATE_NAME": "料理名：",
+    "PLATE_DESCRIPTION": "料理の説明：",
+    "CATEGORY": "カテゴリ：",
+    "BREAKFAST": "朝食",
+    "LUNCH": "昼食",
+    "DINNER": "夕食",
+    "TAKE_PICTURE": "写真を撮る",
+    "SAVE": "保存",
+    "AUTH_REQUIRED": "認証が必要です。ログインしてください。",
+    "UPDATED": "料理が更新されました！",
+    "ADDED": "料理が追加されました！",
+    "INGREDIENTS": "食材",
+    "INGREDIENT_NAME": "名前",
+    "QUANTITY": "数量",
+    "UNIT": "単位",
+    "ADD_INGREDIENT": "食材を追加",
+    "STEPS": "調理手順",
+    "STEPS_PLACEHOLDER": "手順を1行ずつ入力"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "買い物リスト",
+    "WEEK_OF": "{{date}}の週",
+    "EMPTY": "今週の食材が見つかりません。先に料理に食材を追加してください。",
+    "LOADING": "読み込み中...",
+    "MEMBER_LIST": "マイリスト",
+    "CHEF_LIST": "シェフのリスト",
+    "CHEF_LIST_LABEL": "{{name}}のリスト",
+    "ADD_PLACEHOLDER": "商品を追加...",
+    "QUANTITY_LABEL": "数量",
+    "UNIT_LABEL": "単位",
+    "DELETE_TITLE": "削除",
+    "EMPTY_MEMBER_TITLE": "リストが空です",
+    "EMPTY_MEMBER_SUBTITLE": "今週の商品を追加してください",
+    "EMPTY_CHEF_TITLE": "まだ何もありません",
+    "EMPTY_CHEF_SUBTITLE": "{{name}}は今週まだ何も追加していません",
+    "REGENERATE": "リストを再生成",
+    "REGENERATE_CONFIRM": "チェックした項目がリセットされます。続行しますか？",
+    "CANCEL": "キャンセル",
+    "CONFIRM": "確認",
+    "REGENERATE_SUCCESS": "買い物リストを再生成しました",
+    "REGENERATE_FAILED": "買い物リストの再生成に失敗しました",
+    "TOGGLE_FAILED": "項目の更新に失敗しました"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "サブスクリプション",
+    "HERO_TITLE": "プランを選択",
+    "HERO_SUBTITLE": "Ateplaのすべての機能を解除して、制限なく食事を計画しましょう。",
+    "POPULAR": "人気",
+    "DAYS_FREE": "日間無料",
+    "PER_MONTH": "月",
+    "PER_YEAR": "年",
+    "SUBSCRIBE": "登録する",
+    "CONFIRM_TITLE": "サブスクリプションの確認",
+    "CONFIRM_MESSAGE": "{{planName}}プラン（{{price}}）に登録しようとしています。確認しますか？",
+    "CANCEL": "キャンセル",
+    "CONFIRM": "確認",
+    "ERROR": "エラーが発生しました。もう一度お試しください。",
+    "ACTIVE_PLAN": "現在のプラン",
+    "ALREADY_SUBSCRIBED": "すでに登録済み",
+    "CANCEL_SUBSCRIPTION": "サブスクリプションをキャンセル",
+    "CANCEL_CONFIRM_TITLE": "サブスクリプションをキャンセル",
+    "CANCEL_CONFIRM_MESSAGE": "サブスクリプションをキャンセルしてもよろしいですか？現在の期間終了まではアクセスできます。",
+    "MANAGE_SUBSCRIPTION": "サブスクリプションを管理"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "世界のレシピ",
+    "SUBTITLE": "世界中の100の夕食アイデアを探索しましょう。",
+    "RECIPE_COUNT": "{{count}}件のレシピ",
+    "RECIPE_LABEL": "レシピ",
+    "REGION_LABEL": "地域",
+    "POPULAR_TITLE": "人気",
+    "POPULAR_SUBTITLE": "世界で最も人気のある夕食レシピを、世界的な人気順に並べました。",
+    "ADD_TO_PLATES": "マイ料理に追加",
+    "ADD_SUCCESS": "「{{label}}」をマイ料理に追加しました",
+    "ADD_FAILED": "料理の追加に失敗しました",
+    "REGIONS": {
+      "AFRICA": "アフリカ",
+      "AMERICAS": "アメリカ大陸",
+      "ASIA": "アジア",
+      "EUROPE": "ヨーロッパ",
+      "OCEANIA": "オセアニア"
+    }
+  }
+}

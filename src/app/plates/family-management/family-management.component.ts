@@ -6,6 +6,7 @@ import { CreateFamilyDto } from '../../_clients/models/CreateFamilyDto';
 import { InviteFamilyMemberDto } from '../../_clients/models/InviteFamilyMemberDto';
 import { ToastController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-family-management',
@@ -23,7 +24,8 @@ export class FamilyManagementComponent implements OnInit {
     private toastController: ToastController,
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) { }
 
   viewFamilyWeekPlates(familyId: string): void {
@@ -41,14 +43,14 @@ export class FamilyManagementComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors du chargement des familles:', error);
-        this.showErrorToast('Failed to load families');
+        this.showErrorToast(this.translate.instant('FAMILY.LOAD_FAILED'));
       }
     });
   }
 
   createFamily() {
     if (!this.newFamilyName.trim()) {
-      this.showErrorToast('Family name is required');
+      this.showErrorToast(this.translate.instant('FAMILY.NAME_REQUIRED'));
       return;
     }
 
@@ -58,13 +60,13 @@ export class FamilyManagementComponent implements OnInit {
 
     this.familyService.createFamily(createFamilyDto).subscribe({
       next: (family) => {
-        this.showSuccessToast('Family created successfully!');
+        this.showSuccessToast(this.translate.instant('FAMILY.CREATE_SUCCESS'));
         this.newFamilyName = '';
         this.loadFamilies(); // Recharger la liste des familles
       },
       error: (error) => {
         console.error('Erreur lors de la création de la famille:', error);
-        const backendMessage = error?.error?.message || 'Failed to create family';
+        const backendMessage = error?.error?.message || this.translate.instant('FAMILY.CREATE_FAILED');
         this.showErrorToast(backendMessage);
       }
     });
@@ -72,12 +74,12 @@ export class FamilyManagementComponent implements OnInit {
 
   inviteToFamily() {
     if (!this.selectedFamilyId) {
-      this.showErrorToast('Please select a family');
+      this.showErrorToast(this.translate.instant('FAMILY.SELECT_FAMILY_FIRST'));
       return;
     }
 
     if (!this.inviteEmail.trim()) {
-      this.showErrorToast('Email is required');
+      this.showErrorToast(this.translate.instant('FAMILY.EMAIL_REQUIRED'));
       return;
     }
 
@@ -87,12 +89,12 @@ export class FamilyManagementComponent implements OnInit {
 
     this.familyService.inviteToFamily(this.selectedFamilyId, inviteFamilyMemberDto).subscribe({
       next: (result) => {
-        this.showSuccessToast('Invitation sent successfully!');
+        this.showSuccessToast(this.translate.instant('FAMILY.INVITE_SUCCESS'));
         this.inviteEmail = '';
       },
       error: (error) => {
         console.error('Erreur lors de l\'invitation:', error);
-        const backendMessage = error?.error?.message || 'Failed to send invitation';
+        const backendMessage = error?.error?.message || this.translate.instant('FAMILY.INVITE_FAILED');
         this.showErrorToast(backendMessage);
       }
     });
@@ -141,16 +143,16 @@ export class FamilyManagementComponent implements OnInit {
 
   async confirmDeleteFamily(familyId: string, familyName: string) {
     const alert = await this.alertController.create({
-      header: 'Confirm Deletion',
-      subHeader: 'Delete Family',
-      message: `Are you sure you want to delete the family "${familyName}"? This action cannot be undone and will remove all members.`,
+      header: this.translate.instant('FAMILY.CONFIRM_DELETION'),
+      subHeader: this.translate.instant('FAMILY.DELETE_FAMILY'),
+      message: this.translate.instant('FAMILY.DELETE_FAMILY_MESSAGE', { name: familyName }),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('FAMILY.CANCEL'),
           role: 'cancel'
         },
         {
-          text: 'Delete',
+          text: this.translate.instant('FAMILY.DELETE'),
           cssClass: 'alert-danger',
           handler: () => {
             this.deleteFamily(familyId);
@@ -164,16 +166,16 @@ export class FamilyManagementComponent implements OnInit {
 
   async confirmRemoveMember(familyId: string, memberId: string, memberName: string) {
     const alert = await this.alertController.create({
-      header: 'Confirm Removal',
-      subHeader: 'Remove Member',
-      message: `Are you sure you want to remove "${memberName}" from the family?`,
+      header: this.translate.instant('FAMILY.CONFIRM_REMOVAL'),
+      subHeader: this.translate.instant('FAMILY.REMOVE_MEMBER'),
+      message: this.translate.instant('FAMILY.REMOVE_MEMBER_MESSAGE', { name: memberName }),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('FAMILY.CANCEL'),
           role: 'cancel'
         },
         {
-          text: 'Remove',
+          text: this.translate.instant('FAMILY.REMOVE'),
           cssClass: 'alert-warning',
           handler: () => {
             this.removeMember(familyId, memberId);
@@ -188,12 +190,12 @@ export class FamilyManagementComponent implements OnInit {
   deleteFamily(familyId: string) {
     this.familyService.deleteFamily(familyId).subscribe({
       next: () => {
-        this.showSuccessToast('Family deleted successfully!');
+        this.showSuccessToast(this.translate.instant('FAMILY.DELETE_SUCCESS'));
         this.loadFamilies(); // Refresh the list
       },
       error: (error) => {
         console.error('Error deleting family:', error);
-        const backendMessage = error?.error?.message || 'Failed to delete family';
+        const backendMessage = error?.error?.message || this.translate.instant('FAMILY.DELETE_FAILED');
         this.showErrorToast(backendMessage);
       }
     });
@@ -202,12 +204,12 @@ export class FamilyManagementComponent implements OnInit {
   removeMember(familyId: string, memberId: string) {
     this.familyService.removeMember(familyId, memberId).subscribe({
       next: () => {
-        this.showSuccessToast('Member removed successfully!');
+        this.showSuccessToast(this.translate.instant('FAMILY.MEMBER_REMOVED'));
         this.loadFamilies(); // Refresh the list
       },
       error: (error) => {
         console.error('Error removing member:', error);
-        const backendMessage = error?.error?.message || 'Failed to remove member';
+        const backendMessage = error?.error?.message || this.translate.instant('FAMILY.REMOVE_FAILED');
         this.showErrorToast(backendMessage);
       }
     });

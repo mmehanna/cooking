@@ -33,16 +33,6 @@
               <div class="family-name-row">
                 <span class="family-name">{{ family.name }}</span>
                 <ion-button
-                  fill="clear"
-                  size="small"
-                  color="primary"
-                  class="view-week-btn"
-                  (click)="viewFamilyWeekPlates(family.id)"
-                  title="View owner's weekly plates"
-                >
-                  <ion-icon name="calendar-outline"></ion-icon>
-                </ion-button>
-                <ion-button
                   *ngIf="isFamilyOwner(family)"
                   fill="clear"
                   size="small"
@@ -70,7 +60,7 @@
                 <div class="member-item" *ngFor="let userFamily of family.users">
                   <div class="member-info">
                     <span class="member-name">{{ userFamily.user?.name || userFamily.user?.email }}</span>
-                    <span class="member-role">{{ userFamily.role || 'member' }}</span>
+                    <span class="member-role">{{ userFamily.role || ('FAMILY.DEFAULT_ROLE' | translate) }}</span>
                   </div>
                   <ion-button
                     *ngIf="canRemoveMember(family, userFamily.user?.id)"
@@ -107,7 +97,7 @@
           <ion-label position="stacked">{{ 'FAMILY.ENTER_EMAIL' | translate }}</ion-label>
           <ion-input
             [(ngModel)]="inviteEmail"
-            [placeholder]="'user@example.com'"
+            [placeholder]="'FAMILY.EMAIL_PLACEHOLDER' | translate"
             type="email">
           </ion-input>
         </ion-item>

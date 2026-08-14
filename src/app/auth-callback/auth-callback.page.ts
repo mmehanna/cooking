@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../plates/services/auth.service';
+import { UserService } from '../settings/services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth-callback',
@@ -13,7 +15,9 @@ export class AuthCallbackPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +29,23 @@ export class AuthCallbackPage implements OnInit {
     }
 
     this.authService.completeGoogleLogin(token);
-    this.router.navigate(['/landing']);
+
+    this.userService.loadProfile().subscribe({
+      next: (profile) => {
+        const lang = profile?.language || 'en';
+        this.translate.use(lang);
+
+        if (profile?.theme === 'dark') {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+
+        this.router.navigate(['/landing'], { replaceUrl: true });
+      },
+      error: () => {
+        this.router.navigate(['/landing'], { replaceUrl: true });
+      }
+    });
   }
 }

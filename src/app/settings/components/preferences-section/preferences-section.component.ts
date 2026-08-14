@@ -13,6 +13,21 @@ import { UserService } from '../../services/user.service';
 export class PreferencesSectionComponent implements OnInit {
   preferencesForm: FormGroup;
 
+  languages = [
+    { code: 'en', flag: '🇬🇧', nameKey: 'PREFERENCES.ENGLISH' },
+    { code: 'fr', flag: '🇫🇷', nameKey: 'PREFERENCES.FRENCH' },
+    { code: 'es', flag: '🇪🇸', nameKey: 'PREFERENCES.SPANISH' },
+    { code: 'ar', flag: '🇸🇦', nameKey: 'PREFERENCES.ARABIC' },
+    { code: 'zh', flag: '🇨🇳', nameKey: 'PREFERENCES.MANDARIN' },
+    { code: 'ru', flag: '🇷🇺', nameKey: 'PREFERENCES.RUSSIAN' },
+    { code: 'pl', flag: '🇵🇱', nameKey: 'PREFERENCES.POLISH' },
+    { code: 'de', flag: '🇩🇪', nameKey: 'PREFERENCES.GERMAN' },
+    { code: 'pt', flag: '🇵🇹', nameKey: 'PREFERENCES.PORTUGUESE' },
+    { code: 'it', flag: '🇮🇹', nameKey: 'PREFERENCES.ITALIAN' },
+    { code: 'ja', flag: '🇯🇵', nameKey: 'PREFERENCES.JAPANESE' },
+    { code: 'ko', flag: '🇰🇷', nameKey: 'PREFERENCES.KOREAN' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -35,8 +50,14 @@ export class PreferencesSectionComponent implements OnInit {
           notifications: profile.notifications !== false
         });
         this.applyTheme(this.preferencesForm.get('theme')?.value);
+        this.translate.use(profile.language || 'en');
       }
     });
+  }
+
+  setLanguage(code: string) {
+    this.preferencesForm.get('language')?.setValue(code);
+    this.translate.use(code);
   }
 
   onThemeChange(event: any) {

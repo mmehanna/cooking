@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 import {IonicModule, IonicRouteStrategy, MenuController} from '@ionic/angular';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -21,7 +21,7 @@ import {NgxStripeModule} from 'ngx-stripe';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
         TranslateModule.forRoot({
-            lang: 'en'
+            defaultLanguage: 'en'
         }),
         AppRoutingModule,
         IonicModule.forRoot(),

@@ -1,0 +1,484 @@
+{
+  "APP": {
+    "MENU_TITLE": "Wybierz tutaj",
+    "HOME": "Strona główna",
+    "CREATE_DAY_LIST": "Utwórz listę dnia",
+    "PLATE_FOR_DAY": "Danie dnia",
+    "MANAGE_PLATES": "Zarządzaj daniami",
+    "MANAGE_FAMILIES": "Zarządzaj rodziną",
+    "VIEW_SHARED_PLATES": "Zobacz udostępnione dania",
+    "GROCERY_LIST": "Lista zakupów",
+    "SETTINGS": "Ustawienia",
+    "HELP": "Pomoc",
+    "LOGOUT": "Wyloguj",
+    "WORLDWIDE_RECIPES": "Przepisy świata"
+  },
+  "COMMON": {
+    "BACK": "Wstecz"
+  },
+  "LANDING": {
+    "TITLE": "Menu",
+    "USER": "Użytkownik",
+    "PLATES_FOR_WEEK": "Dania na tydzień",
+    "VIEW_MODE": "Widok",
+    "EDIT_MODE": "Edycja",
+    "GENERATE_WEEK": "Automatycznie wygeneruj tydzień",
+    "EDIT_DAY_MENU": "Edytuj menu dnia",
+    "CONFIRM_GENERATE_TITLE": "Potwierdzenie",
+    "CONFIRM_GENERATE_MESSAGE": "Czy na pewno chcesz automatycznie wygenerować dania na tydzień?",
+    "CANCEL": "Anuluj",
+    "CONFIRM": "Potwierdź",
+    "GENERATE_SUCCESS": "Dania tygodniowe wygenerowane pomyślnie",
+    "GENERATE_FAILED": "Nie udało się wygenerować dań tygodniowych",
+    "TODAY": "Dzisiaj",
+    "NO_PLATE": "Jeszcze brak dania",
+    "NO_PLATE_PLANNED": "Brak zaplanowanego dania",
+    "DRAFT_CHIP": "Wersja robocza — niewidoczna dla rodziny",
+    "PUBLISHED": "Opublikowano",
+    "PUBLISH_WEEK": "Opublikuj tydzień",
+    "UNPUBLISH": "Cofnij publikację",
+    "MY_WEEK": "Mój tydzień",
+    "CHEF": "Szef kuchni",
+    "CHEF_WEEK_VIEWING": "Przeglądasz tydzień {{name}}",
+    "THIS_WEEK": "W tym tygodniu",
+    "NEXT_WEEK": "W przyszłym tygodniu",
+    "IN_N_WEEKS": "Za {{n}} tygodni",
+    "LAST_WEEK": "W zeszłym tygodniu",
+    "N_WEEKS_AGO": "{{n}} tygodni temu"
+  },
+  "LOGIN": {
+    "TITLE": "logowanie",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Hasło",
+    "SUBMIT": "Zaloguj się",
+    "CONTINUE_WITH_GOOGLE": "Kontynuuj z Google",
+    "NOT_REGISTERED": "Nie zarejestrowany? Kliknij tutaj!",
+    "ALREADY_REGISTERED": "Już zarejestrowany? Zaloguj się",
+    "HERO_TITLE": "Witamy",
+    "HERO_SUBTITLE": "Planuj posiłki jednym kliknięciem"
+  },
+  "REGISTER": {
+    "TITLE": "Rejestracja",
+    "EMAIL": "E-mail",
+    "EMAIL_REQUIRED": "E-mail jest wymagany i musi być prawidłowy.",
+    "PASSWORD": "Hasło",
+    "PASSWORD_REQUIREMENTS": "Hasło musi mieć od 6 do 8 znaków, zawierać co najmniej jedną wielką literę i jeden znak specjalny.",
+    "CONFIRM_PASSWORD": "Potwierdzenie hasła",
+    "PASSWORD_MISMATCH": "Hasła muszą być identyczne.",
+    "SUBMIT": "Zarejestruj się"
+  },
+  "SETTINGS": {
+    "TITLE": "Ustawienia",
+    "BACK": "Wstecz",
+    "PROFILE": "Profil",
+    "PREFERENCES": "Preferencje",
+    "ACCOUNT": "Konto",
+    "PROFILE_UPDATED": "Profil zaktualizowany pomyślnie",
+    "PROFILE_UPDATE_FAILED": "Nie udało się zaktualizować profilu",
+    "PREFERENCES_UPDATED": "Preferencje zaktualizowane",
+    "PREFERENCES_UPDATE_FAILED": "Nie udało się zaktualizować preferencji",
+    "PASSWORD_CHANGED": "Hasło zmienione pomyślnie",
+    "PASSWORD_CHANGE_FAILED": "Nie udało się zmienić hasła"
+  },
+  "HELP": {
+    "TITLE": "Pomoc",
+    "SECTIONS": {
+      "GENERAL": "Ogólne",
+      "LISTS": "Listy i planowanie",
+      "ACCOUNT": "Konto i subskrypcja"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "Strona główna",
+        "DESC": "Przeglądaj posiłki tygodniowe, publikuj menu jako szef kuchni i zarządzaj planowaniem."
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "Zarządzaj daniami",
+        "DESC": "Twórz, edytuj i organizuj dania. Dodawaj składniki, kroki przygotowania i zdjęcia."
+      },
+      "FAMILY": {
+        "TITLE": "Zarządzaj rodziną",
+        "DESC": "Utwórz rodzinę, zaproś członków i udostępnij im swoje dania."
+      },
+      "SHARED_PLATES": {
+        "TITLE": "Udostępnione dania",
+        "DESC": "Odkrywaj dania udostępnione przez innych członków rodziny."
+      },
+      "GROCERY": {
+        "TITLE": "Lista zakupów",
+        "DESC": "Dodawaj pozycje ręcznie i przeglądaj listę szefa kuchni, aby przygotować posiłki."
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "Planowanie tygodnia",
+        "DESC": "Szef kuchni może opublikować tygodniowe menu, aby cała rodzina mogła je zobaczyć."
+      },
+      "SETTINGS": {
+        "TITLE": "Ustawienia",
+        "DESC": "Aktualizuj profil, preferencje (język, motyw) i zarządzaj hasłem."
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "Subskrypcja",
+        "DESC": "Zasubskrybuj plan, aby odblokować wszystkie funkcje Atepla."
+      }
+    },
+    "SCHEMAS": {
+      "TITLE": "Jak to działa",
+      "CREATE_PLATE": {
+        "TITLE": "Utwórz danie",
+        "STEP1": {
+          "LABEL": "Otwórz zarządzanie daniami",
+          "DESC": "Otwórz menu boczne i wybierz „Zarządzaj daniami”."
+        },
+        "STEP2": {
+          "LABEL": "Dodaj danie",
+          "DESC": "Naciśnij przycisk +, aby utworzyć nowe danie."
+        },
+        "STEP3": {
+          "LABEL": "Wypełnij szczegóły",
+          "DESC": "Dodaj nazwę, składniki i kroki przygotowania."
+        },
+        "STEP4": {
+          "LABEL": "Zapisz",
+          "DESC": "Twoje danie jest teraz dostępne do planowania."
+        }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "Opublikuj tydzień (szef kuchni)",
+        "STEP1": {
+          "LABEL": "Przejdź do strony głównej",
+          "DESC": "Szef kuchni otwiera stronę główną, aby zobaczyć tydzień."
+        },
+        "STEP2": {
+          "LABEL": "Wybierz dania",
+          "DESC": "Dla każdego dnia i posiłku wybierz danie ze swojej kolekcji."
+        },
+        "STEP3": {
+          "LABEL": "Opublikuj",
+          "DESC": "Naciśnij przycisk Publikuj, aby menu było widoczne dla członków."
+        },
+        "STEP4": {
+          "LABEL": "Rodzina widzi",
+          "DESC": "Członkowie automatycznie widzą menu szefa kuchni na swojej stronie głównej."
+        }
+      },
+      "FAMILY": {
+        "TITLE": "Dołącz do rodziny",
+        "STEP1": {
+          "LABEL": "Menu rodziny",
+          "DESC": "Otwórz menu i wybierz „Zarządzaj rodziną”."
+        },
+        "STEP2": {
+          "LABEL": "Otrzymaj zaproszenie",
+          "DESC": "Szef kuchni wyśle Ci zaproszenie e-mailem lub kodem."
+        },
+        "STEP3": {
+          "LABEL": "Zaakceptuj",
+          "DESC": "Zaakceptuj zaproszenie, aby dołączyć do rodziny."
+        },
+        "STEP4": {
+          "LABEL": "Wspólny dostęp",
+          "DESC": "Możesz teraz przeglądać udostępnione dania i tygodniowe menu szefa kuchni."
+        }
+      },
+      "GROCERY": {
+        "TITLE": "Korzystaj z listy zakupów",
+        "STEP1": {
+          "LABEL": "Otwórz listę",
+          "DESC": "W menu wybierz „Lista zakupów”."
+        },
+        "STEP2": {
+          "LABEL": "Dodaj pozycje",
+          "DESC": "Użyj dolnego paska, aby szybko dodać pozycje z ilością i jednostką."
+        },
+        "STEP3": {
+          "LABEL": "Zaznacz / przeglądaj",
+          "DESC": "Odznacz kupione pozycje. Jako członek możesz też przełączyć się na listę szefa kuchni."
+        }
+      }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "Profil użytkownika",
+    "AVATAR_URL": "URL awatara",
+    "NAME": "Imię",
+    "EMAIL": "E-mail",
+    "SAVE": "Zapisz profil"
+  },
+  "PREFERENCES": {
+    "TITLE": "Preferencje aplikacji",
+    "LANGUAGE": "Język",
+    "LANGUAGE_HINT": "Wybierz język używany w aplikacji",
+    "ENGLISH": "Angielski",
+    "FRENCH": "Francuski",
+    "SPANISH": "Hiszpański",
+    "ARABIC": "Arabski",
+    "MANDARIN": "Mandaryński",
+    "RUSSIAN": "Rosyjski",
+    "POLISH": "Polski",
+    "GERMAN": "Niemiecki",
+    "PORTUGUESE": "Portugalski",
+    "ITALIAN": "Włoski",
+    "JAPANESE": "Japoński",
+    "KOREAN": "Koreański",
+    "DARK_MODE": "Tryb ciemny",
+    "DARK_MODE_HINT": "Przełączaj się między jasnym a ciemnym wyglądem",
+    "NOTIFICATIONS": "Powiadomienia",
+    "NOTIFICATIONS_HINT": "Włącz lub wyłącz powiadomienia aplikacji",
+    "SAVE": "Zapisz preferencje"
+  },
+  "ACCOUNT": {
+    "CHANGE_PASSWORD": "Zmień hasło",
+    "CURRENT_PASSWORD": "Obecne hasło",
+    "NEW_PASSWORD": "Nowe hasło",
+    "CONFIRM_NEW_PASSWORD": "Potwierdź nowe hasło",
+    "PASSWORDS_DO_NOT_MATCH": "Hasła nie są identyczne",
+    "DANGER_ZONE": "Strefa niebezpieczeństwa",
+    "DELETE_ACCOUNT": "Usuń konto",
+    "DELETE_WARNING": "Ta czynność jest nieodwracalna. Wszystkie Twoje dane zostaną trwale usunięte.",
+    "DELETE_CONFIRM_TITLE": "Usuń konto",
+    "DELETE_CONFIRM_MESSAGE": "Czy na pewno chcesz usunąć swoje konto? Tej czynności nie można cofnąć. Wszystkie Twoje dania, plany i dane rodziny zostaną trwale usunięte.",
+    "CANCEL": "Anuluj",
+    "DELETE": "Usuń",
+    "FINAL_CONFIRMATION": "Ostateczne potwierdzenie",
+    "TYPE_DELETE": "Wpisz „DELETE”, aby potwierdzić usunięcie konta.",
+    "TYPE_DELETE_PLACEHOLDER": "Wpisz DELETE",
+    "PERMANENTLY_DELETE": "Usuń trwale",
+    "DELETE_FAILED": "Nie udało się usunąć konta"
+  },
+  "PLATES": {
+    "MANAGE": "Zarządzaj daniami",
+    "CANCEL": "Anuluj",
+    "SELECT": "Wybierz",
+    "EDIT": "edytuj",
+    "PLEASE_SELECT": "Wybierz co najmniej jedno danie",
+    "CONFIRM_DELETE": "Potwierdź usunięcie",
+    "CONFIRM_REMOVE": "Potwierdź usunięcie",
+    "DELETE_PLATE_MESSAGE": "Czy na pewno chcesz usunąć danie „{{label}}”?",
+    "REMOVE_PLATE_MESSAGE": "Czy na pewno chcesz usunąć danie „{{label}}” z udostępnionych dań?",
+    "DELETE_SUCCESS": "Usunięcie pomyślne",
+    "REMOVE_SUCCESS": "Usunięcie pomyślne",
+    "DELETE_FAILED": "Usunięcie niepomyślne",
+    "REMOVE_FAILED": "Usunięcie niepomyślne"
+  },
+  "CHOOSE_DATE": {
+    "NEXT": "Dalej",
+    "TITLE": "wybierz datę",
+    "TITLE_LARGE": "Wybierz datę",
+    "STEP_LABEL": "Planowanie",
+    "SUBTITLE": "Wybierz dzień, na który chcesz przygotować posiłki.",
+    "CALENDAR_LABEL": "Kalendarz",
+    "SELECT_DAY": "Wybierz dzień",
+    "SELECTED_LABEL": "Wybrana data",
+    "NO_DATE_SELECTED": "Nie wybrano daty",
+    "UNAVAILABLE": "Ta data jest niedostępna."
+  },
+  "CHOOSE_PLATE": {
+    "TITLE": "Wybierz swoje dania",
+    "SAVE": "Zapisz",
+    "CANCEL": "Anuluj",
+    "ALL": "Wszystkie",
+    "BREAKFAST": "Śniadanie",
+    "LUNCH": "Obiad",
+    "DINNER": "Kolacja",
+    "SELECT_MEAL_TYPE": "Wybierz typ posiłku",
+    "DETAILS": "szczegóły",
+    "WEEK_LIST_SAVED": "Twoja lista tygodniowa została zapisana!",
+    "SAVE_SUCCESS": "Dania zapisane pomyślnie!",
+    "SAVE_FAILED": "Nie udało się zapisać dań. Spróbuj ponownie.",
+    "MAX_PLATES_EXCEEDED": "Przekroczono liczbę posiłków na dzień! Dozwolona liczba to trzy.",
+    "STEP_LABEL": "Wybór posiłku",
+    "HERO_SUBTITLE": "Wybierz do trzech dań i przypisz każde do odpowiedniej pory dnia.",
+    "SELECTED_COUNT": "wybrane dania",
+    "EMPTY_TITLE": "Nie znaleziono dań",
+    "EMPTY_SUBTITLE": "Wypróbuj inny filtr lub dodaj nowe danie."
+  },
+  "PLATES_FOR_DAY": {
+    "TITLE": "Wybierz datę",
+    "DATE": "Data:",
+    "BREAKFAST": "Śniadanie",
+    "LUNCH": "Obiad",
+    "DINNER": "Kolacja",
+    "NO_PLATES": "Brak dania na ten dzień.",
+    "CONFIRM_DELETE": "Potwierdź usunięcie",
+    "DELETE_SPECIFIC_MESSAGE": "Czy na pewno chcesz usunąć to danie?",
+    "CANCEL": "Anuluj",
+    "DELETE": "Usuń",
+    "DELETE_SUCCESS": "Danie usunięte pomyślnie",
+    "DELETE_FAILED": "Nie udało się usunąć dania. Spróbuj później.",
+    "DELETE_ALL_CONFIRM": "Czy na pewno chcesz usunąć wszystkie dania na ten dzień?",
+    "ALL_DELETED_SUCCESS": "Dania usunięte pomyślnie",
+    "NO_PLATES_FOUND": "Nie znaleziono dań na ten dzień.",
+    "ALL_DELETE_FAILED": "Nie udało się usunąć dań. Spróbuj później.",
+    "GENERATE_WEEK": "Automatycznie wygeneruj tydzień"
+  },
+  "FAMILY": {
+    "TITLE": "Zarządzanie rodziną",
+    "BACK": "Wstecz",
+    "CREATE_FAMILY": "Utwórz nową rodzinę",
+    "ENTER_FAMILY_NAME": "Wprowadź nazwę rodziny",
+    "CREATE": "Utwórz rodzinę",
+    "YOUR_FAMILIES": "Twoje rodziny",
+    "OWNER": "Właściciel: ",
+    "MEMBERS": "Członkowie: ",
+    "FAMILY_MEMBERS": "Członkowie rodziny:",
+    "ROLE": "Rola: ",
+    "INVITE_TO_FAMILY": "Zaproś do rodziny",
+    "SELECT_FAMILY": "Wybierz rodzinę",
+    "CHOOSE_FAMILY": "Wybierz rodzinę",
+    "ENTER_EMAIL": "Wprowadź adres e-mail do zaproszenia",
+    "SEND_INVITATION": "Wyślij zaproszenie",
+    "LOAD_FAILED": "Nie udało się załadować rodzin",
+    "NAME_REQUIRED": "Nazwa rodziny jest wymagana",
+    "CREATE_SUCCESS": "Rodzina utworzona pomyślnie!",
+    "CREATE_FAILED": "Nie udało się utworzyć rodziny: ",
+    "SELECT_FAMILY_FIRST": "Najpierw wybierz rodzinę",
+    "EMAIL_REQUIRED": "E-mail jest wymagany",
+    "INVITE_SUCCESS": "Zaproszenie wysłane pomyślnie!",
+    "INVITE_FAILED": "Nie udało się wysłać zaproszenia: ",
+    "CONFIRM_DELETION": "Potwierdź usunięcie",
+    "DELETE_FAMILY": "Usuń rodzinę",
+    "DELETE_FAMILY_MESSAGE": "Czy na pewno chcesz usunąć rodzinę „{{name}}”? Tej czynności nie można cofnąć i usunie wszystkich członków.",
+    "DELETE_SUCCESS": "Rodzina usunięta pomyślnie!",
+    "DELETE_FAILED": "Nie udało się usunąć rodziny: ",
+    "CONFIRM_REMOVAL": "Potwierdź usunięcie",
+    "REMOVE_MEMBER": "Usuń członka",
+    "REMOVE_MEMBER_MESSAGE": "Czy na pewno chcesz usunąć „{{name}}” z rodziny?",
+    "REMOVE": "Usuń",
+    "MEMBER_REMOVED": "Członek usunięty pomyślnie!",
+    "REMOVE_FAILED": "Nie udało się usunąć członka: "
+  },
+  "SHARED_PLATES": {
+    "TITLE": "Udostępnione dania",
+    "BACK": "Wstecz",
+    "CANCEL": "Anuluj",
+    "SELECT": "Wybierz",
+    "DESELECT_ALL": "Odznacz wszystko",
+    "SELECT_ALL": "Zaznacz wszystko",
+    "RECEIVED": "Otrzymane",
+    "SENT": "Wysłane",
+    "PULL_TO_REFRESH": "Pociągnij, aby odświeżyć...",
+    "REFRESHING": "Odświeżanie...",
+    "SHARED_BY": "Udostępnione przez: ",
+    "IN": "w ",
+    "NO_RECEIVED": "Brak otrzymanych udostępnionych dań",
+    "NO_RECEIVED_MESSAGE": "Nie otrzymałeś jeszcze żadnych udostępnionych dań.",
+    "LOADING_RECEIVED": "Ładowanie otrzymanych dań...",
+    "SHARED_WITH": "Udostępnione z: ",
+    "UNSHARE": "Cofnij udostępnianie",
+    "NO_SENT": "Brak wysłanych udostępnionych dań",
+    "NO_SENT_MESSAGE": "Nie udostępniłeś jeszcze żadnych dań.",
+    "LOADING_SENT": "Ładowanie wysłanych dań...",
+    "CONFIRM_UNSHARE": "Potwierdź cofnięcie udostępniania",
+    "UNSHARE_MESSAGE": "Czy na pewno chcesz cofnąć udostępnianie „{{label}}”?",
+    "UNSHARE_SUCCESS": "Udostępnianie dania cofnięte pomyślnie",
+    "UNSHARE_FAILED": "Błąd podczas cofania udostępniania dania: ",
+    "PLEASE_SELECT": "Wybierz co najmniej jedno danie",
+    "BATCH_UNSHARE_MESSAGE": "Czy na pewno chcesz cofnąć udostępnianie {{count}} dań?",
+    "BATCH_UNSHARE_BUTTON": "Cofnij udostępnianie {{count}}",
+    "BATCH_SUCCESS": "Udostępnianie {{count}} dań cofnięte pomyślnie",
+    "BATCH_FAILED": "{{count}} dań nie powiodło się: {{errorMsg}}",
+    "BATCH_ERROR": "Błąd podczas cofania udostępniania dań: "
+  },
+  "SHARE_MODAL": {
+    "SHARE_PLATES": "Udostępnij {{count}} dań",
+    "SHARE_SINGLE": "Udostępnij „{{label}}”",
+    "CLOSE": "Zamknij",
+    "SELECTED_PLATES": "Wybrane dania ({{count}})",
+    "SELECT_FAMILY_OPTIONAL": "Wybierz rodzinę (opcjonalnie)",
+    "CHOOSE_FAMILY": "Wybierz rodzinę",
+    "SELECT_USER": "Wybierz użytkownika w rodzinie",
+    "CHOOSE_USER": "Wybierz użytkownika",
+    "SHARE_PLATES_BUTTON": "Udostępnij {{count}} dań",
+    "SHARE_PLATE_BUTTON": "Udostępnij danie",
+    "SELECT_USER_ERROR": "Wybierz użytkownika",
+    "NO_PLATES": "Nie wybrano dań",
+    "SHARE_SUCCESS": "{{count}} dań udostępnionych pomyślnie!",
+    "SHARE_FAILED": "{{count}} dań nie powiodło się: {{errorMsg}}",
+    "SHARE_ERROR": "Nie udało się udostępnić dań: "
+  },
+  "PLATE_DETAILS": {
+    "TITLE": "Zarządzaj swoim daniem",
+    "PLATE_NAME": "Nazwa dania:",
+    "PLATE_DESCRIPTION": "Opis dania:",
+    "CATEGORY": "Kategoria:",
+    "BREAKFAST": "Śniadanie",
+    "LUNCH": "Obiad",
+    "DINNER": "Kolacja",
+    "TAKE_PICTURE": "zrób zdjęcie",
+    "SAVE": "Zapisz",
+    "AUTH_REQUIRED": "Wymagane uwierzytelnienie. Zaloguj się.",
+    "UPDATED": "Twoje danie jest aktualne!",
+    "ADDED": "Twoje danie zostało dodane!",
+    "INGREDIENTS": "Składniki",
+    "INGREDIENT_NAME": "Nazwa",
+    "QUANTITY": "Ilość",
+    "UNIT": "Jednostka",
+    "ADD_INGREDIENT": "Dodaj składnik",
+    "STEPS": "Kroki przygotowania",
+    "STEPS_PLACEHOLDER": "Wpisuj każdy krok w nowym wierszu"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "Lista zakupów",
+    "WEEK_OF": "Tydzień od {{date}}",
+    "EMPTY": "Nie znaleziono składników na ten tydzień. Najpierw dodaj składniki do dań.",
+    "LOADING": "Ładowanie...",
+    "MEMBER_LIST": "Moja lista",
+    "CHEF_LIST": "Lista szefa kuchni",
+    "CHEF_LIST_LABEL": "Lista {{name}}",
+    "ADD_PLACEHOLDER": "Dodaj pozycję...",
+    "QUANTITY_LABEL": "Ilość",
+    "UNIT_LABEL": "Jednostka",
+    "DELETE_TITLE": "Usuń",
+    "EMPTY_MEMBER_TITLE": "Twoja lista jest pusta",
+    "EMPTY_MEMBER_SUBTITLE": "Dodaj pozycje na ten tydzień",
+    "EMPTY_CHEF_TITLE": "Na razie pusto",
+    "EMPTY_CHEF_SUBTITLE": "{{name}} nie dodał(-a) niczego w tym tygodniu",
+    "REGENERATE": "Wygeneruj ponownie",
+    "REGENERATE_CONFIRM": "To zresetuje zaznaczone pozycje. Kontynuować?",
+    "CANCEL": "Anuluj",
+    "CONFIRM": "Potwierdź",
+    "REGENERATE_SUCCESS": "Lista zakupów wygenerowana ponownie",
+    "REGENERATE_FAILED": "Nie udało się wygenerować ponownie listy zakupów",
+    "TOGGLE_FAILED": "Nie udało się zaktualizować pozycji"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "Subskrypcja",
+    "HERO_TITLE": "Wybierz swój plan",
+    "HERO_SUBTITLE": "Odblokuj wszystkie funkcje Atepla i planuj posiłki bez ograniczeń.",
+    "POPULAR": "Popularny",
+    "DAYS_FREE": "dni za darmo",
+    "PER_MONTH": "miesiąc",
+    "PER_YEAR": "rok",
+    "SUBSCRIBE": "Subskrybuj",
+    "CONFIRM_TITLE": "Potwierdź subskrypcję",
+    "CONFIRM_MESSAGE": "Zamierzasz subskrybować plan {{planName}} za {{price}}. Potwierdzić?",
+    "CANCEL": "Anuluj",
+    "CONFIRM": "Potwierdź",
+    "ERROR": "Wystąpił błąd. Spróbuj ponownie.",
+    "ACTIVE_PLAN": "Aktywny plan",
+    "ALREADY_SUBSCRIBED": "Już subskrybujesz",
+    "CANCEL_SUBSCRIPTION": "Anuluj moją subskrypcję",
+    "CANCEL_CONFIRM_TITLE": "Anuluj subskrypcję",
+    "CANCEL_CONFIRM_MESSAGE": "Czy na pewno chcesz anulować subskrypcję? Zachowasz dostęp do końca bieżącego okresu.",
+    "MANAGE_SUBSCRIPTION": "Zarządzaj subskrypcją"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "Przepisy świata",
+    "SUBTITLE": "Przeglądaj 100 pomysłów na kolację z każdego zakątka globu.",
+    "RECIPE_COUNT": "{{count}} przepisów",
+    "RECIPE_LABEL": "przepisy",
+    "REGION_LABEL": "regiony",
+    "POPULAR_TITLE": "Najpopularniejsze",
+    "POPULAR_SUBTITLE": "Ulubione kolacje świata, uszeregowane według globalnej popularności.",
+    "ADD_TO_PLATES": "Dodaj do moich dań",
+    "ADD_SUCCESS": "„{{label}}” dodano do Twoich dań",
+    "ADD_FAILED": "Nie udało się dodać dania",
+    "REGIONS": {
+      "AFRICA": "Afryka",
+      "AMERICAS": "Ameryki",
+      "ASIA": "Azja",
+      "EUROPE": "Europa",
+      "OCEANIA": "Oceania"
+    }
+  }
+}

@@ -1,41 +1,32 @@
 <ion-content [fullscreen]="true" [scrollY]="false" [forceOverscroll]="false">
   <div class="page-bg"></div>
 
-  <div class="login-hero">
-    <img src="assets/images/login/hero-food.jpg" alt="Delicious food" class="hero-image">
-    <div class="hero-overlay"></div>
-    <div class="hero-brand">
-      Atepla
-      <span class="hero-tagline">{{ 'LOGIN.HERO_SUBTITLE' | translate }}</span>
-    </div>
-  </div>
+  <div class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="logo-wrap">
+          <img src="assets/images/logo.jpeg" alt="Atepla logo" class="auth-logo">
+        </div>
+        <h1 class="brand-title">Atepla</h1>
+        <p class="brand-tagline">{{ 'LOGIN.HERO_SUBTITLE' | translate }}</p>
+      </div>
 
-  <div class="login-container">
-    <div class="login-logo-wrap">
-      <img src="assets/images/logo.jpeg" alt="Logo" class="login-logo">
-    </div>
-
-    <div class="login-icons-row">
-      <ion-icon name="restaurant-outline" class="deco-icon"></ion-icon>
-      <ion-icon name="fast-food-outline" class="deco-icon"></ion-icon>
-      <ion-icon name="cafe-outline" class="deco-icon"></ion-icon>
-    </div>
-
-    <div class="login-card">
-      <h2 class="card-title">{{ 'LOGIN.TITLE' | translate }}</h2>
+      <h2 class="auth-title">{{ 'LOGIN.TITLE' | translate }}</h2>
 
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-        <ion-item lines="none" class="input-item">
+        <ion-item lines="none" class="auth-input">
           <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-          <ion-label position="floating">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
-          <ion-input formControlName="email" type="email"></ion-input>
+          <ion-label position="stacked">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="name@example.com"></ion-input>
         </ion-item>
-        <ion-item lines="none" class="input-item">
+
+        <ion-item lines="none" class="auth-input">
           <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
-          <ion-label position="floating">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-label position="stacked">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="••••••••"></ion-input>
         </ion-item>
-        <ion-button [disabled]="loginForm.invalid" expand="full" type="submit" class="login-btn">
+
+        <ion-button [disabled]="loginForm.invalid" expand="block" type="submit" class="auth-btn">
           <ion-icon name="log-in-outline" slot="start"></ion-icon>
           {{ 'LOGIN.SUBMIT' | translate }}
         </ion-button>
@@ -43,13 +34,17 @@
 
       <div class="auth-divider"><span>ou</span></div>
 
-      <ion-button expand="full" type="button" class="google-btn" (click)="loginWithGoogle()">
+      <ion-button expand="block" type="button" class="google-btn" (click)="loginWithGoogle()">
         <ion-icon name="logo-google" slot="start"></ion-icon>
         {{ 'LOGIN.CONTINUE_WITH_GOOGLE' | translate }}
       </ion-button>
 
-      <div class="register-link">
-        <ion-icon name="person-add-outline" size="small" color="primary"></ion-icon>
+      <ion-button expand="block" type="button" class="apple-btn" tabindex="-1">
+        <ion-icon name="logo-apple" slot="start"></ion-icon>
+        {{ 'LOGIN.CONTINUE_WITH_APPLE' | translate }}
+      </ion-button>
+
+      <div class="auth-link">
         <a routerLink="/register">{{ 'LOGIN.NOT_REGISTERED' | translate }}</a>
       </div>
     </div>

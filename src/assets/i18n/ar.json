@@ -1,0 +1,484 @@
+{
+  "APP": {
+    "MENU_TITLE": "اختر هنا",
+    "HOME": "الرئيسية",
+    "CREATE_DAY_LIST": "أنشئ قائمة يومك",
+    "PLATE_FOR_DAY": "طبق اليوم",
+    "MANAGE_PLATES": "إدارة أطباقك",
+    "MANAGE_FAMILIES": "إدارة عائلتك",
+    "VIEW_SHARED_PLATES": "عرض الأطباق المشتركة",
+    "GROCERY_LIST": "قائمة المشتريات",
+    "SETTINGS": "الإعدادات",
+    "HELP": "المساعدة",
+    "LOGOUT": "تسجيل الخروج",
+    "WORLDWIDE_RECIPES": "وصفات من حول العالم"
+  },
+  "COMMON": {
+    "BACK": "رجوع"
+  },
+  "LANDING": {
+    "TITLE": "القائمة",
+    "USER": "المستخدم",
+    "PLATES_FOR_WEEK": "أطباق الأسبوع",
+    "VIEW_MODE": "عرض",
+    "EDIT_MODE": "تعديل",
+    "GENERATE_WEEK": "إنشاء الأسبوع تلقائيًا",
+    "EDIT_DAY_MENU": "تعديل قائمة اليوم",
+    "CONFIRM_GENERATE_TITLE": "تأكيد",
+    "CONFIRM_GENERATE_MESSAGE": "هل تريد حقًا إنشاء أطباق الأسبوع تلقائيًا؟",
+    "CANCEL": "إلغاء",
+    "CONFIRM": "تأكيد",
+    "GENERATE_SUCCESS": "تم إنشاء أطباق الأسبوع بنجاح",
+    "GENERATE_FAILED": "فشل إنشاء أطباق الأسبوع",
+    "TODAY": "اليوم",
+    "NO_PLATE": "لا يوجد طبق بعد",
+    "NO_PLATE_PLANNED": "لا يوجد طبق مخطط",
+    "DRAFT_CHIP": "مسودة — غير مرئية للعائلة",
+    "PUBLISHED": "منشور",
+    "PUBLISH_WEEK": "نشر الأسبوع",
+    "UNPUBLISH": "إلغاء النشر",
+    "MY_WEEK": "أسبوعي",
+    "CHEF": "الطاهي",
+    "CHEF_WEEK_VIEWING": "عرض أسبوع {{name}}",
+    "THIS_WEEK": "هذا الأسبوع",
+    "NEXT_WEEK": "الأسبوع القادم",
+    "IN_N_WEEKS": "بعد {{n}} أسابيع",
+    "LAST_WEEK": "الأسبوع الماضي",
+    "N_WEEKS_AGO": "قبل {{n}} أسابيع"
+  },
+  "LOGIN": {
+    "TITLE": "تسجيل الدخول",
+    "EMAIL": "البريد الإلكتروني",
+    "PASSWORD": "كلمة المرور",
+    "SUBMIT": "تسجيل الدخول",
+    "CONTINUE_WITH_GOOGLE": "المتابعة باستخدام Google",
+    "NOT_REGISTERED": "غير مسجل؟ اضغط هنا!",
+    "ALREADY_REGISTERED": "مسجل بالفعل؟ سجل الدخول",
+    "HERO_TITLE": "مرحبًا",
+    "HERO_SUBTITLE": "خطط لوجباتك بنقرة واحدة"
+  },
+  "REGISTER": {
+    "TITLE": "إنشاء حساب",
+    "EMAIL": "البريد الإلكتروني",
+    "EMAIL_REQUIRED": "البريد الإلكتروني مطلوب ويجب أن يكون صالحًا.",
+    "PASSWORD": "كلمة المرور",
+    "PASSWORD_REQUIREMENTS": "يجب أن تكون كلمة المرور بين 6 و8 أحرف، وتحتوي على حرف كبير وحرف خاص واحد على الأقل.",
+    "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+    "PASSWORD_MISMATCH": "كلمتا المرور غير متطابقتين.",
+    "SUBMIT": "إنشاء حساب"
+  },
+  "SETTINGS": {
+    "TITLE": "الإعدادات",
+    "BACK": "رجوع",
+    "PROFILE": "الملف الشخصي",
+    "PREFERENCES": "التفضيلات",
+    "ACCOUNT": "الحساب",
+    "PROFILE_UPDATED": "تم تحديث الملف الشخصي بنجاح",
+    "PROFILE_UPDATE_FAILED": "فشل تحديث الملف الشخصي",
+    "PREFERENCES_UPDATED": "تم تحديث التفضيلات",
+    "PREFERENCES_UPDATE_FAILED": "فشل تحديث التفضيلات",
+    "PASSWORD_CHANGED": "تم تغيير كلمة المرور بنجاح",
+    "PASSWORD_CHANGE_FAILED": "فشل تغيير كلمة المرور"
+  },
+  "HELP": {
+    "TITLE": "المساعدة",
+    "SECTIONS": {
+      "GENERAL": "عام",
+      "LISTS": "القوائم والتخطيط",
+      "ACCOUNT": "الحساب والاشتراك"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "الرئيسية",
+        "DESC": "عرض وجبات الأسبوع، نشر قائمتك كطاهٍ، وإدارة التخطيط."
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "إدارة الأطباق",
+        "DESC": "إنشاء الأطباق وتعديلها وتنظيمها. إضافة المكونات وخطوات التحضير والصور."
+      },
+      "FAMILY": {
+        "TITLE": "إدارة العائلة",
+        "DESC": "إنشاء عائلة ودعوة الأعضاء ومشاركة أطباقك معهم."
+      },
+      "SHARED_PLATES": {
+        "TITLE": "الأطباق المشتركة",
+        "DESC": "اكتشف الأطباق المشتركة من أعضاء عائلتك الآخرين."
+      },
+      "GROCERY": {
+        "TITLE": "قائمة المشتريات",
+        "DESC": "أضف العناصر يدويًا واعرض قائمة الطاهٍ لتحضير وجباتك."
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "تخطيط الأسبوع",
+        "DESC": "يمكن للطاهي نشر قائمته الأسبوعية ليراها أفراد العائلة جميعًا."
+      },
+      "SETTINGS": {
+        "TITLE": "الإعدادات",
+        "DESC": "تحديث ملفك الشخصي وتفضيلاتك (اللغة والسمة) وإدارة كلمة المرور."
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "الاشتراك",
+        "DESC": "اشترك في خطة لفتح جميع ميزات Atepla."
+      }
+    },
+    "SCHEMAS": {
+      "TITLE": "كيف يعمل",
+      "CREATE_PLATE": {
+        "TITLE": "إنشاء طبق",
+        "STEP1": {
+          "LABEL": "افتح إدارة الأطباق",
+          "DESC": "افتح القائمة الجانبية واختر \"إدارة الأطباق\"."
+        },
+        "STEP2": {
+          "LABEL": "أضف طبقًا",
+          "DESC": "اضغط على زر + لإنشاء طبق جديد."
+        },
+        "STEP3": {
+          "LABEL": "املأ التفاصيل",
+          "DESC": "أضف الاسم والمكونات وخطوات التحضير."
+        },
+        "STEP4": {
+          "LABEL": "حفظ",
+          "DESC": "طبقك أصبح متاحًا الآن للتخطيط."
+        }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "نشر الأسبوع (الطاهي)",
+        "STEP1": {
+          "LABEL": "اذهب إلى الرئيسية",
+          "DESC": "يفتح الطاهي صفحته الرئيسية لعرض الأسبوع."
+        },
+        "STEP2": {
+          "LABEL": "اختر الأطباق",
+          "DESC": "لكل يوم ووجبة، اختر طبقًا من مجموعتك."
+        },
+        "STEP3": {
+          "LABEL": "نشر",
+          "DESC": "اضغط على زر النشر لجعل القائمة مرئية للأعضاء."
+        },
+        "STEP4": {
+          "LABEL": "تعرض العائلة",
+          "DESC": "يرى الأعضاء تلقائيًا قائمة الطاهي في صفحتهم الرئيسية."
+        }
+      },
+      "FAMILY": {
+        "TITLE": "الانضمام إلى عائلة",
+        "STEP1": {
+          "LABEL": "قائمة العائلة",
+          "DESC": "افتح القائمة واختر \"إدارة العائلة\"."
+        },
+        "STEP2": {
+          "LABEL": "استلام الدعوة",
+          "DESC": "يرسل الطاهي دعوة إليك عبر البريد أو الرمز."
+        },
+        "STEP3": {
+          "LABEL": "قبول",
+          "DESC": "اقبل الدعوة للانضمام إلى العائلة."
+        },
+        "STEP4": {
+          "LABEL": "وصول مشترك",
+          "DESC": "يمكنك الآن عرض الأطباق المشتركة وقائمة الطاهي الأسبوعية."
+        }
+      },
+      "GROCERY": {
+        "TITLE": "استخدام قائمة المشتريات",
+        "STEP1": {
+          "LABEL": "افتح القائمة",
+          "DESC": "من القائمة، اختر \"قائمة المشتريات\"."
+        },
+        "STEP2": {
+          "LABEL": "أضف عناصر",
+          "DESC": "استخدم الشريط السفلي لإضافة العناصر بسرعة مع الكمية والوحدة."
+        },
+        "STEP3": {
+          "LABEL": "تحديد / عرض",
+          "DESC": "حدد العناصر المشتراة. كعضو، يمكنك أيضًا الانتقال إلى قائمة الطاهي."
+        }
+      }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "الملف الشخصي للمستخدم",
+    "AVATAR_URL": "رابط الصورة الرمزية",
+    "NAME": "الاسم",
+    "EMAIL": "البريد الإلكتروني",
+    "SAVE": "حفظ الملف الشخصي"
+  },
+  "PREFERENCES": {
+    "TITLE": "تفضيلات التطبيق",
+    "LANGUAGE": "اللغة",
+    "LANGUAGE_HINT": "اختر اللغة المستخدمة في جميع أنحاء التطبيق",
+    "ENGLISH": "الإنجليزية",
+    "FRENCH": "الفرنسية",
+    "SPANISH": "الإسبانية",
+    "ARABIC": "العربية",
+    "MANDARIN": "الماندرين",
+    "RUSSIAN": "الروسية",
+    "POLISH": "البولندية",
+    "GERMAN": "الألمانية",
+    "PORTUGUESE": "البرتغالية",
+    "ITALIAN": "الإيطالية",
+    "JAPANESE": "اليابانية",
+    "KOREAN": "الكورية",
+    "DARK_MODE": "الوضع الداكن",
+    "DARK_MODE_HINT": "التبديل بين المظهر الفاتح والداكن",
+    "NOTIFICATIONS": "الإشعارات",
+    "NOTIFICATIONS_HINT": "تفعيل أو تعطيل إشعارات التطبيق",
+    "SAVE": "حفظ التفضيلات"
+  },
+  "ACCOUNT": {
+    "CHANGE_PASSWORD": "تغيير كلمة المرور",
+    "CURRENT_PASSWORD": "كلمة المرور الحالية",
+    "NEW_PASSWORD": "كلمة المرور الجديدة",
+    "CONFIRM_NEW_PASSWORD": "تأكيد كلمة المرور الجديدة",
+    "PASSWORDS_DO_NOT_MATCH": "كلمتا المرور غير متطابقتين",
+    "DANGER_ZONE": "منطقة الخطر",
+    "DELETE_ACCOUNT": "حذف الحساب",
+    "DELETE_WARNING": "هذا الإجراء لا رجعة فيه. سيتم حذف جميع بياناتك بشكل دائم.",
+    "DELETE_CONFIRM_TITLE": "حذف الحساب",
+    "DELETE_CONFIRM_MESSAGE": "هل أنت متأكد من أنك تريد حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء. سيتم حذف جميع أطباقك وخططك وبيانات عائلتك بشكل دائم.",
+    "CANCEL": "إلغاء",
+    "DELETE": "حذف",
+    "FINAL_CONFIRMATION": "التأكيد النهائي",
+    "TYPE_DELETE": "اكتب \"DELETE\" لتأكيد حذف الحساب.",
+    "TYPE_DELETE_PLACEHOLDER": "اكتب DELETE",
+    "PERMANENTLY_DELETE": "حذف نهائي",
+    "DELETE_FAILED": "فشل حذف الحساب"
+  },
+  "PLATES": {
+    "MANAGE": "إدارة أطباقك",
+    "CANCEL": "إلغاء",
+    "SELECT": "تحديد",
+    "EDIT": "تعديل",
+    "PLEASE_SELECT": "يرجى تحديد طبق واحد على الأقل",
+    "CONFIRM_DELETE": "تأكيد الحذف",
+    "CONFIRM_REMOVE": "تأكيد الإزالة",
+    "DELETE_PLATE_MESSAGE": "هل أنت متأكد من أنك تريد حذف الطبق \"{{label}}\"؟",
+    "REMOVE_PLATE_MESSAGE": "هل أنت متأكد من أنك تريد إزالة الطبق \"{{label}}\" من الأطباق المشتركة؟",
+    "DELETE_SUCCESS": "تم الحذف بنجاح",
+    "REMOVE_SUCCESS": "تمت الإزالة بنجاح",
+    "DELETE_FAILED": "فشل الحذف",
+    "REMOVE_FAILED": "فشلت الإزالة"
+  },
+  "CHOOSE_DATE": {
+    "NEXT": "التالي",
+    "TITLE": "اختر التاريخ",
+    "TITLE_LARGE": "اختر تاريخك",
+    "STEP_LABEL": "التخطيط",
+    "SUBTITLE": "حدد اليوم الذي تريد إعداد الوجبات له.",
+    "CALENDAR_LABEL": "التقويم",
+    "SELECT_DAY": "حدد يومًا",
+    "SELECTED_LABEL": "التاريخ المحدد",
+    "NO_DATE_SELECTED": "لم يتم تحديد تاريخ",
+    "UNAVAILABLE": "هذا التاريخ غير متاح."
+  },
+  "CHOOSE_PLATE": {
+    "TITLE": "اختر أطباقك",
+    "SAVE": "حفظ",
+    "CANCEL": "إلغاء",
+    "ALL": "الكل",
+    "BREAKFAST": "الإفطار",
+    "LUNCH": "الغداء",
+    "DINNER": "العشاء",
+    "SELECT_MEAL_TYPE": "حدد نوع الوجبة",
+    "DETAILS": "التفاصيل",
+    "WEEK_LIST_SAVED": "تم حفظ قائمة الأسبوع الخاصة بك!",
+    "SAVE_SUCCESS": "تم حفظ الأطباق بنجاح!",
+    "SAVE_FAILED": "فشل حفظ الأطباق. يرجى المحاولة مرة أخرى.",
+    "MAX_PLATES_EXCEEDED": "لقد تجاوزت عدد الوجبات المسموح بها في اليوم! العدد المسموح به هو ثلاثة.",
+    "STEP_LABEL": "اختيار الوجبة",
+    "HERO_SUBTITLE": "اختر ما يصل إلى ثلاثة أطباق وعيّن كل طبق إلى الوقت المناسب من اليوم.",
+    "SELECTED_COUNT": "أطباق محددة",
+    "EMPTY_TITLE": "لم يتم العثور على أطباق",
+    "EMPTY_SUBTITLE": "جرب مرشحًا آخر أو أضف طبقًا جديدًا."
+  },
+  "PLATES_FOR_DAY": {
+    "TITLE": "اختر تاريخًا",
+    "DATE": "التاريخ:",
+    "BREAKFAST": "الإفطار",
+    "LUNCH": "الغداء",
+    "DINNER": "العشاء",
+    "NO_PLATES": "لا يوجد طبق لهذا التاريخ.",
+    "CONFIRM_DELETE": "تأكيد الحذف",
+    "DELETE_SPECIFIC_MESSAGE": "هل أنت متأكد من أنك تريد حذف هذا الطبق؟",
+    "CANCEL": "إلغاء",
+    "DELETE": "حذف",
+    "DELETE_SUCCESS": "تم حذف الطبق بنجاح",
+    "DELETE_FAILED": "فشل حذف الطبق. يرجى المحاولة لاحقًا.",
+    "DELETE_ALL_CONFIRM": "هل أنت متأكد من أنك تريد حذف جميع أطباق هذا اليوم؟",
+    "ALL_DELETED_SUCCESS": "تم حذف الأطباق بنجاح",
+    "NO_PLATES_FOUND": "لم يتم العثور على أطباق لهذا التاريخ.",
+    "ALL_DELETE_FAILED": "فشل حذف الأطباق. يرجى المحاولة لاحقًا.",
+    "GENERATE_WEEK": "إنشاء الأسبوع تلقائيًا"
+  },
+  "FAMILY": {
+    "TITLE": "إدارة العائلة",
+    "BACK": "رجوع",
+    "CREATE_FAMILY": "إنشاء عائلة جديدة",
+    "ENTER_FAMILY_NAME": "أدخل اسم العائلة",
+    "CREATE": "إنشاء العائلة",
+    "YOUR_FAMILIES": "عائلاتك",
+    "OWNER": "المالك: ",
+    "MEMBERS": "الأعضاء: ",
+    "FAMILY_MEMBERS": "أعضاء العائلة:",
+    "ROLE": "الدور: ",
+    "INVITE_TO_FAMILY": "دعوة إلى العائلة",
+    "SELECT_FAMILY": "حدد العائلة",
+    "CHOOSE_FAMILY": "اختر عائلة",
+    "ENTER_EMAIL": "أدخل عنوان البريد للدعوة",
+    "SEND_INVITATION": "إرسال الدعوة",
+    "LOAD_FAILED": "فشل تحميل العائلات",
+    "NAME_REQUIRED": "اسم العائلة مطلوب",
+    "CREATE_SUCCESS": "تم إنشاء العائلة بنجاح!",
+    "CREATE_FAILED": "فشل إنشاء العائلة: ",
+    "SELECT_FAMILY_FIRST": "يرجى تحديد عائلة",
+    "EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
+    "INVITE_SUCCESS": "تم إرسال الدعوة بنجاح!",
+    "INVITE_FAILED": "فشل إرسال الدعوة: ",
+    "CONFIRM_DELETION": "تأكيد الحذف",
+    "DELETE_FAMILY": "حذف العائلة",
+    "DELETE_FAMILY_MESSAGE": "هل أنت متأكد من أنك تريد حذف العائلة \"{{name}}\"؟ لا يمكن التراجع عن هذا الإجراء وسيحذف جميع الأعضاء.",
+    "DELETE_SUCCESS": "تم حذف العائلة بنجاح!",
+    "DELETE_FAILED": "فشل حذف العائلة: ",
+    "CONFIRM_REMOVAL": "تأكيد الإزالة",
+    "REMOVE_MEMBER": "إزالة العضو",
+    "REMOVE_MEMBER_MESSAGE": "هل أنت متأكد من أنك تريد إزالة \"{{name}}\" من العائلة؟",
+    "REMOVE": "إزالة",
+    "MEMBER_REMOVED": "تمت إزالة العضو بنجاح!",
+    "REMOVE_FAILED": "فشل إزالة العضو: "
+  },
+  "SHARED_PLATES": {
+    "TITLE": "الأطباق المشتركة",
+    "BACK": "رجوع",
+    "CANCEL": "إلغاء",
+    "SELECT": "تحديد",
+    "DESELECT_ALL": "إلغاء تحديد الكل",
+    "SELECT_ALL": "تحديد الكل",
+    "RECEIVED": "مستلمة",
+    "SENT": "مرسلة",
+    "PULL_TO_REFRESH": "اسحب للتحديث...",
+    "REFRESHING": "جاري التحديث...",
+    "SHARED_BY": "شاركه: ",
+    "IN": "في ",
+    "NO_RECEIVED": "لا توجد أطباق مشتركة مستلمة",
+    "NO_RECEIVED_MESSAGE": "لم تستلم أي أطباق مشتركة بعد.",
+    "LOADING_RECEIVED": "جاري تحميل الأطباق المستلمة...",
+    "SHARED_WITH": "مشترك مع: ",
+    "UNSHARE": "إلغاء المشاركة",
+    "NO_SENT": "لا توجد أطباق مشتركة مرسلة",
+    "NO_SENT_MESSAGE": "لم تشارك أي أطباق بعد.",
+    "LOADING_SENT": "جاري تحميل الأطباق المرسلة...",
+    "CONFIRM_UNSHARE": "تأكيد إلغاء المشاركة",
+    "UNSHARE_MESSAGE": "هل أنت متأكد من أنك تريد إلغاء مشاركة \"{{label}}\"؟",
+    "UNSHARE_SUCCESS": "تم إلغاء مشاركة الطبق بنجاح",
+    "UNSHARE_FAILED": "خطأ في إلغاء مشاركة الطبق: ",
+    "PLEASE_SELECT": "يرجى تحديد طبق واحد على الأقل",
+    "BATCH_UNSHARE_MESSAGE": "هل أنت متأكد من أنك تريد إلغاء مشاركة {{count}} طبق/أطباق؟",
+    "BATCH_UNSHARE_BUTTON": "إلغاء مشاركة {{count}}",
+    "BATCH_SUCCESS": "تم إلغاء مشاركة {{count}} طبق/أطباق بنجاح",
+    "BATCH_FAILED": "فشل {{count}} طبق/أطباق: {{errorMsg}}",
+    "BATCH_ERROR": "خطأ في إلغاء مشاركة الأطباق: "
+  },
+  "SHARE_MODAL": {
+    "SHARE_PLATES": "مشاركة {{count}} أطباق",
+    "SHARE_SINGLE": "مشاركة \"{{label}}\"",
+    "CLOSE": "إغلاق",
+    "SELECTED_PLATES": "الأطباق المحددة ({{count}})",
+    "SELECT_FAMILY_OPTIONAL": "حدد العائلة (اختياري)",
+    "CHOOSE_FAMILY": "اختر عائلة",
+    "SELECT_USER": "حدد مستخدمًا في العائلة",
+    "CHOOSE_USER": "اختر مستخدمًا",
+    "SHARE_PLATES_BUTTON": "مشاركة {{count}} أطباق",
+    "SHARE_PLATE_BUTTON": "مشاركة الطبق",
+    "SELECT_USER_ERROR": "يرجى تحديد مستخدم",
+    "NO_PLATES": "لم يتم تحديد أطباق",
+    "SHARE_SUCCESS": "تمت مشاركة {{count}} طبق/أطباق بنجاح!",
+    "SHARE_FAILED": "فشل {{count}} طبق/أطباق: {{errorMsg}}",
+    "SHARE_ERROR": "فشل مشاركة الأطباق: "
+  },
+  "PLATE_DETAILS": {
+    "TITLE": "إدارة طبقك",
+    "PLATE_NAME": "اسم الطبق:",
+    "PLATE_DESCRIPTION": "وصف الطبق:",
+    "CATEGORY": "الفئة:",
+    "BREAKFAST": "الإفطار",
+    "LUNCH": "الغداء",
+    "DINNER": "العشاء",
+    "TAKE_PICTURE": "التقاط صورة",
+    "SAVE": "حفظ",
+    "AUTH_REQUIRED": "مطلوب المصادقة. يرجى تسجيل الدخول.",
+    "UPDATED": "تم تحديث طعامك!",
+    "ADDED": "تمت إضافة طعامك!",
+    "INGREDIENTS": "المكونات",
+    "INGREDIENT_NAME": "الاسم",
+    "QUANTITY": "الكمية",
+    "UNIT": "الوحدة",
+    "ADD_INGREDIENT": "إضافة مكون",
+    "STEPS": "خطوات التحضير",
+    "STEPS_PLACEHOLDER": "أدخل كل خطوة في سطر جديد"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "قائمة المشتريات",
+    "WEEK_OF": "أسبوع {{date}}",
+    "EMPTY": "لم يتم العثور على مكونات لهذا الأسبوع. أضف المكونات إلى أطباقك أولاً.",
+    "LOADING": "جاري التحميل...",
+    "MEMBER_LIST": "قائمتي",
+    "CHEF_LIST": "قائمة الطاهي",
+    "CHEF_LIST_LABEL": "قائمة {{name}}",
+    "ADD_PLACEHOLDER": "إضافة عنصر...",
+    "QUANTITY_LABEL": "الكمية",
+    "UNIT_LABEL": "الوحدة",
+    "DELETE_TITLE": "حذف",
+    "EMPTY_MEMBER_TITLE": "قائمتك فارغة",
+    "EMPTY_MEMBER_SUBTITLE": "أضف عناصر لهذا الأسبوع",
+    "EMPTY_CHEF_TITLE": "لا شيء حاليًا",
+    "EMPTY_CHEF_SUBTITLE": "لم يضف {{name}} أي شيء هذا الأسبوع",
+    "REGENERATE": "إعادة إنشاء القائمة",
+    "REGENERATE_CONFIRM": "سيتم إعادة تعيين العناصر المحددة. هل تريد المتابعة؟",
+    "CANCEL": "إلغاء",
+    "CONFIRM": "تأكيد",
+    "REGENERATE_SUCCESS": "تمت إعادة إنشاء قائمة المشتريات",
+    "REGENERATE_FAILED": "فشل إعادة إنشاء قائمة المشتريات",
+    "TOGGLE_FAILED": "فشل تحديث العنصر"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "الاشتراك",
+    "HERO_TITLE": "اختر خطتك",
+    "HERO_SUBTITLE": "افتح جميع ميزات Atepla لتخطيط وجباتك دون قيود.",
+    "POPULAR": "الأكثر شهرة",
+    "DAYS_FREE": "أيام مجانية",
+    "PER_MONTH": "شهر",
+    "PER_YEAR": "سنة",
+    "SUBSCRIBE": "اشتراك",
+    "CONFIRM_TITLE": "تأكيد الاشتراك",
+    "CONFIRM_MESSAGE": "أنت على وشك الاشتراك في خطة {{planName}} بسعر {{price}}. هل تؤكد؟",
+    "CANCEL": "إلغاء",
+    "CONFIRM": "تأكيد",
+    "ERROR": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "ACTIVE_PLAN": "الخطة النشطة",
+    "ALREADY_SUBSCRIBED": "مشترك بالفعل",
+    "CANCEL_SUBSCRIPTION": "إلغاء اشتراكي",
+    "CANCEL_CONFIRM_TITLE": "إلغاء الاشتراك",
+    "CANCEL_CONFIRM_MESSAGE": "هل أنت متأكد من أنك تريد إلغاء اشتراكك؟ ستحتفظ بالوصول حتى نهاية الفترة الحالية.",
+    "MANAGE_SUBSCRIPTION": "إدارة اشتراكي"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "وصفات من حول العالم",
+    "SUBTITLE": "تصفح 100 فكرة عشاء من كل ركن من أركان العالم.",
+    "RECIPE_COUNT": "{{count}} وصفة",
+    "RECIPE_LABEL": "وصفات",
+    "REGION_LABEL": "مناطق",
+    "POPULAR_TITLE": "الأكثر شهرة",
+    "POPULAR_SUBTITLE": "وصفات العشاء المفضلة حول العالم، مرتبة حسب الشهرة العالمية.",
+    "ADD_TO_PLATES": "إضافة إلى أطباقي",
+    "ADD_SUCCESS": "تمت إضافة \"{{label}}\" إلى أطباقك",
+    "ADD_FAILED": "فشل إضافة الطبق",
+    "REGIONS": {
+      "AFRICA": "أفريقيا",
+      "AMERICAS": "الأمريكتان",
+      "ASIA": "آسيا",
+      "EUROPE": "أوروبا",
+      "OCEANIA": "أوقيانوسيا"
+    }
+  }
+}

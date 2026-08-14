@@ -1,32 +1,45 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="modern-header">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="{{ 'SETTINGS.BACK' | translate }}" defaultHref="/"></ion-back-button>
+      <ion-back-button [text]="'SETTINGS.BACK' | translate" defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'SETTINGS.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-segment [(ngModel)]="selectedSegment">
-    <ion-segment-button value="profile">
-      <ion-label>{{ 'SETTINGS.PROFILE' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="preferences">
-      <ion-label>{{ 'SETTINGS.PREFERENCES' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="account">
-      <ion-label>{{ 'SETTINGS.ACCOUNT' | translate }}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+<ion-content [fullscreen]="true" class="settings-content">
+  <div class="settings-shell">
+    <!-- Profile Hero -->
+    <div class="profile-hero" *ngIf="userService.profile$ | async as profile">
+      <div class="profile-hero__avatar">
+        <img *ngIf="profile.avatar" [src]="profile.avatar" alt="Avatar">
+        <span *ngIf="!profile.avatar">{{ getInitials(profile.name || profile.email) }}</span>
+      </div>
+      <div class="profile-hero__text">
+        <h2 class="profile-hero__name">{{ profile.name || profile.email }}</h2>
+        <p class="profile-hero__email" *ngIf="profile.name">{{ profile.email }}</p>
+      </div>
+    </div>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
-        <app-profile-section *ngIf="selectedSegment === 'profile'"></app-profile-section>
-        <app-preferences-section *ngIf="selectedSegment === 'preferences'"></app-preferences-section>
-        <app-account-section *ngIf="selectedSegment === 'account'"></app-account-section>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-segment [(ngModel)]="selectedSegment" class="settings-segment">
+      <ion-segment-button value="profile">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>{{ 'SETTINGS.PROFILE' | translate }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="preferences">
+        <ion-icon name="options-outline"></ion-icon>
+        <ion-label>{{ 'SETTINGS.PREFERENCES' | translate }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="account">
+        <ion-icon name="shield-outline"></ion-icon>
+        <ion-label>{{ 'SETTINGS.ACCOUNT' | translate }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="settings-sections">
+      <app-profile-section *ngIf="selectedSegment === 'profile'"></app-profile-section>
+      <app-preferences-section *ngIf="selectedSegment === 'preferences'"></app-preferences-section>
+      <app-account-section *ngIf="selectedSegment === 'account'"></app-account-section>
+    </div>
+  </div>
 </ion-content>

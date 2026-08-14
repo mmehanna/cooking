@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlateService } from '../services/plate.service';
 import { SharedPlateModel } from '../../_clients/models/SharedPlateModel';
 import { AlertController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-shared-plates-list',
@@ -20,7 +21,8 @@ export class SharedPlatesListComponent implements OnInit {
   constructor(
     private plateService: PlateService,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -77,15 +79,15 @@ export class SharedPlatesListComponent implements OnInit {
 
   async confirmUnshare(sharedPlate: SharedPlateModel) {
     const alert = await this.alertController.create({
-      header: 'Confirm Unshare',
-      message: `Are you sure you want to unshare "${sharedPlate.plate.label}"?`,
+      header: this.translate.instant('SHARED_PLATES.CONFIRM_UNSHARE'),
+      message: this.translate.instant('SHARED_PLATES.UNSHARE_MESSAGE', { label: sharedPlate.plate.label }),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('SHARED_PLATES.CANCEL'),
           role: 'cancel',
         },
         {
-          text: 'Unshare',
+          text: this.translate.instant('SHARED_PLATES.UNSHARE'),
           handler: () => {
             this.unsharePlate(sharedPlate);
           },
@@ -100,7 +102,7 @@ export class SharedPlatesListComponent implements OnInit {
     this.plateService.unsharePlate(sharedPlate.id).subscribe({
       next: async () => {
         const toast = await this.toastController.create({
-          message: 'Plate unshared successfully',
+          message: this.translate.instant('SHARED_PLATES.UNSHARE_SUCCESS'),
           duration: 2000,
           color: 'success',
         });
@@ -110,7 +112,7 @@ export class SharedPlatesListComponent implements OnInit {
       error: async (error) => {
         console.error('Error unsharing plate:', error);
         const toast = await this.toastController.create({
-          message: 'Error unsharing plate: ' + (error.error?.message || error.message),
+          message: this.translate.instant('SHARED_PLATES.UNSHARE_FAILED') + (error.error?.message || error.message),
           duration: 3000,
           color: 'danger',
         });
@@ -150,7 +152,7 @@ export class SharedPlatesListComponent implements OnInit {
   async confirmBatchUnshare() {
     if (this.selectedPlateIds.length === 0) {
       const toast = await this.toastController.create({
-        message: 'Please select at least one plate',
+        message: this.translate.instant('SHARED_PLATES.PLEASE_SELECT'),
         duration: 2000,
         color: 'warning',
       });
@@ -160,15 +162,15 @@ export class SharedPlatesListComponent implements OnInit {
 
     const count = this.selectedPlateIds.length;
     const alert = await this.alertController.create({
-      header: 'Confirm Unshare',
-      message: `Are you sure you want to unshare ${count} plate(s)?`,
+      header: this.translate.instant('SHARED_PLATES.CONFIRM_UNSHARE'),
+      message: this.translate.instant('SHARED_PLATES.BATCH_UNSHARE_MESSAGE', { count }),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('SHARED_PLATES.CANCEL'),
           role: 'cancel',
         },
         {
-          text: `Unshare ${count}`,
+          text: this.translate.instant('SHARED_PLATES.BATCH_UNSHARE_BUTTON', { count }),
           handler: () => {
             this.batchUnsharePlates();
           },
@@ -187,7 +189,7 @@ export class SharedPlatesListComponent implements OnInit {
 
         if (successCount > 0) {
           const toast = await this.toastController.create({
-            message: `${successCount} plate(s) unshared successfully`,
+            message: this.translate.instant('SHARED_PLATES.BATCH_SUCCESS', { count: successCount }),
             duration: 2000,
             color: 'success',
           });
@@ -197,7 +199,7 @@ export class SharedPlatesListComponent implements OnInit {
         if (errorCount > 0) {
           const errorMsg = response.errors.map((e: any) => e.error).join(', ');
           const toast = await this.toastController.create({
-            message: `${errorCount} plate(s) failed: ${errorMsg}`,
+            message: this.translate.instant('SHARED_PLATES.BATCH_FAILED', { count: errorCount, errorMsg }),
             duration: 3000,
             color: 'danger',
           });
@@ -211,7 +213,7 @@ export class SharedPlatesListComponent implements OnInit {
       error: async (error) => {
         console.error('Error batch unsharing plates:', error);
         const toast = await this.toastController.create({
-          message: 'Error unsharing plates: ' + (error.error?.message || error.message),
+          message: this.translate.instant('SHARED_PLATES.BATCH_ERROR') + (error.error?.message || error.message),
           duration: 3000,
           color: 'danger',
         });

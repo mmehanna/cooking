@@ -1,8 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="modern-header">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button [text]="'COMMON.BACK' | translate" defaultHref="/landing" (click)="goBack()"></ion-back-button>
     </ion-buttons>
+    <ion-title>{{ 'CHOOSE_DATE.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button class="toolbar-next" (click)="nextPageValidation()">
         {{ "CHOOSE_DATE.NEXT" | translate }}
