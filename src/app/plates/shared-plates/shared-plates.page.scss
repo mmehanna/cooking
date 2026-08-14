@@ -1,15 +1,9 @@
-ion-content {
-  --background: #f8f9fa;
-  height: 100%;
+.shared-plates-page-content {
+  --background: #f6f7f9;
 }
 
-ion-grid {
-  height: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-ion-row {
-  height: 100%;
-  align-items: stretch;
+.shared-plates-shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
 }

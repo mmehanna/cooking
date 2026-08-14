@@ -1,9 +1,9 @@
-<ion-header class="grocery-header">
-  <ion-toolbar class="grocery-toolbar">
+<ion-header [translucent]="true" class="modern-header">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="/landing" class="grocery-back"></ion-back-button>
+      <ion-back-button text="" defaultHref="/landing"></ion-back-button>
     </ion-buttons>
-    <ion-title class="grocery-title">Liste de courses</ion-title>
+    <ion-title>{{ 'GROCERY_LIST.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +27,7 @@
     <!-- Loading -->
     <div *ngIf="loading" class="grocery-loading">
       <ion-spinner name="crescent" color="primary"></ion-spinner>
-      <p>Chargement...</p>
+      <p>{{ 'GROCERY_LIST.LOADING' | translate }}</p>
     </div>
 
     <!-- View mode toggle for members -->
@@ -38,14 +38,14 @@
           [class.view-toggle__btn--active]="viewMode === 'member'"
           (click)="viewMode = 'member'">
           <ion-icon name="person-outline"></ion-icon>
-          Ma liste
+          {{ 'GROCERY_LIST.MEMBER_LIST' | translate }}
         </button>
         <button
           class="view-toggle__btn"
           [class.view-toggle__btn--active]="viewMode === 'chef'"
           (click)="viewMode = 'chef'">
           <ion-icon name="restaurant-outline"></ion-icon>
-          Liste du chef
+          {{ 'GROCERY_LIST.CHEF_LIST' | translate }}
         </button>
       </div>
     </div>
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <button class="item-card__delete" (click)="deleteManualItem(item)" title="Supprimer">
+          <button class="item-card__delete" (click)="deleteManualItem(item)" [title]="'GROCERY_LIST.DELETE_TITLE' | translate">
             <ion-icon name="trash-outline"></ion-icon>
           </button>
         </div>
@@ -81,8 +81,8 @@
           <div class="empty-state__icon-wrap">
             <ion-icon name="basket-outline" class="empty-state__icon"></ion-icon>
           </div>
-          <h3 class="empty-state__title">Ta liste est vide</h3>
-          <p class="empty-state__subtitle">Ajoute des articles pour cette semaine</p>
+          <h3 class="empty-state__title">{{ 'GROCERY_LIST.EMPTY_MEMBER_TITLE' | translate }}</h3>
+          <p class="empty-state__subtitle">{{ 'GROCERY_LIST.EMPTY_MEMBER_SUBTITLE' | translate }}</p>
         </div>
       </ng-template>
     </ng-container>
@@ -92,7 +92,7 @@
       <div *ngIf="hasChefItems; else emptyChefList" class="items-list items-list--chef">
         <div class="chef-badge" *ngIf="chefName">
           <ion-icon name="restaurant-outline"></ion-icon>
-          <span>Liste de {{ chefName }}</span>
+          <span>{{ 'GROCERY_LIST.CHEF_LIST_LABEL' | translate:{name: chefName} }}</span>
         </div>
 
         <div class="item-card item-card--readonly" *ngFor="let item of chefItems">
@@ -119,8 +119,8 @@
           <div class="empty-state__icon-wrap empty-state__icon-wrap--chef">
             <ion-icon name="restaurant-outline" class="empty-state__icon"></ion-icon>
           </div>
-          <h3 class="empty-state__title">Rien pour le moment</h3>
-          <p class="empty-state__subtitle" *ngIf="chefName">{{ chefName }} n'a rien ajouté cette semaine</p>
+          <h3 class="empty-state__title">{{ 'GROCERY_LIST.EMPTY_CHEF_TITLE' | translate }}</h3>
+          <p class="empty-state__subtitle" *ngIf="chefName">{{ 'GROCERY_LIST.EMPTY_CHEF_SUBTITLE' | translate:{name: chefName} }}</p>
         </div>
       </ng-template>
     </ng-container>
@@ -135,7 +135,7 @@
       <ion-icon name="add-circle" class="quick-add-main__add-icon" (click)="quickAddItem()"></ion-icon>
       <ion-input
         [(ngModel)]="newItemName"
-        placeholder="Ajouter un article..."
+        [placeholder]="'GROCERY_LIST.ADD_PLACEHOLDER' | translate"
         (keydown.enter)="quickAddItem()"
         class="quick-add-main__input">
       </ion-input>
@@ -146,11 +146,11 @@
 
     <div class="quick-add-details" *ngIf="showDetails">
       <div class="quick-add-field">
-        <label class="quick-add-field__label">Qté</label>
+        <label class="quick-add-field__label">{{ 'GROCERY_LIST.QUANTITY_LABEL' | translate }}</label>
         <input [(ngModel)]="newItemQty" placeholder="2" type="text" class="quick-add-field__input">
       </div>
       <div class="quick-add-field">
-        <label class="quick-add-field__label">Unité</label>
+        <label class="quick-add-field__label">{{ 'GROCERY_LIST.UNIT_LABEL' | translate }}</label>
         <input [(ngModel)]="newItemQtyUnit" placeholder="litres" type="text" class="quick-add-field__input">
       </div>
     </div>

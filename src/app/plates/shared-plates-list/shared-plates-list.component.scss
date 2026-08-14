@@ -1,22 +1,291 @@
+:host {
+  display: block;
+}
+
+.shared-segment {
+  background: var(--atepla-surface);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-md);
+  margin-bottom: 16px;
+  padding: 4px;
+
+  ion-segment-button {
+    --background: transparent;
+    --background-checked: var(--ion-color-primary);
+    --color: var(--atepla-text-secondary);
+    --color-checked: #fff;
+    --indicator-color: transparent;
+    --border-radius: var(--atepla-radius-md);
+    border-radius: var(--atepla-radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: none;
+
+    ion-icon {
+      font-size: 1.1rem;
+      margin-right: 6px;
+    }
+  }
+}
+
 .segment-content {
-  padding: 10px;
+  padding-bottom: 16px;
 }
 
-.shared-info {
-  font-size: 0.9em;
-  color: #666;
-  margin-top: 5px;
+.selection-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--atepla-surface);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-lg);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--atepla-shadow-sm);
 }
 
-ion-card {
-  margin: 10px;
+.selection-count {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--atepla-text-primary);
 }
 
-.select-checkbox {
-  margin-bottom: 10px;
+.selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-ion-card-content {
+.selection-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--atepla-radius-md);
+  border: none;
+  background: var(--atepla-blue-soft);
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--atepla-transition);
+
+  ion-icon {
+    font-size: 1rem;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &:hover {
+    background: var(--atepla-blue-medium);
+  }
+}
+
+.selection-btn--danger {
+  background: rgba(var(--ion-color-danger-rgb), 0.1);
+  color: var(--ion-color-danger);
+
+  &:hover {
+    background: rgba(var(--ion-color-danger-rgb), 0.15);
+  }
+}
+
+.plate-list {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.plate-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--atepla-surface);
+  border-radius: var(--atepla-radius-lg);
+  padding: 16px;
+  box-shadow: var(--atepla-shadow-sm);
+  border: 1px solid var(--atepla-border);
+  transition: var(--atepla-transition);
+}
+
+.plate-card--selectable {
+  cursor: pointer;
+}
+
+.plate-card--selected {
+  border-color: var(--ion-color-primary);
+  background: var(--atepla-blue-soft);
+  box-shadow: 0 0 0 3px var(--atepla-blue-soft);
+}
+
+.plate-card__checkbox {
+  padding-top: 4px;
+
+  ion-checkbox {
+    --size: 22px;
+    --checkbox-background-checked: var(--ion-color-primary);
+  }
+}
+
+.plate-card__avatar {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--atepla-radius-md);
+  background: linear-gradient(135deg, var(--ion-color-primary-tint), var(--ion-color-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+}
+
+.plate-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.plate-card__title {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--atepla-text-primary);
+  line-height: 1.25;
+}
+
+.plate-card__desc {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  color: var(--atepla-text-secondary);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.plate-card__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--atepla-text-secondary);
+  font-weight: 500;
+  background: var(--atepla-blue-soft);
+  padding: 4px 10px;
+  border-radius: 20px;
+
+  ion-icon {
+    font-size: 0.9rem;
+    color: var(--ion-color-primary);
+  }
+}
+
+.plate-card__meta--family {
+  margin-left: 6px;
+}
+
+.plate-card__unshare {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--atepla-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--atepla-text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--atepla-transition);
+  margin-top: 2px;
+
+  ion-icon {
+    font-size: 1.15rem;
+  }
+
+  &:hover {
+    background: rgba(var(--ion-color-danger-rgb), 0.08);
+    color: var(--ion-color-danger);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+.empty-state,
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.empty-state__orbit {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--atepla-blue-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.empty-state__icon {
+  font-size: 2.4rem;
+  color: var(--ion-color-primary);
+}
+
+.empty-state__title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--atepla-text-primary);
+}
+
+.empty-state__subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--atepla-text-secondary);
+  max-width: 260px;
+  line-height: 1.4;
+}
+
+.loading-state ion-spinner {
+  color: var(--ion-color-primary);
+  margin-bottom: 12px;
+}
+
+.loading-state p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--atepla-text-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --atepla-bg: #0f172a;
+    --atepla-surface: #1e293b;
+    --atepla-border: rgba(255, 255, 255, 0.06);
+    --atepla-divider: rgba(255, 255, 255, 0.08);
+    --atepla-text-primary: #f1f5f9;
+    --atepla-text-secondary: #94a3b8;
+    --atepla-text-tertiary: #64748b;
+    --atepla-blue-soft: rgba(96, 165, 250, 0.12);
+    --atepla-blue-medium: rgba(96, 165, 250, 0.2);
+    --atepla-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.18);
+    --atepla-shadow-md: 0 2px 12px rgba(0, 0, 0, 0.22);
+  }
 }

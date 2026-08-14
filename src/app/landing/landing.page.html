@@ -49,7 +49,7 @@
         <ion-icon name="checkmark-circle-outline"></ion-icon>
         <ion-label>Published</ion-label>
       </ion-chip>
-      <ion-chip *ngIf="!weekPublished" color="medium">
+      <ion-chip *ngIf="!weekPublished" class="draft-chip">
         <ion-icon name="eye-off-outline"></ion-icon>
         <ion-label>Draft — not visible to family</ion-label>
       </ion-chip>
@@ -75,14 +75,14 @@
     </div>
 
     <div class="mode-toggle" *ngIf="mode === 'view' && viewMode === 'my'">
-      <ion-button fill="clear" size="small" (click)="mode = 'edit'">
+      <ion-button class="mode-btn mode-btn--edit" size="small" (click)="mode = 'edit'">
         <ion-icon name="create-outline" slot="start"></ion-icon>
         {{ 'LANDING.EDIT_MODE' | translate }}
       </ion-button>
     </div>
 
     <div class="mode-toggle" *ngIf="mode === 'edit'">
-      <ion-button fill="clear" size="small" (click)="mode = 'view'">
+      <ion-button class="mode-btn mode-btn--view" size="small" (click)="mode = 'view'">
         <ion-icon name="eye-outline" slot="start"></ion-icon>
         {{ 'LANDING.VIEW_MODE' | translate }}
       </ion-button>
@@ -103,8 +103,8 @@
               <div class="day-badges">
                 <span class="week-badge" *ngIf="isFutureWeek()">{{ getWeekRelativeLabel() }}</span>
                 <span class="week-badge week-badge--past" *ngIf="isPastWeek()">{{ getPastWeekRelativeLabel() }}</span>
-                <ion-button *ngIf="mode === 'edit'" fill="clear" size="small" class="edit-btn" (click)="editDayMenu(plate.date)">
-                  <ion-icon name="pencil-outline"></ion-icon>
+                <ion-button *ngIf="mode === 'edit'" fill="clear" size="small" class="edit-btn" (click)="editDayMenu(plate.date)" [attr.aria-label]="'LANDING.EDIT_DAY' | translate">
+                  <ion-icon name="create-outline" slot="icon-only"></ion-icon>
                 </ion-button>
               </div>
             </div>

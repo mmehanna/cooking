@@ -19,10 +19,27 @@
   font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
+  width: 100%;
   padding-inline: 56px;
   position: absolute;
   left: 0;
   right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  line-height: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-toolbar {
+  --min-height: 56px;
+}
+
+ion-buttons {
+  z-index: 10;
 }
 
 /* ── Content Shell ── */

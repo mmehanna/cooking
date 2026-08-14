@@ -1,17 +1,25 @@
+:host {
+  display: block;
+  --fam-input-bg: #f8fafc;
+}
+
 .family-container {
   padding: 20px 16px;
   max-width: 700px;
   margin: 0 auto;
+  min-height: 100%;
+  background: var(--atepla-bg);
 }
 
 /* Cards */
 .family-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--atepla-surface);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-md);
   margin-bottom: 20px;
   overflow: hidden;
+  transition: var(--atepla-transition);
 }
 
 .card-header {
@@ -29,7 +37,7 @@
 .card-title {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--atepla-text-primary);
   margin: 0;
 }
 
@@ -39,40 +47,61 @@
 
 /* Inputs */
 .custom-input {
-  --background: rgba(0, 0, 0, 0.03);
-  --border-radius: 12px;
+  --background: var(--fam-input-bg);
+  --border-radius: var(--atepla-radius-md);
   --padding-start: 12px;
   --padding-end: 12px;
-  --inner-padding-end: 0;
+  --inner-padding-end: 12px;
+  --min-height: 50px;
+  --highlight-height: 0;
+  --border-color: transparent;
+  width: 100%;
   margin-bottom: 12px;
+  border: 1.5px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-md);
+  overflow: hidden;
+  transition: var(--atepla-transition);
+}
+
+.custom-input:focus-within {
+  border-color: var(--ion-color-primary);
+  box-shadow: 0 0 0 4px var(--atepla-blue-soft);
 }
 
 .custom-input ion-label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #666;
+  color: var(--atepla-text-secondary);
   margin-bottom: 4px;
 }
 
 .custom-input ion-select,
 .custom-input ion-input {
+  --color: var(--atepla-text-primary);
   font-size: 0.95rem;
-  color: #1a1a1a;
+  font-weight: 500;
 }
 
 /* Buttons */
 .action-btn {
-  --border-radius: 14px;
+  --border-radius: var(--atepla-radius-md);
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-shade);
+  --background-hover: var(--ion-color-primary-tint);
+  --color: #fff;
   height: 48px;
   font-weight: 700;
   font-size: 0.95rem;
   margin-top: 8px;
-  --box-shadow: 0 4px 14px rgba(var(--ion-color-primary-rgb), 0.35);
+  --box-shadow: 0 4px 14px rgba(var(--ion-color-primary-rgb), 0.28);
 }
 
 .action-btn--secondary {
-  --background: var(--ion-color-secondary);
-  --box-shadow: 0 4px 14px rgba(var(--ion-color-secondary-rgb), 0.35);
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-shade);
+  --background-hover: var(--ion-color-primary-tint);
+  --color: #fff;
+  --box-shadow: 0 4px 14px rgba(var(--ion-color-primary-rgb), 0.28);
 }
 
 /* Family List */
@@ -83,15 +112,15 @@
 }
 
 .family-item {
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: 16px;
+  background: var(--atepla-bg);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-md);
   padding: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: var(--atepla-transition);
 }
 
 .family-item:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--atepla-blue-soft);
 }
 
 .family-name-row {
@@ -104,13 +133,26 @@
 .family-name {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--atepla-text-primary);
 }
 
 .delete-btn {
   --padding-start: 6px;
   --padding-end: 6px;
   margin: 0;
+  --color: var(--ion-color-danger);
+}
+
+.delete-btn ion-icon {
+  font-size: 1.4rem;
+  font-weight: 700;
+  stroke-width: 48px;
+}
+
+.member-item ion-button ion-icon {
+  font-size: 1.25rem;
+  font-weight: 700;
+  stroke-width: 48px;
 }
 
 .family-meta {
@@ -124,21 +166,23 @@
   align-items: center;
   gap: 4px;
   font-size: 0.8rem;
-  color: #777;
-  background: rgba(0, 0, 0, 0.04);
+  color: var(--atepla-text-secondary);
+  background: var(--atepla-blue-soft);
   padding: 4px 10px;
   border-radius: 20px;
+  font-weight: 500;
 }
 
 .meta-tag ion-icon {
   font-size: 0.85rem;
+  color: var(--ion-color-primary);
 }
 
 /* Members Section */
 .members-section {
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--atepla-divider);
 }
 
 .members-title {
@@ -165,7 +209,7 @@
 
 .member-name {
   font-size: 0.92rem;
-  color: #333;
+  color: var(--atepla-text-secondary);
 }
 
 .member-role {
@@ -173,10 +217,27 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #888;
-  background: rgba(0, 0, 0, 0.05);
+  color: var(--ion-color-primary);
+  background: var(--atepla-blue-soft);
   padding: 2px 8px;
   border-radius: 10px;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --atepla-bg: #0f172a;
+    --atepla-surface: #1e293b;
+    --atepla-border: rgba(255, 255, 255, 0.06);
+    --atepla-divider: rgba(255, 255, 255, 0.08);
+    --atepla-text-primary: #f1f5f9;
+    --atepla-text-secondary: #94a3b8;
+    --atepla-text-tertiary: #64748b;
+    --atepla-blue-soft: rgba(96, 165, 250, 0.12);
+    --atepla-blue-medium: rgba(96, 165, 250, 0.2);
+    --atepla-shadow-md: 0 2px 12px rgba(0, 0, 0, 0.22);
+    --fam-input-bg: #1e293b;
+  }
 }
 
 /* Responsive */
@@ -186,7 +247,7 @@
   }
 
   .family-card {
-    border-radius: 16px;
+    border-radius: var(--atepla-radius-lg);
     margin-bottom: 16px;
   }
 

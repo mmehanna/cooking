@@ -1,136 +1,10 @@
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0.4);
-  }
-  70% {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 12px rgba(var(--ion-color-primary-rgb), 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0);
-  }
-}
-
-.login-hero {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
-}
-
-.hero-brand {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 2.8rem;
-  font-weight: 900;
-  color: white;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-}
-
-.hero-tagline {
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-transform: none;
-  opacity: 0.95;
-  margin-top: 8px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
-
-.login-container {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 0 20px;
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.login-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin: -40px 0 16px;
-}
-
-.login-logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  animation: pulse 2.5s ease-in-out infinite;
-  transition: transform 0.3s ease;
-  background: white;
-}
-
-.login-logo:hover {
-  transform: scale(1.08);
-}
-
-.login-icons-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin: 8px 0 32px;
-}
-
-.deco-icon {
-  font-size: 28px;
-  color: white;
-  opacity: 0.9;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.deco-icon:hover {
-  transform: scale(1.2) rotate(8deg);
-  opacity: 1;
-}
-
-.login-card {
-  background: white;
-  border-radius: 20px;
-  padding: 28px 24px 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-  margin-top: -20px;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
+:host {
+  --auth-max-width: 420px;
 }
 
 ion-content {
   --background: transparent;
+  --overflow: hidden;
 }
 
 .page-bg {
@@ -138,68 +12,147 @@ ion-content {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
     url('/assets/images/login/table-food.jpg') center/cover no-repeat;
 }
 
-.card-title {
-  margin: 0 0 20px;
-  font-size: 1.4rem;
+.auth-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: var(--auth-max-width);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 36px 28px 32px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.5s ease-out;
+  backdrop-filter: blur(16px);
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.auth-logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: white;
+}
+
+.brand-title {
+  margin: 0 0 6px;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--atepla-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.brand-tagline {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--atepla-text-secondary);
+}
+
+.auth-title {
+  margin: 0 0 22px;
+  font-size: 1.15rem;
   font-weight: 700;
   text-align: center;
-  color: var(--ion-color-dark);
+  color: var(--atepla-text-primary);
 }
 
-.input-item {
-  --background: rgba(255, 255, 255, 0.95);
-  --border-color: transparent;
-  --highlight-color-focused: var(--ion-color-primary);
-  --padding-start: 12px;
-  --padding-end: 12px;
-  --inner-padding-end: 12px;
-  --min-height: 52px;
-  margin-bottom: 14px;
-  border-radius: 14px;
-  transition: all 0.3s ease;
-}
-
-.input-item ion-icon {
-  font-size: 20px;
-  margin-right: 8px;
-}
-
-.input-item.item-has-focus {
+.auth-input {
   --background: #ffffff;
-  box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.25);
+  --border-color: rgba(15, 23, 42, 0.1);
+  --highlight-color-focused: var(--ion-color-primary);
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --inner-padding-end: 14px;
+  --min-height: 74px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-ion-item ion-label {
-  color: var(--ion-color-dark);
+.auth-input .input-wrapper {
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.login-btn {
-  margin-top: 16px;
+.auth-input ion-icon[slot="start"] {
+  font-size: 22px;
+  margin-right: 10px;
+  color: var(--ion-color-primary);
+  align-self: center;
+}
+
+.auth-input ion-label {
+  color: var(--atepla-text-secondary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.auth-input ion-input {
+  --padding-top: 0;
+  --padding-bottom: 4px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--atepla-text-primary);
+}
+
+.auth-input.item-has-focus {
+  border-color: rgba(var(--ion-color-primary-rgb), 0.45);
+  box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.08);
+}
+
+.auth-btn {
+  margin-top: 18px;
   height: 52px;
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  border-radius: 14px;
-  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
-  --background-hover: linear-gradient(135deg, var(--ion-color-primary-shade) 0%, var(--ion-color-secondary-shade) 100%);
-  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  --border-radius: 14px;
+  --background: var(--ion-color-primary);
+  --background-hover: var(--ion-color-primary-shade);
+  --background-activated: var(--ion-color-primary-shade);
+  --box-shadow: 0 4px 16px rgba(var(--ion-color-primary-rgb), 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.login-btn:not([disabled]):hover {
-  transform: translateY(-2px);
-  --box-shadow: 0 10px 28px rgba(var(--ion-color-primary-rgb), 0.5);
+.auth-btn:not([disabled]):hover {
+  transform: translateY(-1px);
+  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.32);
 }
 
-.login-btn:not([disabled]):active {
+.auth-btn:not([disabled]):active {
   transform: translateY(0);
 }
 
-.login-btn[disabled] {
+.auth-btn[disabled] {
   opacity: 0.5;
 }
 
@@ -207,9 +160,10 @@ ion-item ion-label {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 18px 0 14px;
-  color: var(--ion-color-medium);
-  font-size: 0.9rem;
+  margin: 20px 0 16px;
+  color: var(--atepla-text-tertiary);
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
 .auth-divider::before,
@@ -217,59 +171,120 @@ ion-item ion-label {
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--atepla-divider);
 }
 
 .google-btn {
   height: 52px;
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  --border-radius: 14px;
   --background: #ffffff;
-  --background-hover: #f8f8f8;
-  --color: #202124;
-  --border-color: rgba(0, 0, 0, 0.14);
+  --background-hover: #f8fafc;
+  --background-activated: #f1f5f9;
+  --color: #0f172a;
+  --border-color: rgba(15, 23, 42, 0.12);
   --border-style: solid;
   --border-width: 1px;
-  --box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.register-link {
+.google-btn:hover {
+  transform: translateY(-1px);
+  --box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.google-btn ion-icon {
+  color: #4285f4;
+  font-size: 20px;
+}
+
+.apple-btn {
+  margin-top: 10px;
+  height: 52px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  --border-radius: 14px;
+  --background: #0f172a;
+  --background-hover: #1e293b;
+  --background-activated: #334155;
+  --color: #ffffff;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  pointer-events: none;
+}
+
+.apple-btn ion-icon {
+  font-size: 20px;
+}
+
+.auth-link {
   text-align: center;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  animation: fadeInUp 0.8s ease-out 0.2s both;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--atepla-divider);
+  font-size: 0.9rem;
+  color: var(--atepla-text-secondary);
 }
 
-.register-link a {
+.auth-link a {
   color: var(--ion-color-primary);
   text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.auth-link a:hover {
+  color: var(--ion-color-primary-shade);
+  text-decoration: underline;
+}
+
+.error-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--ion-color-danger);
+  font-size: 0.8rem;
   font-weight: 500;
-  font-size: 0.95rem;
-  position: relative;
-  padding-bottom: 2px;
-  transition: color 0.3s ease;
+  margin: -10px 4px 12px;
 }
 
-.register-link a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--ion-color-primary);
-  transition: width 0.3s ease;
+.error-text ion-icon {
+  margin-top: 1px;
+  flex-shrink: 0;
 }
 
-.register-link a:hover {
-  color: var(--ion-color-secondary);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.register-link a:hover::after {
-  width: 100%;
+@media (max-width: 480px) {
+  .auth-shell {
+    padding: 16px;
+    justify-content: center;
+  }
+
+  .auth-card {
+    padding: 28px 22px 26px;
+    border-radius: 20px;
+  }
+
+  .auth-logo {
+    width: 76px;
+    height: 76px;
+    border-radius: 18px;
+  }
+
+  .brand-title {
+    font-size: 1.5rem;
+  }
 }

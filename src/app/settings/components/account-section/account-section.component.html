@@ -1,35 +1,59 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <form (ngSubmit)="onChangePassword()" [formGroup]="passwordForm">
-      <ion-item>
-        <ion-label position="floating">{{ 'ACCOUNT.CURRENT_PASSWORD' | translate }}</ion-label>
-        <ion-input formControlName="currentPassword" type="password"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">{{ 'ACCOUNT.NEW_PASSWORD' | translate }}</ion-label>
-        <ion-input formControlName="newPassword" type="password"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">{{ 'ACCOUNT.CONFIRM_NEW_PASSWORD' | translate }}</ion-label>
-        <ion-input formControlName="confirmPassword" type="password"></ion-input>
-      </ion-item>
-      <ion-item *ngIf="passwordForm.get('confirmPassword')?.errors?.['mismatch'] && passwordForm.get('confirmPassword')?.touched">
-        <ion-text color="danger">{{ 'ACCOUNT.PASSWORDS_DO_NOT_MATCH' | translate }}</ion-text>
-      </ion-item>
-      <ion-button [disabled]="passwordForm.invalid" expand="full" type="submit">{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</ion-button>
-    </form>
-  </ion-card-content>
-</ion-card>
+<div class="settings-card">
+  <div class="settings-card__header">
+    <div class="settings-card__icon-wrap">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+    </div>
+    <div class="settings-card__title">{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</div>
+  </div>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title color="danger">{{ 'ACCOUNT.DANGER_ZONE' | translate }}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-button expand="full" color="danger" (click)="onDeleteAccount()">{{ 'ACCOUNT.DELETE_ACCOUNT' | translate }}</ion-button>
-    <p>{{ 'ACCOUNT.DELETE_WARNING' | translate }}</p>
-  </ion-card-content>
-</ion-card>
+  <form (ngSubmit)="onChangePassword()" [formGroup]="passwordForm" class="settings-form">
+    <div class="form-field">
+      <label class="form-field__label">{{ 'ACCOUNT.CURRENT_PASSWORD' | translate }}</label>
+      <ion-input class="form-field__input" formControlName="currentPassword" type="password"
+        [class.has-error]="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched"
+        placeholder="••••••••">
+      </ion-input>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">{{ 'ACCOUNT.NEW_PASSWORD' | translate }}</label>
+      <ion-input class="form-field__input" formControlName="newPassword" type="password"
+        [class.has-error]="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched"
+        placeholder="••••••••">
+      </ion-input>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">{{ 'ACCOUNT.CONFIRM_NEW_PASSWORD' | translate }}</label>
+      <ion-input class="form-field__input" formControlName="confirmPassword" type="password"
+        [class.has-error]="passwordForm.get('confirmPassword')?.errors?.['mismatch'] && passwordForm.get('confirmPassword')?.touched"
+        placeholder="••••••••">
+      </ion-input>
+      <div class="form-field__error"
+        *ngIf="passwordForm.get('confirmPassword')?.errors?.['mismatch'] && passwordForm.get('confirmPassword')?.touched">
+        {{ 'ACCOUNT.PASSWORDS_DO_NOT_MATCH' | translate }}
+      </div>
+    </div>
+
+    <ion-button class="save-btn" expand="block" type="submit" [disabled]="passwordForm.invalid">
+      <ion-icon name="key-outline" slot="start"></ion-icon>
+      {{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}
+    </ion-button>
+  </form>
+</div>
+
+<div class="settings-card danger-card">
+  <div class="settings-card__header">
+    <div class="settings-card__icon-wrap danger-icon-wrap">
+      <ion-icon name="warning-outline"></ion-icon>
+    </div>
+    <div class="settings-card__title danger-title">{{ 'ACCOUNT.DANGER_ZONE' | translate }}</div>
+  </div>
+
+  <p class="danger-hint">{{ 'ACCOUNT.DELETE_WARNING' | translate }}</p>
+
+  <ion-button class="danger-btn" expand="block" color="danger" (click)="onDeleteAccount()">
+    <ion-icon name="trash-outline" slot="start"></ion-icon>
+    {{ 'ACCOUNT.DELETE_ACCOUNT' | translate }}
+  </ion-button>
+</div>

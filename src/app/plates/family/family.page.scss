@@ -1,15 +1,24 @@
+:host {
+  display: block;
+}
+
 ion-content {
-  --background: #f8f9fa;
+  --background: var(--atepla-bg);
   height: 100%;
 }
 
 ion-grid {
   height: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 16px;
 }
 
 ion-row {
   height: 100%;
   align-items: stretch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --atepla-bg: #0f172a;
+  }
 }

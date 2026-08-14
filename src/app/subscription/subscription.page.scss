@@ -53,6 +53,7 @@
   position: relative;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .plan-card:hover {
@@ -67,26 +68,47 @@
 .plan-card--popular {
   border-color: var(--ion-color-primary);
   background: linear-gradient(180deg, rgba(var(--ion-color-primary-rgb), 0.04) 0%, rgba(255, 255, 255, 0.95) 100%);
+  padding-top: 72px;
 }
 
 /* Badges */
 .plan-badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: var(--ion-color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border-radius: 20px;
+
+  ion-icon {
+    font-size: 0.85rem;
+  }
+}
+
+.plan-badge--popular {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+  z-index: 2;
 }
 
 .plan-badge--trial {
+  position: absolute;
+  top: 50px;
+  right: 16px;
   background: var(--ion-color-success);
-  top: 46px;
+  box-shadow: 0 2px 8px rgba(var(--ion-color-success-rgb), 0.25);
+}
+
+.plan-card--popular .plan-badge--trial {
+  top: 54px;
 }
 
 /* Plan Header */

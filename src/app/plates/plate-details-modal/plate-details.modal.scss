@@ -1,12 +1,54 @@
-/***** Plate Details Modal — Modern UI *****/
+/***** Plate Details Modal — Minimalist Blue Theme *****/
+
+@mixin dark-modal-palette() {
+  .modal-content {
+    --modal-bg: #0f172a;
+    --modal-surface: #1e293b;
+    --modal-border: rgba(148, 163, 184, 0.1);
+    --modal-blue-border: rgba(59, 130, 246, 0.2);
+    --modal-text: #f8fafc;
+    --modal-text-secondary: #94a3b8;
+    --modal-text-muted: #64748b;
+    --modal-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+    --modal-blue-soft: rgba(59, 130, 246, 0.1);
+    --modal-blue-medium: rgba(59, 130, 246, 0.18);
+  }
+
+  .modal-footer ion-toolbar {
+    --background: #1e293b;
+    --border-color: rgba(148, 163, 184, 0.1);
+  }
+}
+
+.modal-content {
+  --modal-bg: var(--atepla-bg);
+  --modal-surface: var(--atepla-surface);
+  --modal-border: var(--atepla-border);
+  --modal-blue-border: var(--atepla-blue-border);
+  --modal-text: var(--atepla-text-primary);
+  --modal-text-secondary: var(--atepla-text-secondary);
+  --modal-text-muted: var(--atepla-text-tertiary);
+  --modal-shadow: var(--atepla-shadow-md);
+  --modal-blue-soft: var(--atepla-blue-soft);
+  --modal-blue-medium: var(--atepla-blue-medium);
+
+  --background: var(--modal-bg);
+  --padding-bottom: 24px;
+}
+
+@media (prefers-color-scheme: dark) { @include dark-modal-palette(); }
+body.dark { @include dark-modal-palette(); }
 
 /* Header */
 .modal-header {
   ion-toolbar {
-    --background: linear-gradient(135deg, #2b2f26 0%, #3e4338 100%);
+    --background: var(--atepla-header-gradient);
     --border-color: transparent;
     --color: #fff;
     --min-height: 80px;
+    box-shadow: var(--atepla-header-shadow);
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
   }
 }
 
@@ -66,11 +108,6 @@
 }
 
 /* Content */
-.modal-content {
-  --background: #f6f4f0;
-  --padding-bottom: 24px;
-}
-
 .modal-shell {
   max-width: 640px;
   margin: 0 auto;
@@ -79,12 +116,12 @@
 
 /* Form Card */
 .form-card {
-  background: #ffffff;
-  border-radius: 22px;
+  background: var(--modal-surface);
+  border-radius: var(--atepla-radius-lg);
   padding: 20px;
   margin-bottom: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: var(--modal-shadow);
+  border: 1px solid var(--modal-border);
 }
 
 .form-card__header {
@@ -102,7 +139,7 @@
 .form-card__title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--modal-text);
   flex: 1;
 }
 
@@ -110,7 +147,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--ion-color-primary);
-  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  background: var(--modal-blue-soft);
   padding: 4px 10px;
   border-radius: 20px;
 }
@@ -124,7 +161,7 @@
   display: block;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #555;
+  color: var(--modal-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 6px;
@@ -132,26 +169,26 @@
 
 .form-field__input {
   width: 100%;
-  height: 48px;
-  padding: 0 14px;
-  border-radius: 14px;
-  border: 1.5px solid #e8e8e8;
-  background: #fafafa;
-  color: #1a1a1a;
+  height: 50px;
+  padding: 0 16px;
+  border-radius: var(--atepla-radius-md);
+  border: 1.5px solid var(--modal-border);
+  background: var(--modal-bg);
+  color: var(--modal-text);
   font-size: 0.95rem;
   font-weight: 500;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: var(--atepla-transition);
 }
 
 .form-field__input:focus {
   border-color: var(--ion-color-primary);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(var(--ion-color-primary-rgb), 0.08);
+  background: var(--modal-surface);
+  box-shadow: 0 0 0 4px var(--modal-blue-soft);
 }
 
 .form-field__input::placeholder {
-  color: #bbb;
+  color: var(--modal-text-muted);
   font-weight: 400;
 }
 
@@ -169,19 +206,19 @@
   justify-content: center;
   gap: 6px;
   padding: 16px 10px;
-  border-radius: 18px;
-  border: 2px solid #f0f0f0;
-  background: #fafafa;
+  border-radius: var(--atepla-radius-md);
+  border: 1.5px solid var(--modal-border);
+  background: var(--modal-surface);
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: var(--atepla-transition);
   position: relative;
   text-align: center;
 }
 
 .category-option:hover {
-  border-color: #ddd;
+  border-color: var(--modal-blue-border);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--modal-shadow);
 }
 
 .category-option:active {
@@ -190,19 +227,19 @@
 
 .category-option--active {
   border-color: var(--ion-color-primary);
-  background: rgba(var(--ion-color-primary-rgb), 0.06);
-  box-shadow: 0 4px 16px rgba(var(--ion-color-primary-rgb), 0.12);
+  background: var(--modal-blue-soft);
+  box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.15), var(--modal-shadow);
 }
 
 .category-option__icon-wrap {
   width: 40px;
   height: 40px;
   border-radius: 14px;
-  background: #fff;
+  background: var(--modal-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
   transition: background 0.2s ease;
 }
 
@@ -212,7 +249,7 @@
 
 .category-option__icon {
   font-size: 1.2rem;
-  color: var(--ion-color-primary);
+  color: var(--modal-text-secondary);
   transition: color 0.2s ease;
 }
 
@@ -223,12 +260,12 @@
 .category-option__label {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #333;
+  color: var(--modal-text);
 }
 
 .category-option__desc {
   font-size: 0.68rem;
-  color: #999;
+  color: var(--modal-text-muted);
   font-weight: 500;
   line-height: 1.2;
 }
@@ -244,28 +281,28 @@
 /* Textarea */
 .form-textarea {
   width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1.5px solid #e8e8e8;
-  background: #fafafa;
-  color: #1a1a1a;
+  padding: 14px 16px;
+  border-radius: var(--atepla-radius-md);
+  border: 1.5px solid var(--modal-border);
+  background: var(--modal-bg);
+  color: var(--modal-text);
   font-size: 0.95rem;
   font-weight: 500;
   outline: none;
   resize: vertical;
   font-family: inherit;
   line-height: 1.5;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: var(--atepla-transition);
 }
 
 .form-textarea:focus {
   border-color: var(--ion-color-primary);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(var(--ion-color-primary-rgb), 0.08);
+  background: var(--modal-surface);
+  box-shadow: 0 0 0 4px var(--modal-blue-soft);
 }
 
 .form-textarea::placeholder {
-  color: #bbb;
+  color: var(--modal-text-muted);
   font-weight: 400;
 }
 
@@ -282,21 +319,21 @@
   align-items: center;
   gap: 8px;
   padding: 8px 10px;
-  background: #fafafa;
-  border-radius: 14px;
-  border: 1px solid #f0f0f0;
+  background: var(--modal-surface);
+  border-radius: var(--atepla-radius-md);
+  border: 1px solid var(--modal-border);
   transition: background 0.2s ease;
 }
 
 .ingredient-row:hover {
-  background: #f5f5f5;
+  background: var(--modal-bg);
 }
 
 .ingredient-row__num {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  background: var(--modal-blue-soft);
   color: var(--ion-color-primary);
   font-size: 0.72rem;
   font-weight: 800;
@@ -308,23 +345,25 @@
 
 .ingredient-input {
   height: 38px;
-  padding: 0 10px;
-  border-radius: 10px;
-  border: 1.5px solid #e8e8e8;
-  background: #fff;
-  color: #1a1a1a;
+  padding: 0 12px;
+  border-radius: var(--atepla-radius-sm);
+  border: 1.5px solid var(--modal-border);
+  background: var(--modal-bg);
+  color: var(--modal-text);
   font-size: 0.88rem;
   font-weight: 500;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: var(--atepla-transition);
 }
 
 .ingredient-input:focus {
   border-color: var(--ion-color-primary);
+  background: var(--modal-surface);
+  box-shadow: 0 0 0 3px var(--modal-blue-soft);
 }
 
 .ingredient-input::placeholder {
-  color: #bbb;
+  color: var(--modal-text-muted);
   font-weight: 400;
 }
 
@@ -346,10 +385,10 @@
 .ingredient-delete {
   width: 32px;
   height: 32px;
-  border-radius: 10px;
+  border-radius: var(--atepla-radius-sm);
   border: none;
   background: transparent;
-  color: #bbb;
+  color: var(--modal-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,22 +418,22 @@
   justify-content: center;
   padding: 30px 20px;
   text-align: center;
-  border-radius: 16px;
-  background: #fafafa;
-  border: 1.5px dashed #e0e0e0;
+  border-radius: var(--atepla-radius-md);
+  background: var(--modal-surface);
+  border: 1.5px dashed var(--modal-border);
   margin-bottom: 14px;
 }
 
 .ingredients-empty__icon {
   font-size: 2rem;
-  color: #ddd;
+  color: var(--modal-text-muted);
   margin-bottom: 8px;
 }
 
 .ingredients-empty__text {
   margin: 0;
   font-size: 0.88rem;
-  color: #aaa;
+  color: var(--modal-text-secondary);
   font-weight: 600;
 }
 
@@ -406,18 +445,18 @@
   gap: 8px;
   width: 100%;
   height: 44px;
-  border-radius: 14px;
-  border: 1.5px dashed #ccc;
+  border-radius: var(--atepla-radius-md);
+  border: 1.5px dashed var(--modal-border);
   background: transparent;
   color: var(--ion-color-primary);
   font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--atepla-transition);
 }
 
 .add-ingredient-btn:hover {
-  background: rgba(var(--ion-color-primary-rgb), 0.04);
+  background: var(--modal-blue-soft);
   border-color: var(--ion-color-primary);
 }
 
@@ -437,19 +476,20 @@
   gap: 10px;
   width: 100%;
   height: 48px;
-  border-radius: 14px;
-  border: 1.5px solid #e8e8e8;
-  background: #fafafa;
-  color: #555;
+  border-radius: var(--atepla-radius-md);
+  border: 1.5px solid var(--modal-border);
+  background: var(--modal-bg);
+  color: var(--modal-text-secondary);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--atepla-transition);
 }
 
 .photo-btn:hover {
-  background: #f0f0f0;
-  border-color: #ddd;
+  background: var(--modal-surface);
+  border-color: var(--ion-color-primary);
+  color: var(--ion-color-primary);
 }
 
 .photo-btn:active {
@@ -458,24 +498,29 @@
 
 .photo-btn__icon {
   font-size: 1.2rem;
-  color: var(--ion-color-medium);
+  color: var(--modal-text-muted);
+  transition: color 0.2s ease;
+}
+
+.photo-btn:hover .photo-btn__icon {
+  color: var(--ion-color-primary);
 }
 
 /* Footer */
 .modal-footer {
   ion-toolbar {
-    --background: #fff;
-    --border-color: rgba(0, 0, 0, 0.06);
+    --background: var(--modal-surface);
+    --border-color: var(--modal-border);
     padding: 8px 16px;
   }
 }
 
 .save-btn {
-  --border-radius: 16px;
+  --border-radius: var(--atepla-radius-md);
   height: 52px;
   font-weight: 700;
   font-size: 1rem;
-  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.35);
+  --box-shadow: 0 4px 16px rgba(var(--ion-color-primary-rgb), 0.28);
   margin: 0;
 }
 
