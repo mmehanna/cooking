@@ -24,3 +24,178 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* ── Modern Shared Header ── */
+.modern-header ion-toolbar {
+  --background: var(--atepla-header-gradient);
+  --border-color: transparent;
+  --color: var(--atepla-header-title-color);
+  --min-height: 56px;
+  box-shadow: var(--atepla-header-shadow);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.modern-header ion-title {
+  color: var(--atepla-header-title-color);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding-inline: 56px;
+}
+
+.modern-header ion-back-button,
+.modern-header .help-back,
+.modern-header ion-buttons ion-button {
+  --color: var(--atepla-header-back-color);
+  --icon-font-size: 22px;
+  font-weight: 600;
+}
+
+.modern-header ion-menu-button {
+  --color: var(--atepla-header-back-color);
+}
+
+.modern-header .header-action-btn {
+  --color: var(--atepla-header-back-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ── Minimalist Shared Utilities ── */
+
+.atepla-page {
+  --background: var(--atepla-bg);
+}
+
+.atepla-card {
+  background: var(--atepla-surface);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-md);
+  transition: var(--atepla-transition);
+}
+
+.atepla-card--hover:active {
+  transform: scale(0.995);
+}
+
+.atepla-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border-radius: var(--atepla-radius-md);
+  border: 1.5px solid var(--atepla-border);
+  background: #f8fafc;
+  color: var(--atepla-text-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  outline: none;
+  transition: var(--atepla-transition);
+}
+
+.atepla-input:focus {
+  border-color: var(--ion-color-primary);
+  background: var(--atepla-surface);
+  box-shadow: 0 0 0 4px var(--atepla-blue-soft);
+}
+
+.atepla-input::placeholder {
+  color: var(--atepla-text-tertiary);
+}
+
+.atepla-btn {
+  --border-radius: var(--atepla-radius-md);
+  height: 50px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  --box-shadow: var(--atepla-shadow-sm);
+}
+
+.atepla-btn--primary {
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-shade);
+  --background-hover: var(--ion-color-primary-tint);
+  --color: #fff;
+  --box-shadow: 0 4px 16px rgba(59, 102, 168, 0.28);
+}
+
+.atepla-btn--soft {
+  --background: var(--atepla-blue-soft);
+  --background-activated: var(--atepla-blue-medium);
+  --background-hover: var(--atepla-blue-medium);
+  --color: var(--ion-color-primary);
+}
+
+.atepla-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.atepla-empty__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--atepla-blue-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.atepla-empty__icon ion-icon {
+  font-size: 1.8rem;
+  color: var(--ion-color-primary);
+}
+
+.atepla-empty__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--atepla-text-primary);
+  margin: 0 0 6px;
+}
+
+.atepla-empty__subtitle {
+  font-size: 0.9rem;
+  color: var(--atepla-text-secondary);
+  margin: 0;
+  max-width: 280px;
+  line-height: 1.45;
+}
+
+.atepla-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.atepla-chip--primary {
+  background: var(--atepla-blue-soft);
+  color: var(--ion-color-primary);
+}
+
+.atepla-chip--success {
+  background: rgba(45, 211, 111, 0.1);
+  color: var(--ion-color-success);
+}
+
+.atepla-chip--warning {
+  background: rgba(255, 196, 9, 0.12);
+  color: #b45309;
+}
+
+.atepla-chip--neutral {
+  background: #f1f5f9;
+  color: var(--atepla-text-secondary);
+}

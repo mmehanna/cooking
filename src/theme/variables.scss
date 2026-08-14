@@ -3,13 +3,39 @@
 
 /** Ionic CSS Variables **/
 :root {
-  /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  /** primary - muted steel blue **/
+  --ion-color-primary: #3B66A8;
+  --ion-color-primary-rgb: 59, 102, 168;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #335990;
+  --ion-color-primary-tint: #5078B6;
+
+  /** modern header gradient **/
+  --atepla-header-gradient: linear-gradient(135deg, #3B66A8 0%, #335990 55%, #2B4D78 100%);
+  --atepla-header-shadow: 0 4px 20px rgba(59, 102, 168, 0.25);
+  --atepla-header-title-color: #ffffff;
+  --atepla-header-back-color: #ffffff;
+
+  /** minimalist shared palette **/
+  --atepla-bg: #f8fafc;
+  --atepla-surface: #ffffff;
+  --atepla-border: rgba(15, 23, 42, 0.06);
+  --atepla-divider: rgba(15, 23, 42, 0.08);
+  --atepla-text-primary: #0f172a;
+  --atepla-text-secondary: #64748b;
+  --atepla-text-tertiary: #94a3b8;
+  --atepla-blue-soft: rgba(59, 102, 168, 0.06);
+  --atepla-blue-medium: rgba(59, 102, 168, 0.12);
+  --atepla-blue-border: rgba(59, 102, 168, 0.18);
+  --atepla-radius-xl: 24px;
+  --atepla-radius-lg: 18px;
+  --atepla-radius-md: 14px;
+  --atepla-radius-sm: 10px;
+  --atepla-shadow-sm: 0 1px 4px rgba(15, 23, 42, 0.04);
+  --atepla-shadow-md: 0 2px 12px rgba(15, 23, 42, 0.06);
+  --atepla-shadow-lg: 0 8px 28px rgba(15, 23, 42, 0.09);
+  --atepla-transition: all 0.18s ease;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
