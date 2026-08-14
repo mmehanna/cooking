@@ -32,6 +32,14 @@
     "GENERATE_FAILED": "Échec de la génération des plats de la semaine",
     "TODAY": "Aujourd'hui",
     "NO_PLATE": "Pas encore de plat",
+    "NO_PLATE_PLANNED": "Aucun plat prévu",
+    "DRAFT_CHIP": "Brouillon — non visible par la famille",
+    "PUBLISHED": "Publié",
+    "PUBLISH_WEEK": "Publier la semaine",
+    "UNPUBLISH": "Dépublier",
+    "MY_WEEK": "Ma semaine",
+    "CHEF": "Chef",
+    "CHEF_WEEK_VIEWING": "Semaine de {{name}}",
     "THIS_WEEK": "Cette semaine",
     "NEXT_WEEK": "La semaine prochaine",
     "IN_N_WEEKS": "Dans {{n}} semaines",
@@ -44,6 +52,7 @@
     "PASSWORD": "Mot de passe",
     "SUBMIT": "Se connecter",
     "CONTINUE_WITH_GOOGLE": "Continuer avec Google",
+    "CONTINUE_WITH_APPLE": "Continuer avec Apple",
     "NOT_REGISTERED": "Pas encore inscrit ? Cliquez ici !",
     "ALREADY_REGISTERED": "Déjà inscrit ? Se connecter",
     "HERO_TITLE": "Bienvenue",
@@ -117,30 +126,75 @@
       "TITLE": "Comment ça marche",
       "CREATE_PLATE": {
         "TITLE": "Créer un plat",
-        "STEP1": { "LABEL": "Menu Gérer vos plats", "DESC": "Ouvrez le menu latéral et sélectionnez \"Gérer vos plats\"." },
-        "STEP2": { "LABEL": "Ajouter un plat", "DESC": "Appuyez sur le bouton + pour créer un nouveau plat." },
-        "STEP3": { "LABEL": "Remplir les détails", "DESC": "Ajoutez le nom, les ingrédients et les étapes de préparation." },
-        "STEP4": { "LABEL": "Enregistrer", "DESC": "Votre plat est maintenant disponible pour la planification." }
+        "STEP1": {
+          "LABEL": "Menu Gérer vos plats",
+          "DESC": "Ouvrez le menu latéral et sélectionnez \"Gérer vos plats\"."
+        },
+        "STEP2": {
+          "LABEL": "Ajouter un plat",
+          "DESC": "Appuyez sur le bouton + pour créer un nouveau plat."
+        },
+        "STEP3": {
+          "LABEL": "Remplir les détails",
+          "DESC": "Ajoutez le nom, les ingrédients et les étapes de préparation."
+        },
+        "STEP4": {
+          "LABEL": "Enregistrer",
+          "DESC": "Votre plat est maintenant disponible pour la planification."
+        }
       },
       "CHEF_WEEK": {
         "TITLE": "Publier la semaine (Chef)",
-        "STEP1": { "LABEL": "Aller sur l'accueil", "DESC": "Le chef consulte sa page d'accueil pour voir sa semaine." },
-        "STEP2": { "LABEL": "Choisir les plats", "DESC": "Pour chaque jour et repas, sélectionnez un plat de votre collection." },
-        "STEP3": { "LABEL": "Publier", "DESC": "Appuyez sur le bouton Publier pour rendre le menu visible aux membres." },
-        "STEP4": { "LABEL": "La famille consulte", "DESC": "Les membres voient automatiquement le menu du chef sur leur accueil." }
+        "STEP1": {
+          "LABEL": "Aller sur l'accueil",
+          "DESC": "Le chef consulte sa page d'accueil pour voir sa semaine."
+        },
+        "STEP2": {
+          "LABEL": "Choisir les plats",
+          "DESC": "Pour chaque jour et repas, sélectionnez un plat de votre collection."
+        },
+        "STEP3": {
+          "LABEL": "Publier",
+          "DESC": "Appuyez sur le bouton Publier pour rendre le menu visible aux membres."
+        },
+        "STEP4": {
+          "LABEL": "La famille consulte",
+          "DESC": "Les membres voient automatiquement le menu du chef sur leur accueil."
+        }
       },
       "FAMILY": {
         "TITLE": "Rejoindre une famille",
-        "STEP1": { "LABEL": "Menu Famille", "DESC": "Ouvrez le menu et sélectionnez \"Gérer votre famille\"." },
-        "STEP2": { "LABEL": "Recevoir l'invitation", "DESC": "Le chef vous envoie une invitation par email ou code." },
-        "STEP3": { "LABEL": "Accepter", "DESC": "Acceptez l'invitation pour rejoindre la famille." },
-        "STEP4": { "LABEL": "Accès partagé", "DESC": "Vous pouvez maintenant voir les plats partagés et le menu du chef." }
+        "STEP1": {
+          "LABEL": "Menu Famille",
+          "DESC": "Ouvrez le menu et sélectionnez \"Gérer votre famille\"."
+        },
+        "STEP2": {
+          "LABEL": "Recevoir l'invitation",
+          "DESC": "Le chef vous envoie une invitation par email ou code."
+        },
+        "STEP3": {
+          "LABEL": "Accepter",
+          "DESC": "Acceptez l'invitation pour rejoindre la famille."
+        },
+        "STEP4": {
+          "LABEL": "Accès partagé",
+          "DESC": "Vous pouvez maintenant voir les plats partagés et le menu du chef."
+        }
       },
       "GROCERY": {
         "TITLE": "Utiliser la liste de courses",
-        "STEP1": { "LABEL": "Ouvrir la liste", "DESC": "Dans le menu, sélectionnez \"Liste de courses\"." },
-        "STEP2": { "LABEL": "Ajouter des articles", "DESC": "Utilisez la barre en bas pour ajouter rapidement des articles avec quantité et unité." },
-        "STEP3": { "LABEL": "Cocher / Consulter", "DESC": "Cochez les articles achetés. En tant que membre, basculez aussi sur la liste du chef." }
+        "STEP1": {
+          "LABEL": "Ouvrir la liste",
+          "DESC": "Dans le menu, sélectionnez \"Liste de courses\"."
+        },
+        "STEP2": {
+          "LABEL": "Ajouter des articles",
+          "DESC": "Utilisez la barre en bas pour ajouter rapidement des articles avec quantité et unité."
+        },
+        "STEP3": {
+          "LABEL": "Cocher / Consulter",
+          "DESC": "Cochez les articles achetés. En tant que membre, basculez aussi sur la liste du chef."
+        }
       }
     }
   },
@@ -154,10 +208,23 @@
   "PREFERENCES": {
     "TITLE": "Préférences de l'application",
     "LANGUAGE": "Langue",
+    "LANGUAGE_HINT": "Choisissez la langue utilisée dans toute l'application",
     "ENGLISH": "Anglais",
     "FRENCH": "Français",
+    "SPANISH": "Espagnol",
+    "ARABIC": "Arabe",
+    "MANDARIN": "Mandarin",
+    "RUSSIAN": "Russe",
+    "POLISH": "Polonais",
+    "GERMAN": "Allemand",
+    "PORTUGUESE": "Portugais",
+    "ITALIAN": "Italien",
+    "JAPANESE": "Japonais",
+    "KOREAN": "Coréen",
     "DARK_MODE": "Mode sombre",
+    "DARK_MODE_HINT": "Basculer entre l'apparence claire et sombre",
     "NOTIFICATIONS": "Notifications",
+    "NOTIFICATIONS_HINT": "Activer ou désactiver les notifications de l'application",
     "SAVE": "Enregistrer les préférences"
   },
   "ACCOUNT": {
@@ -183,7 +250,7 @@
     "MANAGE": "Gérer vos plats",
     "CANCEL": "Annuler",
     "SELECT": "Sélectionner",
-    "EDIT": "modifier",
+    "EDIT": "Modifier",
     "PLEASE_SELECT": "Veuillez sélectionner au moins un plat",
     "CONFIRM_DELETE": "Confirmer la suppression",
     "CONFIRM_REMOVE": "Confirmer la suppression",
@@ -192,7 +259,26 @@
     "DELETE_SUCCESS": "Suppression réussie",
     "REMOVE_SUCCESS": "Retrait réussi",
     "DELETE_FAILED": "Échec de la suppression",
-    "REMOVE_FAILED": "Échec du retrait"
+    "REMOVE_FAILED": "Échec du retrait",
+    "CONFIRM_ACTION": "Confirmer {{action}}",
+    "MY_PLATES": "Mes plats",
+    "PLATE_COUNT_SINGULAR": "plat",
+    "PLATE_COUNT_PLURAL": "plats",
+    "SELECTED_COUNT_SINGULAR": "sélectionné",
+    "SELECTED_COUNT_PLURAL": "sélectionnés",
+    "SHARE": "Partager",
+    "SEARCH_PLACEHOLDER": "Rechercher un plat...",
+    "RESULT_COUNT_SINGULAR": "résultat",
+    "RESULT_COUNT_PLURAL": "résultats",
+    "NO_DESCRIPTION": "Aucune description",
+    "DELETE": "Supprimer",
+    "REMOVE": "Retirer",
+    "NO_PLATES_TITLE": "Aucun plat pour le moment",
+    "NO_PLATES_HINT": "Commencez par créer votre premier plat et organisez vos repas.",
+    "CREATE_PLATE": "Créer un plat",
+    "NO_RESULTS_TITLE": "Aucun résultat",
+    "NO_RESULTS_HINT": "Essayez un autre mot-clé pour trouver votre plat.",
+    "UNKNOWN_ERROR": "Erreur serveur inconnue"
   },
   "CHOOSE_DATE": {
     "NEXT": "Suivant",
@@ -264,22 +350,26 @@
     "LOAD_FAILED": "Échec du chargement des familles",
     "NAME_REQUIRED": "Le nom de la famille est requis",
     "CREATE_SUCCESS": "Famille créée avec succès !",
-    "CREATE_FAILED": "Échec de la création de la famille : ",
+    "CREATE_FAILED": "Échec de la création de la famille",
     "SELECT_FAMILY_FIRST": "Veuillez sélectionner une famille",
     "EMAIL_REQUIRED": "L'email est requis",
     "INVITE_SUCCESS": "Invitation envoyée avec succès !",
-    "INVITE_FAILED": "Échec de l'envoi de l'invitation : ",
+    "INVITE_FAILED": "Échec de l'envoi de l'invitation",
     "CONFIRM_DELETION": "Confirmer la suppression",
     "DELETE_FAMILY": "Supprimer la famille",
     "DELETE_FAMILY_MESSAGE": "Êtes-vous sûr de vouloir supprimer la famille \"{{name}}\" ? Cette action est irréversible et supprimera tous les membres.",
     "DELETE_SUCCESS": "Famille supprimée avec succès !",
-    "DELETE_FAILED": "Échec de la suppression de la famille : ",
+    "DELETE_FAILED": "Échec de la suppression de la famille",
     "CONFIRM_REMOVAL": "Confirmer le retrait",
     "REMOVE_MEMBER": "Retirer le membre",
     "REMOVE_MEMBER_MESSAGE": "Êtes-vous sûr de vouloir retirer \"{{name}}\" de la famille ?",
     "REMOVE": "Retirer",
     "MEMBER_REMOVED": "Membre retiré avec succès !",
-    "REMOVE_FAILED": "Échec du retrait du membre : "
+    "REMOVE_FAILED": "Échec du retrait du membre",
+    "EMAIL_PLACEHOLDER": "user@example.com",
+    "DEFAULT_ROLE": "membre",
+    "CANCEL": "Annuler",
+    "DELETE": "Supprimer"
   },
   "SHARED_PLATES": {
     "TITLE": "Plats partagés",
@@ -311,7 +401,9 @@
     "BATCH_UNSHARE_BUTTON": "Annuler {{count}}",
     "BATCH_SUCCESS": "{{count}} plat(s) annulé(s) avec succès",
     "BATCH_FAILED": "{{count}} plat(s) échoué(s) : {{errorMsg}}",
-    "BATCH_ERROR": "Erreur lors de l'annulation du partage des plats : "
+    "BATCH_ERROR": "Erreur lors de l'annulation du partage des plats : ",
+    "SELECTED_COUNT_SINGULAR": "sélectionné",
+    "SELECTED_COUNT_PLURAL": "sélectionnés"
   },
   "SHARE_MODAL": {
     "SHARE_PLATES": "Partager {{count}} plats",
@@ -349,12 +441,43 @@
     "UNIT": "Unité",
     "ADD_INGREDIENT": "Ajouter un ingrédient",
     "STEPS": "Étapes de préparation",
-    "STEPS_PLACEHOLDER": "Entrez chaque étape sur une nouvelle ligne"
+    "STEPS_PLACEHOLDER": "Entrez chaque étape sur une nouvelle ligne",
+    "PLATE_NAME_LABEL": "Nom du plat",
+    "PLATE_NAME_PLACEHOLDER": "Ex: Poulet rôti aux herbes",
+    "DESCRIPTION_LABEL": "Description",
+    "DESCRIPTION_PLACEHOLDER": "Une courte description de votre plat",
+    "CATEGORY_TITLE": "Catégorie",
+    "PHOTO": "Photo",
+    "INGREDIENT_NAME_PLACEHOLDER": "Nom",
+    "INGREDIENT_QTY_PLACEHOLDER": "Qté",
+    "INGREDIENT_UNIT_PLACEHOLDER": "Unité",
+    "REMOVE": "Retirer",
+    "NO_INGREDIENTS": "Aucun ingrédient pour le moment",
+    "EDIT_TITLE": "Modifier le plat",
+    "CREATE_TITLE": "Nouveau plat",
+    "EDIT_SUBTITLE": "Mettez à jour les informations de votre plat",
+    "CREATE_SUBTITLE": "Créez un nouveau plat pour vos repas",
+    "SAVE_CHANGES": "Enregistrer les modifications",
+    "CATEGORY_BREAKFAST_DESC": "Commencez la journée du bon pied",
+    "CATEGORY_LUNCH_DESC": "Une pause savoureuse",
+    "CATEGORY_DINNER_DESC": "Terminez la journée en beauté"
   },
   "GROCERY_LIST": {
     "TITLE": "Liste de courses",
     "WEEK_OF": "Semaine du {{date}}",
     "EMPTY": "Aucun ingrédient trouvé pour cette semaine. Ajoutez des ingrédients à vos plats d'abord.",
+    "LOADING": "Chargement...",
+    "MEMBER_LIST": "Ma liste",
+    "CHEF_LIST": "Liste du chef",
+    "CHEF_LIST_LABEL": "Liste de {{name}}",
+    "ADD_PLACEHOLDER": "Ajouter un article...",
+    "QUANTITY_LABEL": "Qté",
+    "UNIT_LABEL": "Unité",
+    "DELETE_TITLE": "Supprimer",
+    "EMPTY_MEMBER_TITLE": "Ta liste est vide",
+    "EMPTY_MEMBER_SUBTITLE": "Ajoute des articles pour cette semaine",
+    "EMPTY_CHEF_TITLE": "Rien pour le moment",
+    "EMPTY_CHEF_SUBTITLE": "{{name}} n'a rien ajouté cette semaine",
     "REGENERATE": "Régénérer la liste",
     "REGENERATE_CONFIRM": "Cela réinitialisera vos éléments cochés. Continuer ?",
     "CANCEL": "Annuler",

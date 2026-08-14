@@ -1,17 +1,19 @@
-/***** Grocery List — Modern Clean UI *****/
+/***** Grocery List — Minimalist Blue Theme *****/
 
-/* ── Header ── */
+/* ── Header (modern-header is handled globally; keep legacy selectors neutral) ── */
 .grocery-header {
+  /* The template now uses .modern-header; these legacy selectors are kept
+     but neutral so they do not apply any green styling. */
   ion-toolbar {
-    --background: linear-gradient(135deg, #4a7c59 0%, #6b9e75 100%);
+    --background: transparent;
     --border-color: transparent;
-    --color: #fff;
+    --color: inherit;
     --min-height: 64px;
   }
 }
 
 .grocery-back {
-  --color: #fff;
+  --color: var(--atepla-header-back-color, #fff);
   --icon-font-size: 22px;
 }
 
@@ -27,7 +29,7 @@
 
 /* ── Content Shell ── */
 .grocery-content {
-  --background: #f6f4f0;
+  --background: var(--atepla-bg);
 }
 
 .grocery-shell {
@@ -50,28 +52,29 @@
   height: 40px;
   border-radius: 50%;
   border: none;
-  background: #fff;
-  color: #4a7c59;
+  background: var(--atepla-surface);
+  color: var(--ion-color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: all 0.2s ease;
+  box-shadow: var(--atepla-shadow-sm);
+  transition: var(--atepla-transition);
 }
 
 .week-nav__btn:hover:not(:disabled) {
-  background: #eaf3ec;
+  background: var(--atepla-blue-soft);
   transform: scale(1.05);
 }
 
 .week-nav__btn:disabled {
-  opacity: 0.35;
+  opacity: 0.4;
   cursor: not-allowed;
+  color: var(--atepla-text-tertiary);
 }
 
 .week-nav__btn ion-icon {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 
 .week-nav__chip {
@@ -80,21 +83,22 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #fff;
-  border-radius: 16px;
+  background: var(--atepla-surface);
+  border-radius: 999px;
   padding: 10px 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--atepla-shadow-sm);
+  border: 1px solid var(--atepla-border);
 }
 
 .week-nav__icon {
-  color: #4a7c59;
+  color: var(--ion-color-primary);
   font-size: 1rem;
 }
 
 .week-nav__label {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
+  color: var(--atepla-text-primary);
 }
 
 /* ── Loading ── */
@@ -103,12 +107,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 48px 24px;
   gap: 12px;
 }
 
 .grocery-loading p {
-  color: #888;
+  color: var(--atepla-text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -120,10 +124,11 @@
 
 .view-toggle {
   display: flex;
-  background: #fff;
-  border-radius: 16px;
+  background: var(--atepla-surface);
+  border-radius: 999px;
   padding: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--atepla-shadow-sm);
+  border: 1px solid var(--atepla-border);
 }
 
 .view-toggle__btn {
@@ -134,19 +139,19 @@
   gap: 6px;
   padding: 10px 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: 999px;
   background: transparent;
-  color: #888;
+  color: var(--atepla-text-secondary);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: var(--atepla-transition);
 }
 
 .view-toggle__btn--active {
-  background: #4a7c59;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(74, 124, 89, 0.25);
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  box-shadow: 0 2px 8px rgba(var(--ion-color-primary-rgb), 0.25);
 }
 
 .view-toggle__btn ion-icon {
@@ -160,30 +165,35 @@
   gap: 10px;
 }
 
+.items-list--chef {
+  gap: 10px;
+}
+
 /* ── Item Card ── */
 .item-card {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #fff;
-  border-radius: 18px;
+  background: var(--atepla-surface);
+  border-radius: var(--atepla-radius-lg);
   padding: 14px 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  transition: all 0.2s ease;
+  box-shadow: var(--atepla-shadow-sm);
+  border: 1px solid var(--atepla-border);
+  transition: var(--atepla-transition);
 }
 
 .item-card--checked {
-  opacity: 0.55;
-  background: #fafafa;
+  opacity: 0.65;
+  background: var(--atepla-bg);
+  border-color: var(--atepla-divider);
 }
 
 .item-card__checkbox {
   --size: 22px;
-  --checkbox-background-checked: #4a7c59;
-  --checkmark-color: #fff;
-  --border-color: #ddd;
-  --border-color-checked: #4a7c59;
+  --checkbox-background-checked: var(--ion-color-primary);
+  --checkmark-color: var(--ion-color-primary-contrast);
+  --border-color: var(--atepla-text-tertiary);
+  --border-color-checked: var(--ion-color-primary);
   margin: 0;
   flex-shrink: 0;
 }
@@ -199,13 +209,13 @@
 .item-card__name {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #1a1a1a;
-  transition: all 0.2s ease;
+  color: var(--atepla-text-primary);
+  transition: var(--atepla-transition);
 }
 
 .item-card__name--checked {
   text-decoration: line-through;
-  color: #999;
+  color: var(--atepla-text-tertiary);
 }
 
 .item-card__meta {
@@ -217,36 +227,36 @@
 .item-card__qty {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #4a7c59;
-  background: rgba(74, 124, 89, 0.08);
+  color: var(--ion-color-primary);
+  background: var(--atepla-blue-soft);
   padding: 2px 8px;
   border-radius: 8px;
 }
 
 .item-card__unit {
   font-size: 0.82rem;
-  color: #888;
+  color: var(--atepla-text-secondary);
   font-weight: 500;
 }
 
 .item-card__delete {
   width: 34px;
   height: 34px;
-  border-radius: 10px;
+  border-radius: var(--atepla-radius-sm);
   border: none;
   background: transparent;
-  color: #ccc;
+  color: var(--atepla-text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--atepla-transition);
   flex-shrink: 0;
 }
 
 .item-card__delete:hover {
-  background: rgba(var(--ion-color-danger-rgb), 0.08);
-  color: var(--ion-color-danger);
+  background: var(--atepla-blue-soft);
+  color: var(--ion-color-primary);
 }
 
 .item-card__delete:active {
@@ -259,12 +269,12 @@
 
 /* ── Readonly variant (chef list) ── */
 .item-card--readonly {
-  background: #faf9f7;
-  border: 1px dashed #e0ddd8;
+  background: var(--atepla-surface);
+  border: 1px dashed var(--atepla-blue-border);
 }
 
 .item-card--readonly .item-card__name {
-  color: #666;
+  color: var(--atepla-text-secondary);
 }
 
 /* ── Chef Badge ── */
@@ -273,14 +283,15 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, #f5e6c8 0%, #f0dcc0 100%);
-  color: #8a6d3b;
+  background: var(--atepla-blue-soft);
+  color: var(--ion-color-primary);
   font-size: 0.82rem;
   font-weight: 700;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 999px;
   margin: 0 auto 12px;
   width: fit-content;
+  border: 1px solid var(--atepla-blue-border);
 }
 
 .chef-badge ion-icon {
@@ -301,7 +312,7 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #eaf3ec 0%, #d4e8d9 100%);
+  background: var(--atepla-blue-soft);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -309,60 +320,68 @@
 }
 
 .empty-state__icon-wrap--chef {
-  background: linear-gradient(135deg, #f5e6c8 0%, #f0dcc0 100%);
+  background: var(--atepla-blue-soft);
 }
 
 .empty-state__icon {
   font-size: 1.8rem;
-  color: #4a7c59;
+  color: var(--ion-color-primary);
 }
 
 .empty-state__icon-wrap--chef .empty-state__icon {
-  color: #8a6d3b;
+  color: var(--ion-color-primary);
 }
 
 .empty-state__title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--atepla-text-primary);
   margin: 0 0 6px;
 }
 
 .empty-state__subtitle {
   font-size: 0.88rem;
-  color: #999;
+  color: var(--atepla-text-secondary);
   font-weight: 500;
   margin: 0;
+  max-width: 280px;
+  line-height: 1.45;
 }
 
 /* ── Quick Add Footer ── */
 .quick-add-footer {
   --background: transparent;
   --border-style: none;
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.08);
 }
 
 .quick-add-shell {
-  background: #fff;
-  border-radius: 24px 24px 0 0;
+  background: var(--atepla-surface);
+  border-radius: var(--atepla-radius-xl) var(--atepla-radius-xl) 0 0;
   padding: 12px 16px 24px;
+  border-top: 1px solid var(--atepla-border);
 }
 
 .quick-add-main {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #f6f4f0;
-  border-radius: 16px;
+  background: var(--atepla-bg);
+  border-radius: var(--atepla-radius-md);
   padding: 4px 4px 4px 12px;
+  border: 1px solid var(--atepla-border);
 }
 
 .quick-add-main__add-icon {
-  font-size: 1.6rem;
-  color: #4a7c59;
+  font-size: 1.8rem;
+  color: var(--ion-color-primary);
   cursor: pointer;
   flex-shrink: 0;
   transition: transform 0.15s ease;
+}
+
+.quick-add-main__add-icon:hover {
+  color: var(--ion-color-primary-shade);
 }
 
 .quick-add-main__add-icon:active {
@@ -373,31 +392,32 @@
   flex: 1;
   --padding-start: 0;
   --padding-end: 0;
-  --placeholder-color: #aaa;
-  --placeholder-font-weight: 500;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #1a1a1a;
+  --placeholder-color: var(--atepla-text-secondary);
+  --placeholder-font-weight: 600;
+  --placeholder-opacity: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--atepla-text-primary);
 }
 
 .quick-add-main__chevron {
   width: 36px;
   height: 36px;
-  border-radius: 12px;
+  border-radius: var(--atepla-radius-sm);
   border: none;
   background: transparent;
-  color: #bbb;
+  color: var(--atepla-text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--atepla-transition);
   flex-shrink: 0;
 }
 
 .quick-add-main__chevron:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: #888;
+  background: var(--atepla-blue-soft);
+  color: var(--ion-color-primary);
 }
 
 .quick-add-main__chevron ion-icon {
@@ -421,7 +441,7 @@
 .quick-add-field__label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #888;
+  color: var(--atepla-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   padding-left: 2px;
@@ -430,24 +450,24 @@
 .quick-add-field__input {
   height: 42px;
   padding: 0 12px;
-  border-radius: 12px;
-  border: 1.5px solid #e8e8e8;
-  background: #fafafa;
-  color: #1a1a1a;
+  border-radius: var(--atepla-radius-sm);
+  border: 1.5px solid var(--atepla-border);
+  background: var(--atepla-bg);
+  color: var(--atepla-text-primary);
   font-size: 0.9rem;
   font-weight: 500;
   outline: none;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: var(--atepla-transition);
   width: 100%;
 }
 
 .quick-add-field__input:focus {
-  border-color: #4a7c59;
-  background: #fff;
+  border-color: var(--ion-color-primary);
+  background: var(--atepla-surface);
 }
 
 .quick-add-field__input::placeholder {
-  color: #bbb;
+  color: var(--atepla-text-tertiary);
   font-weight: 400;
 }
 
@@ -455,4 +475,56 @@
 .line-through {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+/* ── Dark mode support ── */
+@media (prefers-color-scheme: dark) {
+  .grocery-content {
+    --background: var(--atepla-bg);
+  }
+
+  .week-nav__btn,
+  .week-nav__chip,
+  .view-toggle,
+  .item-card,
+  .item-card--readonly,
+  .quick-add-shell,
+  .quick-add-main,
+  .quick-add-field__input {
+    background: var(--atepla-surface);
+  }
+
+  .week-nav__btn,
+  .week-nav__chip,
+  .view-toggle,
+  .item-card,
+  .item-card--readonly,
+  .quick-add-shell,
+  .quick-add-main,
+  .quick-add-field__input {
+    border-color: var(--atepla-border);
+  }
+
+  .item-card--checked {
+    background: var(--atepla-bg);
+  }
+
+  .week-nav__label,
+  .item-card__name,
+  .empty-state__title {
+    color: var(--atepla-text-primary);
+  }
+
+  .item-card__name--checked,
+  .empty-state__subtitle {
+    color: var(--atepla-text-secondary);
+  }
+
+  .quick-add-main__input {
+    color: var(--atepla-text-primary);
+  }
+
+  .quick-add-field__input::placeholder {
+    color: var(--atepla-text-tertiary);
+  }
 }

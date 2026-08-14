@@ -9,9 +9,14 @@ import { UserService } from './services/user.service';
 export class SettingsPage implements OnInit {
   selectedSegment = 'profile';
 
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit() {
     this.userService.loadProfile().subscribe();
+  }
+
+  getInitials(value: string): string {
+    if (!value) return '?';
+    return value.split(' ').map(p => p.charAt(0).toUpperCase()).slice(0, 2).join('');
   }
 }

@@ -1,0 +1,484 @@
+{
+  "APP": {
+    "MENU_TITLE": "Escolha aqui",
+    "HOME": "Início",
+    "CREATE_DAY_LIST": "Crie sua lista do dia",
+    "PLATE_FOR_DAY": "Prato do dia",
+    "MANAGE_PLATES": "Gerencie seus pratos",
+    "MANAGE_FAMILIES": "Gerencie sua família",
+    "VIEW_SHARED_PLATES": "Ver pratos compartilhados",
+    "GROCERY_LIST": "Lista de Compras",
+    "SETTINGS": "Configurações",
+    "HELP": "Ajuda",
+    "LOGOUT": "Sair",
+    "WORLDWIDE_RECIPES": "Receitas do mundo"
+  },
+  "COMMON": {
+    "BACK": "Voltar"
+  },
+  "LANDING": {
+    "TITLE": "Cardápio",
+    "USER": "Usuário",
+    "PLATES_FOR_WEEK": "Pratos da semana",
+    "VIEW_MODE": "Visualizar",
+    "EDIT_MODE": "Editar",
+    "GENERATE_WEEK": "Gerar semana automaticamente",
+    "EDIT_DAY_MENU": "Editar cardápio do dia",
+    "CONFIRM_GENERATE_TITLE": "Confirmação",
+    "CONFIRM_GENERATE_MESSAGE": "Deseja realmente gerar automaticamente os pratos da semana?",
+    "CANCEL": "Cancelar",
+    "CONFIRM": "Confirmar",
+    "GENERATE_SUCCESS": "Pratos da semana gerados com sucesso",
+    "GENERATE_FAILED": "Falha ao gerar pratos da semana",
+    "TODAY": "Hoje",
+    "NO_PLATE": "Ainda não há prato",
+    "NO_PLATE_PLANNED": "Nenhum prato planejado",
+    "DRAFT_CHIP": "Rascunho — não visível para a família",
+    "PUBLISHED": "Publicado",
+    "PUBLISH_WEEK": "Publicar semana",
+    "UNPUBLISH": "Despublicar",
+    "MY_WEEK": "Minha semana",
+    "CHEF": "Chef",
+    "CHEF_WEEK_VIEWING": "Visualizando a semana de {{name}}",
+    "THIS_WEEK": "Esta semana",
+    "NEXT_WEEK": "Próxima semana",
+    "IN_N_WEEKS": "Em {{n}} semanas",
+    "LAST_WEEK": "Semana passada",
+    "N_WEEKS_AGO": "{{n}} semanas atrás"
+  },
+  "LOGIN": {
+    "TITLE": "login",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Senha",
+    "SUBMIT": "Entrar",
+    "CONTINUE_WITH_GOOGLE": "Continuar com o Google",
+    "NOT_REGISTERED": "Não registrado? Clique aqui!",
+    "ALREADY_REGISTERED": "Já registrado? Entrar",
+    "HERO_TITLE": "Bem-vindo",
+    "HERO_SUBTITLE": "Planeje suas refeições em um clique"
+  },
+  "REGISTER": {
+    "TITLE": "Cadastrar",
+    "EMAIL": "E-mail",
+    "EMAIL_REQUIRED": "O e-mail é obrigatório e deve ser válido.",
+    "PASSWORD": "Senha",
+    "PASSWORD_REQUIREMENTS": "A senha deve ter entre 6 e 8 caracteres, conter pelo menos uma letra maiúscula e um caractere especial.",
+    "CONFIRM_PASSWORD": "Confirmação de senha",
+    "PASSWORD_MISMATCH": "As senhas devem coincidir.",
+    "SUBMIT": "Cadastrar"
+  },
+  "SETTINGS": {
+    "TITLE": "Configurações",
+    "BACK": "Voltar",
+    "PROFILE": "Perfil",
+    "PREFERENCES": "Preferências",
+    "ACCOUNT": "Conta",
+    "PROFILE_UPDATED": "Perfil atualizado com sucesso",
+    "PROFILE_UPDATE_FAILED": "Falha ao atualizar perfil",
+    "PREFERENCES_UPDATED": "Preferências atualizadas",
+    "PREFERENCES_UPDATE_FAILED": "Falha ao atualizar preferências",
+    "PASSWORD_CHANGED": "Senha alterada com sucesso",
+    "PASSWORD_CHANGE_FAILED": "Falha ao alterar senha"
+  },
+  "HELP": {
+    "TITLE": "Ajuda",
+    "SECTIONS": {
+      "GENERAL": "Geral",
+      "LISTS": "Listas e Planejamento",
+      "ACCOUNT": "Conta e Assinatura"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "Início",
+        "DESC": "Veja suas refeições semanais, publique seu cardápio como chef e gerencie seu planejamento."
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "Gerenciar Pratos",
+        "DESC": "Crie, edite e organize seus pratos. Adicione ingredientes, etapas de preparo e fotos."
+      },
+      "FAMILY": {
+        "TITLE": "Gerenciar Família",
+        "DESC": "Crie uma família, convide membros e compartilhe seus pratos com eles."
+      },
+      "SHARED_PLATES": {
+        "TITLE": "Pratos Compartilhados",
+        "DESC": "Descubra pratos compartilhados por outros membros da sua família."
+      },
+      "GROCERY": {
+        "TITLE": "Lista de Compras",
+        "DESC": "Adicione itens manualmente e veja a lista do chef para preparar suas refeições."
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "Planejamento Semanal",
+        "DESC": "O chef pode publicar seu cardápio semanal para toda a família ver."
+      },
+      "SETTINGS": {
+        "TITLE": "Configurações",
+        "DESC": "Atualize seu perfil, preferências (idioma, tema) e gerencie sua senha."
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "Assinatura",
+        "DESC": "Assine um plano para desbloquear todos os recursos do Atepla."
+      }
+    },
+    "SCHEMAS": {
+      "TITLE": "Como funciona",
+      "CREATE_PLATE": {
+        "TITLE": "Criar um Prato",
+        "STEP1": {
+          "LABEL": "Abrir Gerenciar Pratos",
+          "DESC": "Abra o menu lateral e selecione \"Gerenciar Pratos\"."
+        },
+        "STEP2": {
+          "LABEL": "Adicionar um Prato",
+          "DESC": "Toque no botão + para criar um novo prato."
+        },
+        "STEP3": {
+          "LABEL": "Preencher Detalhes",
+          "DESC": "Adicione o nome, ingredientes e etapas de preparo."
+        },
+        "STEP4": {
+          "LABEL": "Salvar",
+          "DESC": "Seu prato agora está disponível para planejamento."
+        }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "Publicar a Semana (Chef)",
+        "STEP1": {
+          "LABEL": "Ir para o Início",
+          "DESC": "O chef abre sua página inicial para ver a semana."
+        },
+        "STEP2": {
+          "LABEL": "Escolher Pratos",
+          "DESC": "Para cada dia e refeição, selecione um prato da sua coleção."
+        },
+        "STEP3": {
+          "LABEL": "Publicar",
+          "DESC": "Toque no botão Publicar para tornar o cardápio visível aos membros."
+        },
+        "STEP4": {
+          "LABEL": "Família Visualiza",
+          "DESC": "Os membros veem automaticamente o cardápio do chef em suas páginas iniciais."
+        }
+      },
+      "FAMILY": {
+        "TITLE": "Ingressar em uma Família",
+        "STEP1": {
+          "LABEL": "Menu da Família",
+          "DESC": "Abra o menu e selecione \"Gerenciar Família\"."
+        },
+        "STEP2": {
+          "LABEL": "Receber Convite",
+          "DESC": "O chef envia um convite por e-mail ou código."
+        },
+        "STEP3": {
+          "LABEL": "Aceitar",
+          "DESC": "Aceite o convite para ingressar na família."
+        },
+        "STEP4": {
+          "LABEL": "Acesso Compartilhado",
+          "DESC": "Agora você pode ver pratos compartilhados e o cardápio semanal do chef."
+        }
+      },
+      "GROCERY": {
+        "TITLE": "Usar a Lista de Compras",
+        "STEP1": {
+          "LABEL": "Abrir a Lista",
+          "DESC": "No menu, selecione \"Lista de Compras\"."
+        },
+        "STEP2": {
+          "LABEL": "Adicionar Itens",
+          "DESC": "Use a barra inferior para adicionar rapidamente itens com quantidade e unidade."
+        },
+        "STEP3": {
+          "LABEL": "Marcar / Visualizar",
+          "DESC": "Marque os itens comprados. Como membro, alterne também para a lista do chef."
+        }
+      }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "Perfil do Usuário",
+    "AVATAR_URL": "URL do Avatar",
+    "NAME": "Nome",
+    "EMAIL": "E-mail",
+    "SAVE": "Salvar Perfil"
+  },
+  "PREFERENCES": {
+    "TITLE": "Preferências do Aplicativo",
+    "LANGUAGE": "Idioma",
+    "LANGUAGE_HINT": "Escolha o idioma usado no aplicativo",
+    "ENGLISH": "Inglês",
+    "FRENCH": "Francês",
+    "SPANISH": "Espanhol",
+    "ARABIC": "Árabe",
+    "MANDARIN": "Mandarim",
+    "RUSSIAN": "Russo",
+    "POLISH": "Polonês",
+    "GERMAN": "Alemão",
+    "PORTUGUESE": "Português",
+    "ITALIAN": "Italiano",
+    "JAPANESE": "Japonês",
+    "KOREAN": "Coreano",
+    "DARK_MODE": "Modo Escuro",
+    "DARK_MODE_HINT": "Alternar entre a aparência clara e escura",
+    "NOTIFICATIONS": "Notificações",
+    "NOTIFICATIONS_HINT": "Ativar ou desativar notificações do aplicativo",
+    "SAVE": "Salvar Preferências"
+  },
+  "ACCOUNT": {
+    "CHANGE_PASSWORD": "Alterar Senha",
+    "CURRENT_PASSWORD": "Senha Atual",
+    "NEW_PASSWORD": "Nova Senha",
+    "CONFIRM_NEW_PASSWORD": "Confirmar Nova Senha",
+    "PASSWORDS_DO_NOT_MATCH": "As senhas não coincidem",
+    "DANGER_ZONE": "Zona de Perigo",
+    "DELETE_ACCOUNT": "Excluir Conta",
+    "DELETE_WARNING": "Esta ação é irreversível. Todos os seus dados serão permanentemente excluídos.",
+    "DELETE_CONFIRM_TITLE": "Excluir Conta",
+    "DELETE_CONFIRM_MESSAGE": "Tem certeza de que deseja excluir sua conta? Esta ação não pode ser desfeita. Todos os seus pratos, planos e dados familiares serão permanentemente excluídos.",
+    "CANCEL": "Cancelar",
+    "DELETE": "Excluir",
+    "FINAL_CONFIRMATION": "Confirmação Final",
+    "TYPE_DELETE": "Digite \"DELETE\" para confirmar a exclusão da conta.",
+    "TYPE_DELETE_PLACEHOLDER": "Digite DELETE",
+    "PERMANENTLY_DELETE": "Excluir Permanentemente",
+    "DELETE_FAILED": "Falha ao excluir conta"
+  },
+  "PLATES": {
+    "MANAGE": "Gerencie seus pratos",
+    "CANCEL": "Cancelar",
+    "SELECT": "Selecionar",
+    "EDIT": "editar",
+    "PLEASE_SELECT": "Selecione pelo menos um prato",
+    "CONFIRM_DELETE": "Confirmar Exclusão",
+    "CONFIRM_REMOVE": "Confirmar Remoção",
+    "DELETE_PLATE_MESSAGE": "Tem certeza de que deseja excluir o prato \"{{label}}\"?",
+    "REMOVE_PLATE_MESSAGE": "Tem certeza de que deseja remover o prato \"{{label}}\" dos seus pratos compartilhados?",
+    "DELETE_SUCCESS": "Exclusão bem-sucedida",
+    "REMOVE_SUCCESS": "Remoção bem-sucedida",
+    "DELETE_FAILED": "Exclusão malsucedida",
+    "REMOVE_FAILED": "Remoção malsucedida"
+  },
+  "CHOOSE_DATE": {
+    "NEXT": "Próximo",
+    "TITLE": "escolha a data",
+    "TITLE_LARGE": "Escolha sua data",
+    "STEP_LABEL": "Planejamento",
+    "SUBTITLE": "Selecione o dia para o qual deseja preparar refeições.",
+    "CALENDAR_LABEL": "Calendário",
+    "SELECT_DAY": "Selecione um dia",
+    "SELECTED_LABEL": "Data selecionada",
+    "NO_DATE_SELECTED": "Nenhuma data selecionada",
+    "UNAVAILABLE": "Esta data não está disponível."
+  },
+  "CHOOSE_PLATE": {
+    "TITLE": "Escolha seus pratos",
+    "SAVE": "Salvar",
+    "CANCEL": "Cancelar",
+    "ALL": "Todos",
+    "BREAKFAST": "Café da Manhã",
+    "LUNCH": "Almoço",
+    "DINNER": "Jantar",
+    "SELECT_MEAL_TYPE": "Selecione o tipo de refeição",
+    "DETAILS": "detalhes",
+    "WEEK_LIST_SAVED": "Sua lista semanal foi salva!",
+    "SAVE_SUCCESS": "Pratos salvos com sucesso!",
+    "SAVE_FAILED": "Falha ao salvar pratos. Tente novamente.",
+    "MAX_PLATES_EXCEEDED": "Você excedeu o número de refeições por dia! O número permitido é três.",
+    "STEP_LABEL": "Seleção de refeição",
+    "HERO_SUBTITLE": "Escolha até três pratos e atribua cada um ao momento certo do dia.",
+    "SELECTED_COUNT": "pratos selecionados",
+    "EMPTY_TITLE": "Nenhum prato encontrado",
+    "EMPTY_SUBTITLE": "Tente outro filtro ou adicione um novo prato."
+  },
+  "PLATES_FOR_DAY": {
+    "TITLE": "Escolha uma data",
+    "DATE": "Data:",
+    "BREAKFAST": "Café da Manhã",
+    "LUNCH": "Almoço",
+    "DINNER": "Jantar",
+    "NO_PLATES": "Não há prato para esta data.",
+    "CONFIRM_DELETE": "Confirmar Exclusão",
+    "DELETE_SPECIFIC_MESSAGE": "Tem certeza de que deseja excluir este prato?",
+    "CANCEL": "Cancelar",
+    "DELETE": "Excluir",
+    "DELETE_SUCCESS": "Prato excluído com sucesso",
+    "DELETE_FAILED": "Falha ao excluir prato. Tente novamente mais tarde.",
+    "DELETE_ALL_CONFIRM": "Tem certeza de que deseja excluir todos os pratos deste dia?",
+    "ALL_DELETED_SUCCESS": "Pratos excluídos com sucesso",
+    "NO_PLATES_FOUND": "Nenhum prato encontrado para esta data.",
+    "ALL_DELETE_FAILED": "Falha ao excluir pratos. Tente novamente mais tarde.",
+    "GENERATE_WEEK": "Gerar semana automaticamente"
+  },
+  "FAMILY": {
+    "TITLE": "Gerenciamento da Família",
+    "BACK": "Voltar",
+    "CREATE_FAMILY": "Criar Nova Família",
+    "ENTER_FAMILY_NAME": "Digite o nome da família",
+    "CREATE": "Criar Família",
+    "YOUR_FAMILIES": "Suas Famílias",
+    "OWNER": "Proprietário: ",
+    "MEMBERS": "Membros: ",
+    "FAMILY_MEMBERS": "Membros da Família:",
+    "ROLE": "Função: ",
+    "INVITE_TO_FAMILY": "Convidar para a Família",
+    "SELECT_FAMILY": "Selecionar Família",
+    "CHOOSE_FAMILY": "Escolha uma família",
+    "ENTER_EMAIL": "Digite o e-mail para convidar",
+    "SEND_INVITATION": "Enviar Convite",
+    "LOAD_FAILED": "Falha ao carregar famílias",
+    "NAME_REQUIRED": "O nome da família é obrigatório",
+    "CREATE_SUCCESS": "Família criada com sucesso!",
+    "CREATE_FAILED": "Falha ao criar família: ",
+    "SELECT_FAMILY_FIRST": "Selecione uma família primeiro",
+    "EMAIL_REQUIRED": "O e-mail é obrigatório",
+    "INVITE_SUCCESS": "Convite enviado com sucesso!",
+    "INVITE_FAILED": "Falha ao enviar convite: ",
+    "CONFIRM_DELETION": "Confirmar Exclusão",
+    "DELETE_FAMILY": "Excluir Família",
+    "DELETE_FAMILY_MESSAGE": "Tem certeza de que deseja excluir a família \"{{name}}\"? Esta ação não pode ser desfeita e removerá todos os membros.",
+    "DELETE_SUCCESS": "Família excluída com sucesso!",
+    "DELETE_FAILED": "Falha ao excluir família: ",
+    "CONFIRM_REMOVAL": "Confirmar Remoção",
+    "REMOVE_MEMBER": "Remover Membro",
+    "REMOVE_MEMBER_MESSAGE": "Tem certeza de que deseja remover \"{{name}}\" da família?",
+    "REMOVE": "Remover",
+    "MEMBER_REMOVED": "Membro removido com sucesso!",
+    "REMOVE_FAILED": "Falha ao remover membro: "
+  },
+  "SHARED_PLATES": {
+    "TITLE": "Pratos Compartilhados",
+    "BACK": "Voltar",
+    "CANCEL": "Cancelar",
+    "SELECT": "Selecionar",
+    "DESELECT_ALL": "Desmarcar Todos",
+    "SELECT_ALL": "Selecionar Todos",
+    "RECEIVED": "Recebidos",
+    "SENT": "Enviados",
+    "PULL_TO_REFRESH": "Puxe para atualizar...",
+    "REFRESHING": "Atualizando...",
+    "SHARED_BY": "Compartilhado por: ",
+    "IN": "em ",
+    "NO_RECEIVED": "Nenhum prato compartilhado recebido",
+    "NO_RECEIVED_MESSAGE": "Você ainda não recebeu pratos compartilhados.",
+    "LOADING_RECEIVED": "Carregando pratos recebidos...",
+    "SHARED_WITH": "Compartilhado com: ",
+    "UNSHARE": "Cancelar Compartilhamento",
+    "NO_SENT": "Nenhum prato compartilhado enviado",
+    "NO_SENT_MESSAGE": "Você ainda não compartilhou nenhum prato.",
+    "LOADING_SENT": "Carregando pratos enviados...",
+    "CONFIRM_UNSHARE": "Confirmar Cancelamento",
+    "UNSHARE_MESSAGE": "Tem certeza de que deseja cancelar o compartilhamento de \"{{label}}\"?",
+    "UNSHARE_SUCCESS": "Compartilhamento do prato cancelado com sucesso",
+    "UNSHARE_FAILED": "Erro ao cancelar compartilhamento do prato: ",
+    "PLEASE_SELECT": "Selecione pelo menos um prato",
+    "BATCH_UNSHARE_MESSAGE": "Tem certeza de que deseja cancelar o compartilhamento de {{count}} prato(s)?",
+    "BATCH_UNSHARE_BUTTON": "Cancelar compartilhamento de {{count}}",
+    "BATCH_SUCCESS": "{{count}} prato(s) teve(tiveram) o compartilhamento cancelado com sucesso",
+    "BATCH_FAILED": "{{count}} prato(s) falhou(falharam): {{errorMsg}}",
+    "BATCH_ERROR": "Erro ao cancelar compartilhamento de pratos: "
+  },
+  "SHARE_MODAL": {
+    "SHARE_PLATES": "Compartilhar {{count}} Pratos",
+    "SHARE_SINGLE": "Compartilhar \"{{label}}\"",
+    "CLOSE": "Fechar",
+    "SELECTED_PLATES": "Pratos Selecionados ({{count}})",
+    "SELECT_FAMILY_OPTIONAL": "Selecionar Família (opcional)",
+    "CHOOSE_FAMILY": "Escolha uma família",
+    "SELECT_USER": "Selecionar Usuário na Família",
+    "CHOOSE_USER": "Escolha um usuário",
+    "SHARE_PLATES_BUTTON": "Compartilhar {{count}} Pratos",
+    "SHARE_PLATE_BUTTON": "Compartilhar Prato",
+    "SELECT_USER_ERROR": "Selecione um usuário",
+    "NO_PLATES": "Nenhum prato selecionado",
+    "SHARE_SUCCESS": "{{count}} prato(s) compartilhado(s) com sucesso!",
+    "SHARE_FAILED": "{{count}} prato(s) falhou(falharam): {{errorMsg}}",
+    "SHARE_ERROR": "Falha ao compartilhar pratos: "
+  },
+  "PLATE_DETAILS": {
+    "TITLE": "Gerencie seu prato",
+    "PLATE_NAME": "Nome do prato:",
+    "PLATE_DESCRIPTION": "Descrição do prato:",
+    "CATEGORY": "Categoria:",
+    "BREAKFAST": "Café da Manhã",
+    "LUNCH": "Almoço",
+    "DINNER": "Jantar",
+    "TAKE_PICTURE": "tirar uma foto",
+    "SAVE": "Salvar",
+    "AUTH_REQUIRED": "Autenticação necessária. Faça login.",
+    "UPDATED": "Sua comida está atualizada!",
+    "ADDED": "Sua comida foi adicionada!",
+    "INGREDIENTS": "Ingredientes",
+    "INGREDIENT_NAME": "Nome",
+    "QUANTITY": "Qtd",
+    "UNIT": "Unidade",
+    "ADD_INGREDIENT": "Adicionar ingrediente",
+    "STEPS": "Etapas de Preparo",
+    "STEPS_PLACEHOLDER": "Digite cada etapa em uma nova linha"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "Lista de Compras",
+    "WEEK_OF": "Semana de {{date}}",
+    "EMPTY": "Nenhum ingrediente encontrado para esta semana. Adicione ingredientes aos seus pratos primeiro.",
+    "LOADING": "Carregando...",
+    "MEMBER_LIST": "Minha lista",
+    "CHEF_LIST": "Lista do chef",
+    "CHEF_LIST_LABEL": "Lista de {{name}}",
+    "ADD_PLACEHOLDER": "Adicionar um item...",
+    "QUANTITY_LABEL": "Qtd",
+    "UNIT_LABEL": "Unidade",
+    "DELETE_TITLE": "Excluir",
+    "EMPTY_MEMBER_TITLE": "Sua lista está vazia",
+    "EMPTY_MEMBER_SUBTITLE": "Adicione itens para esta semana",
+    "EMPTY_CHEF_TITLE": "Nada por enquanto",
+    "EMPTY_CHEF_SUBTITLE": "{{name}} ainda não adicionou nada esta semana",
+    "REGENERATE": "Regenerar Lista",
+    "REGENERATE_CONFIRM": "Isso redefinirá os itens marcados. Continuar?",
+    "CANCEL": "Cancelar",
+    "CONFIRM": "Confirmar",
+    "REGENERATE_SUCCESS": "Lista de compras regenerada",
+    "REGENERATE_FAILED": "Falha ao regenerar lista de compras",
+    "TOGGLE_FAILED": "Falha ao atualizar item"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "Assinatura",
+    "HERO_TITLE": "Escolha seu plano",
+    "HERO_SUBTITLE": "Desbloqueie todos os recursos do Atepla para planejar suas refeições sem limites.",
+    "POPULAR": "Popular",
+    "DAYS_FREE": "dias grátis",
+    "PER_MONTH": "mês",
+    "PER_YEAR": "ano",
+    "SUBSCRIBE": "Assinar",
+    "CONFIRM_TITLE": "Confirmar assinatura",
+    "CONFIRM_MESSAGE": "Você está prestes a assinar o plano {{planName}} por {{price}}. Confirmar?",
+    "CANCEL": "Cancelar",
+    "CONFIRM": "Confirmar",
+    "ERROR": "Ocorreu um erro. Tente novamente.",
+    "ACTIVE_PLAN": "Plano ativo",
+    "ALREADY_SUBSCRIBED": "Já assinado",
+    "CANCEL_SUBSCRIPTION": "Cancelar minha assinatura",
+    "CANCEL_CONFIRM_TITLE": "Cancelar assinatura",
+    "CANCEL_CONFIRM_MESSAGE": "Tem certeza de que deseja cancelar sua assinatura? Você manterá o acesso até o final do período atual.",
+    "MANAGE_SUBSCRIPTION": "Gerenciar minha assinatura"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "Receitas do mundo",
+    "SUBTITLE": "Navegue por 100 ideias de jantar de cada canto do mundo.",
+    "RECIPE_COUNT": "{{count}} receitas",
+    "RECIPE_LABEL": "receitas",
+    "REGION_LABEL": "regiões",
+    "POPULAR_TITLE": "Mais populares",
+    "POPULAR_SUBTITLE": "As receitas de jantar favoritas do mundo, classificadas por fama global.",
+    "ADD_TO_PLATES": "Adicionar aos meus pratos",
+    "ADD_SUCCESS": "\"{{label}}\" adicionado aos seus pratos",
+    "ADD_FAILED": "Falha ao adicionar prato",
+    "REGIONS": {
+      "AFRICA": "África",
+      "AMERICAS": "Américas",
+      "ASIA": "Ásia",
+      "EUROPE": "Europa",
+      "OCEANIA": "Oceania"
+    }
+  }
+}

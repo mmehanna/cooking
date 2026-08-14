@@ -7,6 +7,7 @@ import {PlateItemBo} from "../bos/plate-item.bo";
 import {firstValueFrom} from "rxjs";
 import {AuthService} from "../services/auth.service";
 import {IngredientService} from "../services/ingredient.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'plate-details-modal',
@@ -32,7 +33,8 @@ export class PlateDetailsModal implements OnInit {
               private modalController: ModalController,
               private toastController: ToastController,
               private authService: AuthService,
-              private ingredientService: IngredientService
+              private ingredientService: IngredientService,
+              private translate: TranslateService
   ) {
   }
 
@@ -73,7 +75,7 @@ export class PlateDetailsModal implements OnInit {
     if (!isAuthenticated) {
       console.error('User is not authenticated. Cannot save plate.');
       const toast = await this.toastController.create({
-        message: 'Authentication required. Please log in.',
+        message: this.translate.instant('PLATE_DETAILS.AUTH_REQUIRED'),
         duration: 3000
       });
       await toast.present();
@@ -111,13 +113,13 @@ export class PlateDetailsModal implements OnInit {
   public async presentToast() {
     if (this.plateService.editable) {
       const toast = await this.toastController.create({
-        message: 'Your food is up to date!',
+        message: this.translate.instant('PLATE_DETAILS.UPDATED'),
         duration: 2000
       });
       await toast.present();
     } else {
       const toast = await this.toastController.create({
-        message: 'Your food is added!',
+        message: this.translate.instant('PLATE_DETAILS.ADDED'),
         duration: 2000
       });
       await toast.present();
@@ -130,23 +132,27 @@ export class PlateDetailsModal implements OnInit {
 
   public get categories() {
     return [
-      { value: 'breakfast', label: 'Petit-déjeuner', icon: 'sunny-outline', desc: 'Commencez la journée du bon pied' },
-      { value: 'lunch', label: 'Déjeuner', icon: 'restaurant-outline', desc: 'Une pause savoureuse' },
-      { value: 'dinner', label: 'Dîner', icon: 'moon-outline', desc: 'Terminez la journée en beauté' }
+      { value: 'breakfast', label: this.translate.instant('PLATE_DETAILS.BREAKFAST'), icon: 'sunny-outline', desc: this.translate.instant('PLATE_DETAILS.CATEGORY_BREAKFAST_DESC') },
+      { value: 'lunch', label: this.translate.instant('PLATE_DETAILS.LUNCH'), icon: 'restaurant-outline', desc: this.translate.instant('PLATE_DETAILS.CATEGORY_LUNCH_DESC') },
+      { value: 'dinner', label: this.translate.instant('PLATE_DETAILS.DINNER'), icon: 'moon-outline', desc: this.translate.instant('PLATE_DETAILS.CATEGORY_DINNER_DESC') }
     ];
   }
 
   public get modalTitle(): string {
-    return this.plateService.editable ? 'Modifier le plat' : 'Nouveau plat';
+    return this.plateService.editable
+      ? this.translate.instant('PLATE_DETAILS.EDIT_TITLE')
+      : this.translate.instant('PLATE_DETAILS.CREATE_TITLE');
   }
 
   public get modalSubtitle(): string {
     return this.plateService.editable
-      ? 'Mettez à jour les informations de votre plat'
-      : 'Créez un nouveau plat pour vos repas';
+      ? this.translate.instant('PLATE_DETAILS.EDIT_SUBTITLE')
+      : this.translate.instant('PLATE_DETAILS.CREATE_SUBTITLE');
   }
 
   public get saveLabel(): string {
-    return this.plateService.editable ? 'Enregistrer les modifications' : 'Créer le plat';
+    return this.plateService.editable
+      ? this.translate.instant('PLATE_DETAILS.SAVE_CHANGES')
+      : this.translate.instant('PLATES.CREATE_PLATE');
   }
 }

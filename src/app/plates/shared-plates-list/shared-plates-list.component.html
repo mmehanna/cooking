@@ -1,97 +1,117 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ 'SHARED_PLATES.TITLE' | translate }}</ion-title>
-    <ion-buttons slot="end" *ngIf="activeSegment === 'sent'">
-      <ion-button (click)="toggleSelectionMode()">
-        {{ isSelectionMode ? ('SHARED_PLATES.CANCEL' | translate) : ('SHARED_PLATES.SELECT' | translate) }}
-      </ion-button>
-      <ion-button *ngIf="isSelectionMode" (click)="selectAll()">
-        {{ selectedPlateIds.length === sharedPlatesByMe.length ? ('SHARED_PLATES.DESELECT_ALL' | translate) : ('SHARED_PLATES.SELECT_ALL' | translate) }}
-      </ion-button>
-      <ion-button *ngIf="isSelectionMode && selectedPlateIds.length > 0" color="danger" (click)="confirmBatchUnshare()">
-        <ion-icon name="trash" slot="start"></ion-icon>
-        ({{ selectedPlateIds.length }})
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)" class="shared-segment">
+  <ion-segment-button value="received">
+    <ion-icon name="download-outline"></ion-icon>
+    <ion-label>{{ 'SHARED_PLATES.RECEIVED' | translate }}</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="sent">
+    <ion-icon name="share-outline"></ion-icon>
+    <ion-label>{{ 'SHARED_PLATES.SENT' | translate }}</ion-label>
+  </ion-segment-button>
+</ion-segment>
 
-<ion-content>
-  <ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="received">
-      <ion-label>{{ 'SHARED_PLATES.RECEIVED' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="sent">
-      <ion-label>{{ 'SHARED_PLATES.SENT' | translate }}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+<div class="segment-content">
+  <!-- Received tab -->
+  <div *ngIf="activeSegment === 'received'">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+      <ion-refresher-content [pullingText]="'SHARED_PLATES.PULL_TO_REFRESH' | translate"
+                              [refreshingText]="'SHARED_PLATES.REFRESHING' | translate"></ion-refresher-content>
+    </ion-refresher>
 
-  <div class="segment-content">
-    <div *ngIf="activeSegment === 'received'">
-      <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
-        <ion-refresher-content [pullingText]="'SHARED_PLATES.PULL_TO_REFRESH' | translate" [refreshingText]="'SHARED_PLATES.REFRESHING' | translate"></ion-refresher-content>
-      </ion-refresher>
-
-      <ion-card *ngFor="let sharedPlate of sharedPlatesWithMe">
-        <ion-card-content>
-          <ion-card-title>{{ sharedPlate.plate.label }}</ion-card-title>
-          <p>{{ sharedPlate.plate.description }}</p>
-          <p class="shared-info">
-            {{ 'SHARED_PLATES.SHARED_BY' | translate }}{{ sharedPlate.sharedByUser?.name || sharedPlate.sharedByUser?.email }}
-            <span *ngIf="sharedPlate.family">{{ 'SHARED_PLATES.IN' | translate }}{{ sharedPlate.family?.name }}</span>
-          </p>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card *ngIf="sharedPlatesWithMe.length === 0 && !isLoadingReceived">
-        <ion-card-content>
-          <ion-card-title>{{ 'SHARED_PLATES.NO_RECEIVED' | translate }}</ion-card-title>
-          <p>{{ 'SHARED_PLATES.NO_RECEIVED_MESSAGE' | translate }}</p>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card *ngIf="isLoadingReceived">
-        <ion-card-content>
-          <ion-spinner name="crescent"></ion-spinner>
-          <p>{{ 'SHARED_PLATES.LOADING_RECEIVED' | translate }}</p>
-        </ion-card-content>
-      </ion-card>
+    <div class="plate-list">
+      <div class="plate-card" *ngFor="let sharedPlate of sharedPlatesWithMe"
+           (click)="!isSelectionMode">
+        <div class="plate-card__avatar">
+          <span>{{ sharedPlate.plate.label?.charAt(0) | uppercase }}</span>
+        </div>
+        <div class="plate-card__body">
+          <h3 class="plate-card__title">{{ sharedPlate.plate.label }}</h3>
+          <p class="plate-card__desc" *ngIf="sharedPlate.plate.description">{{ sharedPlate.plate.description }}</p>
+          <div class="plate-card__meta">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>{{ 'SHARED_PLATES.SHARED_BY' | translate }}{{ sharedPlate.sharedByUser?.name || sharedPlate.sharedByUser?.email }}</span>
+          </div>
+          <div class="plate-card__meta plate-card__meta--family" *ngIf="sharedPlate.family">
+            <ion-icon name="people-outline"></ion-icon>
+            <span>{{ sharedPlate.family?.name }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div *ngIf="activeSegment === 'sent'">
-      <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
-        <ion-refresher-content [pullingText]="'SHARED_PLATES.PULL_TO_REFRESH' | translate" [refreshingText]="'SHARED_PLATES.REFRESHING' | translate"></ion-refresher-content>
-      </ion-refresher>
+    <div class="empty-state" *ngIf="sharedPlatesWithMe.length === 0 && !isLoadingReceived">
+      <div class="empty-state__orbit">
+        <ion-icon name="download-outline" class="empty-state__icon"></ion-icon>
+      </div>
+      <h3 class="empty-state__title">{{ 'SHARED_PLATES.NO_RECEIVED' | translate }}</h3>
+      <p class="empty-state__subtitle">{{ 'SHARED_PLATES.NO_RECEIVED_MESSAGE' | translate }}</p>
+    </div>
 
-      <ion-card *ngFor="let sharedPlate of sharedPlatesByMe" (click)="isSelectionMode && togglePlateSelection(sharedPlate.id)">
-        <ion-card-content>
-          <ion-checkbox *ngIf="isSelectionMode" [checked]="isPlateSelected(sharedPlate.id)" slot="start" class="select-checkbox"></ion-checkbox>
-          <ion-card-title>{{ sharedPlate.plate.label }}</ion-card-title>
-          <p>{{ sharedPlate.plate.description }}</p>
-          <p class="shared-info">
-            {{ 'SHARED_PLATES.SHARED_WITH' | translate }}{{ sharedPlate.sharedWithUser?.name || sharedPlate.sharedWithUser?.email }}
-            <span *ngIf="sharedPlate.family">{{ 'SHARED_PLATES.IN' | translate }}{{ sharedPlate.family?.name }}</span>
-          </p>
-          <ion-button *ngIf="!isSelectionMode" fill="clear" color="danger" (click)="confirmUnshare(sharedPlate)">
-            <ion-icon name="trash" slot="start"></ion-icon>
-            {{ 'SHARED_PLATES.UNSHARE' | translate }}
-          </ion-button>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card *ngIf="sharedPlatesByMe.length === 0 && !isLoadingSent">
-        <ion-card-content>
-          <ion-card-title>{{ 'SHARED_PLATES.NO_SENT' | translate }}</ion-card-title>
-          <p>{{ 'SHARED_PLATES.NO_SENT_MESSAGE' | translate }}</p>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card *ngIf="isLoadingSent">
-        <ion-card-content>
-          <ion-spinner name="crescent"></ion-spinner>
-          <p>{{ 'SHARED_PLATES.LOADING_SENT' | translate }}</p>
-        </ion-card-content>
-      </ion-card>
+    <div class="loading-state" *ngIf="isLoadingReceived">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>{{ 'SHARED_PLATES.LOADING_RECEIVED' | translate }}</p>
     </div>
   </div>
-</ion-content>
+
+  <!-- Sent tab -->
+  <div *ngIf="activeSegment === 'sent'">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+      <ion-refresher-content [pullingText]="'SHARED_PLATES.PULL_TO_REFRESH' | translate"
+                              [refreshingText]="'SHARED_PLATES.REFRESHING' | translate"></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="selection-toolbar" *ngIf="isSelectionMode">
+      <span class="selection-count">{{ selectedPlateIds.length }} {{ (selectedPlateIds.length > 1 ? 'SHARED_PLATES.SELECTED_COUNT_PLURAL' : 'SHARED_PLATES.SELECTED_COUNT_SINGULAR') | translate }}</span>
+      <div class="selection-actions">
+        <button class="selection-btn" (click)="selectAll()">
+          {{ selectedPlateIds.length === sharedPlatesByMe.length ? ('SHARED_PLATES.DESELECT_ALL' | translate) : ('SHARED_PLATES.SELECT_ALL' | translate) }}
+        </button>
+        <button class="selection-btn selection-btn--danger" *ngIf="selectedPlateIds.length > 0" (click)="confirmBatchUnshare()">
+          <ion-icon name="trash-outline"></ion-icon>
+          ({{ selectedPlateIds.length }})
+        </button>
+      </div>
+    </div>
+
+    <div class="plate-list">
+      <div class="plate-card plate-card--selectable"
+           *ngFor="let sharedPlate of sharedPlatesByMe"
+           [class.plate-card--selected]="isSelectionMode && isPlateSelected(sharedPlate.id)"
+           (click)="isSelectionMode && togglePlateSelection(sharedPlate.id)">
+        <div class="plate-card__checkbox" *ngIf="isSelectionMode">
+          <ion-checkbox [checked]="isPlateSelected(sharedPlate.id)"></ion-checkbox>
+        </div>
+        <div class="plate-card__avatar">
+          <span>{{ sharedPlate.plate.label?.charAt(0) | uppercase }}</span>
+        </div>
+        <div class="plate-card__body">
+          <h3 class="plate-card__title">{{ sharedPlate.plate.label }}</h3>
+          <p class="plate-card__desc" *ngIf="sharedPlate.plate.description">{{ sharedPlate.plate.description }}</p>
+          <div class="plate-card__meta">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>{{ 'SHARED_PLATES.SHARED_WITH' | translate }}{{ sharedPlate.sharedWithUser?.name || sharedPlate.sharedWithUser?.email }}</span>
+          </div>
+          <div class="plate-card__meta plate-card__meta--family" *ngIf="sharedPlate.family">
+            <ion-icon name="people-outline"></ion-icon>
+            <span>{{ sharedPlate.family?.name }}</span>
+          </div>
+        </div>
+        <button class="plate-card__unshare" *ngIf="!isSelectionMode" (click)="confirmUnshare(sharedPlate); $event.stopPropagation()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="sharedPlatesByMe.length === 0 && !isLoadingSent">
+      <div class="empty-state__orbit">
+        <ion-icon name="share-outline" class="empty-state__icon"></ion-icon>
+      </div>
+      <h3 class="empty-state__title">{{ 'SHARED_PLATES.NO_SENT' | translate }}</h3>
+      <p class="empty-state__subtitle">{{ 'SHARED_PLATES.NO_SENT_MESSAGE' | translate }}</p>
+    </div>
+
+    <div class="loading-state" *ngIf="isLoadingSent">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>{{ 'SHARED_PLATES.LOADING_SENT' | translate }}</p>
+    </div>
+  </div>
+</div>

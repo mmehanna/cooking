@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="modern-header">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="goBack()" fill="clear">
@@ -26,8 +26,14 @@
         [class.plan-card--selected]="selectedPlanId === plan.id"
         (click)="selectPlan(plan.id)">
 
-        <div class="plan-badge" *ngIf="plan.isPopular">{{ 'SUBSCRIPTION.POPULAR' | translate }}</div>
-        <div class="plan-badge plan-badge--trial" *ngIf="plan.trialDays">{{ plan.trialDays }} {{ 'SUBSCRIPTION.DAYS_FREE' | translate }}</div>
+        <div class="plan-badge plan-badge--popular" *ngIf="plan.isPopular">
+          <ion-icon name="star"></ion-icon>
+          {{ 'SUBSCRIPTION.POPULAR' | translate }}
+        </div>
+        <div class="plan-badge plan-badge--trial" *ngIf="plan.trialDays">
+          <ion-icon name="gift"></ion-icon>
+          {{ plan.trialDays }} {{ 'SUBSCRIPTION.DAYS_FREE' | translate }}
+        </div>
 
         <div class="plan-header">
           <h3 class="plan-name">{{ plan.name }}</h3>

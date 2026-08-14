@@ -1,18 +1,22 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>{{ 'PROFILE.TITLE' | translate }}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
-      <ion-item>
-        <ion-label position="floating">{{ 'PROFILE.NAME' | translate }}</ion-label>
-        <ion-input formControlName="name" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">{{ 'PROFILE.EMAIL' | translate }}</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
-      </ion-item>
-      <ion-button [disabled]="profileForm.invalid" expand="full" type="submit">{{ 'PROFILE.SAVE' | translate }}</ion-button>
-    </form>
-  </ion-card-content>
-</ion-card>
+<div class="settings-card">
+  <div class="settings-card__header">
+    <div class="settings-card__icon-wrap">
+      <ion-icon name="person-outline"></ion-icon>
+    </div>
+    <span class="settings-card__title">{{ 'PROFILE.TITLE' | translate }}</span>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="profileForm" class="settings-form">
+    <div class="form-field">
+      <label class="form-field__label">{{ 'PROFILE.NAME' | translate }}</label>
+      <input class="form-field__input" formControlName="name" type="text" [placeholder]="'PROFILE.NAME' | translate">
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">{{ 'PROFILE.EMAIL' | translate }}</label>
+      <input class="form-field__input" formControlName="email" type="email" [placeholder]="'PROFILE.EMAIL' | translate" readonly>
+    </div>
+
+    <ion-button [disabled]="profileForm.invalid" expand="block" type="submit" class="save-btn">{{ 'PROFILE.SAVE' | translate }}</ion-button>
+  </form>
+</div>

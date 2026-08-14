@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="modern-header">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button [text]="'SHARED_PLATES.BACK' | translate" defaultHref="/"></ion-back-button>
@@ -7,12 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3">
-        <app-shared-plates-list></app-shared-plates-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content [fullscreen]="true" class="shared-plates-page-content">
+  <div class="shared-plates-shell">
+    <app-shared-plates-list></app-shared-plates-list>
+  </div>
 </ion-content>

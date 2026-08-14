@@ -7,6 +7,7 @@ import {PLateModel} from "../_clients/models/PLateModel";
 import {PlateDetailsModal} from "./plate-details-modal/plate-details.modal";
 import {SharePlateModalComponent} from "./share-plate-modal/share-plate-modal.component";
 import {PlateClient} from "../_clients/plate.client";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-plates-with-a-list-page',
@@ -24,7 +25,8 @@ export class PlatesListPage implements OnInit {
               private modalController: ModalController,
               private toastController: ToastController,
               private alertController: AlertController,
-              private plateClient: PlateClient
+              private plateClient: PlateClient,
+              private translate: TranslateService
   ) {
   }
 
@@ -200,7 +202,7 @@ export class PlatesListPage implements OnInit {
 
   public async presentBatchShareModal() {
     if (this.selectedPlates.length === 0) {
-      this.showToast('Please select at least one plate');
+      this.showToast(this.translate.instant('PLATES.PLEASE_SELECT'));
       return;
     }
 
@@ -228,17 +230,19 @@ export class PlatesListPage implements OnInit {
   }
 
   public async deletePlate(plate: PlateItemBo) {
-    const actionLabel = plate.isOwner ? 'Delete' : 'Remove';
-    const message = plate.isOwner 
-      ? `Are you sure you want to delete the plate "${plate.label}"?`
-      : `Are you sure you want to remove the plate "${plate.label}" from your shared plates?`;
+    const actionKey = plate.isOwner ? 'DELETE' : 'REMOVE';
+    const actionLabel = this.translate.instant(`PLATES.${actionKey}`);
+    const message = this.translate.instant(
+      plate.isOwner ? 'PLATES.DELETE_PLATE_MESSAGE' : 'PLATES.REMOVE_PLATE_MESSAGE',
+      { label: plate.label }
+    );
 
     const alert = await this.alertController.create({
-      header: `Confirm ${actionLabel}`,
+      header: this.translate.instant('PLATES.CONFIRM_ACTION', { action: actionLabel }),
       message: message,
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('PLATES.CANCEL'),
           role: 'cancel',
         },
         {
@@ -253,7 +257,7 @@ export class PlatesListPage implements OnInit {
               this.plateList = [...this.plateList]; // Créer un nouvel objet tableau pour forcer la mise à jour
             }
 
-            const deleteObservable = plate.isOwner 
+            const deleteObservable = plate.isOwner
               ? this.plateClient.deletePlate(plate.id)
               : this.plateClient.removeSharedAccess(plate.id);
 
@@ -261,7 +265,7 @@ export class PlatesListPage implements OnInit {
               next: async () => {
                 console.log(`Plate ${actionLabel.toLowerCase()}d successfully from server`);
                 const toast = await this.toastController.create({
-                  message: `${actionLabel} successful`,
+                  message: this.translate.instant(plate.isOwner ? 'PLATES.DELETE_SUCCESS' : 'PLATES.REMOVE_SUCCESS'),
                   duration: 2000
                 });
                 await toast.present();
@@ -272,13 +276,13 @@ export class PlatesListPage implements OnInit {
                 console.error('Status:', err.status);
                 console.error('URL:', err.url);
 
-                let errorMessage = `${actionLabel} unsuccessful`;
+                let errorMessage = this.translate.instant(plate.isOwner ? 'PLATES.DELETE_FAILED' : 'PLATES.REMOVE_FAILED');
                 if (err.error && typeof err.error === 'object' && err.error.message) {
                   errorMessage += `: ${err.error.message}`;
                 } else if (err.message) {
                   errorMessage += `: ${err.message}`;
                 } else {
-                  errorMessage += ': Unknown server error';
+                  errorMessage += `: ${this.translate.instant('PLATES.UNKNOWN_ERROR')}`;
                 }
 
                 const toast = await this.toastController.create({

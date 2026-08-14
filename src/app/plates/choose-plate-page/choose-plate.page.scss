@@ -1,20 +1,10 @@
 .choose-plate-content {
-  --background: #f7f5ef;
+  --background: var(--atepla-bg);
 }
 
-ion-toolbar {
-  --background: rgba(255, 255, 255, 0.94);
-  --border-color: rgba(26, 28, 24, 0.08);
-  --color: #20231d;
-}
-
-ion-title {
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
+/* Header is styled by the shared .modern-header in global.scss; avoid overriding it. */
 .cancel-button {
-  --color: #667064;
+  --color: var(--atepla-header-back-color);
   font-weight: 700;
   text-transform: capitalize;
 }
@@ -31,7 +21,7 @@ ion-title {
 
 .page-intro p {
   margin: 0 0 6px;
-  color: #7f6f4d;
+  color: var(--ion-color-primary);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -41,7 +31,7 @@ ion-title {
 
 .page-intro h1 {
   margin: 0;
-  color: #20231d;
+  color: var(--atepla-text-primary);
   font-size: 2.7rem;
   line-height: 1.04;
   letter-spacing: 0;
@@ -55,18 +45,25 @@ ion-title {
   align-items: end;
   min-height: 210px;
   padding: 28px;
-  background:
-    linear-gradient(90deg, rgba(25, 33, 26, 0.86), rgba(25, 33, 26, 0.48)),
-    url("/assets/images/landing/wednesday.jpg") center / cover;
+  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 55%, #1e40af 100%);
   color: #ffffff;
-  box-shadow: 0 18px 42px rgba(43, 47, 38, 0.18);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-lg);
+}
+
+.selection-hero h6 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.92;
 }
 
 .selection-summary {
   min-width: 128px;
   padding: 18px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: var(--atepla-radius-md);
   text-align: center;
   backdrop-filter: blur(12px);
 }
@@ -78,6 +75,7 @@ ion-title {
 }
 
 .selection-summary span {
+  display: block;
   margin-top: 7px;
   font-size: 0.86rem;
   font-weight: 700;
@@ -85,24 +83,26 @@ ion-title {
 
 .filter-panel {
   position: sticky;
-  top: 0;
+  top: 8px;
   z-index: 5;
   margin: -20px 12px 18px;
   padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(50, 56, 44, 0.08);
-  box-shadow: 0 14px 34px rgba(43, 47, 38, 0.12);
+  background: var(--atepla-surface);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-md);
   backdrop-filter: blur(12px);
 }
 
 ion-segment {
-  --background: #eef2ea;
+  --background: #f1f5f9;
   min-height: 54px;
+  border-radius: var(--atepla-radius-md);
 }
 
 ion-segment-button {
-  --indicator-color: #2f5d46;
-  --color: #596558;
+  --indicator-color: var(--ion-color-primary);
+  --color: var(--atepla-text-secondary);
   --color-checked: #ffffff;
   min-height: 46px;
   letter-spacing: 0;
@@ -125,21 +125,21 @@ ion-segment-button ion-icon {
   justify-content: center;
   gap: 8px;
   padding: 14px 10px;
-  border: 1.5px solid rgba(50, 56, 44, 0.1);
-  border-radius: 12px;
-  background: #eef2ea;
-  color: #596558;
+  border: 1.5px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-md);
+  background: #f1f5f9;
+  color: var(--atepla-text-secondary);
   font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: var(--atepla-transition);
 }
 
 .filter-chip.active {
-  background: #2f5d46;
+  background: var(--ion-color-primary);
   color: #ffffff;
-  border-color: #2f5d46;
-  box-shadow: 0 6px 16px rgba(47, 93, 70, 0.22);
+  border-color: var(--ion-color-primary);
+  box-shadow: 0 6px 16px rgba(59, 102, 168, 0.22);
 }
 
 .filter-chip ion-icon {
@@ -158,15 +158,17 @@ ion-segment-button ion-icon {
   flex-direction: column;
   gap: 4px;
   padding: 8px 10px;
-  border: 1px solid rgba(50, 56, 44, 0.08);
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 12px 30px rgba(43, 47, 38, 0.08);
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  border: 1px solid var(--atepla-border);
+  border-left: 4px solid transparent;
+  background: var(--atepla-surface);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-md);
+  transition: var(--atepla-transition);
 }
 
 .plate-card.selected {
-  border-color: rgba(47, 93, 70, 0.42);
-  box-shadow: 0 14px 34px rgba(47, 93, 70, 0.16);
+  border-left-color: var(--ion-color-primary);
+  box-shadow: 0 4px 16px rgba(59, 102, 168, 0.1);
 }
 
 .plate-card:active {
@@ -181,11 +183,13 @@ ion-segment-button ion-icon {
 }
 
 ion-checkbox {
-  --checkbox-background-checked: #2f5d46;
-  --border-color-checked: #2f5d46;
+  --checkbox-background-checked: var(--ion-color-primary);
+  --border-color-checked: var(--ion-color-primary);
   --checkmark-color: #ffffff;
+  --border-color: var(--atepla-border);
+  --checkbox-background: var(--atepla-surface);
   flex: 1;
-  color: #20231d;
+  color: var(--atepla-text-primary);
   font-size: 0.92rem;
   font-weight: 800;
   line-height: 1.2;
@@ -202,7 +206,7 @@ ion-checkbox span {
   height: 30px;
   margin: -4px -6px 0 0;
   --border-radius: 999px;
-  --color: #6a7568;
+  --color: var(--atepla-text-secondary);
 }
 
 .details-button ion-icon {
@@ -213,11 +217,13 @@ ion-checkbox span {
   display: grid;
   gap: 8px;
   padding: 8px 10px;
-  background: #f1f7ee;
+  margin-top: 4px;
+  background: var(--atepla-blue-soft);
+  border-radius: var(--atepla-radius-md);
 }
 
 .meal-select ion-label {
-  color: #55715f;
+  color: var(--ion-color-primary);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -227,36 +233,50 @@ ion-checkbox span {
 .meal-select ion-select {
   min-height: 32px;
   padding: 0 12px;
-  background: #ffffff;
-  color: #1f2d24;
+  background: var(--atepla-surface);
+  color: var(--atepla-text-primary);
   font-weight: 700;
+  border-radius: var(--atepla-radius-sm);
+  border: 1px solid var(--atepla-border);
 }
 
 .empty-state {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 260px;
-  padding: 32px 18px;
-  background: rgba(255, 255, 255, 0.92);
+  padding: 48px 24px;
+  background: var(--atepla-surface);
+  border: 1px solid var(--atepla-border);
+  border-radius: var(--atepla-radius-lg);
+  box-shadow: var(--atepla-shadow-md);
   text-align: center;
 }
 
 .empty-state ion-icon {
-  color: #7f6f4d;
-  font-size: 2.8rem;
+  width: 72px;
+  height: 72px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background: var(--atepla-blue-soft);
+  color: var(--ion-color-primary);
+  font-size: 1.8rem;
+  border-radius: 50%;
 }
 
 .empty-state h2 {
-  margin: 12px 0 6px;
-  color: #20231d;
-  font-size: 1.35rem;
-  letter-spacing: 0;
+  margin: 0 0 6px;
+  color: var(--atepla-text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .empty-state p {
-  max-width: 420px;
+  max-width: 280px;
   margin: 0;
-  color: #667064;
+  color: var(--atepla-text-secondary);
+  font-size: 0.9rem;
   line-height: 1.45;
 }
 
@@ -265,10 +285,10 @@ ion-checkbox span {
 }
 
 .add-fab ion-fab-button {
-  --background: #7f6f4d;
-  --background-activated: #6f6042;
-  --background-hover: #907d57;
-  --box-shadow: 0 12px 28px rgba(127, 111, 77, 0.24);
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-shade);
+  --background-hover: var(--ion-color-primary-tint);
+  --box-shadow: 0 12px 28px rgba(59, 102, 168, 0.24);
 }
 
 .bottom-action {
@@ -278,18 +298,19 @@ ion-checkbox span {
   left: 0;
   z-index: 10;
   padding: 12px 16px calc(12px + var(--ion-safe-area-bottom));
-  background: rgba(247, 245, 239, 0.92);
+  background: rgba(248, 250, 252, 0.92);
   backdrop-filter: blur(14px);
+  border-top: 1px solid var(--atepla-border);
 }
 
 .bottom-action ion-button {
   max-width: 980px;
   margin: 0 auto;
-  --background: #2f5d46;
-  --background-activated: #244a37;
-  --background-hover: #386d53;
-  --border-radius: 8px;
-  --box-shadow: 0 12px 28px rgba(47, 93, 70, 0.24);
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-shade);
+  --background-hover: var(--ion-color-primary-tint);
+  --border-radius: var(--atepla-radius-md);
+  --box-shadow: 0 12px 28px rgba(59, 102, 168, 0.24);
   font-weight: 800;
   letter-spacing: 0;
   text-transform: capitalize;
@@ -324,6 +345,7 @@ ion-checkbox span {
 
   .selection-summary span {
     margin-left: 8px;
+    margin-top: 0;
   }
 
   .filter-panel {
@@ -349,60 +371,81 @@ ion-checkbox span {
 
 @media (prefers-color-scheme: dark) {
   .choose-plate-content {
-    --background: #141712;
+    --background: #0f172a;
   }
 
-  ion-toolbar {
-    --background: rgba(22, 24, 20, 0.94);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --color: #f4f0e8;
+  .cancel-button {
+    --color: #ffffff;
+  }
+
+  .page-intro p {
+    color: var(--ion-color-primary-tint);
+  }
+
+  .page-intro h1 {
+    color: #f8fafc;
   }
 
   .filter-panel,
   .plate-card,
   .empty-state {
     border-color: rgba(255, 255, 255, 0.08);
-    background: rgba(29, 32, 27, 0.96);
+    background: #1e293b;
+  }
+
+  .selection-hero {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 55%, #172554 100%);
+    box-shadow: 0 8px 28px rgba(59, 102, 168, 0.18);
+  }
+
+  .selection-summary {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.18);
   }
 
   ion-segment {
-    --background: #252b24;
+    --background: #1e293b;
   }
 
   ion-checkbox,
   .empty-state h2 {
-    color: #f4f0e8;
+    color: #f8fafc;
   }
+
   .meal-select {
-    --background: #263528;
-    background: #263528;
-    color: #a8d6b4;
+    background: rgba(59, 102, 168, 0.12);
+  }
+
+  .meal-select ion-label {
+    color: #60a5fa;
   }
 
   .meal-select ion-select {
-    background: #20241f;
-    color: #f4f0e8;
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   .filter-chip {
-    background: #252b24;
-    border-color: rgba(255, 255, 255, 0.1);
-    color: #a8b0a6;
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
   }
 
   .filter-chip.active {
-    background: #3a7a5a;
-    border-color: #3a7a5a;
+    background: var(--ion-color-primary);
+    border-color: var(--ion-color-primary);
     color: #ffffff;
-    box-shadow: 0 6px 16px rgba(47, 93, 70, 0.35);
+    box-shadow: 0 6px 16px rgba(59, 102, 168, 0.25);
   }
 
   .empty-state p,
-  .cancel-button {
-    color: #a8b0a6;
+  .details-button {
+    color: #94a3b8;
   }
 
   .bottom-action {
-    background: rgba(20, 23, 18, 0.92);
+    background: rgba(15, 23, 42, 0.92);
+    border-top-color: rgba(255, 255, 255, 0.08);
   }
 }

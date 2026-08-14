@@ -1,6 +1,8 @@
-<ion-header [translucent]="true" class="manage-header">
+<ion-header [translucent]="true" class="modern-header">
   <ion-toolbar>
-    <ion-back-button [text]="'COMMON.BACK' | translate" slot="start" defaultHref="/landing"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="'COMMON.BACK' | translate" defaultHref="/landing"></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'PLATES.MANAGE' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleSelectionMode()" fill="clear" class="header-action-btn">
@@ -21,11 +23,11 @@
     <div class="plates-hero" *ngIf="!isSelectionMode">
       <div class="plates-hero__text">
         <p class="plates-hero__subtitle">{{ 'PLATES.MANAGE' | translate }}</p>
-        <h1 class="plates-hero__title">Mes plats</h1>
+        <h1 class="plates-hero__title">{{ 'PLATES.MY_PLATES' | translate }}</h1>
       </div>
       <div class="plates-hero__stat" *ngIf="plateList?.length">
         <strong>{{ plateList.length }}</strong>
-        <span>plat{{ plateList.length > 1 ? 's' : '' }}</span>
+        <span>{{ (plateList.length > 1 ? 'PLATES.PLATE_COUNT_PLURAL' : 'PLATES.PLATE_COUNT_SINGULAR') | translate }}</span>
       </div>
     </div>
 
@@ -33,11 +35,11 @@
     <div class="selection-banner" *ngIf="isSelectionMode">
       <div class="selection-banner__info">
         <ion-icon name="checkmark-circle-outline" class="selection-banner__icon"></ion-icon>
-        <span class="selection-banner__text">{{ selectedPlates.length }} sélectionné{{ selectedPlates.length > 1 ? 's' : '' }}</span>
+        <span class="selection-banner__text">{{ selectedPlates.length }} {{ (selectedPlates.length > 1 ? 'PLATES.SELECTED_COUNT_PLURAL' : 'PLATES.SELECTED_COUNT_SINGULAR') | translate }}</span>
       </div>
       <ion-button *ngIf="selectedPlates.length > 0" (click)="presentBatchShareModal()" size="small" fill="solid" color="primary" class="selection-banner__btn">
         <ion-icon name="share-outline" slot="start"></ion-icon>
-        Partager
+        {{ 'PLATES.SHARE' | translate }}
       </ion-button>
     </div>
 
@@ -45,7 +47,7 @@
     <div class="search-wrap">
       <ion-searchbar
         [(ngModel)]="searchTerm"
-        [placeholder]="'Rechercher un plat...'"
+        [placeholder]="'PLATES.SEARCH_PLACEHOLDER' | translate"
         animated="true"
         class="plates-searchbar"
         showClearButton="focus">
@@ -54,7 +56,7 @@
 
     <!-- Results Header -->
     <div class="results-header" *ngIf="filteredPlateList?.length">
-      <span class="results-count">{{ filteredPlateList.length }} résultat{{ filteredPlateList.length > 1 ? 's' : '' }}</span>
+      <span class="results-count">{{ filteredPlateList.length }} {{ (filteredPlateList.length > 1 ? 'PLATES.RESULT_COUNT_PLURAL' : 'PLATES.RESULT_COUNT_SINGULAR') | translate }}</span>
     </div>
 
     <!-- Grid -->
@@ -93,7 +95,7 @@
               {{ plate.description }}
             </p>
             <p class="plate-description plate-description--empty" *ngIf="!plate.description">
-              Aucune description
+              {{ 'PLATES.NO_DESCRIPTION' | translate }}
             </p>
           </div>
         </div>
@@ -101,10 +103,10 @@
         <!-- Actions -->
         <div class="plate-card__actions" *ngIf="!isSelectionMode">
           <div class="action-group">
-            <button class="action-pill action-pill--edit" (click)="presentDetailEditPlateModal(plate); $event.stopPropagation()" title="Modifier">
+            <button class="action-pill action-pill--edit" (click)="presentDetailEditPlateModal(plate); $event.stopPropagation()" [title]="'PLATES.EDIT' | translate">
               <ion-icon name="create-outline"></ion-icon>
             </button>
-            <button class="action-pill action-pill--delete" (click)="deletePlate(plate); $event.stopPropagation()" title="Supprimer">
+            <button class="action-pill action-pill--delete" (click)="deletePlate(plate); $event.stopPropagation()" [title]="'PLATES.DELETE' | translate">
               <ion-icon name="trash-outline"></ion-icon>
             </button>
           </div>
@@ -119,11 +121,11 @@
           <ion-icon name="fast-food-outline" class="empty-state__icon empty-state__icon--main"></ion-icon>
         </div>
       </div>
-      <h2 class="empty-state__title">Aucun plat pour le moment</h2>
-      <p class="empty-state__hint">Commencez par créer votre premier plat et organisez vos repas.</p>
+      <h2 class="empty-state__title">{{ 'PLATES.NO_PLATES_TITLE' | translate }}</h2>
+      <p class="empty-state__hint">{{ 'PLATES.NO_PLATES_HINT' | translate }}</p>
       <ion-button (click)="presentDetailAddPlateModal()" class="empty-state__btn" shape="round" size="large">
         <ion-icon name="add-outline" slot="start"></ion-icon>
-        Créer un plat
+        {{ 'PLATES.CREATE_PLATE' | translate }}
       </ion-button>
     </div>
 
@@ -134,8 +136,8 @@
           <ion-icon name="search-outline" class="empty-state__icon empty-state__icon--main"></ion-icon>
         </div>
       </div>
-      <h2 class="empty-state__title">Aucun résultat</h2>
-      <p class="empty-state__hint">Essayez un autre mot-clé pour trouver votre plat.</p>
+      <h2 class="empty-state__title">{{ 'PLATES.NO_RESULTS_TITLE' | translate }}</h2>
+      <p class="empty-state__hint">{{ 'PLATES.NO_RESULTS_HINT' | translate }}</p>
     </div>
   </div>
 

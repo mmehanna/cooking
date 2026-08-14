@@ -1,0 +1,484 @@
+{
+  "APP": {
+    "MENU_TITLE": "在这里选择",
+    "HOME": "首页",
+    "CREATE_DAY_LIST": "创建您的每日清单",
+    "PLATE_FOR_DAY": "今日餐点",
+    "MANAGE_PLATES": "管理您的餐点",
+    "MANAGE_FAMILIES": "管理您的家庭",
+    "VIEW_SHARED_PLATES": "查看共享餐点",
+    "GROCERY_LIST": "购物清单",
+    "SETTINGS": "设置",
+    "HELP": "帮助",
+    "LOGOUT": "退出登录",
+    "WORLDWIDE_RECIPES": "全球食谱"
+  },
+  "COMMON": {
+    "BACK": "返回"
+  },
+  "LANDING": {
+    "TITLE": "菜单",
+    "USER": "用户",
+    "PLATES_FOR_WEEK": "本周餐点",
+    "VIEW_MODE": "查看",
+    "EDIT_MODE": "编辑",
+    "GENERATE_WEEK": "自动生成本周",
+    "EDIT_DAY_MENU": "编辑当日菜单",
+    "CONFIRM_GENERATE_TITLE": "确认",
+    "CONFIRM_GENERATE_MESSAGE": "您确定要自动生成本周的餐点吗？",
+    "CANCEL": "取消",
+    "CONFIRM": "确认",
+    "GENERATE_SUCCESS": "本周餐点生成成功",
+    "GENERATE_FAILED": "本周餐点生成失败",
+    "TODAY": "今天",
+    "NO_PLATE": "还没有餐点",
+    "NO_PLATE_PLANNED": "没有计划餐点",
+    "DRAFT_CHIP": "草稿 — 家庭成员不可见",
+    "PUBLISHED": "已发布",
+    "PUBLISH_WEEK": "发布本周",
+    "UNPUBLISH": "取消发布",
+    "MY_WEEK": "我的本周",
+    "CHEF": "厨师",
+    "CHEF_WEEK_VIEWING": "正在查看 {{name}} 的周菜单",
+    "THIS_WEEK": "本周",
+    "NEXT_WEEK": "下周",
+    "IN_N_WEEKS": "{{n}}周后",
+    "LAST_WEEK": "上周",
+    "N_WEEKS_AGO": "{{n}}周前"
+  },
+  "LOGIN": {
+    "TITLE": "登录",
+    "EMAIL": "电子邮箱",
+    "PASSWORD": "密码",
+    "SUBMIT": "登录",
+    "CONTINUE_WITH_GOOGLE": "使用 Google 继续",
+    "NOT_REGISTERED": "还未注册？点击这里！",
+    "ALREADY_REGISTERED": "已经注册？登录",
+    "HERO_TITLE": "欢迎",
+    "HERO_SUBTITLE": "一键规划您的餐食"
+  },
+  "REGISTER": {
+    "TITLE": "注册",
+    "EMAIL": "电子邮箱",
+    "EMAIL_REQUIRED": "电子邮箱为必填项，且必须是有效邮箱。",
+    "PASSWORD": "密码",
+    "PASSWORD_REQUIREMENTS": "密码长度必须为 6 到 8 个字符，且至少包含一个大写字母和一个特殊字符。",
+    "CONFIRM_PASSWORD": "确认密码",
+    "PASSWORD_MISMATCH": "两次输入的密码必须一致。",
+    "SUBMIT": "注册"
+  },
+  "SETTINGS": {
+    "TITLE": "设置",
+    "BACK": "返回",
+    "PROFILE": "个人资料",
+    "PREFERENCES": "偏好设置",
+    "ACCOUNT": "账户",
+    "PROFILE_UPDATED": "个人资料更新成功",
+    "PROFILE_UPDATE_FAILED": "个人资料更新失败",
+    "PREFERENCES_UPDATED": "偏好设置已更新",
+    "PREFERENCES_UPDATE_FAILED": "偏好设置更新失败",
+    "PASSWORD_CHANGED": "密码修改成功",
+    "PASSWORD_CHANGE_FAILED": "密码修改失败"
+  },
+  "HELP": {
+    "TITLE": "帮助",
+    "SECTIONS": {
+      "GENERAL": "通用",
+      "LISTS": "清单与规划",
+      "ACCOUNT": "账户与订阅"
+    },
+    "ITEMS": {
+      "LANDING": {
+        "TITLE": "首页",
+        "DESC": "查看每周餐食，以厨师身份发布菜单，并管理您的规划。"
+      },
+      "MANAGE_PLATES": {
+        "TITLE": "管理餐点",
+        "DESC": "创建、编辑和管理您的餐点。添加食材、烹饪步骤和照片。"
+      },
+      "FAMILY": {
+        "TITLE": "管理家庭",
+        "DESC": "创建家庭，邀请成员，并与他们共享您的餐点。"
+      },
+      "SHARED_PLATES": {
+        "TITLE": "共享餐点",
+        "DESC": "发现其他家庭成员共享的餐点。"
+      },
+      "GROCERY": {
+        "TITLE": "购物清单",
+        "DESC": "手动添加商品，并查看厨师清单以准备您的餐食。"
+      },
+      "WEEK_PLANNING": {
+        "TITLE": "周计划",
+        "DESC": "厨师可以发布每周菜单，让整个家庭都能查看。"
+      },
+      "SETTINGS": {
+        "TITLE": "设置",
+        "DESC": "更新您的个人资料、偏好设置（语言、主题）并管理密码。"
+      },
+      "SUBSCRIPTION": {
+        "TITLE": "订阅",
+        "DESC": "订阅计划以解锁 Atepla 的所有功能。"
+      }
+    },
+    "SCHEMAS": {
+      "TITLE": "使用方法",
+      "CREATE_PLATE": {
+        "TITLE": "创建餐点",
+        "STEP1": {
+          "LABEL": "打开管理餐点",
+          "DESC": "打开侧边菜单，选择“管理餐点”。"
+        },
+        "STEP2": {
+          "LABEL": "添加餐点",
+          "DESC": "点击 + 按钮创建新餐点。"
+        },
+        "STEP3": {
+          "LABEL": "填写详情",
+          "DESC": "添加名称、食材和烹饪步骤。"
+        },
+        "STEP4": {
+          "LABEL": "保存",
+          "DESC": "您的餐点现在可用于规划。"
+        }
+      },
+      "CHEF_WEEK": {
+        "TITLE": "发布本周菜单（厨师）",
+        "STEP1": {
+          "LABEL": "前往首页",
+          "DESC": "厨师打开首页以查看本周安排。"
+        },
+        "STEP2": {
+          "LABEL": "选择餐点",
+          "DESC": "为每一天和每一餐从您的收藏中选择餐点。"
+        },
+        "STEP3": {
+          "LABEL": "发布",
+          "DESC": "点击发布按钮，让家庭成员看到菜单。"
+        },
+        "STEP4": {
+          "LABEL": "家庭成员查看",
+          "DESC": "成员会自动在他们的首页看到厨师的菜单。"
+        }
+      },
+      "FAMILY": {
+        "TITLE": "加入家庭",
+        "STEP1": {
+          "LABEL": "家庭菜单",
+          "DESC": "打开菜单，选择“管理家庭”。"
+        },
+        "STEP2": {
+          "LABEL": "接收邀请",
+          "DESC": "厨师通过邮件或邀请码向您发送邀请。"
+        },
+        "STEP3": {
+          "LABEL": "接受",
+          "DESC": "接受邀请以加入家庭。"
+        },
+        "STEP4": {
+          "LABEL": "共享访问",
+          "DESC": "您现在可以查看共享餐点和厨师的每周菜单。"
+        }
+      },
+      "GROCERY": {
+        "TITLE": "使用购物清单",
+        "STEP1": {
+          "LABEL": "打开清单",
+          "DESC": "在菜单中选择“购物清单”。"
+        },
+        "STEP2": {
+          "LABEL": "添加商品",
+          "DESC": "使用底部栏快速添加带有数量和单位的商品。"
+        },
+        "STEP3": {
+          "LABEL": "勾选/查看",
+          "DESC": "勾选已购买的商品。作为成员，还可以切换到厨师清单。"
+        }
+      }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "用户资料",
+    "AVATAR_URL": "头像链接",
+    "NAME": "姓名",
+    "EMAIL": "电子邮箱",
+    "SAVE": "保存资料"
+  },
+  "PREFERENCES": {
+    "TITLE": "应用偏好设置",
+    "LANGUAGE": "语言",
+    "LANGUAGE_HINT": "选择整个应用使用的语言",
+    "ENGLISH": "英语",
+    "FRENCH": "法语",
+    "SPANISH": "西班牙语",
+    "ARABIC": "阿拉伯语",
+    "MANDARIN": "普通话",
+    "RUSSIAN": "俄语",
+    "POLISH": "波兰语",
+    "GERMAN": "德语",
+    "PORTUGUESE": "葡萄牙语",
+    "ITALIAN": "意大利语",
+    "JAPANESE": "日语",
+    "KOREAN": "韩语",
+    "DARK_MODE": "深色模式",
+    "DARK_MODE_HINT": "在浅色和深色外观之间切换",
+    "NOTIFICATIONS": "通知",
+    "NOTIFICATIONS_HINT": "启用或禁用应用通知",
+    "SAVE": "保存偏好设置"
+  },
+  "ACCOUNT": {
+    "CHANGE_PASSWORD": "修改密码",
+    "CURRENT_PASSWORD": "当前密码",
+    "NEW_PASSWORD": "新密码",
+    "CONFIRM_NEW_PASSWORD": "确认新密码",
+    "PASSWORDS_DO_NOT_MATCH": "两次输入的密码不一致",
+    "DANGER_ZONE": "危险区域",
+    "DELETE_ACCOUNT": "删除账户",
+    "DELETE_WARNING": "此操作不可撤销。您的所有数据将被永久删除。",
+    "DELETE_CONFIRM_TITLE": "删除账户",
+    "DELETE_CONFIRM_MESSAGE": "您确定要删除账户吗？此操作无法撤销。您的所有餐点、计划和家庭数据将被永久删除。",
+    "CANCEL": "取消",
+    "DELETE": "删除",
+    "FINAL_CONFIRMATION": "最终确认",
+    "TYPE_DELETE": "输入“DELETE”以确认删除账户。",
+    "TYPE_DELETE_PLACEHOLDER": "输入 DELETE",
+    "PERMANENTLY_DELETE": "永久删除",
+    "DELETE_FAILED": "账户删除失败"
+  },
+  "PLATES": {
+    "MANAGE": "管理您的餐点",
+    "CANCEL": "取消",
+    "SELECT": "选择",
+    "EDIT": "编辑",
+    "PLEASE_SELECT": "请至少选择一个餐点",
+    "CONFIRM_DELETE": "确认删除",
+    "CONFIRM_REMOVE": "确认移除",
+    "DELETE_PLATE_MESSAGE": "您确定要删除餐点“{{label}}”吗？",
+    "REMOVE_PLATE_MESSAGE": "您确定要从共享餐点中移除“{{label}}”吗？",
+    "DELETE_SUCCESS": "删除成功",
+    "REMOVE_SUCCESS": "移除成功",
+    "DELETE_FAILED": "删除失败",
+    "REMOVE_FAILED": "移除失败"
+  },
+  "CHOOSE_DATE": {
+    "NEXT": "下一步",
+    "TITLE": "选择日期",
+    "TITLE_LARGE": "选择您的日期",
+    "STEP_LABEL": "规划",
+    "SUBTITLE": "选择您想要准备餐食的日期。",
+    "CALENDAR_LABEL": "日历",
+    "SELECT_DAY": "选择一天",
+    "SELECTED_LABEL": "已选日期",
+    "NO_DATE_SELECTED": "未选择日期",
+    "UNAVAILABLE": "该日期不可用。"
+  },
+  "CHOOSE_PLATE": {
+    "TITLE": "选择您的餐点",
+    "SAVE": "保存",
+    "CANCEL": "取消",
+    "ALL": "全部",
+    "BREAKFAST": "早餐",
+    "LUNCH": "午餐",
+    "DINNER": "晚餐",
+    "SELECT_MEAL_TYPE": "选择餐食类型",
+    "DETAILS": "详情",
+    "WEEK_LIST_SAVED": "您的周清单已保存！",
+    "SAVE_SUCCESS": "餐点保存成功！",
+    "SAVE_FAILED": "餐点保存失败。请重试。",
+    "MAX_PLATES_EXCEEDED": "您已超出每日餐食数量上限！允许数量为三个。",
+    "STEP_LABEL": "餐食选择",
+    "HERO_SUBTITLE": "最多选择三个餐点，并将每个餐点分配到一天中的合适时间。",
+    "SELECTED_COUNT": "已选餐点",
+    "EMPTY_TITLE": "未找到餐点",
+    "EMPTY_SUBTITLE": "尝试其他筛选条件或添加新餐点。"
+  },
+  "PLATES_FOR_DAY": {
+    "TITLE": "选择日期",
+    "DATE": "日期：",
+    "BREAKFAST": "早餐",
+    "LUNCH": "午餐",
+    "DINNER": "晚餐",
+    "NO_PLATES": "该日期没有餐点。",
+    "CONFIRM_DELETE": "确认删除",
+    "DELETE_SPECIFIC_MESSAGE": "您确定要删除这个餐点吗？",
+    "CANCEL": "取消",
+    "DELETE": "删除",
+    "DELETE_SUCCESS": "餐点删除成功",
+    "DELETE_FAILED": "餐点删除失败。请稍后再试。",
+    "DELETE_ALL_CONFIRM": "您确定要删除当天的所有餐点吗？",
+    "ALL_DELETED_SUCCESS": "餐点全部删除成功",
+    "NO_PLATES_FOUND": "该日期未找到餐点。",
+    "ALL_DELETE_FAILED": "餐点删除失败。请稍后再试。",
+    "GENERATE_WEEK": "自动生成本周"
+  },
+  "FAMILY": {
+    "TITLE": "家庭管理",
+    "BACK": "返回",
+    "CREATE_FAMILY": "创建新家庭",
+    "ENTER_FAMILY_NAME": "输入家庭名称",
+    "CREATE": "创建家庭",
+    "YOUR_FAMILIES": "您的家庭",
+    "OWNER": "所有者：",
+    "MEMBERS": "成员：",
+    "FAMILY_MEMBERS": "家庭成员：",
+    "ROLE": "角色：",
+    "INVITE_TO_FAMILY": "邀请加入家庭",
+    "SELECT_FAMILY": "选择家庭",
+    "CHOOSE_FAMILY": "选择家庭",
+    "ENTER_EMAIL": "输入要邀请的电子邮箱",
+    "SEND_INVITATION": "发送邀请",
+    "LOAD_FAILED": "家庭加载失败",
+    "NAME_REQUIRED": "家庭名称为必填项",
+    "CREATE_SUCCESS": "家庭创建成功！",
+    "CREATE_FAILED": "家庭创建失败：",
+    "SELECT_FAMILY_FIRST": "请先选择家庭",
+    "EMAIL_REQUIRED": "电子邮箱为必填项",
+    "INVITE_SUCCESS": "邀请发送成功！",
+    "INVITE_FAILED": "邀请发送失败：",
+    "CONFIRM_DELETION": "确认删除",
+    "DELETE_FAMILY": "删除家庭",
+    "DELETE_FAMILY_MESSAGE": "您确定要删除家庭“{{name}}”吗？此操作无法撤销，并将移除所有成员。",
+    "DELETE_SUCCESS": "家庭删除成功！",
+    "DELETE_FAILED": "家庭删除失败：",
+    "CONFIRM_REMOVAL": "确认移除",
+    "REMOVE_MEMBER": "移除成员",
+    "REMOVE_MEMBER_MESSAGE": "您确定要将“{{name}}”从家庭中移除吗？",
+    "REMOVE": "移除",
+    "MEMBER_REMOVED": "成员移除成功！",
+    "REMOVE_FAILED": "成员移除失败："
+  },
+  "SHARED_PLATES": {
+    "TITLE": "共享餐点",
+    "BACK": "返回",
+    "CANCEL": "取消",
+    "SELECT": "选择",
+    "DESELECT_ALL": "取消全选",
+    "SELECT_ALL": "全选",
+    "RECEIVED": "已接收",
+    "SENT": "已发送",
+    "PULL_TO_REFRESH": "下拉刷新...",
+    "REFRESHING": "刷新中...",
+    "SHARED_BY": "共享人：",
+    "IN": "在",
+    "NO_RECEIVED": "没有接收到的共享餐点",
+    "NO_RECEIVED_MESSAGE": "您还没有收到任何共享餐点。",
+    "LOADING_RECEIVED": "正在加载接收的餐点...",
+    "SHARED_WITH": "共享给：",
+    "UNSHARE": "取消共享",
+    "NO_SENT": "没有发送的共享餐点",
+    "NO_SENT_MESSAGE": "您还没有共享任何餐点。",
+    "LOADING_SENT": "正在加载发送的餐点...",
+    "CONFIRM_UNSHARE": "确认取消共享",
+    "UNSHARE_MESSAGE": "您确定要取消共享“{{label}}”吗？",
+    "UNSHARE_SUCCESS": "餐点取消共享成功",
+    "UNSHARE_FAILED": "取消共享餐点出错：",
+    "PLEASE_SELECT": "请至少选择一个餐点",
+    "BATCH_UNSHARE_MESSAGE": "您确定要取消共享 {{count}} 个餐点吗？",
+    "BATCH_UNSHARE_BUTTON": "取消共享 {{count}}",
+    "BATCH_SUCCESS": "{{count}} 个餐点取消共享成功",
+    "BATCH_FAILED": "{{count}} 个餐点失败：{{errorMsg}}",
+    "BATCH_ERROR": "取消共享餐点出错："
+  },
+  "SHARE_MODAL": {
+    "SHARE_PLATES": "共享 {{count}} 个餐点",
+    "SHARE_SINGLE": "共享“{{label}}”",
+    "CLOSE": "关闭",
+    "SELECTED_PLATES": "已选餐点（{{count}}）",
+    "SELECT_FAMILY_OPTIONAL": "选择家庭（可选）",
+    "CHOOSE_FAMILY": "选择家庭",
+    "SELECT_USER": "选择家庭中的用户",
+    "CHOOSE_USER": "选择用户",
+    "SHARE_PLATES_BUTTON": "共享 {{count}} 个餐点",
+    "SHARE_PLATE_BUTTON": "共享餐点",
+    "SELECT_USER_ERROR": "请选择用户",
+    "NO_PLATES": "未选择餐点",
+    "SHARE_SUCCESS": "{{count}} 个餐点共享成功！",
+    "SHARE_FAILED": "{{count}} 个餐点失败：{{errorMsg}}",
+    "SHARE_ERROR": "餐点共享失败："
+  },
+  "PLATE_DETAILS": {
+    "TITLE": "管理您的餐点",
+    "PLATE_NAME": "餐点名称：",
+    "PLATE_DESCRIPTION": "餐点描述：",
+    "CATEGORY": "分类：",
+    "BREAKFAST": "早餐",
+    "LUNCH": "午餐",
+    "DINNER": "晚餐",
+    "TAKE_PICTURE": "拍照",
+    "SAVE": "保存",
+    "AUTH_REQUIRED": "需要身份验证。请登录。",
+    "UPDATED": "您的餐点已更新！",
+    "ADDED": "您的餐点已添加！",
+    "INGREDIENTS": "食材",
+    "INGREDIENT_NAME": "名称",
+    "QUANTITY": "数量",
+    "UNIT": "单位",
+    "ADD_INGREDIENT": "添加食材",
+    "STEPS": "烹饪步骤",
+    "STEPS_PLACEHOLDER": "每行输入一个步骤"
+  },
+  "GROCERY_LIST": {
+    "TITLE": "购物清单",
+    "WEEK_OF": "{{date}} 这一周",
+    "EMPTY": "本周未找到食材。请先在餐点中添加食材。",
+    "LOADING": "加载中...",
+    "MEMBER_LIST": "我的清单",
+    "CHEF_LIST": "厨师清单",
+    "CHEF_LIST_LABEL": "{{name}} 的清单",
+    "ADD_PLACEHOLDER": "添加商品...",
+    "QUANTITY_LABEL": "数量",
+    "UNIT_LABEL": "单位",
+    "DELETE_TITLE": "删除",
+    "EMPTY_MEMBER_TITLE": "您的清单为空",
+    "EMPTY_MEMBER_SUBTITLE": "为本周添加商品",
+    "EMPTY_CHEF_TITLE": "暂时为空",
+    "EMPTY_CHEF_SUBTITLE": "{{name}} 本周尚未添加任何内容",
+    "REGENERATE": "重新生成清单",
+    "REGENERATE_CONFIRM": "这将重置您已勾选的项目。是否继续？",
+    "CANCEL": "取消",
+    "CONFIRM": "确认",
+    "REGENERATE_SUCCESS": "购物清单已重新生成",
+    "REGENERATE_FAILED": "购物清单重新生成失败",
+    "TOGGLE_FAILED": "商品更新失败"
+  },
+  "SUBSCRIPTION": {
+    "TITLE": "订阅",
+    "HERO_TITLE": "选择您的计划",
+    "HERO_SUBTITLE": "解锁 Atepla 的所有功能，无限制地规划您的餐食。",
+    "POPULAR": "热门",
+    "DAYS_FREE": "天免费",
+    "PER_MONTH": "月",
+    "PER_YEAR": "年",
+    "SUBSCRIBE": "订阅",
+    "CONFIRM_TITLE": "确认订阅",
+    "CONFIRM_MESSAGE": "您即将订阅 {{planName}} 计划，价格为 {{price}}。是否确认？",
+    "CANCEL": "取消",
+    "CONFIRM": "确认",
+    "ERROR": "发生错误。请重试。",
+    "ACTIVE_PLAN": "当前计划",
+    "ALREADY_SUBSCRIBED": "已订阅",
+    "CANCEL_SUBSCRIPTION": "取消我的订阅",
+    "CANCEL_CONFIRM_TITLE": "取消订阅",
+    "CANCEL_CONFIRM_MESSAGE": "您确定要取消订阅吗？在当前周期结束前您仍可继续使用。",
+    "MANAGE_SUBSCRIPTION": "管理我的订阅"
+  },
+  "WORLDWIDE_RECIPES": {
+    "TITLE": "全球食谱",
+    "SUBTITLE": "浏览来自全球各地的 100 道晚餐灵感。",
+    "RECIPE_COUNT": "{{count}} 道食谱",
+    "RECIPE_LABEL": "食谱",
+    "REGION_LABEL": "地区",
+    "POPULAR_TITLE": "最受欢迎",
+    "POPULAR_SUBTITLE": "全球最受欢迎的晚餐食谱，按知名度排名。",
+    "ADD_TO_PLATES": "添加到我的餐点",
+    "ADD_SUCCESS": "“{{label}}”已添加到您的餐点",
+    "ADD_FAILED": "添加餐点失败",
+    "REGIONS": {
+      "AFRICA": "非洲",
+      "AMERICAS": "美洲",
+      "ASIA": "亚洲",
+      "EUROPE": "欧洲",
+      "OCEANIA": "大洋洲"
+    }
+  }
+}

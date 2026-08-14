@@ -1,13 +1,129 @@
-/***** Manage Plates — Modern UI *****/
+/***** Manage Plates — Minimalist Blue Theme *****/
+
+@mixin dark-plates-palette() {
+  .plates-content {
+    --plates-bg: #0f172a;
+    --plates-surface: #1e293b;
+    --plates-border: rgba(148, 163, 184, 0.1);
+    --plates-blue-border: rgba(59, 130, 246, 0.2);
+    --plates-avatar-bg: #334155;
+    --plates-text: #f8fafc;
+    --plates-text-secondary: #94a3b8;
+    --plates-text-muted: #64748b;
+    --plates-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+    --plates-blue-soft: rgba(59, 130, 246, 0.1);
+    --plates-blue-medium: rgba(59, 130, 246, 0.18);
+  }
+
+  .manage-header ion-toolbar {
+    --background: rgba(15, 23, 42, 0.9);
+    --border-color: rgba(148, 163, 184, 0.08);
+  }
+}
+
+@mixin dark-category-avatars() {
+  .plate-avatar {
+    background: linear-gradient(135deg, var(--plates-bg), var(--plates-avatar-bg));
+    color: var(--plates-text-secondary);
+  }
+
+  .plate-avatar--meat {
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.18), rgba(239, 68, 68, 0.1));
+    color: #fca5a5;
+  }
+  .plate-avatar--meat .plate-avatar__icon { color: #f87171; }
+
+  .plate-avatar--fish {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(14, 165, 233, 0.1));
+    color: #7dd3fc;
+  }
+  .plate-avatar--fish .plate-avatar__icon { color: #38bdf8; }
+
+  .plate-avatar--veg {
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.18), rgba(34, 197, 94, 0.1));
+    color: #86efac;
+  }
+  .plate-avatar--veg .plate-avatar__icon { color: #4ade80; }
+
+  .plate-avatar--pasta {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.18), rgba(234, 179, 8, 0.1));
+    color: #fde047;
+  }
+  .plate-avatar--pasta .plate-avatar__icon { color: #facc15; }
+
+  .plate-avatar--soup {
+    background: linear-gradient(135deg, rgba(192, 132, 252, 0.18), rgba(168, 85, 247, 0.1));
+    color: #d8b4fe;
+  }
+  .plate-avatar--soup .plate-avatar__icon { color: #c084fc; }
+
+  .plate-avatar--dessert {
+    background: linear-gradient(135deg, rgba(244, 114, 182, 0.18), rgba(236, 72, 153, 0.1));
+    color: #f9a8d4;
+  }
+  .plate-avatar--dessert .plate-avatar__icon { color: #f472b6; }
+
+  .plate-avatar--breakfast {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.18), rgba(234, 179, 8, 0.1));
+    color: #fef08a;
+  }
+  .plate-avatar--breakfast .plate-avatar__icon { color: #facc15; }
+
+  .plate-avatar--main {
+    background: linear-gradient(135deg, rgba(168, 162, 158, 0.18), rgba(120, 113, 108, 0.1));
+    color: #d6d3d1;
+  }
+  .plate-avatar--main .plate-avatar__icon { color: #a8a29e; }
+
+  .plate-avatar--starter {
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(20, 184, 166, 0.1));
+    color: #99f6e4;
+  }
+  .plate-avatar--starter .plate-avatar__icon { color: #2dd4bf; }
+
+  .plate-avatar--default {
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.18), rgba(100, 116, 139, 0.1));
+    color: #cbd5e1;
+  }
+  .plate-avatar--default .plate-avatar__icon { color: #60a5fa; }
+}
+
+@mixin dark-category-chips() {
+  .plate-category--meat { background: rgba(248, 113, 113, 0.12); color: #fca5a5; }
+  .plate-category--fish { background: rgba(56, 189, 248, 0.12); color: #7dd3fc; }
+  .plate-category--veg { background: rgba(74, 222, 128, 0.12); color: #86efac; }
+  .plate-category--pasta { background: rgba(250, 204, 21, 0.12); color: #fde047; }
+  .plate-category--soup { background: rgba(192, 132, 252, 0.12); color: #d8b4fe; }
+  .plate-category--dessert { background: rgba(244, 114, 182, 0.12); color: #f9a8d4; }
+  .plate-category--breakfast { background: rgba(250, 204, 21, 0.12); color: #fef08a; }
+  .plate-category--main { background: rgba(168, 162, 158, 0.12); color: #d6d3d1; }
+  .plate-category--starter { background: rgba(45, 212, 191, 0.12); color: #99f6e4; }
+}
 
 .plates-content {
-  --background: #f6f4f0;
+  --plates-bg: var(--atepla-bg);
+  --plates-surface: var(--atepla-surface);
+  --plates-border: var(--atepla-border);
+  --plates-blue-border: var(--atepla-blue-border);
+  --plates-avatar-bg: #e2e8f0;
+  --plates-text: var(--atepla-text-primary);
+  --plates-text-secondary: var(--atepla-text-secondary);
+  --plates-text-muted: var(--atepla-text-tertiary);
+  --plates-radius: var(--atepla-radius-lg);
+  --plates-shadow: var(--atepla-shadow-md);
+  --plates-blue-soft: var(--atepla-blue-soft);
+  --plates-blue-medium: var(--atepla-blue-medium);
+
+  --background: var(--plates-bg);
 }
+
+@media (prefers-color-scheme: dark) { @include dark-plates-palette(); }
+body.dark { @include dark-plates-palette(); }
 
 /* Header */
 .manage-header ion-toolbar {
   --background: rgba(255, 255, 255, 0.92);
-  --border-color: rgba(0, 0, 0, 0.06);
+  --border-color: rgba(15, 23, 42, 0.06);
   backdrop-filter: blur(10px);
 }
 
@@ -32,11 +148,9 @@
   gap: 16px;
   padding: 28px 24px;
   margin: 16px 0 20px;
-  border-radius: 24px;
-  background:
-    linear-gradient(135deg, rgba(32, 35, 29, 0.88), rgba(32, 35, 29, 0.62)),
-    url("/assets/images/landing/wednesday.jpg") center / cover;
-  box-shadow: 0 14px 40px rgba(43, 47, 38, 0.18);
+  border-radius: var(--plates-radius);
+  background: var(--atepla-header-gradient);
+  box-shadow: var(--atepla-header-shadow);
   color: #fff;
 }
 
@@ -94,10 +208,10 @@
   gap: 12px;
   margin: 16px 0 12px;
   padding: 12px 18px;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--plates-surface);
+  border-radius: var(--plates-radius);
+  box-shadow: var(--plates-shadow);
+  border: 1px solid var(--plates-blue-border);
   animation: slideDown 0.35s ease both;
 }
 
@@ -115,7 +229,7 @@
 .selection-banner__text {
   font-weight: 700;
   font-size: 0.95rem;
-  color: #1a1a1a;
+  color: var(--plates-text);
 }
 
 .selection-banner__btn {
@@ -130,15 +244,16 @@
 }
 
 .plates-searchbar {
-  --background: #ffffff;
-  --border-radius: 18px;
-  --box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  --background: var(--plates-surface);
+  --border-radius: 999px;
+  --box-shadow: var(--plates-shadow);
   --icon-color: var(--ion-color-primary);
-  --clear-button-color: var(--ion-color-medium);
-  --placeholder-color: #a0a0a0;
-  --color: #1a1a1a;
+  --clear-button-color: var(--plates-text-muted);
+  --placeholder-color: var(--plates-text-muted);
+  --color: var(--plates-text);
   padding: 0;
-  border-radius: 18px;
+  border-radius: 999px;
+  border: 1px solid var(--plates-border);
 }
 
 /* Results header */
@@ -153,7 +268,7 @@
 .results-count {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #888;
+  color: var(--plates-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -172,18 +287,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  background: #ffffff;
-  border-radius: 22px;
+  background: var(--plates-surface);
+  border-radius: var(--plates-radius);
   padding: 16px 18px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: var(--plates-shadow);
+  border: 1px solid var(--plates-border);
   transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.25s ease, border-color 0.2s ease;
   overflow: hidden;
 }
 
 .plate-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
+  box-shadow: var(--atepla-shadow-lg);
 }
 
 .plate-card:active {
@@ -209,8 +324,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.06);
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  background: var(--plates-bg);
+  border: 2px solid var(--plates-border);
+  color: var(--plates-text-muted);
   transition: all 0.2s ease;
 }
 
@@ -222,8 +338,8 @@
 
 .plate-card--selected {
   border-color: var(--ion-color-primary);
-  box-shadow: 0 6px 24px rgba(var(--ion-color-primary-rgb), 0.15);
-  background: linear-gradient(135deg, #ffffff 0%, rgba(var(--ion-color-primary-rgb), 0.04) 100%);
+  box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.2), var(--plates-shadow);
+  background: linear-gradient(135deg, var(--plates-surface) 0%, var(--plates-blue-soft) 100%);
 }
 
 /* Card body */
@@ -246,11 +362,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
+  background: linear-gradient(135deg, var(--plates-bg), var(--plates-avatar-bg));
   font-weight: 800;
   font-size: 1.4rem;
-  color: #555;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+  color: var(--plates-text-secondary);
+  box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
 .plate-avatar__icon-wrap {
@@ -260,11 +376,11 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--plates-surface);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
 }
 
 .plate-avatar__icon {
@@ -272,82 +388,82 @@
   color: var(--ion-color-primary);
 }
 
-/* Category color variants */
+/* Category color variants — softer pastels */
 .plate-avatar--meat {
-  background: linear-gradient(135deg, #ff8a80, #ffcdd2);
-  color: #b71c1c;
+  background: linear-gradient(135deg, #fecaca, #fee2e2);
+  color: #b91c1c;
 }
 .plate-avatar--meat .plate-avatar__icon {
-  color: #c62828;
+  color: #dc2626;
 }
 
 .plate-avatar--fish {
-  background: linear-gradient(135deg, #80d8ff, #b3e5fc);
-  color: #01579b;
+  background: linear-gradient(135deg, #bae6fd, #e0f2fe);
+  color: #0369a1;
 }
 .plate-avatar--fish .plate-avatar__icon {
-  color: #0277bd;
+  color: #0284c7;
 }
 
 .plate-avatar--veg {
-  background: linear-gradient(135deg, #a5d6a7, #c8e6c9);
-  color: #1b5e20;
+  background: linear-gradient(135deg, #bbf7d0, #dcfce7);
+  color: #15803d;
 }
 .plate-avatar--veg .plate-avatar__icon {
-  color: #2e7d32;
+  color: #16a34a;
 }
 
 .plate-avatar--pasta {
-  background: linear-gradient(135deg, #ffe082, #ffecb3);
-  color: #7f6003;
+  background: linear-gradient(135deg, #fde68a, #fef3c7);
+  color: #a16207;
 }
 .plate-avatar--pasta .plate-avatar__icon {
-  color: #9e8a00;
+  color: #ca8a04;
 }
 
 .plate-avatar--soup {
-  background: linear-gradient(135deg, #ce93d8, #e1bee7);
-  color: #4a148c;
+  background: linear-gradient(135deg, #e9d5ff, #f3e8ff);
+  color: #7e22ce;
 }
 .plate-avatar--soup .plate-avatar__icon {
-  color: #6a1b9a;
+  color: #9333ea;
 }
 
 .plate-avatar--dessert {
-  background: linear-gradient(135deg, #f48fb1, #f8bbd0);
-  color: #880e4f;
+  background: linear-gradient(135deg, #fbcfe8, #fce7f3);
+  color: #be185d;
 }
 .plate-avatar--dessert .plate-avatar__icon {
-  color: #ad1457;
+  color: #db2777;
 }
 
 .plate-avatar--breakfast {
-  background: linear-gradient(135deg, #fff59d, #fff9c4);
-  color: #7f7000;
+  background: linear-gradient(135deg, #fef08a, #fef9c3);
+  color: #854d0e;
 }
 .plate-avatar--breakfast .plate-avatar__icon {
-  color: #9e8d00;
+  color: #a16207;
 }
 
 .plate-avatar--main {
-  background: linear-gradient(135deg, #bcaaa4, #d7ccc8);
-  color: #3e2723;
+  background: linear-gradient(135deg, #d6d3d1, #e7e5e4);
+  color: #44403c;
 }
 .plate-avatar--main .plate-avatar__icon {
-  color: #4e342e;
+  color: #57534e;
 }
 
 .plate-avatar--starter {
-  background: linear-gradient(135deg, #80cbc4, #b2dfdb);
-  color: #004d40;
+  background: linear-gradient(135deg, #99f6e4, #ccfbf1);
+  color: #0f766e;
 }
 .plate-avatar--starter .plate-avatar__icon {
-  color: #00695c;
+  color: #0d9488;
 }
 
 .plate-avatar--default {
-  background: linear-gradient(135deg, #cfd8dc, #eceff1);
-  color: #263238;
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+  color: var(--plates-text-secondary);
 }
 .plate-avatar--default .plate-avatar__icon {
   color: var(--ion-color-primary);
@@ -375,7 +491,7 @@
 .plate-label {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--plates-text);
   line-height: 1.2;
 }
 
@@ -386,52 +502,52 @@
   letter-spacing: 0.06em;
   padding: 3px 10px;
   border-radius: 20px;
-  background: #f0f0f0;
-  color: #666;
+  background: var(--plates-bg);
+  color: var(--plates-text-secondary);
   white-space: nowrap;
 }
 
 .plate-category--meat {
-  background: #ffebee;
-  color: #c62828;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 .plate-category--fish {
-  background: #e1f5fe;
-  color: #0277bd;
+  background: #e0f2fe;
+  color: #0369a1;
 }
 .plate-category--veg {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: #dcfce7;
+  color: #15803d;
 }
 .plate-category--pasta {
-  background: #fff8e1;
-  color: #9e8a00;
+  background: #fef3c7;
+  color: #a16207;
 }
 .plate-category--soup {
-  background: #f3e5f5;
-  color: #6a1b9a;
+  background: #f3e8ff;
+  color: #7e22ce;
 }
 .plate-category--dessert {
-  background: #fce4ec;
-  color: #ad1457;
+  background: #fce7f3;
+  color: #be185d;
 }
 .plate-category--breakfast {
-  background: #fffde7;
-  color: #9e8d00;
+  background: #fef9c3;
+  color: #854d0e;
 }
 .plate-category--main {
-  background: #efebe9;
-  color: #4e342e;
+  background: #e7e5e4;
+  color: #44403c;
 }
 .plate-category--starter {
-  background: #e0f2f1;
-  color: #00695c;
+  background: #ccfbf1;
+  color: #0f766e;
 }
 
 .plate-description {
   margin: 0;
   font-size: 0.85rem;
-  color: #777;
+  color: var(--plates-text-secondary);
   line-height: 1.35;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -440,7 +556,7 @@
 }
 
 .plate-description--empty {
-  color: #bbb;
+  color: var(--plates-text-muted);
   font-style: italic;
 }
 
@@ -455,7 +571,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #f8f8f8;
+  background: var(--plates-bg);
   border-radius: 14px;
   padding: 4px;
 }
@@ -469,7 +585,7 @@
   border-radius: 12px;
   border: none;
   background: transparent;
-  color: #888;
+  color: var(--plates-text-muted);
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -479,8 +595,9 @@
 }
 
 .action-pill:hover {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: var(--plates-surface);
+  box-shadow: var(--plates-shadow);
+  color: var(--plates-text);
 }
 
 .action-pill:active {
@@ -488,14 +605,14 @@
 }
 
 .action-pill--edit:hover {
-  color: var(--ion-color-medium);
+  color: var(--plates-text);
 }
 
 .action-pill--share {
   color: var(--ion-color-primary);
 }
 .action-pill--share:hover {
-  background: rgba(var(--ion-color-primary-rgb), 0.08);
+  background: var(--plates-blue-soft);
 }
 
 .action-pill--delete:hover {
@@ -519,10 +636,10 @@
 }
 
 .empty-state__orbit {
-  width: 100px;
-  height: 100px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(var(--ion-color-primary-rgb), 0.1), rgba(var(--ion-color-primary-rgb), 0.04));
+  background: var(--plates-blue-soft);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -530,36 +647,35 @@
 }
 
 .empty-state__icon--main {
-  font-size: 3rem;
+  font-size: 1.8rem;
   color: var(--ion-color-primary);
-  opacity: 0.8;
 }
 
 .empty-state__title {
   margin: 0 0 8px;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--plates-text);
 }
 
 .empty-state__hint {
   margin: 0 0 24px;
-  font-size: 0.95rem;
-  color: #999;
+  font-size: 0.9rem;
+  color: var(--plates-text-secondary);
   max-width: 280px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .empty-state__btn {
-  --border-radius: 16px;
+  --border-radius: var(--atepla-radius-md);
   height: 50px;
   font-weight: 700;
-  --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.35);
+  --box-shadow: var(--atepla-shadow-sm);
 }
 
 /* FAB */
 .add-fab {
-  --box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.45);
+  --box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.35);
   --background: var(--ion-color-primary);
   --background-activated: var(--ion-color-primary-shade);
 }
@@ -579,12 +695,23 @@
 @keyframes softPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0.2);
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0.18);
   }
   50% {
     transform: scale(1.04);
     box-shadow: 0 0 0 18px rgba(var(--ion-color-primary-rgb), 0);
   }
+}
+
+/* Dark mode category overrides */
+@media (prefers-color-scheme: dark) {
+  @include dark-category-avatars();
+  @include dark-category-chips();
+}
+
+body.dark {
+  @include dark-category-avatars();
+  @include dark-category-chips();
 }
 
 /* Responsive */

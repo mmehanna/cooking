@@ -1,4 +1,4 @@
-<ion-header class="modal-header">
+<ion-header class="modal-header modern-header">
   <ion-toolbar class="modal-toolbar">
     <div class="modal-header__brand">
       <div class="modal-header__icon-wrap">
@@ -29,22 +29,22 @@
         </div>
 
         <div class="form-field">
-          <label class="form-field__label">Nom du plat</label>
+          <label class="form-field__label">{{ 'PLATE_DETAILS.PLATE_NAME_LABEL' | translate }}</label>
           <input
             class="form-field__input"
             formControlName="label"
             maxlength="40"
-            placeholder="Ex: Poulet rôti aux herbes"
+            [placeholder]="'PLATE_DETAILS.PLATE_NAME_PLACEHOLDER' | translate"
             type="text">
         </div>
 
         <div class="form-field">
-          <label class="form-field__label">Description</label>
+          <label class="form-field__label">{{ 'PLATE_DETAILS.DESCRIPTION_LABEL' | translate }}</label>
           <input
             class="form-field__input"
             formControlName="description"
             maxlength="120"
-            placeholder="Une courte description de votre plat"
+            [placeholder]="'PLATE_DETAILS.DESCRIPTION_PLACEHOLDER' | translate"
             type="text">
         </div>
       </div>
@@ -53,7 +53,7 @@
       <div class="form-card">
         <div class="form-card__header">
           <ion-icon name="albums-outline" class="form-card__icon"></ion-icon>
-          <span class="form-card__title">Catégorie</span>
+          <span class="form-card__title">{{ 'PLATE_DETAILS.CATEGORY_TITLE' | translate }}</span>
         </div>
 
         <div class="category-grid">
@@ -99,10 +99,10 @@
         <div class="ingredients-list" *ngIf="ingredients.length > 0">
           <div class="ingredient-row" *ngFor="let ingredient of ingredients; let i = index">
             <div class="ingredient-row__num">{{ i + 1 }}</div>
-            <input [(ngModel)]="ingredient.name" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--name" placeholder="Nom" type="text">
-            <input [(ngModel)]="ingredient.quantity" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--qty" placeholder="Qté" type="text">
-            <input [(ngModel)]="ingredient.unit" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--unit" placeholder="Unité" type="text">
-            <button class="ingredient-delete" (click)="removeIngredientRow(i)" title="Retirer">
+            <input [(ngModel)]="ingredient.name" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--name" [placeholder]="'PLATE_DETAILS.INGREDIENT_NAME_PLACEHOLDER' | translate" type="text">
+            <input [(ngModel)]="ingredient.quantity" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--qty" [placeholder]="'PLATE_DETAILS.INGREDIENT_QTY_PLACEHOLDER' | translate" type="text">
+            <input [(ngModel)]="ingredient.unit" [ngModelOptions]="{ standalone: true }" class="ingredient-input ingredient-input--unit" [placeholder]="'PLATE_DETAILS.INGREDIENT_UNIT_PLACEHOLDER' | translate" type="text">
+            <button class="ingredient-delete" (click)="removeIngredientRow(i)" [title]="'PLATE_DETAILS.REMOVE' | translate">
               <ion-icon name="trash-outline"></ion-icon>
             </button>
           </div>
@@ -110,7 +110,7 @@
 
         <div class="ingredients-empty" *ngIf="ingredients.length === 0">
           <ion-icon name="flask-outline" class="ingredients-empty__icon"></ion-icon>
-          <p class="ingredients-empty__text">Aucun ingrédient pour le moment</p>
+          <p class="ingredients-empty__text">{{ 'PLATE_DETAILS.NO_INGREDIENTS' | translate }}</p>
         </div>
 
         <button class="add-ingredient-btn" (click)="addIngredientRow()">
@@ -123,7 +123,7 @@
       <div class="form-card">
         <div class="form-card__header">
           <ion-icon name="camera-outline" class="form-card__icon"></ion-icon>
-          <span class="form-card__title">Photo</span>
+          <span class="form-card__title">{{ 'PLATE_DETAILS.PHOTO' | translate }}</span>
         </div>
         <button class="photo-btn">
           <ion-icon name="camera-outline" class="photo-btn__icon"></ion-icon>

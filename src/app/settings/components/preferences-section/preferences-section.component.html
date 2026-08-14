@@ -1,27 +1,51 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>{{ 'PREFERENCES.TITLE' | translate }}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <form (ngSubmit)="onSubmit()" [formGroup]="preferencesForm">
-      <ion-item>
-        <ion-label>{{ 'PREFERENCES.LANGUAGE' | translate }}</ion-label>
-        <ion-select formControlName="language" interface="popover">
-          <ion-select-option value="en">{{ 'PREFERENCES.ENGLISH' | translate }}</ion-select-option>
-          <ion-select-option value="fr">{{ 'PREFERENCES.FRENCH' | translate }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{ 'PREFERENCES.DARK_MODE' | translate }}</ion-label>
-        <ion-toggle [checked]="preferencesForm.get('theme')?.value === 'dark'"
-          (ionChange)="onThemeChange($event)">
-        </ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{ 'PREFERENCES.NOTIFICATIONS' | translate }}</ion-label>
-        <ion-toggle formControlName="notifications"></ion-toggle>
-      </ion-item>
-      <ion-button expand="full" type="submit">{{ 'PREFERENCES.SAVE' | translate }}</ion-button>
-    </form>
-  </ion-card-content>
-</ion-card>
+<div class="settings-card">
+  <div class="settings-card__header">
+    <div class="settings-card__icon-wrap">
+      <ion-icon name="options-outline"></ion-icon>
+    </div>
+    <div class="settings-card__title">{{ 'PREFERENCES.TITLE' | translate }}</div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="preferencesForm" class="settings-form">
+    <div class="form-field">
+      <label class="form-field__label">{{ 'PREFERENCES.LANGUAGE' | translate }}</label>
+      <p class="form-field__hint">{{ 'PREFERENCES.LANGUAGE_HINT' | translate }}</p>
+
+      <div class="language-grid">
+        <button
+          type="button"
+          class="language-chip"
+          *ngFor="let lang of languages"
+          [class.language-chip--active]="preferencesForm.get('language')?.value === lang.code"
+          (click)="setLanguage(lang.code)"
+        >
+          <span class="language-chip__flag">{{ lang.flag }}</span>
+          <span class="language-chip__name">{{ lang.nameKey | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <div class="toggle-row__text">
+        <div class="toggle-row__title">{{ 'PREFERENCES.DARK_MODE' | translate }}</div>
+        <div class="toggle-row__hint">{{ 'PREFERENCES.DARK_MODE_HINT' | translate }}</div>
+      </div>
+      <ion-toggle [checked]="preferencesForm.get('theme')?.value === 'dark'"
+        (ionChange)="onThemeChange($event)" class="modern-toggle">
+      </ion-toggle>
+    </div>
+
+    <div class="toggle-row">
+      <div class="toggle-row__text">
+        <div class="toggle-row__title">{{ 'PREFERENCES.NOTIFICATIONS' | translate }}</div>
+        <div class="toggle-row__hint">{{ 'PREFERENCES.NOTIFICATIONS_HINT' | translate }}</div>
+      </div>
+      <ion-toggle formControlName="notifications" class="modern-toggle"></ion-toggle>
+    </div>
+
+    <ion-button class="save-btn" expand="block" type="submit">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      {{ 'PREFERENCES.SAVE' | translate }}
+    </ion-button>
+  </form>
+</div>
